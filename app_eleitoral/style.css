@@ -51,6 +51,9 @@ body {
   color: var(--text-light);
 }
 
+  color: var(--text-light);
+}
+
 .dark-mode .sidebar {
   background: var(--glass-bg-dark);
   backdrop-filter: blur(12px);
