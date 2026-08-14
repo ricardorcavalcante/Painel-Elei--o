@@ -8,6 +8,23 @@ async function loadKmlSecoes(locaisData) {
         if (!response.ok) throw new Error('Não foi possível carregar o arquivo KML');
         const kmlText = await response.text();
 
+        // Coordenadas reais obtidas por geocodificação (Nominatim/OSM) a partir
+        // dos endereços do KML — ver geocode-kml.mjs. O KML original não traz
+        // nenhuma geometria (<Point>/<coordinates>), só texto de nome/endereço.
+        let geoLookup = {};
+        try {
+            const geoResponse = await fetch('locais_geocoded.json');
+            if (geoResponse.ok) {
+                const geoList = await geoResponse.json();
+                geoList.forEach(g => {
+                    const geoKey = `${g.ra}|${g.local}|${g.endereco}`.trim().toLowerCase();
+                    geoLookup[geoKey] = g;
+                });
+            }
+        } catch (geoErr) {
+            console.warn('Não foi possível carregar locais_geocoded.json:', geoErr);
+        }
+
         const parser = new DOMParser();
         const xmlDoc = parser.parseFromString(kmlText, 'text/xml');
         const placemarks = xmlDoc.getElementsByTagName('Placemark');
@@ -51,13 +68,19 @@ async function loadKmlSecoes(locaisData) {
                 if (foundKey) matchedData = lookup[foundKey];
             }
 
+            const geoKey = `${ra}|${localName}|${enderecoKml}`.trim().toLowerCase();
+            const geo = geoLookup[geoKey];
+
             secoesList.push({
                 local: localName,
                 ra: ra || (matchedData ? matchedData.ra : ''),
                 zona: matchedData ? matchedData.zona : 'N/A',
                 secoes: matchedData ? matchedData.secoes : 0,
                 eleitorado: matchedData ? matchedData.eleitorado : 0,
-                endereco: enderecoKml || (matchedData ? matchedData.endereco : '')
+                endereco: enderecoKml || (matchedData ? matchedData.endereco : ''),
+                lat: geo && geo.matched ? geo.lat : null,
+                lng: geo && geo.matched ? geo.lng : null,
+                precisao: geo && geo.matched ? geo.precisao : null
             });
         });
 

@@ -468,6 +468,14 @@ tr:hover { background-color: #e8f4fd; }
     color: #ffffff;
 }
 
+.kml-popup-precisao {
+    margin-top: 6px !important;
+    padding-top: 6px;
+    border-top: 1px solid rgba(255, 255, 255, 0.12);
+    font-size: 0.72rem !important;
+    color: rgba(255, 255, 255, 0.55) !important;
+}
+
 /* Tooltip rápido no hover */
 .kml-hover-tooltip {
     background: rgba(26, 29, 35, 0.92);

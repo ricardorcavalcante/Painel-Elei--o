@@ -248,8 +248,35 @@ function plotKmlSecoesMarkers(secoes) {
     kmlMarkersGroup.clearLayers();
     markerMap = {};
 
+    // Vários locais podem cair na mesma coordenada (ex: mesma quadra ou,
+    // no pior caso, mesmo centro de RA quando não há endereço geocodificável).
+    // Para não empilhar marcadores exatamente um sobre o outro, aplicamos um
+    // pequeno leque visual em espiral — a coordenada real (e a exibida no
+    // popup/precisão) não muda, só o ponto de desenho do pino.
+    const GOLDEN_ANGLE = 137.508 * (Math.PI / 180);
+    const coordOccurrences = {};
+
     secoes.forEach((sec, index) => {
-        const [lat, lng] = getAccurateLocationCoordinates(sec, index);
+        // Prioriza a coordenada real obtida por geocodificação (locais_geocoded.json).
+        // Só recorre à estimativa heurística por endereço quando a geocodificação falhou.
+        let lat, lng, precisao;
+        if (sec.lat != null && sec.lng != null) {
+            [lat, lng] = [sec.lat, sec.lng];
+            precisao = sec.precisao;
+        } else {
+            [lat, lng] = getAccurateLocationCoordinates(sec, index);
+            precisao = 'estimado';
+        }
+
+        const coordKey = `${lat.toFixed(5)},${lng.toFixed(5)}`;
+        const n = coordOccurrences[coordKey] || 0;
+        coordOccurrences[coordKey] = n + 1;
+        if (n > 0) {
+            const angle = n * GOLDEN_ANGLE;
+            const radiusDeg = 0.00035 * Math.sqrt(n); // ~40m por passo da espiral
+            lat += Math.cos(angle) * radiusDeg;
+            lng += Math.sin(angle) * radiusDeg;
+        }
 
         // Obter a cor exata da Zona Eleitoral
         const markerColor = zoneColors[sec.zona] || '#1F4E78';
@@ -278,6 +305,13 @@ function plotKmlSecoesMarkers(secoes) {
             offset: [0, -5]
         });
 
+        const precisaoLabels = {
+            endereco: 'Endereço geocodificado',
+            quadra: 'Quadra/Setor geocodificado',
+            ra: 'Aproximado (centro da RA)',
+            estimado: 'Estimado (endereço não localizado)'
+        };
+
         circleMarker.bindPopup(`
             <div class="kml-popup">
                 <h4>${sec.local}</h4>
@@ -286,6 +320,7 @@ function plotKmlSecoesMarkers(secoes) {
                     <p><strong>Seções:</strong> ${sec.secoes || '—'}</p>
                     <p><strong>Eleitorado:</strong> ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : '—'}</p>
                     <p><strong>Zona Eleitoral:</strong> ${sec.zona || '—'}</p>
+                    <p class="kml-popup-precisao"><strong>Localização:</strong> ${precisaoLabels[precisao] || precisao}</p>
                 </div>
             </div>
         `, { className: 'custom-kml-popup' });
