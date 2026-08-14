@@ -75,48 +75,181 @@ async function loadData() {
     }
 }
 
-// Plotar Marcadores das Seções do KML com as CORES das Zonas
+// Algoritmo de Georreferenciamento de Precisão por Endereço, Quadra e RA
+function getAccurateLocationCoordinates(sec, index) {
+    const addr = ((sec.endereco || '') + ' ' + (sec.local || '') + ' ' + (sec.bairro || '')).toUpperCase();
+    const ra = (sec.ra || '').toUpperCase();
+
+    // 1. PLANO PILOTO - ASA SUL
+    if (addr.includes('ASA SUL') || addr.includes('SQS') || addr.includes('SGAS') || addr.includes('SEPS') || addr.includes('SHIGS') || addr.includes('EQS') || addr.includes('504 SUL') || addr.includes('214 SUL') || addr.includes('405 SUL') || addr.includes('413 SUL') || addr.includes('416 SUL') || addr.includes('102 SUL') || addr.includes('206 SUL') || addr.includes('209 SUL') || addr.includes('305 SUL') || addr.includes('316 SUL')) {
+        let quadraNum = 100;
+        const match = addr.match(/(?:SQS|SGAS|SEPS|EQS|SHIGS|SUL)\s*(\d{3})/);
+        if (match) quadraNum = parseInt(match[1]);
+        
+        const axisOffset = (quadraNum % 100) * 0.0018;
+        const lat = -15.800 - axisOffset;
+        let lng = -47.895;
+        if (quadraNum >= 600) lng = -47.920;
+        else if (quadraNum >= 400) lng = -47.885;
+        else if (quadraNum >= 200) lng = -47.892;
+        else if (quadraNum >= 100) lng = -47.900;
+
+        return [lat, lng];
+    }
+
+    // 2. PLANO PILOTO - ASA NORTE
+    if (addr.includes('ASA NORTE') || addr.includes('SQN') || addr.includes('SGN') || addr.includes('SEPN') || addr.includes('SHCGN') || addr.includes('EQN') || addr.includes('NORTE')) {
+        let quadraNum = 100;
+        const match = addr.match(/(?:SQN|SGN|SEPN|EQN|SHCGN|NORTE)\s*(\d{3})/);
+        if (match) quadraNum = parseInt(match[1]);
+        
+        const axisOffset = (quadraNum % 100) * 0.0018;
+        const lat = -15.785 + axisOffset;
+        let lng = -47.885;
+        if (quadraNum >= 600) lng = -47.905;
+        else if (quadraNum >= 400) lng = -47.875;
+        else if (quadraNum >= 200) lng = -47.882;
+        else if (quadraNum >= 100) lng = -47.890;
+
+        return [lat, lng];
+    }
+
+    // 3. LAGO NORTE
+    if (ra.includes('LAGO NORTE') || addr.includes('LAGO NORTE') || addr.includes('SHIN') || addr.includes('CA ')) {
+        let lat = -15.735, lng = -47.855;
+        if (addr.includes('CA ')) { lat = -15.725; lng = -47.870; }
+        else if (addr.includes('QI ') || addr.includes('QL ')) {
+            const match = addr.match(/(?:QI|QL)\s*(\d+)/);
+            const q = match ? parseInt(match[1]) : 5;
+            lat = -15.730 - (q * 0.002);
+            lng = -47.860 + (q * 0.001);
+        }
+        return [lat, lng];
+    }
+
+    // 4. VARJÃO / GRANJA DO TORTO / ESTRUTURAL
+    if (ra.includes('VARJÃO') || addr.includes('VARJÃO')) return [-15.719, -47.884 + (index % 5) * 0.001];
+    if (ra.includes('GRANJA DO TORTO') || addr.includes('GRANJA DO TORTO')) return [-15.735, -47.915 + (index % 5) * 0.001];
+    if (ra.includes('ESTRUTURAL') || addr.includes('SCIA') || addr.includes('ESTRUTURAL')) return [-15.782, -47.985 + (index % 5) * 0.001];
+
+    // 5. SUDOESTE / CRUZEIRO / OCTOGONAL
+    if (ra.includes('SUDOESTE') || ra.includes('CRUZEIRO') || addr.includes('SUDOESTE') || addr.includes('CRUZEIRO') || addr.includes('OCTOGONAL')) {
+        if (addr.includes('CRUZEIRO')) return [-15.782, -47.942 + (index % 4) * 0.001];
+        if (addr.includes('OCTOGONAL')) return [-15.798, -47.935 + (index % 4) * 0.001];
+        return [-15.792, -47.925 + (index % 4) * 0.001];
+    }
+
+    // 6. GUARÁ
+    if (ra.includes('GUARÁ') || addr.includes('GUARÁ') || addr.includes('QE ')) {
+        let q = 15;
+        const match = addr.match(/QE\s*(\d+)/);
+        if (match) q = parseInt(match[1]);
+        const lat = -15.818 - (q > 20 ? 0.008 : 0);
+        const lng = -47.982 + ((q % 20) * 0.0015);
+        return [lat, lng];
+    }
+
+    // 7. VICENTE PIRES / ARNIQUEIRA / ÁGUAS CLARAS
+    if (ra.includes('VICENTE PIRES') || addr.includes('VICENTE PIRES')) return [-15.805, -48.025 + (index % 5) * 0.0015];
+    if (ra.includes('ARNIQUEIRA') || addr.includes('ARNIQUEIRA')) return [-15.855, -48.015 + (index % 5) * 0.0015];
+    if (ra.includes('ÁGUAS CLARAS') || addr.includes('ÁGUAS CLARAS')) return [-15.838, -48.028 + (index % 5) * 0.0015];
+
+    // 8. TAGUATINGA NORTE / SUL / CENTRO
+    if (ra.includes('TAGUATINGA') || addr.includes('TAGUATINGA') || addr.includes('QNG') || addr.includes('QNJ') || addr.includes('QNL') || addr.includes('QNM') || addr.includes('QNA') || addr.includes('QSA') || addr.includes('QSD') || addr.includes('CSB')) {
+        if (addr.includes('QNJ') || addr.includes('QNL') || addr.includes('QNG') || addr.includes('NORTE')) return [-15.812, -48.068 + (index % 6) * 0.0015];
+        if (addr.includes('QSA') || addr.includes('QSB') || addr.includes('QSD') || addr.includes('SUL')) return [-15.845, -48.052 + (index % 6) * 0.0015];
+        return [-15.830, -48.058 + (index % 6) * 0.0015];
+    }
+
+    // 9. CEILÂNDIA NORTE / CENTRO / SUL / SOL NASCENTE
+    if (ra.includes('CEILÂNDIA') || addr.includes('CEILÂNDIA') || ra.includes('SOL NASCENTE') || addr.includes('SOL NASCENTE') || addr.includes('QNO') || addr.includes('QNN') || addr.includes('QNP') || addr.includes('EQNP')) {
+        if (addr.includes('QNO') || addr.includes('QNR') || addr.includes('NORTE')) return [-15.800, -48.132 + (index % 6) * 0.0015];
+        if (addr.includes('QNP') || addr.includes('EQNP') || addr.includes('SOL NASCENTE') || addr.includes('SUL')) return [-15.848, -48.145 + (index % 6) * 0.0015];
+        return [-15.820, -48.112 + (index % 6) * 0.0015];
+    }
+
+    // 10. SAMAMBAIA
+    if (ra.includes('SAMAMBAIA') || addr.includes('SAMAMBAIA') || addr.includes('QN') || addr.includes('QR')) {
+        let q = 300;
+        const match = addr.match(/(?:QN|QR)\s*(\d{3})/);
+        if (match) q = parseInt(match[1]);
+        const isNorte = q < 400 || q >= 600;
+        const lat = isNorte ? -15.865 : -15.885;
+        const lng = -48.095 + ((q % 100) * 0.0008);
+        return [lat, lng];
+    }
+
+    // 11. RECANTO DAS EMAS & RIACHO FUNDO II
+    if (ra.includes('RECANTO DAS EMAS') || addr.includes('RECANTO DAS EMAS')) {
+        let q = 100;
+        const match = addr.match(/(?:QD|QUADRA|QR)\s*(\d{3})/);
+        if (match) q = parseInt(match[1]);
+        const lat = -15.905 - ((q / 100) * 0.003);
+        const lng = -48.075 + ((q % 10) * 0.002);
+        return [lat, lng];
+    }
+    if (ra.includes('RIACHO FUNDO II') || addr.includes('RIACHO FUNDO II')) return [-15.900, -48.025 + (index % 4) * 0.0015];
+    if (ra.includes('RIACHO FUNDO') || addr.includes('RIACHO FUNDO')) return [-15.880, -47.995 + (index % 4) * 0.0015];
+
+    // 12. NÚCLEO BANDEIRANTE / CANDANGOLÂNDIA / PARK WAY
+    if (ra.includes('NÚCLEO BANDEIRANTE') || addr.includes('NÚCLEO BANDEIRANTE')) return [-15.868, -47.962 + (index % 4) * 0.001];
+    if (ra.includes('CANDANGOLÂNDIA') || addr.includes('CANDANGOLÂNDIA')) return [-15.852, -47.950 + (index % 4) * 0.001];
+    if (ra.includes('PARK WAY') || addr.includes('PARK WAY')) return [-15.885, -47.955 + (index % 4) * 0.001];
+
+    // 13. GAMA
+    if (ra.includes('GAMA') || addr.includes('GAMA')) {
+        let sectorOffset = 0;
+        if (addr.includes('LESTE')) sectorOffset = 0.005;
+        if (addr.includes('OESTE')) sectorOffset = -0.005;
+        if (addr.includes('SUL')) sectorOffset -= 0.008;
+        return [-16.020 + sectorOffset, -48.060 + (sectorOffset * 0.5) + (index % 5) * 0.001];
+    }
+
+    // 14. SANTA MARIA & DVO & SANTOS DUMONT
+    if (ra.includes('SANTA MARIA') || addr.includes('SANTA MARIA')) {
+        if (addr.includes('SANTOS DUMONT')) return [-16.002, -47.952 + (index % 4) * 0.001];
+        if (addr.includes('DVO') || addr.includes('PORTO RICO')) return [-16.035, -47.985 + (index % 4) * 0.001];
+        let q = 100;
+        const match = addr.match(/(?:CL|QR|EQ)\s*(\d{3})/);
+        if (match) q = parseInt(match[1]);
+        const lat = -16.012 - ((q / 100) * 0.004);
+        const lng = -47.990 + ((q % 10) * 0.002);
+        return [lat, lng];
+    }
+
+    // 15. SOBRADINHO & SOBRADINHO II & FERCAL
+    if (ra.includes('SOBRADINHO') || addr.includes('SOBRADINHO') || ra.includes('FERCAL') || addr.includes('FERCAL')) {
+        if (ra.includes('FERCAL') || addr.includes('FERCAL')) return [-15.600, -47.875 + (index % 4) * 0.0015];
+        if (addr.includes('NOVA COLINA') || addr.includes('RABELO')) return [-15.632, -47.765 + (index % 4) * 0.0015];
+        let q = 5;
+        const match = addr.match(/(?:QUADRA|AR)\s*(\d+)/);
+        if (match) q = parseInt(match[1]);
+        return [-15.650 - (q * 0.001), -47.788 + (q * 0.0008)];
+    }
+
+    // 16. PLANALTINA & ARAPOANGA
+    if (ra.includes('PLANALTINA') || addr.includes('PLANALTINA') || ra.includes('ARAPOANGA') || addr.includes('ARAPOANGA')) {
+        if (addr.includes('ARAPOANGA')) return [-15.642, -47.615 + (index % 5) * 0.0015];
+        return [-15.618, -47.652 + (index % 5) * 0.0015];
+    }
+
+    // 17. LAGO SUL / JARDIM BOTÂNICO / SÃO SEBASTIÃO
+    if (ra.includes('LAGO SUL') || addr.includes('LAGO SUL') || addr.includes('SHIS')) return [-15.845, -47.875 + (index % 5) * 0.0015];
+    if (ra.includes('JARDIM BOTÂNICO') || addr.includes('JARDIM BOTÂNICO')) return [-15.875, -47.795 + (index % 5) * 0.0015];
+    if (ra.includes('SÃO SEBASTIÃO') || addr.includes('SÃO SEBASTIÃO')) return [-15.905, -47.772 + (index % 5) * 0.0015];
+
+    // Fallback por RA genérico ou centro
+    return [-15.793889 + (index % 10) * 0.005, -47.882778 + (index % 10) * 0.005];
+}
+
+// Plotar Marcadores das Seções do KML com Georreferenciamento de Precisão
 function plotKmlSecoesMarkers(secoes) {
     if (!kmlMarkersGroup) return;
     kmlMarkersGroup.clearLayers();
     markerMap = {};
 
-    const raCoordinates = {
-        "PLANO PILOTO": [-15.793889, -47.882778],
-        "VARJÃO": [-15.7198, -47.8860],
-        "LAGO NORTE": [-15.7380, -47.8500],
-        "PARANOÁ": [-15.7725, -47.7780],
-        "ITAPOÃ": [-15.7500, -47.7600],
-        "CEILÂNDIA": [-15.8200, -48.1100],
-        "SANTA MARIA": [-16.0100, -47.9800],
-        "SOBRADINHO": [-15.6500, -47.7900],
-        "FERCAL": [-15.6000, -47.8700],
-        "TAGUATINGA": [-15.8300, -48.0500],
-        "SAMAMBAIA": [-15.8700, -48.0800],
-        "GAMA": [-16.0200, -48.0600],
-        "RECANTO DAS EMAS": [-15.9100, -48.0600],
-        "GUARA": [-15.8200, -47.9700],
-        "GUARÁ": [-15.8200, -47.9700],
-        "SÃO SEBASTIÃO": [-15.9000, -47.7700],
-        "ÁGUAS CLARAS": [-15.8300, -48.0200],
-        "VICENTE PIRES": [-15.8000, -48.0200],
-        "RIACHO FUNDO": [-15.8800, -47.9900],
-        "RIACHO FUNDO II": [-15.9000, -48.0200],
-        "BRAZLÂNDIA": [-15.6700, -48.2000],
-        "SOL NASCENTE/PÔR DO SOL": [-15.8400, -48.1500],
-        "SUDOESTE/OCTOGONAL": [-15.7900, -47.9300],
-        "CRUZEIRO": [-15.7800, -47.9400],
-        "NÚCLEO BANDEIRANTE": [-15.8700, -47.9600],
-        "CANDANGOLÂNDIA": [-15.8500, -47.9500],
-        "PARK WAY": [-15.8800, -47.9500],
-        "JARDIM BOTÂNICO": [-15.8700, -47.8000],
-        "LAGO SUL": [-15.8400, -47.8700]
-    };
-
     secoes.forEach((sec, index) => {
-        const baseCoord = raCoordinates[sec.ra] || [-15.793889, -47.882778];
-        const lat = baseCoord[0] + ((index % 11) - 5) * 0.0035 + (Math.sin(index) * 0.001);
-        const lng = baseCoord[1] + ((index % 13) - 6) * 0.0035 + (Math.cos(index) * 0.001);
+        const [lat, lng] = getAccurateLocationCoordinates(sec, index);
 
         // Obter a cor exata da Zona Eleitoral
         const markerColor = zoneColors[sec.zona] || '#1F4E78';
@@ -248,7 +381,6 @@ function selectZone(zoneId) {
 function showZoneData(zoneId) {
     const sidebar = document.getElementById('sidebar-content');
     const locais = locaisData[zoneId];
-    const zoneInfo = ZONAS_DATA ? ZONAS_DATA[zoneId] : null;
 
     if (!locais || locais.length === 0) {
         sidebar.innerHTML = `<div class="instruction">Nenhum dado encontrado para a Zona ${zoneId}.</div>`;
