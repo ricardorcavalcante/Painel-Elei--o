@@ -1,0 +1,5557 @@
+{
+  "1": [
+    {
+      "local": "CEM ELEFANTE BRANCO SGAS 708/908",
+      "endereco": "SGAS 708/908 MÓDULOS 25/26 ÁREA ESPECIAL - ALA SUL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 6,
+      "eleitorado": 2617,
+      "geo_query": "SGAS 708/908 MÓDULOS 25/26 ÁREA ESPECIAL - ALA SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEM SETOR LESTE SGAS 611/612",
+      "endereco": "SGAS 611/612 CONJUNTO E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 17,
+      "eleitorado": 4410,
+      "geo_query": "SGAS 611/612 CONJUNTO E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01 (ANTIGO CENTRO EDUCACIONAL)",
+      "endereco": "nan",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2919,
+      "geo_query": "CENTRO DE ENSINO FUNDAMENTAL 01 (ANTIGO CENTRO EDUCACIONAL), Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01 DE BRASILIA SQS 106",
+      "endereco": "SQS 106 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2176,
+      "geo_query": "SQS 106 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 03 DE BRASILIA SQS 103",
+      "endereco": "SQS 103 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 5,
+      "eleitorado": 1556,
+      "geo_query": "SQS 103 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 05 DE BRASILIA SQS 408",
+      "endereco": "QUADRA SQS 408, - AE. ASA SUL. 70257000 Brasília - Distrito Federa",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2298,
+      "geo_query": "QUADRA SQS 408, - AE. ASA SUL. 70257000 Brasília - Distrito Federa, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 214 SUL",
+      "endereco": "SQS 214 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2200,
+      "geo_query": "SQS 214 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 405 SUL",
+      "endereco": "SQS 405 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 8,
+      "eleitorado": 2623,
+      "geo_query": "SQS 405 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL LA SALLE",
+      "endereco": "SGAS 906 CONJUNTO E LOTE 06",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 0,
+      "geo_query": "SGAS 906 CONJUNTO E LOTE 06, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL LA SALLE SGAS 906",
+      "endereco": "SGAS Quadra 906, Conjunto E, Asa Sul, Brasília - DF.",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 3904,
+      "geo_query": "SGAS Quadra 906, Conjunto E, Asa Sul, Brasília - DF., Brasília - DF, Brasil"
+    },
+    {
+      "local": "CESAS - CEJA ASA SUL C.E.S.A.S. SGAS 602",
+      "endereco": "SGAS 602 PROJ D",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 3825,
+      "geo_query": "SGAS 602 PROJ D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CIL - CENTRO INTERESCOLAR DE LÍNGUAS SGAS 907/908",
+      "endereco": "SGAS 907/908 MÓDULOS 25/26 - ASA SUL - JUNTO AO CEM ELEF BRANCO",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 2774,
+      "geo_query": "SGAS 907/908 MÓDULOS 25/26 - ASA SUL - JUNTO AO CEM ELEF BRANCO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO COR JESU SGAS 615",
+      "endereco": "SGAS 615 LOTE 110",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3259,
+      "geo_query": "SGAS 615 LOTE 110, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO MARISTA DE BRASILIA SGAS 609",
+      "endereco": "SGAS 609 MODULO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 15,
+      "eleitorado": 3968,
+      "geo_query": "SGAS 609 MODULO A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO MARISTA ENSINO MÉDIO SGAS 615",
+      "endereco": "SGAS 615 MÓDULO C",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 19,
+      "eleitorado": 4765,
+      "geo_query": "SGAS 615 MÓDULO C, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO ÚNICO 606 SUL",
+      "endereco": "fica na SGAS 606, Conjunto F, Lotes 40/44, asa sul",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2453,
+      "geo_query": "fica na SGAS 606, Conjunto F, Lotes 40/44, asa sul, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 102 SUL",
+      "endereco": "SQS 102 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2125,
+      "geo_query": "SQS 102 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 206 SUL",
+      "endereco": "SQS 206 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 8,
+      "eleitorado": 2225,
+      "geo_query": "SQS 206 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 209 SUL",
+      "endereco": "SQS 209 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2296,
+      "geo_query": "SQS 209 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 305 SUL",
+      "endereco": "SQS 305 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 7,
+      "eleitorado": 2028,
+      "geo_query": "SQS 305 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 316 SUL",
+      "endereco": "SQS 316 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 9,
+      "eleitorado": 2539,
+      "geo_query": "SQS 316 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 413 SUL",
+      "endereco": "SQS 413 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 6,
+      "eleitorado": 1938,
+      "geo_query": "SQS 413 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 416 SUL",
+      "endereco": "SQS 416 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 8,
+      "eleitorado": 2335,
+      "geo_query": "SQS 416 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA PARQUE 313/314 SUL",
+      "endereco": "EQS 313/314 AREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3222,
+      "geo_query": "EQS 313/314 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA SALESIANA BRASÍLIA",
+      "endereco": "SHIGS 702 CONJUNTO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 2759,
+      "geo_query": "SHIGS 702 CONJUNTO A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UDF SEPS 704/904",
+      "endereco": "SEPS 704/904 CONJUNTO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 19,
+      "eleitorado": 4864,
+      "geo_query": "SEPS 704/904 CONJUNTO A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNIP - UNIVERSIDADE PAULISTA SGAS 913",
+      "endereco": "SGAS 913 S/N CONJUNTO B",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 15,
+      "eleitorado": 4239,
+      "geo_query": "SGAS 913 S/N CONJUNTO B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UPIS - UNIAO PIONEIRA DE INTEGRACAO SOCIAL SEPS 712/912",
+      "endereco": "SEPS 712/912 CONJUNTO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 3587,
+      "geo_query": "SEPS 712/912 CONJUNTO A, Brasília - DF, Brasil"
+    }
+  ],
+  "2": [
+    {
+      "local": "CAIC SANTA PAULINA",
+      "endereco": "QUADRA 05 AREA ESPECIAL 01",
+      "ra": "VARJÃO",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 8,
+      "eleitorado": 3247,
+      "geo_query": "QUADRA 05 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01 DO LAGO NORTE",
+      "endereco": "SHIN QI 04/06 AE LAGO NORTE",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "LAGO NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 5998,
+      "geo_query": "SHIN QI 04/06 AE LAGO NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01 DO VARJAO",
+      "endereco": "QD. 07, CJ. D, LT. 02, ÁREA ESPECIAL, VARJÃO",
+      "ra": "VARJÃO",
+      "bairro_2022": "VARJÃO",
+      "secoes_2022": 11,
+      "eleitorado": 4954,
+      "geo_query": "QD. 07, CJ. D, LT. 02, ÁREA ESPECIAL, VARJÃO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 02 DO PARANOA",
+      "endereco": "QUADRA 04 CONJ. A LOTE 05",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 11,
+      "eleitorado": 4284,
+      "geo_query": "QUADRA 04 CONJ. A LOTE 05, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL DRA. ZILDA ARNS",
+      "endereco": "QUADRA 378, CONJUNTO N, ÁREA ESPECIAL, NÚMERO 2",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "ITAPOÃ",
+      "secoes_2022": 18,
+      "eleitorado": 7152,
+      "geo_query": "QUADRA 378, CONJUNTO N, ÁREA ESPECIAL, NÚMERO 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 01 DO PARANOA",
+      "endereco": "QUADRA 4 CONJ. A LOTE 05 - PARANOA",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 13,
+      "eleitorado": 4957,
+      "geo_query": "QUADRA 4 CONJ. A LOTE 05 - PARANOA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 03 DO PARANOA (ANTIGO CEF 1)",
+      "endereco": "QUADRA 26 AREA ESPECIAL S/N. PARANOÁ. 71572608 ",
+      "ra": "PARANOÁ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4778,
+      "geo_query": "QUADRA 26 AREA ESPECIAL S/N. PARANOÁ. 71572608 , Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DARCY RIBEIRO",
+      "endereco": "QUADRA 31 CJ. F AREA ESPECIAL",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 13,
+      "eleitorado": 4959,
+      "geo_query": "QUADRA 31 CJ. F AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DO LAGO NORTE",
+      "endereco": "SHIN CA 02 LOTE 24 LAGO NORTE",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "LAGO NORTE",
+      "secoes_2022": 12,
+      "eleitorado": 4402,
+      "geo_query": "SHIN CA 02 LOTE 24 LAGO NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SANTA CARMEN SALLES",
+      "endereco": "QUADRA 2/3, LOTE 01 - PARANOA. PARANOÁ PARQUE (PARANOÁ). 71587150 Brasília -",
+      "ra": "PARANOÁ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4870,
+      "geo_query": "QUADRA 2/3, LOTE 01 - PARANOA. PARANOÁ PARQUE (PARANOÁ). 71587150 Brasília -, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO SOCIAL JOÃO PAULO II",
+      "endereco": "QUADRA 03 ÁREA ESPECIAL LOTE 01",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 7,
+      "eleitorado": 1622,
+      "geo_query": "QUADRA 03 ÁREA ESPECIAL LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEP - ESCOLA TÉCNICA LESTE SÉRGIO DAMACENO",
+      "endereco": " Quadra 1, Conjunto A, Área Especial 1 Paranoá, Brasília - DF",
+      "ra": "PARANOÁ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3907,
+      "geo_query": " Quadra 1, Conjunto A, Área Especial 1 Paranoá, Brasília - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO COC LAGO NORTE",
+      "endereco": "SHIN QL 9/11- AE S/N LOTE B",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "LAGO NORTE",
+      "secoes_2022": 19,
+      "eleitorado": 7128,
+      "geo_query": "SHIN QL 9/11- AE S/N LOTE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO INDI BIBIA",
+      "endereco": "SHIN QI 3 CONJUNTO D A.E",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "LAGO NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 4120,
+      "geo_query": "SHIN QI 3 CONJUNTO D A.E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO BARÃO DO RIO BRANCO",
+      "endereco": "Chácara N - Rodovia DF 250, KM 2,5, º 03 - Itapoã, Brasília - DF, 73255-904",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2264,
+      "geo_query": "Chácara N - Rodovia DF 250, KM 2,5, º 03 - Itapoã, Brasília - DF, 73255-904, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO DO SOL",
+      "endereco": "CA 06 LOTE A",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "LAGO NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 6103,
+      "geo_query": "CA 06 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01 DO ITAPOÃ",
+      "endereco": "DEL LAGO QUADRA 61 CONJUNTO E ÁREA ESPECIAL",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "ITAPOÃ",
+      "secoes_2022": 14,
+      "eleitorado": 5613,
+      "geo_query": "DEL LAGO QUADRA 61 CONJUNTO E ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01 DO PARANOA",
+      "endereco": "QD 26 CJ G LT 01 - AREA ESPECIAL",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 12,
+      "eleitorado": 5336,
+      "geo_query": "QD 26 CJ G LT 01 - AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02 DO ITAPOÃ",
+      "endereco": "DEL LAGO QD. 378 CONJ. L ÁREA ESPECIAL",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "ITAPOÃ",
+      "secoes_2022": 14,
+      "eleitorado": 5100,
+      "geo_query": "DEL LAGO QD. 378 CONJ. L ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02 DO PARANOA",
+      "endereco": "QD 30 CJ E LT 17",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 13,
+      "eleitorado": 4529,
+      "geo_query": "QD 30 CJ E LT 17, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 03 DO PARANOA",
+      "endereco": "QUADRA 17 CONJ. C LOTE 08",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 12,
+      "eleitorado": 4388,
+      "geo_query": "QUADRA 17 CONJ. C LOTE 08, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 04 DO PARANOA",
+      "endereco": "QD 14 CJ F LT 01",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 14,
+      "eleitorado": 4362,
+      "geo_query": "QD 14 CJ F LT 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 05 DO PARANOA",
+      "endereco": "QUADRA 24 CJ. I AREA ESPECIAL",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 10,
+      "eleitorado": 2482,
+      "geo_query": "QUADRA 24 CJ. I AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 06 DO PARANOA",
+      "endereco": "QUADRA 33, ÁREA ESPECIAL, MÓDULO G",
+      "ra": "PARANOÁ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 8,
+      "eleitorado": 2163,
+      "geo_query": "QUADRA 33, ÁREA ESPECIAL, MÓDULO G, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ALTO INTERLAGOS",
+      "endereco": "CHÁCARA INTERLAGOS, N 10A, ALTIPLANO LESTE",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "PARANOÁ",
+      "secoes_2022": 3,
+      "eleitorado": 775,
+      "geo_query": "CHÁCARA INTERLAGOS, N 10A, ALTIPLANO LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CORA CORALINA",
+      "endereco": "COND. ENTRELAGOS, ROD. DF 250, KM 02",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "ITAPOÃ",
+      "secoes_2022": 6,
+      "eleitorado": 2518,
+      "geo_query": "COND. ENTRELAGOS, ROD. DF 250, KM 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE GRANJA DO TORTO",
+      "endereco": "AE S/N GRANJA DO TORTO",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "GRANJA DO TORTO",
+      "secoes_2022": 6,
+      "eleitorado": 2297,
+      "geo_query": "AE S/N GRANJA DO TORTO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE OLHOS D'ÁGUA",
+      "endereco": "DF- 003 KM 7,5 (AO LADO DA IGREJA), - CHACARA 22. 71507993",
+      "ra": "PARANOÁ",
+      "bairro_2022": "TAQUARI",
+      "secoes_2022": 2,
+      "eleitorado": 499,
+      "geo_query": "DF- 003 KM 7,5 (AO LADO DA IGREJA), - CHACARA 22. 71507993, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE SOBRADINHO DOS MELOS",
+      "endereco": "DF 250 - VIA LAGO NORTE - KM 07 - NR",
+      "ra": "LAGO NORTE",
+      "bairro_2022": "ITAPOÃ",
+      "secoes_2022": 2,
+      "eleitorado": 516,
+      "geo_query": "DF 250 - VIA LAGO NORTE - KM 07 - NR, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNIVERSIDADE DO DISTRITO FEDERAL PROFESSOR JORGE AMAURY MAIA NUNES",
+      "endereco": "Parque Tecnológico Capital Digital, Lote 04, S/N, Edifício Governança, Bloco B, 2º andar, CEP 70.636-000, Granja do Torto, Brasília - DF",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2721,
+      "geo_query": "Parque Tecnológico Capital Digital, Lote 04, S/N, Edifício Governança, Bloco B, 2º andar, CEP 70.636-000, Granja do Torto, Brasília - DF, Brasília - DF, Brasil"
+    }
+  ],
+  "3": [
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 03",
+      "endereco": "QNM 36 CONJUNTO B-2 LOTE 60 - VILA MUTIRAO",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2698,
+      "geo_query": "QNM 36 CONJUNTO B-2 LOTE 60 - VILA MUTIRAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 05",
+      "endereco": "EQNJ 23/25 AREA ESPECIAL",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1733,
+      "geo_query": "EQNJ 23/25 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 06",
+      "endereco": "EQNL 17/19 AREA ESPECIAL",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2473,
+      "geo_query": "EQNL 17/19 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 04",
+      "endereco": "EQNL 05/07 AREA ESPECIAL",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 3837,
+      "geo_query": "EQNL 05/07 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 16",
+      "endereco": "QNL 22 AE 24",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 2953,
+      "geo_query": "QNL 22 AE 24, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 17",
+      "endereco": "EQNM 38/40 LOTE A",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 13,
+      "eleitorado": 4477,
+      "geo_query": "EQNM 38/40 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 19",
+      "endereco": "EQNL 10/12 AREA ESPECIAL 01",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 3799,
+      "geo_query": "EQNL 10/12 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 05",
+      "endereco": " QNJ 56, 56 - AREA ESPECIAL 16. TAGUATINGA. 72140560 Brasília",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 20,
+      "eleitorado": 6895,
+      "geo_query": " QNJ 56, 56 - AREA ESPECIAL 16. TAGUATINGA. 72140560 Brasília, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 41",
+      "endereco": "EQNL 13/15, Área Especial 01, Taguatinga Norte",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 17,
+      "eleitorado": 4508,
+      "geo_query": "EQNL 13/15, Área Especial 01, Taguatinga Norte, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 53",
+      "endereco": "QNL 16 VIA 2, LOTE 1. TAGUATINGA NORTE (TAGUATINGA). 72160622",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 2973,
+      "geo_query": "QNL 16 VIA 2, LOTE 1. TAGUATINGA NORTE (TAGUATINGA). 72160622, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 55",
+      "endereco": "QNL 28 AREA ESPECIAL 27",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 2957,
+      "geo_query": "QNL 28 AREA ESPECIAL 27, Brasília - DF, Brasil"
+    }
+  ],
+  "4": [
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 103 DE SANTA MARIA",
+      "endereco": "CL 103 LOTE 1-B",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 10,
+      "eleitorado": 4206,
+      "geo_query": "CL 103 LOTE 1-B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 201 DE SANTA MARIA",
+      "endereco": "CL 201 LOTE 1 A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 13,
+      "eleitorado": 4227,
+      "geo_query": "CL 201 LOTE 1 A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 209 DE SANTA MARIA",
+      "endereco": "CL 209 LOTE 1-A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 12,
+      "eleitorado": 4273,
+      "geo_query": "CL 209 LOTE 1-A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 213 DE SANTA MARIA",
+      "endereco": "CL 213 LOTE 01 - G",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 5720,
+      "geo_query": "CL 213 LOTE 01 - G, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 308 DE SANTA MARIA",
+      "endereco": "CL 308 LOTE 1-B",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 18,
+      "eleitorado": 6328,
+      "geo_query": "CL 308 LOTE 1-B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 316 DE SANTA MARIA",
+      "endereco": "CL 316 LOTE 1-A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 17,
+      "eleitorado": 5593,
+      "geo_query": "CL 316 LOTE 1-A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 403 DE SANTA MARIA",
+      "endereco": "CL 403 - LOTE 1-A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 5298,
+      "geo_query": "CL 403 - LOTE 1-A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 418 DE SANTA MARIA",
+      "endereco": "E/Q 417/418 - 517/518 - LOTE 01",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 3139,
+      "geo_query": "E/Q 417/418 - 517/518 - LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL SANTOS DUMONT",
+      "endereco": "AVENIDA S/N - RESIDENCIAL SANTOS DUMONT- SANTA MARIA",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "RESIDENCIAL SANTOS DUMONT",
+      "secoes_2022": 18,
+      "eleitorado": 6669,
+      "geo_query": "AVENIDA S/N - RESIDENCIAL SANTOS DUMONT- SANTA MARIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO GESNER TEIXEIRA",
+      "endereco": "RUA DAS ADALIAS LOTES 2/6 - DVO - CIDADE NOVA",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "CIDADE NOVA",
+      "secoes_2022": 6,
+      "eleitorado": 1841,
+      "geo_query": "RUA DAS ADALIAS LOTES 2/6 - DVO - CIDADE NOVA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 404 DE SANTA MARIA",
+      "endereco": "CL 404 LOTE A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 5775,
+      "geo_query": "CL 404 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 417 DE SANTA MARIA",
+      "endereco": "QR 417 LOTE A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 16,
+      "eleitorado": 6083,
+      "geo_query": "QR 417 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 310 DE SANTA MARIA",
+      "endereco": "CL 310 - CONJ H - AREA ESPECIAL",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 4605,
+      "geo_query": "CL 310 - CONJ H - AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO PALOMA",
+      "endereco": "Colégio Paloma - QR 307, Conj. V, Lt. 2 - Santa Maria",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 967,
+      "geo_query": "Colégio Paloma - QR 307, Conj. V, Lt. 2 - Santa Maria, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01 - PORTO RICO",
+      "endereco": "QUADRA 17 - LOTE 14-C - 3 ETAPA - CONDOMINIO PORTO RICO",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 9,
+      "eleitorado": 3352,
+      "geo_query": "QUADRA 17 - LOTE 14-C - 3 ETAPA - CONDOMINIO PORTO RICO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 100 DE SANTA MARIA",
+      "endereco": "QR 100 - CONJUNTO T - AREA ESPECIAL 01",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 12,
+      "eleitorado": 2975,
+      "geo_query": "QR 100 - CONJUNTO T - AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 116 DE SANTA MARIA",
+      "endereco": "CL 116 LOTE 1-M",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 15,
+      "eleitorado": 5892,
+      "geo_query": "CL 116 LOTE 1-M, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 203",
+      "endereco": "Q.203 AREA ESPECIAL",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 18,
+      "eleitorado": 6027,
+      "geo_query": "Q.203 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 206 DE SANTA MARIA",
+      "endereco": "CL 206 LOTE 1-C",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 17,
+      "eleitorado": 5467,
+      "geo_query": "CL 206 LOTE 1-C, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 215 DE SANTA MARIA",
+      "endereco": "CL 215 LOTE A",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 12,
+      "eleitorado": 4425,
+      "geo_query": "CL 215 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 218 DE SANTA MARIA",
+      "endereco": "CL 218 LOTE 01 F",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "SANTA MARIA",
+      "secoes_2022": 14,
+      "eleitorado": 5487,
+      "geo_query": "CL 218 LOTE 01 F, Brasília - DF, Brasil"
+    }
+  ],
+  "5": [
+    {
+      "local": "CAIC JULIA KUBITSCHEK",
+      "endereco": "AR 13 CONJUNTO 3 AREA ESPECIAL 01",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 8,
+      "eleitorado": 2832,
+      "geo_query": "AR 13 CONJUNTO 3 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 01",
+      "endereco": "QUADRA 02 AREA ESPECIAL",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 6,
+      "eleitorado": 1819,
+      "geo_query": "QUADRA 02 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 03",
+      "endereco": "QUADRA 16 AREA ESPECIAL D/1",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 7,
+      "eleitorado": 2397,
+      "geo_query": "QUADRA 16 AREA ESPECIAL D/1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO NERY LACERDA - CENEL",
+      "endereco": "SH MANSÕES SOBRADINHO CONDOMÍNIO MINI-CHÁCARAS ES 11B - SOBRADINHO",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 5,
+      "eleitorado": 2970,
+      "geo_query": "SH MANSÕES SOBRADINHO CONDOMÍNIO MINI-CHÁCARAS ES 11B - SOBRADINHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL Nº 01",
+      "endereco": "QUADRA 14 AREA ESPECIAL RUA 5",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 6,
+      "eleitorado": 1798,
+      "geo_query": "QUADRA 14 AREA ESPECIAL RUA 5, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01",
+      "endereco": "QUADRA 02 C/D LOTE F",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 11,
+      "eleitorado": 3435,
+      "geo_query": "QUADRA 02 C/D LOTE F, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 03",
+      "endereco": "QUADRA 6 AREA ESPECIAL 3",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 13,
+      "eleitorado": 4863,
+      "geo_query": "QUADRA 6 AREA ESPECIAL 3, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 04",
+      "endereco": "QUADRA 15 AREA ESPECIAL 2",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 18,
+      "eleitorado": 4785,
+      "geo_query": "QUADRA 15 AREA ESPECIAL 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 05",
+      "endereco": "QUADRA 10 RUA 4 AREA ESPECIAL 4/5",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 17,
+      "eleitorado": 5198,
+      "geo_query": "QUADRA 10 RUA 4 AREA ESPECIAL 4/5, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 07",
+      "endereco": "AR 13 CONJUNTO 05 LOTE 01",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 13,
+      "eleitorado": 4146,
+      "geo_query": "AR 13 CONJUNTO 05 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 08",
+      "endereco": "AR 03 LOTE 04 AREA ESP. ST OESTE",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 13,
+      "eleitorado": 4160,
+      "geo_query": "AR 03 LOTE 04 AREA ESP. ST OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 09 - ANTIGO COER",
+      "endereco": "AR 13 CONJ 1 AREA ESPECIAL 3",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 10,
+      "eleitorado": 3098,
+      "geo_query": "AR 13 CONJ 1 AREA ESPECIAL 3, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL PROF CARLOS MOTA",
+      "endereco": "RODOVIA DF-01 KM 13 RUA 8 CHACARA 187-LAGO OESTE",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 8,
+      "eleitorado": 2730,
+      "geo_query": "RODOVIA DF-01 KM 13 RUA 8 CHACARA 187-LAGO OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL QUEIMA LENÇOL",
+      "endereco": "SITIO PATRICIA DF 325 KM 8/9 LOBERAL ZONA RURAL",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 3,
+      "eleitorado": 1045,
+      "geo_query": "SITIO PATRICIA DF 325 KM 8/9 LOBERAL ZONA RURAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 01 - GINÁSIO",
+      "endereco": "QUADRA 04 AREA ESPECIAL 4",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 22,
+      "eleitorado": 7088,
+      "geo_query": "QUADRA 04 AREA ESPECIAL 4, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO SANTA RITA DE CASSIA",
+      "endereco": "QUADRA 09 AREA ESPECIAL 02",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 9,
+      "eleitorado": 2781,
+      "geo_query": "QUADRA 09 AREA ESPECIAL 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 02",
+      "endereco": "QUADRA 12 AREA ESPECIAL 5",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 18,
+      "eleitorado": 0,
+      "geo_query": "QUADRA 12 AREA ESPECIAL 5, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 03",
+      "endereco": "QUADRA 5 AREA ESPECIAL 5",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 18,
+      "eleitorado": 0,
+      "geo_query": "QUADRA 5 AREA ESPECIAL 5, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 03 - CCM",
+      "endereco": " Quadra 5, Área Especial 05, Sobradinho, Brasília - DF (CEP 73031-574)",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 18,
+      "eleitorado": 6642,
+      "geo_query": " Quadra 5, Área Especial 05, Sobradinho, Brasília - DF (CEP 73031-574), Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL FERCAL",
+      "endereco": "DF 205 OESTE KM 19 FERCAL",
+      "ra": "FERCAL",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 9,
+      "eleitorado": 2571,
+      "geo_query": "DF 205 OESTE KM 19 FERCAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL LA SALLE",
+      "endereco": "QUADRA 14 AREA ESP. LOTES 24/27",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 16,
+      "eleitorado": 4441,
+      "geo_query": "QUADRA 14 AREA ESP. LOTES 24/27, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO INTERESCOLAR DE LINGUAS -CIL",
+      "endereco": "QUADRA 11 AREA RESERVADA 01",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 8,
+      "eleitorado": 3289,
+      "geo_query": "QUADRA 11 AREA RESERVADA 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EDUCANDÁRIO - INSTITUTO VITÓRIA-RÉGIA",
+      "endereco": "Quadra 04, Área Especial Nº 3, CEP 73025-032, Sobradinho, DF",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3558,
+      "geo_query": "Quadra 04, Área Especial Nº 3, CEP 73025-032, Sobradinho, DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01",
+      "endereco": "QUADRA 6 AREA ESPECIAL 1 RUA 5",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 4,
+      "eleitorado": 1251,
+      "geo_query": "QUADRA 6 AREA ESPECIAL 1 RUA 5, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 04",
+      "endereco": "QUADRA 15 AREA ESPECIAL 02",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 7,
+      "eleitorado": 2064,
+      "geo_query": "QUADRA 15 AREA ESPECIAL 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 05",
+      "endereco": "QUADRA 9 AREA ESPECIAL 05",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 14,
+      "eleitorado": 4293,
+      "geo_query": "QUADRA 9 AREA ESPECIAL 05, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 10",
+      "endereco": "QUADRA 02 CONJUNTO B/C LOTE E",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 7,
+      "eleitorado": 0,
+      "geo_query": "QUADRA 02 CONJUNTO B/C LOTE E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 11",
+      "endereco": "QUADRA 11 AREA ESPECIAL",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 3,
+      "eleitorado": 0,
+      "geo_query": "QUADRA 11 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 12",
+      "endereco": "QUADRA 01 AREA ESPECIAL SETOR DE INDUSTRIA",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 8,
+      "eleitorado": 2415,
+      "geo_query": "QUADRA 01 AREA ESPECIAL SETOR DE INDUSTRIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 13 AR 05",
+      "endereco": "AR 05 AREA ESPECIAL 1",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 9,
+      "eleitorado": 3030,
+      "geo_query": "AR 05 AREA ESPECIAL 1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 14",
+      "endereco": "AR 19 CONJUNTO 07 LOTE 01",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO II",
+      "secoes_2022": 8,
+      "eleitorado": 2532,
+      "geo_query": "AR 19 CONJUNTO 07 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 15",
+      "endereco": "QUADRA 3 AREA ESPECIAL 1/2",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 19,
+      "eleitorado": 4973,
+      "geo_query": "QUADRA 3 AREA ESPECIAL 1/2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 16 DE SOBRADINHO - NOVA COLINA",
+      "endereco": "CONDOMINIO NOVO SETOR DE MANSÕES - ÁREA ESPECIAL",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 10,
+      "eleitorado": 3423,
+      "geo_query": "CONDOMINIO NOVO SETOR DE MANSÕES - ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 17 VILA RABELO",
+      "endereco": "AV CENTRAL AE VILA RABELO",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 6,
+      "eleitorado": 2284,
+      "geo_query": "AV CENTRAL AE VILA RABELO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE BASEVI",
+      "endereco": "DF 001 KM 6 VILA BASEVI",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 4,
+      "eleitorado": 1352,
+      "geo_query": "DF 001 KM 6 VILA BASEVI, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE BOA VISTA",
+      "endereco": "ROD DF 205 OESTE KM 06 COMUNIDADE BOA VISTA",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 4,
+      "eleitorado": 1134,
+      "geo_query": "ROD DF 205 OESTE KM 06 COMUNIDADE BOA VISTA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CATINGUEIRO",
+      "endereco": "DF 205 KM 13 ESTRADA SECUNDARIA",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 1,
+      "eleitorado": 346,
+      "geo_query": "DF 205 KM 13 ESTRADA SECUNDARIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CORREGO DO ARROZAL",
+      "endereco": "BR 020 KM 13/14 NUCLEO RURAL CORREGO DO ARROZAL",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "NÚCLEO RURAL CÓRREGO DO ARROZAL",
+      "secoes_2022": 2,
+      "eleitorado": 757,
+      "geo_query": "BR 020 KM 13/14 NUCLEO RURAL CORREGO DO ARROZAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CORREGO DO OURO",
+      "endereco": "DF 205 FAZENDA CORREGO DO OURO",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 1,
+      "eleitorado": 227,
+      "geo_query": "DF 205 FAZENDA CORREGO DO OURO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ENGENHO VELHO",
+      "endereco": "ROD DF 150 KM 12 CD ENGENHO VELHO",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 5,
+      "eleitorado": 1647,
+      "geo_query": "ROD DF 150 KM 12 CD ENGENHO VELHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE MORRO DO SANSAO",
+      "endereco": "FAZENDA SOBRADINHO PROX. AO POLO DE CINEMA",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 1,
+      "eleitorado": 328,
+      "geo_query": "FAZENDA SOBRADINHO PROX. AO POLO DE CINEMA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE RUA DO MATO",
+      "endereco": "DF 150 KM 11 CHACARA 4 ESTRADA DA FERCAL",
+      "ra": "FERCAL",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 3,
+      "eleitorado": 811,
+      "geo_query": "DF 150 KM 11 CHACARA 4 ESTRADA DA FERCAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE SANTA HELENA",
+      "endereco": "DF 001 GRANJA SANTA HELENA",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 3,
+      "eleitorado": 994,
+      "geo_query": "DF 001 GRANJA SANTA HELENA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO EDUCACIONAL SANTO ELIAS",
+      "endereco": "QUADRA 11 AREA RESERVADA 3",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 6,
+      "eleitorado": 2096,
+      "geo_query": "QUADRA 11 AREA RESERVADA 3, Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO PEDAGOGICO CRESCER",
+      "endereco": "BR 020 KM 2 COND. GRAN VILLE, LOTE 9",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 2,
+      "eleitorado": 706,
+      "geo_query": "BR 020 KM 2 COND. GRAN VILLE, LOTE 9, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNIPROJEÇÃO",
+      "endereco": "ST.DE IND. DE SOB., QUADRA 02, RUA B, LOTES 01 A 06",
+      "ra": "SOBRADINHO",
+      "bairro_2022": "SOBRADINHO",
+      "secoes_2022": 7,
+      "eleitorado": 2588,
+      "geo_query": "ST.DE IND. DE SOB., QUADRA 02, RUA B, LOTES 01 A 06, Brasília - DF, Brasil"
+    }
+  ],
+  "6": [
+    {
+      "local": "CAIC ASSIS CHATEAUBRIAND",
+      "endereco": "AREA ESPECIAL 04 SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 3574,
+      "geo_query": "AREA ESPECIAL 04 SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL 01",
+      "endereco": "SETOR EDUCACIONAL LT 01",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 0,
+      "geo_query": "SETOR EDUCACIONAL LT 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01",
+      "endereco": "SETOR EDUCACIONAL LT M",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 12,
+      "eleitorado": 2449,
+      "geo_query": "SETOR EDUCACIONAL LT M, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 02",
+      "endereco": "AV. SÃO PAULO QD 52 LOTE B",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 14,
+      "eleitorado": 5264,
+      "geo_query": "AV. SÃO PAULO QD 52 LOTE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 02 DO ARAPOANGA",
+      "endereco": "Quadra 21, Conjunto F, Área Especial, Arapoanga, Planaltina, Distrito Federal (CEP 73368-564)",
+      "ra": "ARAPOANGA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 14,
+      "eleitorado": 3159,
+      "geo_query": "Quadra 21, Conjunto F, Área Especial, Arapoanga, Planaltina, Distrito Federal (CEP 73368-564), Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 03",
+      "endereco": "EQ 10/20 CONJ H LOTE 01-BURITIS II",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 12,
+      "eleitorado": 3185,
+      "geo_query": "EQ 10/20 CONJ H LOTE 01-BURITIS II, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 04",
+      "endereco": "SETOR EDUCACIONAL LOTE C/D",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 8,
+      "eleitorado": 2263,
+      "geo_query": "SETOR EDUCACIONAL LOTE C/D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 04 (CCMDF)",
+      "endereco": "Setor Educacional, Lotes C/D, Planaltina - DF.",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 8,
+      "eleitorado": 2690,
+      "geo_query": "Setor Educacional, Lotes C/D, Planaltina - DF., Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 08 DE PLANALTINA",
+      "endereco": "EQ 03/04 LOTE H-SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 2970,
+      "geo_query": "EQ 03/04 LOTE H-SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL ARAPOANGA",
+      "endereco": "ÁREA ESPECIAL COND. ARAPOANGA",
+      "ra": "ARAPOANGA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 14,
+      "eleitorado": 3785,
+      "geo_query": "ÁREA ESPECIAL COND. ARAPOANGA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL JK",
+      "endereco": "BR 020 MOD. 07 LOTES 16/19-COND. MESTRE DARMAS",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 8,
+      "eleitorado": 2934,
+      "geo_query": "BR 020 MOD. 07 LOTES 16/19-COND. MESTRE DARMAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL NOSSA SENHORA DE FÁTIMA",
+      "endereco": "AREA ESPECIAL 01 VNS DE FATIMA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 9,
+      "eleitorado": 3401,
+      "geo_query": "AREA ESPECIAL 01 VNS DE FATIMA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL PIPIRIPAU II",
+      "endereco": "BR 020 DF 365 DF 017 NUCLEO RURAL PIPIRIPAU",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 3,
+      "eleitorado": 945,
+      "geo_query": "BR 020 DF 365 DF 017 NUCLEO RURAL PIPIRIPAU, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL RIO PRETO",
+      "endereco": "DF 320 NÚCLEO RURAL RIO PRETO",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 526,
+      "geo_query": "DF 320 NÚCLEO RURAL RIO PRETO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL SÃO JOSÉ",
+      "endereco": "DF 250 NUCLEO RURAL SÃO JOSÉ",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 662,
+      "geo_query": "DF 250 NUCLEO RURAL SÃO JOSÉ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 02",
+      "endereco": "SETOR EDUCACIONAL LOTES J/L",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 9657,
+      "geo_query": "SETOR EDUCACIONAL LOTES J/L, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 03",
+      "endereco": "EQ 02/03 SETOR RESIDENCIAL NORTE",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 13,
+      "eleitorado": 3655,
+      "geo_query": "EQ 02/03 SETOR RESIDENCIAL NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DELTA",
+      "endereco": "QUADRA 01 CONJ. F LOTES 21/31",
+      "ra": "PLANALTINA",
+      "bairro_2022": "SETOR RESIDENCIAL LESTE",
+      "secoes_2022": 9,
+      "eleitorado": 3062,
+      "geo_query": "QUADRA 01 CONJ. F LOTES 21/31, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DONA AMÉRICA GUIMARÃES",
+      "endereco": "Q. 10K CONJ.C - ÁREA ESPECIAL - ST. HAB. ARAPOANGA",
+      "ra": "ARAPOANGA",
+      "bairro_2022": "ARAPOANGA",
+      "secoes_2022": 15,
+      "eleitorado": 6500,
+      "geo_query": "Q. 10K CONJ.C - ÁREA ESPECIAL - ST. HAB. ARAPOANGA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL ESTÂNCIA III - CCMDF",
+      "endereco": "Módulo 01, Rua 01, Setor Habitacional Mestre D'Armas, Planaltina - DF",
+      "ra": "PLANALTINA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2447,
+      "geo_query": "Módulo 01, Rua 01, Setor Habitacional Mestre D'Armas, Planaltina - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL OSORIO BACCHIN",
+      "endereco": "GLEBA G LOTE 22 NÚCLEO RURAL JARDIM MORUMBI",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 3,
+      "eleitorado": 899,
+      "geo_query": "GLEBA G LOTE 22 NÚCLEO RURAL JARDIM MORUMBI, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL POMPILIO MARQUES DE SOUZA",
+      "endereco": "COND. MESTRE DARMAS MOD 1 LOTE 13",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 13,
+      "eleitorado": 5026,
+      "geo_query": "COND. MESTRE DARMAS MOD 1 LOTE 13, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL STELLA DOS CHERUBINS GUIMARÃES TROIS",
+      "endereco": "RUA HUGO LOBO QD 97 AREA ESPECIAL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 4362,
+      "geo_query": "RUA HUGO LOBO QD 97 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL TAQUARA",
+      "endereco": "BR 020 DF 019 NUCLEO RURAL TAQUARA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 5,
+      "eleitorado": 1677,
+      "geo_query": "BR 020 DF 019 NUCLEO RURAL TAQUARA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL VALE DO AMANHECER",
+      "endereco": "AE 03 LOTE 01-VILA PACHECO",
+      "ra": "PLANALTINA",
+      "bairro_2022": "VALE DO AMANHECER",
+      "secoes_2022": 10,
+      "eleitorado": 3809,
+      "geo_query": "AE 03 LOTE 01-VILA PACHECO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL VARZEAS",
+      "endereco": "DF 120 NÚCLEO RURAL TABATINGA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 3,
+      "eleitorado": 947,
+      "geo_query": "DF 120 NÚCLEO RURAL TABATINGA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01",
+      "endereco": "AV. INDEPENDÊNCIA 102",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 12,
+      "eleitorado": 3194,
+      "geo_query": "AV. INDEPENDÊNCIA 102, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01 DO ARAPOANGA",
+      "endereco": "EQ 15/16 CONJ. I AREA ESPECIAL-ARAPOANGA",
+      "ra": "ARAPOANGA",
+      "bairro_2022": "ARAPOANGA",
+      "secoes_2022": 14,
+      "eleitorado": 4810,
+      "geo_query": "EQ 15/16 CONJ. I AREA ESPECIAL-ARAPOANGA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 03",
+      "endereco": "Q.1/2 PROJEÇÃO G-SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "SETOR RESIDENCIAL LESTE",
+      "secoes_2022": 9,
+      "eleitorado": 2807,
+      "geo_query": "Q.1/2 PROJEÇÃO G-SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 04",
+      "endereco": "EQ 3/4 PROJEÇÃO G SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "SETOR RESIDENCIAL LESTE",
+      "secoes_2022": 10,
+      "eleitorado": 2620,
+      "geo_query": "EQ 3/4 PROJEÇÃO G SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 05",
+      "endereco": "AV. CONTORNO Q. 17-VILA VICENTINA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 10,
+      "eleitorado": 3318,
+      "geo_query": "AV. CONTORNO Q. 17-VILA VICENTINA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 06",
+      "endereco": "EQ 05/06 LOTE G-SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 3300,
+      "geo_query": "EQ 05/06 LOTE G-SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 07",
+      "endereco": "QUADRA 45 BAIRRO NOSSA SRA FÁTIMA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 7,
+      "eleitorado": 2317,
+      "geo_query": "QUADRA 45 BAIRRO NOSSA SRA FÁTIMA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 09",
+      "endereco": "LOTE 01 VIA WL 01-SRN",
+      "ra": "PLANALTINA",
+      "bairro_2022": "SETOR RESIDENCIAL NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 0,
+      "geo_query": "LOTE 01 VIA WL 01-SRN, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 11",
+      "endereco": "EQ 4/5 SETOR RESIDENCIAL NORTE",
+      "ra": "PLANALTINA",
+      "bairro_2022": "JARDIM RORIZ",
+      "secoes_2022": 10,
+      "eleitorado": 2987,
+      "geo_query": "EQ 4/5 SETOR RESIDENCIAL NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 13",
+      "endereco": "EQ 6/7 SETOR RESIDENCIAL NORTE",
+      "ra": "PLANALTINA",
+      "bairro_2022": "JARDIM RORIZ",
+      "secoes_2022": 7,
+      "eleitorado": 2466,
+      "geo_query": "EQ 6/7 SETOR RESIDENCIAL NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 14",
+      "endereco": "QD 13 CONJ A LT 01 BURITIS III",
+      "ra": "PLANALTINA",
+      "bairro_2022": "SETOR RESIDENCIAL LESTE",
+      "secoes_2022": 11,
+      "eleitorado": 3278,
+      "geo_query": "QD 13 CONJ A LT 01 BURITIS III, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 15",
+      "endereco": "ESTÂNCIA NOVA PLANALTINA QUADRA 01 ÁREA ESPECIAL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 13,
+      "eleitorado": 3681,
+      "geo_query": "ESTÂNCIA NOVA PLANALTINA QUADRA 01 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 16",
+      "endereco": "COND. NOVA PLANALTINA Q. 01 RUA A ÁREA ESPECIAL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "ESTANCIA MESTRE D'ARMAS",
+      "secoes_2022": 15,
+      "eleitorado": 5305,
+      "geo_query": "COND. NOVA PLANALTINA Q. 01 RUA A ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ALTAMIR",
+      "endereco": "DF 128 KM 8 BICA DO DER",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 5,
+      "eleitorado": 1697,
+      "geo_query": "DF 128 KM 8 BICA DO DER, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE APRODARMAS",
+      "endereco": "FAZENDA MESTRE DARMAS",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 638,
+      "geo_query": "FAZENDA MESTRE DARMAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ESTÂNCIA",
+      "endereco": "DF 14 LT 63/67 COND. ESTÂNCIA PLANALTINA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 12,
+      "eleitorado": 3542,
+      "geo_query": "DF 14 LT 63/67 COND. ESTÂNCIA PLANALTINA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ETA 44",
+      "endereco": "BR 020 KM 18 NUCLEO EXPERIMENTAL EMBRAPA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 494,
+      "geo_query": "BR 020 KM 18 NUCLEO EXPERIMENTAL EMBRAPA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE MESTRE D'ARMAS",
+      "endereco": "CR 02, Área Especial, Vale do Amanhecer, Planaltina - DF",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 3166,
+      "geo_query": "CR 02, Área Especial, Vale do Amanhecer, Planaltina - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE MONJOLO",
+      "endereco": "BR 020 DF 335 FAZENDA MONJOLO",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 2,
+      "eleitorado": 416,
+      "geo_query": "BR 020 DF 335 FAZENDA MONJOLO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE PARANA",
+      "endereco": "EQ 01/02 LOTE H-SRL",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 11,
+      "eleitorado": 2798,
+      "geo_query": "EQ 01/02 LOTE H-SRL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE RAJADINHA",
+      "endereco": "DF 006 NÚCLEO RURAL RAJADINHA",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 3,
+      "eleitorado": 1058,
+      "geo_query": "DF 006 NÚCLEO RURAL RAJADINHA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE SANTOS DUMONT",
+      "endereco": "DF 130 KM 18-NÚCLEO RURAL SANTOS DUMONT",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 5,
+      "eleitorado": 1061,
+      "geo_query": "DF 130 KM 18-NÚCLEO RURAL SANTOS DUMONT, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VALE DO SOL",
+      "endereco": "COND VALE DO SOL DF 134 AREA ESPECIAL LT 1/6",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 5,
+      "eleitorado": 1468,
+      "geo_query": "COND VALE DO SOL DF 134 AREA ESPECIAL LT 1/6, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA TÉCNICA DE SAÚDE DE PLANALTINA",
+      "endereco": "ENTRE AV. CONTORNO/AV. INDEPENDÊNCIA - SETOR HOSPITALAR",
+      "ra": "PLANALTINA",
+      "bairro_2022": "PLANALTINA",
+      "secoes_2022": 6,
+      "eleitorado": 1283,
+      "geo_query": "ENTRE AV. CONTORNO/AV. INDEPENDÊNCIA - SETOR HOSPITALAR, Brasília - DF, Brasil"
+    }
+  ],
+  "8": [
+    {
+      "local": "CENTRO DE ENSINO 10",
+      "endereco": "EQNN 23/25",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 5168,
+      "geo_query": "EQNN 23/25, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO 16",
+      "endereco": "EQNM 22/24",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 4813,
+      "geo_query": "EQNM 22/24, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO 20",
+      "endereco": "EQNM 08/10",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 19,
+      "eleitorado": 5490,
+      "geo_query": "EQNM 08/10, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO 23-(CENTRO EDUCACIONAL 11)",
+      "endereco": "EQNP 05/01 - SETOR P NORTE",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 4659,
+      "geo_query": "EQNP 05/01 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 02",
+      "endereco": "EQNM 01/03",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 2892,
+      "geo_query": "EQNM 01/03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 04",
+      "endereco": "EQNM 21/23",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 3443,
+      "geo_query": "EQNM 21/23, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 07",
+      "endereco": "EQNM 05/07",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 19,
+      "eleitorado": 5932,
+      "geo_query": "EQNM 05/07, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MARIA DO ROSARIO G.SILVA",
+      "endereco": "EQNN 21/23",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 3645,
+      "geo_query": "EQNN 21/23, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 03",
+      "endereco": "QNM 13 A.E",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 4726,
+      "geo_query": "QNM 13 A.E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 02",
+      "endereco": "QNM 14",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 0,
+      "geo_query": "QNM 14, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 05-(CEF 25)",
+      "endereco": "QNP 09 - SETOR P NORTE",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 20,
+      "eleitorado": 7518,
+      "geo_query": "QNP 09 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 07",
+      "endereco": "QNN 13",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 1330,
+      "geo_query": "QNN 13, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01",
+      "endereco": "EQNM 23/25",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 8,
+      "eleitorado": 2720,
+      "geo_query": "EQNM 23/25, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02",
+      "endereco": "EQNM 19/21",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 0,
+      "geo_query": "EQNM 19/21, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 03",
+      "endereco": "EQNM 18/20",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 3145,
+      "geo_query": "EQNM 18/20, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 06",
+      "endereco": "EQNM 04/06",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 18,
+      "eleitorado": 4896,
+      "geo_query": "EQNM 04/06, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 07 ( CEF 35 )",
+      "endereco": "EQNN 01/03",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 18,
+      "eleitorado": 4807,
+      "geo_query": "EQNN 01/03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 08",
+      "endereco": "EQNN 05/07",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 3893,
+      "geo_query": "EQNN 05/07, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 10",
+      "endereco": "EQNM 02/04",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 0,
+      "geo_query": "EQNM 02/04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 11",
+      "endereco": "EQNM 06/08",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 0,
+      "geo_query": "EQNM 06/08, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 12",
+      "endereco": "EQNM 20/22",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2149,
+      "geo_query": "EQNM 20/22, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 13",
+      "endereco": "EQNM 24/26",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 1950,
+      "geo_query": "EQNM 24/26, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 15",
+      "endereco": "EQNN 08/10",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 3379,
+      "geo_query": "EQNN 08/10, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 18",
+      "endereco": "EQNM 03/05",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 4,
+      "eleitorado": 1128,
+      "geo_query": "EQNM 03/05, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 19",
+      "endereco": "EQNM 07/09",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 3,
+      "eleitorado": 1111,
+      "geo_query": "EQNM 07/09, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 20",
+      "endereco": "EQNN 02/04",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3279,
+      "geo_query": "EQNN 02/04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 21",
+      "endereco": "EQNN 04/06",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 4782,
+      "geo_query": "EQNN 04/06, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 22",
+      "endereco": "EQNN 06/08",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 3608,
+      "geo_query": "EQNN 06/08, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 26",
+      "endereco": "EQNN 03/05",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1569,
+      "geo_query": "EQNN 03/05, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 27",
+      "endereco": "EQNN 07/09",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 2788,
+      "geo_query": "EQNN 07/09, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 28",
+      "endereco": "EQNN 17/19",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 2057,
+      "geo_query": "EQNN 17/19, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 29",
+      "endereco": "EQNN 19/21",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 2822,
+      "geo_query": "EQNN 19/21, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 35",
+      "endereco": "EQNP 13/09 - SETOR P NORTE",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 6002,
+      "geo_query": "EQNP 13/09 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 36",
+      "endereco": "EQNP 05/09",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 3767,
+      "geo_query": "EQNP 05/09, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 39",
+      "endereco": "EQNP 15/11 - SETOR P NORTE",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 4290,
+      "geo_query": "EQNP 15/11 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 40",
+      "endereco": "EQNP 11/07 - SETOR P NORTE",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 13,
+      "eleitorado": 3901,
+      "geo_query": "EQNP 11/07 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA NORMAL DE CEILANDIA",
+      "endereco": "EQNM 17/19",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 9,
+      "eleitorado": 2659,
+      "geo_query": "EQNM 17/19, Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO DE ENSINO SUPERIOR DE BRASÍLIA-IESB",
+      "endereco": "QNN 31 ÀREA ESPECIAL, B,C,D E",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2996,
+      "geo_query": "QNN 31 ÀREA ESPECIAL, B,C,D E, Brasília - DF, Brasil"
+    }
+  ],
+  "9": [
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL 1",
+      "endereco": "QE 20 LT A AREA ESPECIAL",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 6,
+      "eleitorado": 2068,
+      "geo_query": "QE 20 LT A AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 02 - VILA ESTRUTURAL",
+      "endereco": "QD 02 AE CONJUNTO 01/02",
+      "ra": "SCIA/ESTRUTURAL",
+      "bairro_2022": "VILA ESTRUTURAL",
+      "secoes_2022": 18,
+      "eleitorado": 6808,
+      "geo_query": "QD 02 AE CONJUNTO 01/02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 1",
+      "endereco": "QE 4 AE J",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 16,
+      "eleitorado": 5537,
+      "geo_query": "QE 4 AE J, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 10",
+      "endereco": "QE 46 AE 05",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 6,
+      "eleitorado": 2075,
+      "geo_query": "QE 46 AE 05, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 2",
+      "endereco": "QE 7 AE Q",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 13,
+      "eleitorado": 2631,
+      "geo_query": "QE 7 AE Q, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 4",
+      "endereco": "QE 12 AE A",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 20,
+      "eleitorado": 5567,
+      "geo_query": "QE 12 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 5",
+      "endereco": "EQ 32/34 LT B - AE",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 10,
+      "eleitorado": 3579,
+      "geo_query": "EQ 32/34 LT B - AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 8",
+      "endereco": "EQ 13/15 AE B",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 17,
+      "eleitorado": 5473,
+      "geo_query": "EQ 13/15 AE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 1",
+      "endereco": "EQ 34/36 AE B",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 15,
+      "eleitorado": 5237,
+      "geo_query": "EQ 34/36 AE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 3",
+      "endereco": "EQ 17/19 AE A",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 25,
+      "eleitorado": 8626,
+      "geo_query": "EQ 17/19 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 4",
+      "endereco": "QE 09 AE D",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 14,
+      "eleitorado": 3481,
+      "geo_query": "QE 09 AE D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 416 DE SANTA MARIA",
+      "endereco": "QE 09 AE D",
+      "ra": "SANTA MARIA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3349,
+      "geo_query": "QE 09 AE D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL INFANTIL 01 DA VILA ESTRUTURAL",
+      "endereco": "QUADRA 03 AE 01 SETOR NORTE",
+      "ra": "SCIA/ESTRUTURAL",
+      "bairro_2022": "VILA ESTRUTURAL",
+      "secoes_2022": 9,
+      "eleitorado": 2502,
+      "geo_query": "QUADRA 03 AE 01 SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO ENSINO EDUCACIONAL 01 - VILA ESTRUTURAL(MILITAR)",
+      "endereco": "Setor Central, Área Especial 03, Vila Estrutural, Brasília ",
+      "ra": "SCIA/ESTRUTURAL",
+      "bairro_2022": "VILA ESTRUTURAL",
+      "secoes_2022": 20,
+      "eleitorado": 7036,
+      "geo_query": "Setor Central, Área Especial 03, Vila Estrutural, Brasília , Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO ENSINO MEDIO 01 DO GUARA - CEM (GG)",
+      "endereco": "QE 07 AE M",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 19,
+      "eleitorado": 5135,
+      "geo_query": "QE 07 AE M, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CILG -CENTRO INTERESCOLAR DE LINGUAS",
+      "endereco": "QE 07 AE Q (AO LADO DO CEF 02)",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 9,
+      "eleitorado": 3009,
+      "geo_query": "QE 07 AE Q (AO LADO DO CEF 02), Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO ELITE (ANTIGO JK)",
+      "endereco": "QE 08 AREA ESPECIAL 1",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 11,
+      "eleitorado": 3922,
+      "geo_query": "QE 08 AREA ESPECIAL 1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO LICEU GUARA",
+      "endereco": "Quadra SRIA II, QE 48, CL 2, Lotes 3 e 4, Guará II, Brasília - DF, CEP 71070-484",
+      "ra": "GUARÁ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2875,
+      "geo_query": "Quadra SRIA II, QE 48, CL 2, Lotes 3 e 4, Guará II, Brasília - DF, CEP 71070-484, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO OBJETIVO DO GUARA",
+      "endereco": "QE 38 AREA ESPECIAL 8 LOTE C",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 18,
+      "eleitorado": 6147,
+      "geo_query": "QE 38 AREA ESPECIAL 8 LOTE C, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO PROJEÇÃO",
+      "endereco": "QE 20 AREA ESPECIAL E",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 14,
+      "eleitorado": 4321,
+      "geo_query": "QE 20 AREA ESPECIAL E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO ROGACIONISTA",
+      "endereco": "AREA ESPECIAL 08 MODULO B",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 20,
+      "eleitorado": 7081,
+      "geo_query": "AREA ESPECIAL 08 MODULO B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO ROGACIONISTA - INFANTIL NUCLEO 01",
+      "endereco": "EQ 34/34 LOTE D",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 8,
+      "eleitorado": 2792,
+      "geo_query": "EQ 34/34 LOTE D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 10 - ESCOLA CLASSE 10 DO GAMA",
+      "endereco": "QI 01/03 LT A/E",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3165,
+      "geo_query": "QI 01/03 LT A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 15 - ESCOLA CLASSE 15 DO GAMA",
+      "endereco": "QI 01/03 LT A/E",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2174,
+      "geo_query": "QI 01/03 LT A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 28 - ESCOLA CLASSE 28 DO GAMA",
+      "endereco": "QE 2 AE A",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 1559,
+      "geo_query": "QE 2 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 29 - ESCOLA CLASSE 29 DO GAMA",
+      "endereco": "QE 2 AE A",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2170,
+      "geo_query": "QE 2 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02 - VILA ESTRUTURAL",
+      "endereco": "QD 03 CJ A AE 06 - VILA ESTRUTURAL",
+      "ra": "SCIA/ESTRUTURAL",
+      "bairro_2022": "VILA ESTRUTURAL",
+      "secoes_2022": 14,
+      "eleitorado": 4189,
+      "geo_query": "QD 03 CJ A AE 06 - VILA ESTRUTURAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 03 (ANTIGO PADRE DI FRANCIA)",
+      "endereco": "QE 42 AE 01",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 4,
+      "eleitorado": 1575,
+      "geo_query": "QE 42 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 08 (ANTIGO CEF 07)",
+      "endereco": "EQ 28/30 AE A",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 21,
+      "eleitorado": 6825,
+      "geo_query": "EQ 28/30 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 1 - 9ª ZE - BRASÍLIA",
+      "endereco": "QI 01/03 LT A/E",
+      "ra": "GUARÁ",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3110,
+      "geo_query": "QI 01/03 LT A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 2",
+      "endereco": "QE 2 AE A",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 5,
+      "eleitorado": 2017,
+      "geo_query": "QE 2 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 3",
+      "endereco": "QE 7 LT J AREA ESPECIAL",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 5,
+      "eleitorado": 3452,
+      "geo_query": "QE 7 LT J AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 5",
+      "endereco": "QE 20 AE K",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA I",
+      "secoes_2022": 9,
+      "eleitorado": 2082,
+      "geo_query": "QE 20 AE K, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 6",
+      "endereco": "EQ 24/26 AE A",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 14,
+      "eleitorado": 4942,
+      "geo_query": "EQ 24/26 AE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 7",
+      "endereco": "QE 38 CONJ. D AE 12",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 5,
+      "eleitorado": 1678,
+      "geo_query": "QE 38 CONJ. D AE 12, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VILA ESTRUTURAL",
+      "endereco": "PRACA CENTRAL",
+      "ra": "SCIA/ESTRUTURAL",
+      "bairro_2022": "VILA ESTRUTURAL",
+      "secoes_2022": 14,
+      "eleitorado": 3919,
+      "geo_query": "PRACA CENTRAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA TÉCNICA DO GUARÁ - CEPAG / GUARÁ II",
+      "endereco": "EQE 19/17 - LOTE A - GUARÁ II",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 7,
+      "eleitorado": 2468,
+      "geo_query": "EQE 19/17 - LOTE A - GUARÁ II, Brasília - DF, Brasil"
+    },
+    {
+      "local": "FACULDADE PROJEÇÃO- PERTO TERMINAL RODOVIARIO GUARA II",
+      "endereco": "AREA ESPECIAL 10 LOTE C",
+      "ra": "GUARÁ",
+      "bairro_2022": "GUARA II",
+      "secoes_2022": 25,
+      "eleitorado": 4296,
+      "geo_query": "AREA ESPECIAL 10 LOTE C, Brasília - DF, Brasil"
+    }
+  ],
+  "10": [
+    {
+      "local": "CAIC JUSCELINO KUBITSCHEK DO NUCLEO BANDEIRANTE",
+      "endereco": "SMPW QUADRA 6 CONJUNTO 1, AE 02, SETOR DE MANSOES PARK WAY",
+      "ra": "PARK WAY",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 650,
+      "geo_query": "SMPW QUADRA 6 CONJUNTO 1, AE 02, SETOR DE MANSOES PARK WAY, CEP 71740-601, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCACAO INFANTIL DO NÚCLEO BANDEIRANTE",
+      "endereco": "2A AV. ENTREBLOCOS 960/1040",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 7,
+      "eleitorado": 2480,
+      "geo_query": "2A AV. ENTREBLOCOS 960/1040, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCACAO INFANTIL DO RIACHO FUNDO II",
+      "endereco": "QN 14A CONJ 07 AE 1/2",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 12,
+      "eleitorado": 4762,
+      "geo_query": "QN 14A CONJ 07 AE 1/2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 01 - RF I",
+      "endereco": "QN 07, AE 10, RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 10,
+      "eleitorado": 3866,
+      "geo_query": "QN 07, AE 10, RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01 DO RIACHO FUNDO II",
+      "endereco": "QN 07 LOTE D AREA ESPECIAL 1/2 - RIACHO FUNDO II",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 11,
+      "eleitorado": 4574,
+      "geo_query": "QN 07 LOTE D AREA ESPECIAL 1/2 - RIACHO FUNDO II, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 1",
+      "endereco": "AV CONTORNO AE 07 -NÚCLEO BANDEIRANTE",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 13,
+      "eleitorado": 4517,
+      "geo_query": "AV CONTORNO AE 07 -NÚCLEO BANDEIRANTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL LOBO GUARA",
+      "endereco": "QS 8, 2 - AREA ESPECEIAL02. RIACHO FUNDO II. 71884330 Brasília",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4606,
+      "geo_query": "QS 8, 2 - AREA ESPECEIAL02. RIACHO FUNDO II. 71884330 Brasília, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL METROPOLITANA",
+      "endereco": "RUA 01 LOTE 06 METROPOLITANA",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 9,
+      "eleitorado": 3303,
+      "geo_query": "RUA 01 LOTE 06 METROPOLITANA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO - JULIA KUBITSCHEK",
+      "endereco": "QRO A AE 01",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "CANDANGOLANDIA",
+      "secoes_2022": 8,
+      "eleitorado": 2929,
+      "geo_query": "QRO A AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 1 DO RIACHO FUNDO I",
+      "endereco": "QUADRA 14 LOTE A",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 15,
+      "eleitorado": 5653,
+      "geo_query": "QUADRA 14 LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO URSO BRANCO",
+      "endereco": "3 AVENIDA AREA ESPECIAL 04 - NÚCLEO BANDEIRANTE",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 13,
+      "eleitorado": 5705,
+      "geo_query": "3 AVENIDA AREA ESPECIAL 04 - NÚCLEO BANDEIRANTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO TELEBRASILIA",
+      "endereco": "QN 01 LOTE 01/02 - RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 17,
+      "eleitorado": 2683,
+      "geo_query": "QN 01 LOTE 01/02 - RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 02 RIACHO FUNDO I",
+      "endereco": "QN 07 AE 1/2",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 14,
+      "eleitorado": 5301,
+      "geo_query": "QN 07 AE 1/2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL AGROURBANO IPÊ",
+      "endereco": "COMBINADO AGROURBANO I (CAUB I) IPE/RIACHO FUNDO",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 5,
+      "eleitorado": 1841,
+      "geo_query": "COMBINADO AGROURBANO I (CAUB I) IPE/RIACHO FUNDO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL INFANTIL DA CANDANGOLANDIA",
+      "endereco": "QR 1-A, PRAÇA DO BOSQUE",
+      "ra": "CANDANGOLÂNDIA",
+      "bairro_2022": "CANDANGOLANDIA",
+      "secoes_2022": 8,
+      "eleitorado": 2901,
+      "geo_query": "QR 1-A, PRAÇA DO BOSQUE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL VARGEM BONITA",
+      "endereco": "NUCLEO HABIT. SUL-AE 01 LOT F-PROX Q17 PARK WAY VARGEM BONITA 71750",
+      "ra": "PARK WAY",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 16,
+      "eleitorado": 5890,
+      "geo_query": "NUCLEO HABIT. SUL-AE 01 LOT F-PROX Q17 PARK WAY VARGEM BONITA 71750, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCATIVO PASSIONISTA MÃE DA SANTA ESPERANÇA",
+      "endereco": "QN 05 AE 02 - RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 13,
+      "eleitorado": 4529,
+      "geo_query": "QN 05 AE 02 - RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO ENSINO MEDIO 01 RFII (ANTIGO CED 01 RFII)",
+      "endereco": "QD 18 AE 02, Riacho Fundo 2",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3776,
+      "geo_query": "QD 18 AE 02, Riacho Fundo 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CIL-CENTRO INTERESCOLAR DE LINGUAS DO RIACHO FUNDO I",
+      "endereco": "QS 14, Lote A / Área Especial, Riacho Fundo I ",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3251,
+      "geo_query": "QS 14, Lote A / Área Especial, Riacho Fundo I , Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO ISAAC NEWTON",
+      "endereco": "QN 07 AREA ESPECIAL 11 RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 10,
+      "eleitorado": 3445,
+      "geo_query": "QN 07 AREA ESPECIAL 11 RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO LA SALLE",
+      "endereco": "2 AVENIDA AREA ESPECIAL 11 - NÚCLEO BANDEIRANTE",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 18,
+      "eleitorado": 6425,
+      "geo_query": "2 AVENIDA AREA ESPECIAL 11 - NÚCLEO BANDEIRANTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO EDUCANDÁRIO DE FÁTIMA",
+      "endereco": "QN 14B CONJ 6 LOTES 19/20 RIACHO FUNDO II",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 4,
+      "eleitorado": 1936,
+      "geo_query": "QN 14B CONJ 6 LOTES 19/20 RIACHO FUNDO II, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02 DA CANDANGOLÂNDIA (ANTIGA ZOOBOTANICA)",
+      "endereco": "EQ 02/03 AE - CANDANGOLÂNDIA",
+      "ra": "CANDANGOLÂNDIA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3088,
+      "geo_query": "EQ 02/03 AE - CANDANGOLÂNDIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02 DO RIACHO FUNDO I",
+      "endereco": "QN 05 ÁREA ESPECIAL 07 - RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 5,
+      "eleitorado": 1150,
+      "geo_query": "QN 05 ÁREA ESPECIAL 07 - RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 1 CANDANGOLANDIA",
+      "endereco": "EQ 05/07, AREA ESPECIAL -CANDANGOLÂNDIA",
+      "ra": "CANDANGOLÂNDIA",
+      "bairro_2022": "CANDANGOLANDIA",
+      "secoes_2022": 9,
+      "eleitorado": 2490,
+      "geo_query": "EQ 05/07, AREA ESPECIAL -CANDANGOLÂNDIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 1 DO RIACHO FUNDO II",
+      "endereco": "QC 4 CONJ 18 LOTE 2",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 12,
+      "eleitorado": 4986,
+      "geo_query": "QC 4 CONJ 18 LOTE 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 2 DO RIACHO FUNDO II",
+      "endereco": "QN 14 CONJUNTO D LOTE A",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 10,
+      "eleitorado": 3766,
+      "geo_query": "QN 14 CONJUNTO D LOTE A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 4",
+      "endereco": "2 AV ENTREBLOCOS 440/540",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 8,
+      "eleitorado": 2755,
+      "geo_query": "2 AV ENTREBLOCOS 440/540, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 410",
+      "endereco": "2 AV ENTREBLOCOS 440/540",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 8,
+      "eleitorado": 5098,
+      "geo_query": "2 AV ENTREBLOCOS 440/540, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 42",
+      "endereco": "2 AV ENTREBLOCOS 440/540",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 8,
+      "eleitorado": 3678,
+      "geo_query": "2 AV ENTREBLOCOS 440/540, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 425",
+      "endereco": "2 AV ENTREBLOCOS 440/540",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 8,
+      "eleitorado": 4578,
+      "geo_query": "2 AV ENTREBLOCOS 440/540, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 45",
+      "endereco": "2 AV ENTREBLOCOS 440/540",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 8,
+      "eleitorado": 4441,
+      "geo_query": "2 AV ENTREBLOCOS 440/540, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 5",
+      "endereco": "2 AV ENTREBLOCOS 1400/1500",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 6,
+      "eleitorado": 2084,
+      "geo_query": "2 AV ENTREBLOCOS 1400/1500, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE AGROVILA II",
+      "endereco": "EPCT DF 001 - SENTIDO GAMA/TAGUAT-CAUB II -",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 4,
+      "eleitorado": 1174,
+      "geo_query": "EPCT DF 001 - SENTIDO GAMA/TAGUAT-CAUB II -, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VERDE DO RIACHO FUNDO I",
+      "endereco": "SHRF E/Q 2/4 LOTE A QS 4",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 3,
+      "eleitorado": 2003,
+      "geo_query": "SHRF E/Q 2/4 LOTE A QS 4, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA SALESIANA SAO DOMINGOS SAVIO",
+      "endereco": "3 AVENIDA AE 5 LOTE A/F- NÚCLEO BANDEIRANTE",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "NUCLEO BANDEIRANTE",
+      "secoes_2022": 15,
+      "eleitorado": 5133,
+      "geo_query": "3 AVENIDA AE 5 LOTE A/F- NÚCLEO BANDEIRANTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO FEDERAL DE BRASÍLIA - CAMPUS RIACHO FUNDO",
+      "endereco": "AVENIDA CEDRO, AE 15, QS 16, FAZENDA SUCUPIRA- RIACHO FUNDO I",
+      "ra": "RIACHO FUNDO",
+      "bairro_2022": "RIACHO FUNDO",
+      "secoes_2022": 5,
+      "eleitorado": 1935,
+      "geo_query": "AVENIDA CEDRO, AE 15, QS 16, FAZENDA SUCUPIRA- RIACHO FUNDO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "JARDIM DE INFANCIA 1 DO RIACHO FUNDO II",
+      "endereco": "QN 8-C AE 01",
+      "ra": "RIACHO FUNDO II",
+      "bairro_2022": "RIACHO FUNDO II",
+      "secoes_2022": 9,
+      "eleitorado": 3325,
+      "geo_query": "QN 8-C AE 01, Brasília - DF, Brasil"
+    }
+  ],
+  "11": [
+    {
+      "local": "CASA THOMAS JEFFERSON",
+      "endereco": "SHCSW/EQSW 301/302, LOTE 02, SETOR SUDOESTE",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "SETOR SUDOESTE",
+      "secoes_2022": 20,
+      "eleitorado": 6458,
+      "geo_query": "SHCSW/EQSW 301/302, LOTE 02, SETOR SUDOESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 01",
+      "endereco": "SRES Q 01, LOTE 05, AREA ESPECIAL, CRUZEIRO VELHO",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "CRUZEIRO VELHO",
+      "secoes_2022": 20,
+      "eleitorado": 6049,
+      "geo_query": "SRES Q 01, LOTE 05, AREA ESPECIAL, CRUZEIRO VELHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL ATHOS BULCÃO",
+      "endereco": "SHCES Q. 309, LOTE 01, AREA ESPECIAL, CRUZEIRO NOVO",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 19,
+      "eleitorado": 5757,
+      "geo_query": "SHCES Q. 309, LOTE 01, AREA ESPECIAL, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO INTEGRADO DO CRUZEIRO - CEMI DO CRUZEIRO",
+      "endereco": "SRES AREA ESPECIAL F, LOTE G, CRUZEIRO VELHO",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "CRUZEIRO VELHO",
+      "secoes_2022": 14,
+      "eleitorado": 4036,
+      "geo_query": "SRES AREA ESPECIAL F, LOTE G, CRUZEIRO VELHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 02",
+      "endereco": "SHCES Q 805, LOTE 02, ÁREA ESPECIAL, CRUZEIRO NOVO",
+      "ra": "NÚCLEO BANDEIRANTE",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 20,
+      "eleitorado": 8939,
+      "geo_query": "SHCES Q 805, LOTE 02, ÁREA ESPECIAL, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO CIMAN",
+      "endereco": "SH/AOS ENTRE AREAS 01/04, LOTE 08, OCTOGONAL",
+      "ra": "SUDOESTE/OCTOGONAL",
+      "bairro_2022": "AREA OCTOGONAL SUL",
+      "secoes_2022": 29,
+      "eleitorado": 8405,
+      "geo_query": "SH/AOS ENTRE AREAS 01/04, LOTE 08, OCTOGONAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO IN-NOVA ( ANTIGO COC )",
+      "endereco": "EQSW 101/102, Lote/Quadra 01, Brasília ",
+      "ra": "SUDOESTE/OCTOGONAL",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 1081,
+      "geo_query": "EQSW 101/102, Lote/Quadra 01, Brasília , Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO SOMA",
+      "endereco": "SHCES Q 609, LOTE 01, CRUZEIRO NOVO",
+      "ra": "CRUZEIRO",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 10,
+      "eleitorado": 2930,
+      "geo_query": "SHCES Q 609, LOTE 01, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO DROMOS",
+      "endereco": "SQSW/EQSW 303/304, LOTE 03, SETOR SUDOESTE",
+      "ra": "SUDOESTE/OCTOGONAL",
+      "bairro_2022": "SETOR SUDOESTE",
+      "secoes_2022": 12,
+      "eleitorado": 3670,
+      "geo_query": "SQSW/EQSW 303/304, LOTE 03, SETOR SUDOESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CANADENSE DE BRASÍLIA ( ANTIGA MAPLE BEAR )",
+      "endereco": "SIG QUADRA 08, LOTE 2225, PARTE F, SIG",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "SETOR DE INDUSTRIAS GRAFICAS",
+      "secoes_2022": 16,
+      "eleitorado": 5164,
+      "geo_query": "SIG QUADRA 08, LOTE 2225, PARTE F, SIG, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 04",
+      "endereco": "SHCES Q. 407, ÁREA ESPECIAL, CRUZEIRO NOVO",
+      "ra": "CRUZEIRO",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 10,
+      "eleitorado": 3201,
+      "geo_query": "SHCES Q. 407, ÁREA ESPECIAL, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 05",
+      "endereco": "SHCES Q 201/203, ÁREA ESPECIAL, CRUZEIRO NOVO",
+      "ra": "CRUZEIRO",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 10,
+      "eleitorado": 2914,
+      "geo_query": "SHCES Q 201/203, ÁREA ESPECIAL, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 06",
+      "endereco": "SHCES Q 807, ÁREA ESPECIAL, CRUZEIRO NOVO",
+      "ra": "CRUZEIRO",
+      "bairro_2022": "CRUZEIRO NOVO",
+      "secoes_2022": 15,
+      "eleitorado": 4521,
+      "geo_query": "SHCES Q 807, ÁREA ESPECIAL, CRUZEIRO NOVO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 08",
+      "endereco": "AOS 06/08, ÁREA ESPECIAL, OCTOGONAL",
+      "ra": "SUDOESTE/OCTOGONAL",
+      "bairro_2022": "AREA OCTOGONAL SUL",
+      "secoes_2022": 18,
+      "eleitorado": 5909,
+      "geo_query": "AOS 06/08, ÁREA ESPECIAL, OCTOGONAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE DA VILA DO RCG",
+      "endereco": "VILA DO RCG, RUA C, ÁREA ESPECIAL, S/N",
+      "ra": "CRUZEIRO",
+      "bairro_2022": "SETOR MILITAR COMPLEMENTAR",
+      "secoes_2022": 4,
+      "eleitorado": 1097,
+      "geo_query": "VILA DO RCG, RUA C, ÁREA ESPECIAL, S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE SMU",
+      "endereco": "QRO, AREA ESPECIAL, SETOR MILITAR URBANO",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "SETOR MILITAR URBANO",
+      "secoes_2022": 8,
+      "eleitorado": 2452,
+      "geo_query": "QRO, AREA ESPECIAL, SETOR MILITAR URBANO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "MAPLE BEAR ( ANTIGO CANDANGUINHO - CECAN )",
+      "endereco": "EQSW 303/304, Lote 01, Parte C, Setor Sudoeste, Brasília - DF",
+      "ra": "SUDOESTE/OCTOGONAL",
+      "bairro_2022": "SETOR SUDOESTE",
+      "secoes_2022": 21,
+      "eleitorado": 6721,
+      "geo_query": "EQSW 303/304, Lote 01, Parte C, Setor Sudoeste, Brasília - DF, Brasília - DF, Brasil"
+    }
+  ],
+  "13": [
+    {
+      "local": "CAIC AYRTON SENNA",
+      "endereco": "QR 117 SETOR URBANO",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 4251,
+      "geo_query": "QR 117 SETOR URBANO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CAIC HELENA REIS",
+      "endereco": "QR 409 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 17,
+      "eleitorado": 6086,
+      "geo_query": "QR 409 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CCI SÊNIOR",
+      "endereco": "QN 401 CONJUNTO D LOTES 01/02",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 27,
+      "eleitorado": 9143,
+      "geo_query": "QN 401 CONJUNTO D LOTES 01/02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 307",
+      "endereco": "QR 307 CONJUNTO 08 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3902,
+      "geo_query": "QR 307 CONJUNTO 08 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO 412",
+      "endereco": "QN 412 AREA ESPECIAL 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 5485,
+      "geo_query": "QN 412 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 120",
+      "endereco": "QN 120/122 CONJUNTO 04 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 15,
+      "eleitorado": 5492,
+      "geo_query": "QN 120/122 CONJUNTO 04 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 312",
+      "endereco": "QS 312 CONJUNTO 05 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 18,
+      "eleitorado": 5408,
+      "geo_query": "QS 312 CONJUNTO 05 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 404",
+      "endereco": "QS 404 AREA ESPECIAL 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5690,
+      "geo_query": "QS 404 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 411",
+      "endereco": "QN 411 AE SETOR NORTE - SAMAMBAIA NORTE",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 4914,
+      "geo_query": "QN 411 AE SETOR NORTE - SAMAMBAIA NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 427",
+      "endereco": "QN 427 AE 2",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5575,
+      "geo_query": "QN 427 AE 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 619",
+      "endereco": "QS 619 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 9,
+      "eleitorado": 3183,
+      "geo_query": "QS 619 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 304",
+      "endereco": "QR 304 CONJUNTO 04 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA SUL",
+      "secoes_2022": 16,
+      "eleitorado": 6148,
+      "geo_query": "QR 304 CONJUNTO 04 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 414",
+      "endereco": "QS 414 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 18,
+      "eleitorado": 6563,
+      "geo_query": "QS 414 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL MYRIAM ERVILHA",
+      "endereco": "DF 280 KM 14 - SAMAMBAIA",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 5871,
+      "geo_query": "DF 280 KM 14 - SAMAMBAIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 108",
+      "endereco": "QS 108/110 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 20,
+      "eleitorado": 6939,
+      "geo_query": "QS 108/110 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 111",
+      "endereco": "QS 111 AREA ESPECIAL 10",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 10,
+      "eleitorado": 3376,
+      "geo_query": "QS 111 AREA ESPECIAL 10, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 121",
+      "endereco": "QS 121 CONJUNTO 01 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 13,
+      "eleitorado": 3776,
+      "geo_query": "QS 121 CONJUNTO 01 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 303",
+      "endereco": "QR 303 CONJUNTO 12",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 12,
+      "eleitorado": 4073,
+      "geo_query": "QR 303 CONJUNTO 12, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 318",
+      "endereco": "QN 318 CONJUNTO 04 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 15,
+      "eleitorado": 5168,
+      "geo_query": "QN 318 CONJUNTO 04 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 325",
+      "endereco": "QR 325 AREA ESPECIAL 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 16,
+      "eleitorado": 4562,
+      "geo_query": "QR 325 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 403",
+      "endereco": "QN 403/405 AREA ESPECIAL",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 14,
+      "eleitorado": 4741,
+      "geo_query": "QN 403/405 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 407",
+      "endereco": "QR 407/409 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 15,
+      "eleitorado": 3416,
+      "geo_query": "QR 407/409 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 419",
+      "endereco": "QS 419 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 12,
+      "eleitorado": 3852,
+      "geo_query": "QS 419 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 431",
+      "endereco": "QS 431 AE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 18,
+      "eleitorado": 5550,
+      "geo_query": "QS 431 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 604",
+      "endereco": "QS 604 AE",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 12,
+      "eleitorado": 4371,
+      "geo_query": "QS 604 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 614",
+      "endereco": "QR 614 AREA ESPECIAL 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 10,
+      "eleitorado": 3190,
+      "geo_query": "QR 614 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 831",
+      "endereco": "QR 831 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA NORTE",
+      "secoes_2022": 1,
+      "eleitorado": 631,
+      "geo_query": "QR 831 LOTE 01, Brasília - DF, Brasil"
+    }
+  ],
+  "14": [
+    {
+      "local": "IFB - INSTITUTO FEDERAL DE BRASILIA",
+      "endereco": "SGAN 610, MODULO D E F G, ASA NORTE",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4338,
+      "geo_query": "SGAN 610, MODULO D E F G, ASA NORTE, CEP 70830-450, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEAN - CENTRO DE ENSINO MEDIO ASA NORTE",
+      "endereco": "SGAN 606 MODULO G/H",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 3805,
+      "geo_query": "SGAN 606 MODULO G/H, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCACAO INFANTIL 316 NORTE",
+      "endereco": "SQN 316",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3254,
+      "geo_query": "SQN 316, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 104 NORTE",
+      "endereco": "SQN 104",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2572,
+      "geo_query": "SQN 104, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 410 NORTE",
+      "endereco": "SQN 410 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2871,
+      "geo_query": "SQN 410 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 7 DE BRASILIA",
+      "endereco": "SGAN 912 MODULO A/B",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 12,
+      "eleitorado": 4552,
+      "geo_query": "SGAN 912 MODULO A/B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL GAN",
+      "endereco": "SGAN 603/604, Módulo H, Lote 02, Área Especial, Asa Norte",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2744,
+      "geo_query": "SGAN 603/604, Módulo H, Lote 02, Área Especial, Asa Norte, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO PAULO FREIRE",
+      "endereco": "SGAN 610 MODULO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 2525,
+      "geo_query": "SGAN 610 MODULO A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL GISNO",
+      "endereco": "SGAN 907 MODULO A",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 3376,
+      "geo_query": "SGAN 907 MODULO A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL LEONARDO DA VINCI",
+      "endereco": "SGAN 914 CONJUNTO I",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 29,
+      "eleitorado": 9900,
+      "geo_query": "SGAN 914 CONJUNTO I, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SIGMA",
+      "endereco": "SGAN 910 MÓDULO E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 2626,
+      "geo_query": "SGAN 910 MÓDULO E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO MADRE CARMEN SALLES",
+      "endereco": "SGAN 604 LOTE D",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 3075,
+      "geo_query": "SGAN 604 LOTE D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO MARISTA JOAO PAULO II",
+      "endereco": "SEPN 702 LOTE B",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 12,
+      "eleitorado": 4991,
+      "geo_query": "SEPN 702 LOTE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO SAGRADA FAMILIA",
+      "endereco": "SGAN 906 LOTE C",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 2949,
+      "geo_query": "SGAN 906 LOTE C, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO SANTA DOROTEIA",
+      "endereco": "SGAN 911 MODULO B",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3457,
+      "geo_query": "SGAN 911 MODULO B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO IDEAL",
+      "endereco": "SGAN 916 MODULO B",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 2839,
+      "geo_query": "SGAN 916 MODULO B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 113 NORTE",
+      "endereco": "SQN 113 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3336,
+      "geo_query": "SQN 113 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 115 NORTE",
+      "endereco": "SQN 115",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 4146,
+      "geo_query": "SQN 115, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 304 NORTE",
+      "endereco": "SQN 304",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2672,
+      "geo_query": "SQN 304, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 312 NORTE",
+      "endereco": "SQN 312",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2600,
+      "geo_query": "SQN 312, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 403 NORTE",
+      "endereco": "SQN 403 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 3059,
+      "geo_query": "SQN 403 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 405 NORTE",
+      "endereco": "SQN 405 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 2459,
+      "geo_query": "SQN 405 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 407 NORTE",
+      "endereco": "SQN 407 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1896,
+      "geo_query": "SQN 407 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 411 NORTE",
+      "endereco": "SQN 411 ÁREA ESPECIAL",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2511,
+      "geo_query": "SQN 411 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 415 NORTE",
+      "endereco": "SQN 415",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 2181,
+      "geo_query": "SQN 415, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA PARQUE 210 NORTE",
+      "endereco": "EQN 210/211 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2991,
+      "geo_query": "EQN 210/211 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "FUNDACAO LOGOSOFICA",
+      "endereco": "HCGN 704 A/E",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2293,
+      "geo_query": "HCGN 704 A/E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "HEAVENLY INTERNATIONAL SCHOOL",
+      "endereco": "nan",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3513,
+      "geo_query": "HEAVENLY INTERNATIONAL SCHOOL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNB - PAVILHAO JOAO CALMON",
+      "endereco": "CAMPUS UNIVERSITARIO DARCY RIBEIRO",
+      "ra": "PLANO PILOTO",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1967,
+      "geo_query": "CAMPUS UNIVERSITARIO DARCY RIBEIRO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNICEUB",
+      "endereco": "SEPN 707/907",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "ASA NORTE",
+      "secoes_2022": 33,
+      "eleitorado": 9847,
+      "geo_query": "SEPN 707/907, Brasília - DF, Brasil"
+    }
+  ],
+  "15": [
+    {
+      "local": "CEF Nº 10",
+      "endereco": "QSE 05/07 ÁREA ESPECIAL N 01",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 4919,
+      "geo_query": "QSE 05/07 ÁREA ESPECIAL N 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF Nº 15",
+      "endereco": "QSA 03/04 ÁREA ESPECIAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 15,
+      "eleitorado": 4941,
+      "geo_query": "QSA 03/04 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF Nº 3",
+      "endereco": "EQSA 25/24 QSD 09/11 ÁREA ESPECIAL S/ N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 5719,
+      "geo_query": "EQSA 25/24 QSD 09/11 ÁREA ESPECIAL S/ N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF Nº 8",
+      "endereco": "QNA 52 ÁREA ESPECIAL S/ N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 3633,
+      "geo_query": "QNA 52 ÁREA ESPECIAL S/ N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEI 02 - CENTRO DE EDUCAÇÃO INFANTIL 02",
+      "endereco": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 8,
+      "eleitorado": 2839,
+      "geo_query": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEMAB - CENTRO DE ENSINO MÉDIO AVE BRANCA",
+      "endereco": "QSA 03/05 ÁREA ESPECIAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 24,
+      "eleitorado": 7743,
+      "geo_query": "QSA 03/05 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL 02 - CEI02",
+      "endereco": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 8,
+      "eleitorado": 3609,
+      "geo_query": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL ÁGUAS CLARAS",
+      "endereco": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 8,
+      "eleitorado": 2954,
+      "geo_query": "QS 11, A/E 01 - AREAL(ÁGUAS CLARAS) - DISTRITO FEDERAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENS MÉDIO Nº 3",
+      "endereco": "QSE 05 ÁREA ESPECIAL N 14",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 17,
+      "eleitorado": 4510,
+      "geo_query": "QSE 05 ÁREA ESPECIAL N 14, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUC STELLA MARIS",
+      "endereco": "SETOR C 07 - PARTE B - AE P/ IGREJA CATÓLICA",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA CENTRO",
+      "secoes_2022": 18,
+      "eleitorado": 5526,
+      "geo_query": "SETOR C 07 - PARTE B - AE P/ IGREJA CATÓLICA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL CATOLICA DE BRASILIA",
+      "endereco": "QS 07 LOTE 1 EPCT - TAGUATINGA SUL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 24,
+      "eleitorado": 9664,
+      "geo_query": "QS 07 LOTE 1 EPCT - TAGUATINGA SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL Nº 02",
+      "endereco": "EQSA 25/24 QSD 09/11 AE S/N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 20,
+      "eleitorado": 5660,
+      "geo_query": "EQSA 25/24 QSD 09/11 AE S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SIGMA",
+      "endereco": "RUA 14 SUL, LOTE 06",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "SUL (AGUAS CLARAS)",
+      "secoes_2022": 17,
+      "eleitorado": 6844,
+      "geo_query": "RUA 14 SUL, LOTE 06, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO UNIVERSITARIO EURO AMERICANO - UNIEURO",
+      "endereco": "AVENIDA CASTANHEIRAS LOTE 370",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 41,
+      "eleitorado": 14175,
+      "geo_query": "AVENIDA CASTANHEIRAS LOTE 370, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEUB - ÁGUAS CLARAS",
+      "endereco": "RUA 214 LOTE 1/17 QS 01 TAGUATINGA SUL - DF",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 5,
+      "eleitorado": 2487,
+      "geo_query": "RUA 214 LOTE 1/17 QS 01 TAGUATINGA SUL - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CILT - CENTRO INTERESCOLAR DE LINGUAS DE TAGUATINGA",
+      "endereco": "QSB 02/03 ÁREA ESPECIAL N 03/04",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 3903,
+      "geo_query": "QSB 02/03 ÁREA ESPECIAL N 03/04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO LEONARDO DA VINCI",
+      "endereco": "QS 03 RUA 420 LOTE 02",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 37,
+      "eleitorado": 11615,
+      "geo_query": "QS 03 RUA 420 LOTE 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO ANCHIETA - TAGUATINGA",
+      "endereco": "QSC 19, QUADRA 27 CONJUNTO A, LOTE 16, ST DE CHÁCARAS - PRIMAVERA, TAG",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 1,
+      "eleitorado": 590,
+      "geo_query": "QSC 19, QUADRA 27 CONJUNTO A, LOTE 16, ST DE CHÁCARAS - PRIMAVERA, TAG, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO IDEAL",
+      "endereco": "AVENIDA JEQUITIBÁ N. 325",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "SUL (AGUAS CLARAS)",
+      "secoes_2022": 15,
+      "eleitorado": 4445,
+      "geo_query": "AVENIDA JEQUITIBÁ N. 325, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO IDEAL - A/E 31",
+      "endereco": "QNG, Área Especial Nº 31 – Setor G Norte, Taguatinga, Brasília",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2579,
+      "geo_query": "QNG, Área Especial Nº 31 – Setor G Norte, Taguatinga, Brasília, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO IDEAL MANACÁ",
+      "endereco": "Rua Manacá, lote 2, Bloco II, Águas Claras, Brasília - DF, CEP 71907-270",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3598,
+      "geo_query": "Rua Manacá, lote 2, Bloco II, Águas Claras, Brasília - DF, CEP 71907-270, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO MARISTA - ÁGUAS CLARAS",
+      "endereco": "RUA TAMBORIL LOTE 1",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 20,
+      "eleitorado": 6945,
+      "geo_query": "RUA TAMBORIL LOTE 1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO OBJETIVO - ÁGUAS CLARAS",
+      "endereco": "nan",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4384,
+      "geo_query": "COLÉGIO OBJETIVO - ÁGUAS CLARAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO OLIMPO LTDA",
+      "endereco": "RUA 7 SUL, LOTE 04",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "SUL (AGUAS CLARAS)",
+      "secoes_2022": 10,
+      "eleitorado": 3231,
+      "geo_query": "RUA 7 SUL, LOTE 04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO VISÃO",
+      "endereco": "RUA 25 NORTE, LOTE 04",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "NORTE (AGUAS CLARAS)",
+      "secoes_2022": 6,
+      "eleitorado": 2000,
+      "geo_query": "RUA 25 NORTE, LOTE 04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA ATUAL",
+      "endereco": "QUADRA 204, LOTE 01",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3818,
+      "geo_query": "QUADRA 204, LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 54 (CEF Nº 18 - ESCOLA NORMAL)",
+      "endereco": "QSD 32 ÁREA P/ ESCOLA N 02",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 2936,
+      "geo_query": "QSD 32 ÁREA P/ ESCOLA N 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ARNIQUEIRA",
+      "endereco": "SMPW 04 CJ 04 LT 05 - COL. AGR. ARNIQUEIRA",
+      "ra": "ARNIQUEIRA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 5,
+      "eleitorado": 1736,
+      "geo_query": "SMPW 04 CJ 04 LT 05 - COL. AGR. ARNIQUEIRA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 1",
+      "endereco": "QSC 01 AE 01",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 3,
+      "eleitorado": 982,
+      "geo_query": "QSC 01 AE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 11",
+      "endereco": "QSE 12/14 AE S/N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 2590,
+      "geo_query": "QSE 12/14 AE S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VILA AREAL",
+      "endereco": "QS 06 CONJUNTO 430",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "ASSENTAMENTO DO AREAL (ÁGUAS cLARAS)",
+      "secoes_2022": 8,
+      "eleitorado": 2506,
+      "geo_query": "QS 06 CONJUNTO 430, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA LA SALLE",
+      "endereco": "QUADRA 301 ÁREA ESPECIAL S/N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 38,
+      "eleitorado": 12906,
+      "geo_query": "QUADRA 301 ÁREA ESPECIAL S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA TÉCNICA DE BRASÍLIA",
+      "endereco": "QS 07 LOTE 02/08 - AVENIDA ÁGUAS CLARAS - VILA AREAL",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "TAGUATINGA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 3788,
+      "geo_query": "QS 07 LOTE 02/08 - AVENIDA ÁGUAS CLARAS - VILA AREAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "FACULDADE PROCESSUS - CAMPUS II",
+      "endereco": "AVENIDA ARAUCÁRIAS N. 4400",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 9,
+      "eleitorado": 3083,
+      "geo_query": "AVENIDA ARAUCÁRIAS N. 4400, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNIPLAN -CENTRO UNIVERSITÁRIO PLANALTO DO DISTRITO FEDERAL",
+      "endereco": "AVENIDA PAU BRASIL, LOTE 2 - ÁGUAS CLARAS - DISTRITO FEDERAL",
+      "ra": "ÁGUAS CLARAS",
+      "bairro_2022": "AGUAS CLARAS - TAGUATINGA SUL",
+      "secoes_2022": 36,
+      "eleitorado": 9428,
+      "geo_query": "AVENIDA PAU BRASIL, LOTE 2 - ÁGUAS CLARAS - DISTRITO FEDERAL, Brasília - DF, Brasil"
+    }
+  ],
+  "16": [
+    {
+      "local": "CAIC - PROFESSOR BENEDITO CARLOS DE OLIVEIRA",
+      "endereco": "AE 05 - SETOR TRADICIONAL",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 2,
+      "eleitorado": 764,
+      "geo_query": "AE 05 - SETOR TRADICIONAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE CONVIVÊNCIA BRAZLÂNDIA CENTRAL (COSE)",
+      "endereco": "AE 01 LOTE K/L/M/N - SETOR NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 2,
+      "eleitorado": 557,
+      "geo_query": "AE 01 LOTE K/L/M/N - SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCACAO INFANTIL 01 DE BRAZLANDIA",
+      "endereco": "PIQ 05, LOTE 01, SETOR VEREDAS",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 4,
+      "eleitorado": 1293,
+      "geo_query": "PIQ 05, LOTE 01, SETOR VEREDAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL - CENEBRAZ",
+      "endereco": "EQ 2/4 LOTE A - SETOR NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 8,
+      "eleitorado": 2505,
+      "geo_query": "EQ 2/4 LOTE A - SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 12",
+      "endereco": "EQNO 02/04 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 4248,
+      "geo_query": "EQNO 02/04 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 26 (ANTIGA EC 30)",
+      "endereco": "EQNO 5/7 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 4020,
+      "geo_query": "EQNO 5/7 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 27",
+      "endereco": "QNR 01 AREA ESPECIAL03",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5850,
+      "geo_query": "QNR 01 AREA ESPECIAL03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 28",
+      "endereco": "QNP 21 AREA ESPECIAL - SETOR HABITACIONAL SOL NASCENTE",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 3130,
+      "geo_query": "QNP 21 AREA ESPECIAL - SETOR HABITACIONAL SOL NASCENTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 30",
+      "endereco": "AREA ESPECIAL FRENTE MODULO 07 - CONDOMINIO PRIVE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 4207,
+      "geo_query": "AREA ESPECIAL FRENTE MODULO 07 - CONDOMINIO PRIVE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 31 (ANTIGO CE 17 E 53)",
+      "endereco": "EQNO 17 CONJUNTO H LOTE 02 - EXPANSÃO SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5141,
+      "geo_query": "EQNO 17 CONJUNTO H LOTE 02 - EXPANSÃO SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 34 (ANTIGA EC 60)",
+      "endereco": "QNO 19 CONJUNTO B LOTE 01 - EXPANSÃO DO SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 4380,
+      "geo_query": "QNO 19 CONJUNTO B LOTE 01 - EXPANSÃO DO SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL BOA ESPERANÇA",
+      "endereco": "BR 070 - DF 180/190 FAZENDA CACHOEIRA NUCLEO RURAL BOA ESPERANCA",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 3,
+      "eleitorado": 988,
+      "geo_query": "BR 070 - DF 180/190 FAZENDA CACHOEIRA NUCLEO RURAL BOA ESPERANCA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL N. 01",
+      "endereco": "PIQ( PROGRAMA DE INTEGRAÇÃO DE QUADRAS) Q. 06 LT. 02, SETOR VEREDAS",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 11,
+      "eleitorado": 2500,
+      "geo_query": "PIQ( PROGRAMA DE INTEGRAÇÃO DE QUADRAS) Q. 06 LT. 02, SETOR VEREDAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL N. 02",
+      "endereco": "QUADRA 12 ÁREA ESPECIAL 05 - SETOR NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 6,
+      "eleitorado": 1910,
+      "geo_query": "QUADRA 12 ÁREA ESPECIAL 05 - SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL N. 03",
+      "endereco": "AE - QUADRA 046, VILA SÃO JOSÉ",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 11,
+      "eleitorado": 3325,
+      "geo_query": "AE - QUADRA 046, VILA SÃO JOSÉ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL VENDINHA",
+      "endereco": "BR - 080 KM 25 ESTRADA DE BRAZLÂNDIA PARA PADRE BERNARDO",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 2,
+      "eleitorado": 695,
+      "geo_query": "BR - 080 KM 25 ESTRADA DE BRAZLÂNDIA PARA PADRE BERNARDO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL- INCRA 08",
+      "endereco": "ZR - DF 070, DF 180 - ALEXANDRE GUSMAO",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "N.R.ALEX. GUSMAO",
+      "secoes_2022": 8,
+      "eleitorado": 2178,
+      "geo_query": "ZR - DF 070, DF 180 - ALEXANDRE GUSMAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 12",
+      "endereco": "QNP 13 - AREA ESPECIAL - SETOR P NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 2631,
+      "geo_query": "QNP 13 - AREA ESPECIAL - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO N. 01",
+      "endereco": "QD. 04 AE N. 02",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 11,
+      "eleitorado": 2671,
+      "geo_query": "QD. 04 AE N. 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 09",
+      "endereco": "EQNO 03/05 SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 6306,
+      "geo_query": "EQNO 03/05 SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 02",
+      "endereco": "PRACA DO LAÇO - SETOR NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 9,
+      "eleitorado": 2913,
+      "geo_query": "PRACA DO LAÇO - SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 04 (CURRALINHO)",
+      "endereco": "BR 080 KM 37 FAZ. CURRALINHO, ESTRADA DE PADRE BERNARDO",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 1,
+      "eleitorado": 319,
+      "geo_query": "BR 080 KM 37 FAZ. CURRALINHO, ESTRADA DE PADRE BERNARDO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 14 (ANTIGO CE 15)",
+      "endereco": "EQNO 11/13 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 20,
+      "eleitorado": 6131,
+      "geo_query": "EQNO 11/13 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 16 (ANTIGO CEF 24)",
+      "endereco": "QNQ 03",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 3932,
+      "geo_query": "QNQ 03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL INCRA 09",
+      "endereco": "NRAG - NUCLEO RURAL ALEXANDRE GUSMAO KM 16 BR 070 INCRA 09",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1539,
+      "geo_query": "NRAG - NUCLEO RURAL ALEXANDRE GUSMAO KM 16 BR 070 INCRA 09, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL IRMÃ MARIA REGINA VELANES RÉGIS",
+      "endereco": "ZR DF 001 (EPCT) DF 430, RODEADOR",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 4,
+      "eleitorado": 1533,
+      "geo_query": "ZR DF 001 (EPCT) DF 430, RODEADOR, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO ENSINO MÉDIO Nº 02",
+      "endereco": "QUADRA 36 AE 03, VILA SÃO JOSÉ",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 11,
+      "eleitorado": 3860,
+      "geo_query": "QUADRA 36 AE 03, VILA SÃO JOSÉ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO INTERESCOLAR DE LINGUAS DE BRAZLANDIA - CILB",
+      "endereco": "ÁREA ESPECIAL 07 QUADRA 02 - SETOR TRADICIONAL",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 5,
+      "eleitorado": 1341,
+      "geo_query": "ÁREA ESPECIAL 07 QUADRA 02 - SETOR TRADICIONAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CONGREGAÇÃO IRMÃS OBLATAS DO MENINO JESUS",
+      "endereco": "AE N. 02 LT. M/N",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 1047,
+      "geo_query": "AE N. 02 LT. M/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 07",
+      "endereco": "Q. 38 AE N. 02",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "VILA SAO JOSE",
+      "secoes_2022": 8,
+      "eleitorado": 2418,
+      "geo_query": "Q. 38 AE N. 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 08",
+      "endereco": "Q. 04 LOTE 01",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR VEREDAS",
+      "secoes_2022": 8,
+      "eleitorado": 2664,
+      "geo_query": "Q. 04 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 09",
+      "endereco": "EQ 45/55 - VILA SÃO JOSÉ",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "VILA SAO JOSE",
+      "secoes_2022": 9,
+      "eleitorado": 0,
+      "geo_query": "EQ 45/55 - VILA SÃO JOSÉ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 16",
+      "endereco": "EQNO 04/06 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 3640,
+      "geo_query": "EQNO 04/06 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 17",
+      "endereco": "EQNO 01/03 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 13,
+      "eleitorado": 2925,
+      "geo_query": "EQNO 01/03 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 31",
+      "endereco": "EQNO 09/11 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 4274,
+      "geo_query": "EQNO 09/11 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 33",
+      "endereco": "EQNO 13/15 - SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 17,
+      "eleitorado": 5270,
+      "geo_query": "EQNO 13/15 - SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 34",
+      "endereco": "EQNP 17/13 - SETOR P NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 3239,
+      "geo_query": "EQNP 17/13 - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 38",
+      "endereco": "EQNP 15/19 - AREA ESPECIAL - SETOR P NORTE",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 3812,
+      "geo_query": "EQNP 15/19 - AREA ESPECIAL - SETOR P NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 55",
+      "endereco": "EQNO 19/20 - CONJUNTO C - ÁREA ESPECIAL - EXPANSÃO SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2474,
+      "geo_query": "EQNO 19/20 - CONJUNTO C - ÁREA ESPECIAL - EXPANSÃO SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 56",
+      "endereco": "EQNO 18 CONJUNTO I LOTE 2 - EXPANSÃO DO SETOR O",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 3109,
+      "geo_query": "EQNO 18 CONJUNTO I LOTE 2 - EXPANSÃO DO SETOR O, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 61",
+      "endereco": "QNQ 4 LOTE A SETOR Q",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 4798,
+      "geo_query": "QNQ 4 LOTE A SETOR Q, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 62",
+      "endereco": "QNQ 01 - AREA ESPECIAL",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 4782,
+      "geo_query": "QNQ 01 - AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 65",
+      "endereco": "QNR 02 - ÁREA ESPECIAL 04",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 11,
+      "eleitorado": 4389,
+      "geo_query": "QNR 02 - ÁREA ESPECIAL 04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 66",
+      "endereco": "AV.CORREGO DAS CORUJAS S/N - SETOR HABITACIONAL SOL NASCENTE TRECHO 3",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 17,
+      "eleitorado": 7138,
+      "geo_query": "AV.CORREGO DAS CORUJAS S/N - SETOR HABITACIONAL SOL NASCENTE TRECHO 3, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE ALMECEGAS",
+      "endereco": "ZONA RURAL FAZ. ALMECEGAS BR-080 - DF 206 VC 505",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 1,
+      "eleitorado": 131,
+      "geo_query": "ZONA RURAL FAZ. ALMECEGAS BR-080 - DF 206 VC 505, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE BUCANHAO",
+      "endereco": "ZR-DF-240-ACESSO P/VSJ, KM 3,7",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 1,
+      "eleitorado": 73,
+      "geo_query": "ZR-DF-240-ACESSO P/VSJ, KM 3,7, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE DO SETOR P NORTE",
+      "endereco": "RUA DA CASCALHEIRA S/N - VC 311",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "CEILANDIA NORTE",
+      "secoes_2022": 3,
+      "eleitorado": 1442,
+      "geo_query": "RUA DA CASCALHEIRA S/N - VC 311, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE INCRA 06",
+      "endereco": "ZR - ROD. DF 180, KM 06 (DCAG), N.R.ALEX. GUSMAO",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 3,
+      "eleitorado": 782,
+      "geo_query": "ZR - ROD. DF 180, KM 06 (DCAG), N.R.ALEX. GUSMAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE INCRA 07",
+      "endereco": "ZR - DF 249 - DF 008, N.R.ALEX. GUSMAO",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 2,
+      "eleitorado": 592,
+      "geo_query": "ZR - DF 249 - DF 008, N.R.ALEX. GUSMAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 01",
+      "endereco": "AE N 03",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR TRADICIONAL",
+      "secoes_2022": 6,
+      "eleitorado": 1434,
+      "geo_query": "AE N 03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 03",
+      "endereco": "EQ 6/8",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2665,
+      "geo_query": "EQ 6/8, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N. 01 - INCRA 08",
+      "endereco": "INCRA 08 - QUADRA 18 LOTE 01",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "N.R.ALEX. GUSMAO",
+      "secoes_2022": 7,
+      "eleitorado": 2445,
+      "geo_query": "INCRA 08 - QUADRA 18 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N. 05 - GB",
+      "endereco": "AE N. 01",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 4,
+      "eleitorado": 1193,
+      "geo_query": "AE N. 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N. 06",
+      "endereco": "QD. 38 AE N. 01",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "VILA SAO JOSE",
+      "secoes_2022": 6,
+      "eleitorado": 1896,
+      "geo_query": "QD. 38 AE N. 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE POLO AGRICOLA TORRE",
+      "endereco": "ZR - DF 001 (EPCT) DF 430/415 KM 06",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "BRAZLANDIA",
+      "secoes_2022": 3,
+      "eleitorado": 812,
+      "geo_query": "ZR - DF 001 (EPCT) DF 430/415 KM 06, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE RURAL CHAPADINHA",
+      "endereco": "ZR - DF 240 (DF 008) DF 445, 4 KM ESQ.",
+      "ra": "BRAZLÂNDIA",
+      "bairro_2022": "N.R.ALEX. GUSMAO",
+      "secoes_2022": 3,
+      "eleitorado": 819,
+      "geo_query": "ZR - DF 240 (DF 008) DF 445, 4 KM ESQ., Brasília - DF, Brasil"
+    }
+  ],
+  "17": [
+    {
+      "local": "CED 07 - CENTRO EDUCACIONAL 07 DO GAMA",
+      "endereco": "QUADRA EQ 15/17, LOTE 03, PRACA 01, SETOR CENTRAL GAMA",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 5031,
+      "geo_query": "QUADRA EQ 15/17, LOTE 03, PRACA 01, SETOR CENTRAL GAMA, CEP 72405-155, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 05 - CENTRO DE ENSINO FUNDAMENTAL 05 DO GAMA",
+      "endereco": "EQ 26/29 AREA ESPECIAL, SETOR OESTE GAMA",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 15,
+      "eleitorado": 4425,
+      "geo_query": "EQ 26/29 AREA ESPECIAL, SETOR OESTE GAMA, CEP 72420-266, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 08 - CENTRO DE ENSINO FUNDAMENTAL 08 DO GAMA",
+      "endereco": "PRACA 2, AE CEF 08, SETOR SUL GAMA",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 15,
+      "eleitorado": 3929,
+      "geo_query": "PRACA 2, AE CEF 08, SETOR SUL GAMA, CEP 72415-117, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 10 - CENTRO DE ENSINO FUNDAMENTAL 10 DO GAMA",
+      "endereco": "EQ 16/26 E 19-22, AREA ESPECIAL, SETOR OESTE GAMA",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 15,
+      "eleitorado": 5975,
+      "geo_query": "EQ 16/26 E 19-22, AREA ESPECIAL, SETOR OESTE GAMA, CEP 72420-167, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 11 - CENTRO DE ENSINO FUNDAMENTAL 11 DO GAMA",
+      "endereco": "QUADRA 1, AREA ESPECIAL, SETOR SUL GAMA",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR NORTE",
+      "secoes_2022": 19,
+      "eleitorado": 4635,
+      "geo_query": "QUADRA 1, AREA ESPECIAL, SETOR SUL GAMA, CEP 72410-100, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CED 06 - CENTRO EDUCACIONAL 06 DO GAMA",
+      "endereco": "EQ 02/07 A.E. S.LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 15,
+      "eleitorado": 4843,
+      "geo_query": "EQ 02/07 A.E. S.LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CED 08 - CENTRO EDUCACIONAL 08 DO GAMA",
+      "endereco": "E Q 4/10 A.E.SETOR SUL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 20,
+      "eleitorado": 6859,
+      "geo_query": "E Q 4/10 A.E.SETOR SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CED CASA GRANDE - CENTRO EDUCACIONAL CASA GRANDE",
+      "endereco": "N RURAL CASA GRANDE CH 16 SETOR DE CHACARAS NORTE",
+      "ra": "GAMA",
+      "bairro_2022": "NÚCLEO RURAL DO GAMA",
+      "secoes_2022": 7,
+      "eleitorado": 3169,
+      "geo_query": "N RURAL CASA GRANDE CH 16 SETOR DE CHACARAS NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CED ENGENHO DAS LAJES - CENTRO EDUCACIONAL ENGENHO DAS LAJES",
+      "endereco": "BR 060 KM 30 - RODOVIA BSB/GOIANIA",
+      "ra": "GAMA",
+      "bairro_2022": "NÚCLEO RURAL DO GAMA",
+      "secoes_2022": 4,
+      "eleitorado": 1538,
+      "geo_query": "BR 060 KM 30 - RODOVIA BSB/GOIANIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 01 - CENTRO DE ENSINO FUNDAMENTAL 01 DO GAMA",
+      "endereco": "EQ 1/2 A.E. SETOR NORTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR NORTE",
+      "secoes_2022": 19,
+      "eleitorado": 7291,
+      "geo_query": "EQ 1/2 A.E. SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 03 - CENTRO DE ENSINO FUNDAMENTAL 03 DO GAMA",
+      "endereco": "E Q 6/11 A. E.S.LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 15,
+      "eleitorado": 3872,
+      "geo_query": "E Q 6/11 A. E.S.LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 04 - CENTRO ENSINO FUNDAMENTAL 04 DO GAMA",
+      "endereco": "E Q 29/33 PR 03 A E. SETOR LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 20,
+      "eleitorado": 6092,
+      "geo_query": "E Q 29/33 PR 03 A E. SETOR LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF 102 NORTE",
+      "endereco": "EQ 16/26 E 19/22 A.E. S.OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR OESTE",
+      "secoes_2022": 20,
+      "eleitorado": 2790,
+      "geo_query": "EQ 16/26 E 19/22 A.E. S.OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEM 01 - CENTRO DE ENSINO MEDIO 01 DO GAMA",
+      "endereco": "E/Q 18/21 AREA ESPECIAL - SETOR LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 23,
+      "eleitorado": 7469,
+      "geo_query": "E/Q 18/21 AREA ESPECIAL - SETOR LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEM 02 - CENTRO DE ENSINO MEDIO 02 DO GAMA",
+      "endereco": "LOTE 27/36 A.E. S.CENTRAL LADO OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR CENTRAL",
+      "secoes_2022": 27,
+      "eleitorado": 9240,
+      "geo_query": "LOTE 27/36 A.E. S.CENTRAL LADO OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEM 03 - CENTRO DE ENSINO MÉDIO 03 DO GAMA",
+      "endereco": "EQ 5/11 A.E. SETOR SUL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 14,
+      "eleitorado": 5325,
+      "geo_query": "EQ 5/11 A.E. SETOR SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEMI - CEM INTEGRADO 01 EDUCAÇÃO PROFISSIONAL",
+      "endereco": "EQ 12/16 A.ESPECIALSETOR OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 2173,
+      "geo_query": "EQ 12/16 A.ESPECIALSETOR OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL DO GAMA",
+      "endereco": "EQ. 55/56 AE 02 SETOR CENTRAL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR CENTRAL",
+      "secoes_2022": 4,
+      "eleitorado": 1581,
+      "geo_query": "EQ. 55/56 AE 02 SETOR CENTRAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 07",
+      "endereco": "EQ 15/17 - PRACA 01 LOTE 03",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR CENTRAL",
+      "secoes_2022": 13,
+      "eleitorado": 5649,
+      "geo_query": "EQ 15/17 - PRACA 01 LOTE 03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CIL - CENTRO INTERESCOLAR DE LINGUAS DO GAMA",
+      "endereco": "EQ 16/18, Setor Central, Gama, Distrito Federal",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 5722,
+      "geo_query": "EQ 16/18, Setor Central, Gama, Distrito Federal, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 01 - ESCOLA CLASSE 01 DO GAMA",
+      "endereco": "EQ 18/21 PR. 2 A.E. S.LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 16,
+      "eleitorado": 5232,
+      "geo_query": "EQ 18/21 PR. 2 A.E. S.LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 02 - ESCOLA CLASSE 02 DO GAMA",
+      "endereco": "EQ 2/4, Área Especial, Setor Oeste, CEP 72.425-025, Gama,",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4499,
+      "geo_query": "EQ 2/4, Área Especial, Setor Oeste, CEP 72.425-025, Gama,, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 03 - ESCOLA CLASSE 03 DO GAMA",
+      "endereco": "E/Q 10/15 - AE SETOR LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 10,
+      "eleitorado": 3375,
+      "geo_query": "E/Q 10/15 - AE SETOR LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 09 - ESCOLA CLASSE 09 DO GAMA",
+      "endereco": "Quadra 03, Área Especial, Setor Sul, Gama, Brasília ",
+      "ra": "GAMA",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3564,
+      "geo_query": "Quadra 03, Área Especial, Setor Sul, Gama, Brasília , Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 14 - ESCOLA CLASSE 14 DO GAMA",
+      "endereco": "E/Q 29/33 AE SETOR LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 11,
+      "eleitorado": 3178,
+      "geo_query": "E/Q 29/33 AE SETOR LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 19 - ESCOLA CLASSE 19 DO GAMA",
+      "endereco": "E/Q 30/49 A.E SETOR LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 9,
+      "eleitorado": 2732,
+      "geo_query": "E/Q 30/49 A.E SETOR LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 21 - ESCOLA CLASSE 21 DO GAMA",
+      "endereco": "E Q 44/45 A.E S.LESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 7,
+      "eleitorado": 2544,
+      "geo_query": "E Q 44/45 A.E S.LESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "EC 22 - ESCOLA CLASSE 22 DO GAMA",
+      "endereco": "EQ 33/49 A.E. S.CENTRAL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR CENTRAL",
+      "secoes_2022": 10,
+      "eleitorado": 2596,
+      "geo_query": "EQ 33/49 A.E. S.CENTRAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02",
+      "endereco": "EQ 02/04 AREA ESPECIAL SETOR OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR OESTE",
+      "secoes_2022": 13,
+      "eleitorado": 6194,
+      "geo_query": "EQ 02/04 AREA ESPECIAL SETOR OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 09",
+      "endereco": "Q 03 AE SETOR SUL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 15,
+      "eleitorado": 3963,
+      "geo_query": "Q 03 AE SETOR SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 10",
+      "endereco": "EQ 10/21 AREA ESPECIAL SETOR OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR OESTE",
+      "secoes_2022": 9,
+      "eleitorado": 5288,
+      "geo_query": "EQ 10/21 AREA ESPECIAL SETOR OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 15",
+      "endereco": "QUADRA 02 AREA ESPECIAL SETOR NORTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 1828,
+      "geo_query": "QUADRA 02 AREA ESPECIAL SETOR NORTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 28",
+      "endereco": "QUADRA A LOTE B VILA RORIZ SETOR OESTE",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR OESTE",
+      "secoes_2022": 5,
+      "eleitorado": 0,
+      "geo_query": "QUADRA A LOTE B VILA RORIZ SETOR OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 29",
+      "endereco": "EQ 13/15 AE SETOR SUL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 6,
+      "eleitorado": 2083,
+      "geo_query": "EQ 13/15 AE SETOR SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "JI 05 - JARDIM DE INFÂNCIA 05 DO GAMA",
+      "endereco": "QUADRA 10 - ÁREA ESPECIAL",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR SUL",
+      "secoes_2022": 4,
+      "eleitorado": 1015,
+      "geo_query": "QUADRA 10 - ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "UNICEPLAC - CENTRO UNIV. DO PLANALTO CENTRAL APPARECIDO DOS SANTOS",
+      "endereco": "SIGA A.E. 02 SETOR LESTE INDÚSTRIA",
+      "ra": "GAMA",
+      "bairro_2022": "SETOR LESTE",
+      "secoes_2022": 4,
+      "eleitorado": 1438,
+      "geo_query": "SIGA A.E. 02 SETOR LESTE INDÚSTRIA, Brasília - DF, Brasil"
+    }
+  ],
+  "18": [
+    {
+      "local": "CENTRO EDUCACIONAL JARDINS MANGUEIRAL",
+      "endereco": "PRACA DE ATIVIDADES 02, JARDINS MANGUEIRAL, JARDIM BOTANICO",
+      "ra": "JARDIM BOTÂNICO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 7177,
+      "geo_query": "PRACA DE ATIVIDADES 02, JARDINS MANGUEIRAL, JARDIM BOTANICO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO FEDERAL DE BRASÍLIA - IFB SÃO SEBASTIÃO",
+      "endereco": "CENTRO DE MULTIPLAS FUNCOES, AREA ESPECIAL 3, SAO SEBASTIAO",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 6761,
+      "geo_query": "CENTRO DE MULTIPLAS FUNCOES, AREA ESPECIAL 3, SAO SEBASTIAO, CEP 71690-001, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 06 DE BRASÍLIA",
+      "endereco": "SHIS QI 15 AREA ESPECIAL 02 - LAGO SUL, BRASÍLIA - DF",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3779,
+      "geo_query": "SHIS QI 15 AREA ESPECIAL 02 - LAGO SUL, BRASÍLIA - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL CERÂMICA SÃO PAULO",
+      "endereco": "RUA 01, LT 101, SETOR TRADICIONAL",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 15,
+      "eleitorado": 5478,
+      "geo_query": "RUA 01, LT 101, SETOR TRADICIONAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL DO BOSQUE",
+      "endereco": "ÁREA INSTITUCIONAL Nº 02, RESIDENCIAL DO BOSQUE - SÃO SEBASTIÃO, DF",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 14,
+      "eleitorado": 4824,
+      "geo_query": "ÁREA INSTITUCIONAL Nº 02, RESIDENCIAL DO BOSQUE - SÃO SEBASTIÃO, DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL JARDIM II",
+      "endereco": "DF 285 KM 20 NÚCLEO RURAL JARDIM II",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "ZONA RURAL",
+      "secoes_2022": 2,
+      "eleitorado": 529,
+      "geo_query": "DF 285 KM 20 NÚCLEO RURAL JARDIM II, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL MIGUEL ARCANJO",
+      "endereco": "QD 02, AE 03, BAIRRO SÃO BARTOLOMEU, SÃO SEBASTIÃO, BRASÍLIA - DF",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 8,
+      "eleitorado": 2841,
+      "geo_query": "QD 02, AE 03, BAIRRO SÃO BARTOLOMEU, SÃO SEBASTIÃO, BRASÍLIA - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL NOVA BETANIA",
+      "endereco": "BR 251 KM 38 NOVA BETANIA",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 6,
+      "eleitorado": 1653,
+      "geo_query": "BR 251 KM 38 NOVA BETANIA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 01 - CENTRÃO",
+      "endereco": "QUADRA 202/203 AREA ESPECIAL -RESIDENCIAL OESTE",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 20,
+      "eleitorado": 6749,
+      "geo_query": "QUADRA 202/203 AREA ESPECIAL -RESIDENCIAL OESTE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DO LAGO SUL - CEL",
+      "endereco": "SHIS QI 09 AREA ESPECIAL",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 13,
+      "eleitorado": 4191,
+      "geo_query": "SHIS QI 09 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL DO PAD/DF",
+      "endereco": "BR-251, KM-07, ESTRADA DE UNAI ¿ DF",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "ZONA RURAL",
+      "secoes_2022": 11,
+      "eleitorado": 2013,
+      "geo_query": "BR-251, KM-07, ESTRADA DE UNAI ¿ DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SAO BARTOLOMEU",
+      "endereco": "AE QUADRA 02 CONJUNTO 03 LOTE 04",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 16,
+      "eleitorado": 4861,
+      "geo_query": "AE QUADRA 02 CONJUNTO 03 LOTE 04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SAO JOSE",
+      "endereco": "QUADRA 16 AREA ESPECIAL BAIRRO SAO JOSE",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 14,
+      "eleitorado": 4934,
+      "geo_query": "QUADRA 16 AREA ESPECIAL BAIRRO SAO JOSE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL SÃO FRANCISCO - CHICÃO",
+      "endereco": "QUADRA 17, LOTE 100, ÁREA ESPECIAL",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 10,
+      "eleitorado": 6021,
+      "geo_query": "QUADRA 17, LOTE 100, ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CIEIC - CENTRO INTEGRADO IRMAOS CARVALHO",
+      "endereco": "SH ESTRADA DO SOL COND. MANSÕES SERRANA KM 5 CHÁCARA IRMÃOS CARVALHO",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "JARDIM BOTÂNICO",
+      "secoes_2022": 9,
+      "eleitorado": 3003,
+      "geo_query": "SH ESTRADA DO SOL COND. MANSÕES SERRANA KM 5 CHÁCARA IRMÃOS CARVALHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO MARIA IMACULADA",
+      "endereco": "SHIS QI 05 CHACARA 72",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 7,
+      "eleitorado": 1690,
+      "geo_query": "SHIS QI 05 CHACARA 72, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO DIGITAL",
+      "endereco": "PRAÇA DE ATIVIDADES PA 02, LOTE 04, JARDIM MANGUEIRAL",
+      "ra": "JARDIM BOTÂNICO",
+      "bairro_2022": "JARDIM BOTÂNICO",
+      "secoes_2022": 7,
+      "eleitorado": 5848,
+      "geo_query": "PRAÇA DE ATIVIDADES PA 02, LOTE 04, JARDIM MANGUEIRAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO DOM JOSÉ",
+      "endereco": "SHIS QI 26, CJ H, ÁREA ESPECIAL - LAGO SUL, BRASÍLIA-DF",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 11,
+      "eleitorado": 3242,
+      "geo_query": "SHIS QI 26, CJ H, ÁREA ESPECIAL - LAGO SUL, BRASÍLIA-DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO EVEREST",
+      "endereco": "SHIS QI 19, Chácara 18, lago sul",
+      "ra": "LAGO SUL",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 4965,
+      "geo_query": "SHIS QI 19, Chácara 18, lago sul, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO MODELO DE SÃO SEBASTIÃO",
+      "endereco": "RUA 9 QUADRA 01 CONJUNTO A CHACARA 07 VILA NOVA",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 7,
+      "eleitorado": 1860,
+      "geo_query": "RUA 9 QUADRA 01 CONJUNTO A CHACARA 07 VILA NOVA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO NOSSA SENHORA DO PERPÉTUO SOCORRO",
+      "endereco": "SHIS EQL 06/08 CONJUNTO A1",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 15,
+      "eleitorado": 3932,
+      "geo_query": "SHIS EQL 06/08 CONJUNTO A1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO PRESBITERIANO MACKENZIE",
+      "endereco": "SHIS QI 05 CHACARA 74/79",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 26,
+      "eleitorado": 7442,
+      "geo_query": "SHIS QI 05 CHACARA 74/79, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 01 SHI SUL - LAGO SUL",
+      "endereco": "SHIS QI 05 CONJUNTO 17 LOTE 15",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 4,
+      "eleitorado": 1386,
+      "geo_query": "SHIS QI 05 CONJUNTO 17 LOTE 15, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 104",
+      "endereco": "QUADRA 104 CJ. 01 LOTE 01 BAIRRO RESIDENCIAL OESTE SAO SEBASTIAO",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 14,
+      "eleitorado": 4020,
+      "geo_query": "QUADRA 104 CJ. 01 LOTE 01 BAIRRO RESIDENCIAL OESTE SAO SEBASTIAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 303",
+      "endereco": "QD 303 CONJ 01 LOTE 34",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 15,
+      "eleitorado": 5157,
+      "geo_query": "QD 303 CONJ 01 LOTE 34, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE AGROVILA",
+      "endereco": "QUADRA 100 - CONJ. Q - AREA ESPECIAL N. 01BAIRRO VILA NOVA",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 12,
+      "eleitorado": 3959,
+      "geo_query": "QUADRA 100 - CONJ. Q - AREA ESPECIAL N. 01BAIRRO VILA NOVA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE BELA VISTA",
+      "endereco": "RUA 01 LT 221- BAIRRO BELA VISTA",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 8,
+      "eleitorado": 2530,
+      "geo_query": "RUA 01 LT 221- BAIRRO BELA VISTA, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CAFÉ SEM TROCO",
+      "endereco": "DF-130, KM 32, BRASÍLIA - DF",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "ZONA RURAL",
+      "secoes_2022": 6,
+      "eleitorado": 2291,
+      "geo_query": "DF-130, KM 32, BRASÍLIA - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE CERAMICA DA BENCAO",
+      "endereco": "RUA DA GAMELEIRA 331 CENTRO",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 14,
+      "eleitorado": 4161,
+      "geo_query": "RUA DA GAMELEIRA 331 CENTRO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE LAMARÃO",
+      "endereco": "BR 251, KM 07, DF 285, VC 441, COLÔNIA AGRÍCOLA LAMARÃO, PARANOÁ",
+      "ra": "PARANOÁ",
+      "bairro_2022": "ZONA RURAL",
+      "secoes_2022": 1,
+      "eleitorado": 219,
+      "geo_query": "BR 251, KM 07, DF 285, VC 441, COLÔNIA AGRÍCOLA LAMARÃO, PARANOÁ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VILA DO BOA",
+      "endereco": "VILA DO BOA SEM NUMERO SAO SEBASTIAO",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 5,
+      "eleitorado": 1548,
+      "geo_query": "VILA DO BOA SEM NUMERO SAO SEBASTIAO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VILA NOVA",
+      "endereco": "RUA 31 NUMERO 200 BAIRRO SÃO JOSÉ",
+      "ra": "SÃO SEBASTIÃO",
+      "bairro_2022": "SAO SEBASTIAO",
+      "secoes_2022": 14,
+      "eleitorado": 3960,
+      "geo_query": "RUA 31 NUMERO 200 BAIRRO SÃO JOSÉ, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA DAS NACOES",
+      "endereco": "SHIS QI 21 AREA ESPECIAL CONJUNTO 01",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 24,
+      "eleitorado": 8093,
+      "geo_query": "SHIS QI 21 AREA ESPECIAL CONJUNTO 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA FRANCESA FRANÇOIS MITTERRAND",
+      "endereco": "SHIS QI 21 BLOCO D",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 10,
+      "eleitorado": 3219,
+      "geo_query": "SHIS QI 21 BLOCO D, Brasília - DF, Brasil"
+    },
+    {
+      "local": "KINGDOM SCHOOL",
+      "endereco": "SHIS QI 11 ÁREA ESPECIAL B, ENTRECONJUNTOS 02 E 04",
+      "ra": "LAGO SUL",
+      "bairro_2022": "LAGO SUL",
+      "secoes_2022": 7,
+      "eleitorado": 1890,
+      "geo_query": "SHIS QI 11 ÁREA ESPECIAL B, ENTRECONJUNTOS 02 E 04, Brasília - DF, Brasil"
+    }
+  ],
+  "19": [
+    {
+      "local": "CEF Nº 11",
+      "endereco": "CND 05 ÁREA ESPECIAL - PRAÇA DO BICALHO",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5704,
+      "geo_query": "CND 05 ÁREA ESPECIAL - PRAÇA DO BICALHO, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CEF Nº 14",
+      "endereco": "QNB 15 ÁREA ESPECIAL S/ Nº",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 2240,
+      "geo_query": "QNB 15 ÁREA ESPECIAL S/ Nº, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE EDUCAÇÃO INFANTIL Nº 02 (ESCOLA CLASSE Nº 30)",
+      "endereco": "QND 59 ÁREA ESPECIAL Nº 37",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 2107,
+      "geo_query": "QND 59 ÁREA ESPECIAL Nº 37, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO DO SESI",
+      "endereco": "QNF 24 AREA ESPECIAL S/N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 5354,
+      "geo_query": "QNF 24 AREA ESPECIAL S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL N 12",
+      "endereco": "QNG 39 AREA ESPECIAL 03",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3522,
+      "geo_query": "QNG 39 AREA ESPECIAL 03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO TAGUATINGA NORTE",
+      "endereco": "QNC AREA PARA ESCOLA 01/03",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3307,
+      "geo_query": "QNC AREA PARA ESCOLA 01/03, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL N 4",
+      "endereco": "EQNG 06/07 AE 20",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 5522,
+      "geo_query": "EQNG 06/07 AE 20, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO ENS MÉDIO EIT",
+      "endereco": "QNB 01 AE 01 SETOR CENTRAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 6306,
+      "geo_query": "QNB 01 AE 01 SETOR CENTRAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLEGIO JESUS MARIA JOSE",
+      "endereco": "QNG 40 AREA ESPECIAL 5/6",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 14,
+      "eleitorado": 4723,
+      "geo_query": "QNG 40 AREA ESPECIAL 5/6, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO BIÃNGULO - RUA 07/10",
+      "endereco": "St. Hab. Vicente Pires Lote 08/09/10 - Vicente Pires, Brasília - DF, 72007-406",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "N/A",
+      "secoes_2022": 0,
+      "eleitorado": 3183,
+      "geo_query": "St. Hab. Vicente Pires Lote 08/09/10 - Vicente Pires, Brasília - DF, 72007-406, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO DJ",
+      "endereco": "COLÔNIA AGRÍCOLA VICENTE PIRES - RUA 08, CHAC. 207, LOTES 02/04",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 15,
+      "eleitorado": 4527,
+      "geo_query": "COLÔNIA AGRÍCOLA VICENTE PIRES - RUA 08, CHAC. 207, LOTES 02/04, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO IDEAL",
+      "endereco": "QNG 09/11, LT 01/02",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 7,
+      "eleitorado": 2103,
+      "geo_query": "QNG 09/11, LT 01/02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO KAIRÓS (ANTIGO INSTITUTO EDUCACIONAL SAGARANA",
+      "endereco": "COLÔNIA AGRÍCOLA VICENTE PIRES RUA 06 CH 255 LT 2/4",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 13,
+      "eleitorado": 4875,
+      "geo_query": "COLÔNIA AGRÍCOLA VICENTE PIRES RUA 06 CH 255 LT 2/4, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO LICEU",
+      "endereco": "RUA 06 CH 253 LT. A",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 16,
+      "eleitorado": 6331,
+      "geo_query": "RUA 06 CH 253 LT. A, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO OBJETIVO - RUA 03",
+      "endereco": "RUA 03 CHÁCARA N 82 LOTE 07/08",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "COLÔNIA AGRÍCOLA VICENTE PIRES",
+      "secoes_2022": 18,
+      "eleitorado": 6892,
+      "geo_query": "RUA 03 CHÁCARA N 82 LOTE 07/08, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO VITÓRIA RÉGIA - UNIDADE 1",
+      "endereco": "RUA 6 CHÁCARA 274 VICENTE PIRES",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "COLÔNIA AGRÍCOLA VICENTE PIRES",
+      "secoes_2022": 14,
+      "eleitorado": 5544,
+      "geo_query": "RUA 6 CHÁCARA 274 VICENTE PIRES, Brasília - DF, Brasil"
+    },
+    {
+      "local": "COLÉGIO VITÓRIA RÉGIA UNIDADE 4 (ANTIGO COLÉGIO MAXIMUS)",
+      "endereco": "Rua 06, Chácara 276, Lotes 2, 4 e 8, Vicente Pires, Brasília - DF",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 6,
+      "eleitorado": 2385,
+      "geo_query": "Rua 06, Chácara 276, Lotes 2, 4 e 8, Vicente Pires, Brasília - DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA BILINGUE LIBRAS (ANTIGA ESCOLA CLASSE N 21)",
+      "endereco": "EQNH 01/03 AE S/N",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 2705,
+      "geo_query": "EQNH 01/03 AE S/N, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 02",
+      "endereco": "COLÔNIA AGRÍCOLA VILA SÃO JOSÉ - RUA 11 ÁREA ESPECIAL 01",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 0,
+      "geo_query": "COLÔNIA AGRÍCOLA VILA SÃO JOSÉ - RUA 11 ÁREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 12",
+      "endereco": "QNH 06 AREA ESPECIAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 2702,
+      "geo_query": "QNH 06 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 15",
+      "endereco": "QND 43 LT 23 ÁREA ESPECIAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 9,
+      "eleitorado": 3430,
+      "geo_query": "QND 43 LT 23 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 16",
+      "endereco": "EQNG 06/07 AREA ESPECIAL N 15",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 1410,
+      "geo_query": "EQNG 06/07 AREA ESPECIAL N 15, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 18",
+      "endereco": "QND 12 LOTE 41 ÁREA ESPECIAL",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2742,
+      "geo_query": "QND 12 LOTE 41 ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 27",
+      "endereco": "ECNF 01/QNF 19 AE",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 13,
+      "eleitorado": 3689,
+      "geo_query": "ECNF 01/QNF 19 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 39",
+      "endereco": "QNC 15 AREA ESPECIAL N 15",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 4,
+      "eleitorado": 1162,
+      "geo_query": "QNC 15 AREA ESPECIAL N 15, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 6",
+      "endereco": "CNB 12 ÁREA ESPECIAL Nº 01",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 10,
+      "eleitorado": 2863,
+      "geo_query": "CNB 12 ÁREA ESPECIAL Nº 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE N 8",
+      "endereco": "QNG 12 AREA ESPECIAL 14",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 2075,
+      "geo_query": "QNG 12 AREA ESPECIAL 14, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE VICENTE PIRES",
+      "endereco": "COLÔNIA AGRÍCOLA VICENTE PIRES - AREA ESPECIAL N 01",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 8,
+      "eleitorado": 2665,
+      "geo_query": "COLÔNIA AGRÍCOLA VICENTE PIRES - AREA ESPECIAL N 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "FACULDADE PROJECAO",
+      "endereco": "ÁREA ESPECIAL 4 E 5, SETOR C NORTE (QNC)",
+      "ra": "TAGUATINGA",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 17,
+      "eleitorado": 5452,
+      "geo_query": "ÁREA ESPECIAL 4 E 5, SETOR C NORTE (QNC), Brasília - DF, Brasil"
+    },
+    {
+      "local": "INSTITUTO EDUCACIONAL MONTESQUIEU",
+      "endereco": "RUA 10 CH 323/1",
+      "ra": "VICENTE PIRES",
+      "bairro_2022": "TAGUATINGA NORTE",
+      "secoes_2022": 5,
+      "eleitorado": 1502,
+      "geo_query": "RUA 10 CH 323/1, Brasília - DF, Brasil"
+    }
+  ],
+  "20": [
+    {
+      "local": "CENTRO DE ENSINO ESPECIAL 01",
+      "endereco": "EQNP 10/14",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 10,
+      "eleitorado": 6705,
+      "geo_query": "EQNP 10/14, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 11",
+      "endereco": "EQNN 24/26",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 4627,
+      "geo_query": "EQNN 24/26, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 13",
+      "endereco": "EQNP 30/34",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 4909,
+      "geo_query": "EQNP 30/34, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 14",
+      "endereco": "EQNP 28/32",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 5750,
+      "geo_query": "EQNP 28/32, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 18",
+      "endereco": "QNP 10 A.E.",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 15,
+      "eleitorado": 5736,
+      "geo_query": "QNP 10 A.E., Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 19",
+      "endereco": "EQNN 18/20",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 18,
+      "eleitorado": 6132,
+      "geo_query": "EQNN 18/20, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 32 (ANTIGA E.C. 67)",
+      "endereco": "SHPS - EQ. 500/700 A.E - COND. POR DO SOL",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 4,
+      "eleitorado": 1927,
+      "geo_query": "SHPS - EQ. 500/700 A.E - COND. POR DO SOL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 33 (ANTIGA E.C. 44)",
+      "endereco": "QNP 12 A.E.",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 4687,
+      "geo_query": "QNP 12 A.E., Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MEDIO 04",
+      "endereco": "QNN 14 A.E.",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 6,
+      "eleitorado": 2289,
+      "geo_query": "QNN 14 A.E., Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 06",
+      "endereco": "QNP 16 A.E",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 17,
+      "eleitorado": 9676,
+      "geo_query": "QNP 16 A.E, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 24",
+      "endereco": "EQNN 20/22 AE B",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 11,
+      "eleitorado": 3697,
+      "geo_query": "EQNN 20/22 AE B, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 25",
+      "endereco": "EQNN 22/24",
+      "ra": "CEILÂNDIA",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 4035,
+      "geo_query": "EQNN 22/24, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 43",
+      "endereco": "EQNP 14/18",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 4722,
+      "geo_query": "EQNP 14/18, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 46",
+      "endereco": "EQNP 16/20",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 8,
+      "eleitorado": 5462,
+      "geo_query": "EQNP 16/20, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 47",
+      "endereco": "EQNP 22/26",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 4873,
+      "geo_query": "EQNP 22/26, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 48",
+      "endereco": "EQNP 26/30",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 14,
+      "eleitorado": 3816,
+      "geo_query": "EQNP 26/30, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 50",
+      "endereco": "EQNP 24/28",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 7968,
+      "geo_query": "EQNP 24/28, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 502 DO ITAPOÃ",
+      "endereco": "EQNP 24/28",
+      "ra": "ITAPOÃ",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 12,
+      "eleitorado": 1563,
+      "geo_query": "EQNP 24/28, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 52",
+      "endereco": "EQNP 32/36",
+      "ra": "SOL NASCENTE/PÔR DO SOL",
+      "bairro_2022": "CEILANDIA SUL",
+      "secoes_2022": 13,
+      "eleitorado": 6386,
+      "geo_query": "EQNP 32/36, Brasília - DF, Brasil"
+    }
+  ],
+  "21": [
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 101 DO RECANTO DAS EMAS",
+      "endereco": "QD. 101 CONJ. 10B LOTES 1/2 RECANTO DAS EMAS",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 14,
+      "eleitorado": 5449,
+      "geo_query": "QD. 101 CONJ. 10B LOTES 1/2 RECANTO DAS EMAS, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 106 DO RECANTO DAS EMAS",
+      "endereco": "QD 106 - ÁREA ESPECIAL",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 14,
+      "eleitorado": 5411,
+      "geo_query": "QD 106 - ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 113 DO RECANTO DAS EMAS",
+      "endereco": "QD. 113 CONJ 8-A LOTE 01 AE",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 9,
+      "eleitorado": 3475,
+      "geo_query": "QD. 113 CONJ 8-A LOTE 01 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 115 DO RECANTO DAS EMAS",
+      "endereco": "QUADRA 115 CONJUNTO 7-C LOTE 1 AREA ESPECIAL",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 15,
+      "eleitorado": 3956,
+      "geo_query": "QUADRA 115 CONJUNTO 7-C LOTE 1 AREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 206 DO RECANTO DAS EMAS",
+      "endereco": "QD 206 CONJUNTO 02 LOTE 02",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 16,
+      "eleitorado": 5472,
+      "geo_query": "QD 206 CONJUNTO 02 LOTE 02, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 301 DO RECANTO DAS EMAS",
+      "endereco": "QD 301 AE",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 15,
+      "eleitorado": 5540,
+      "geo_query": "QD 301 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 306 DO RECANTO DAS EMAS",
+      "endereco": "QD 306 AVENIDA MONJOLO LOTE 06 AE",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 11,
+      "eleitorado": 3625,
+      "geo_query": "QD 306 AVENIDA MONJOLO LOTE 06 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 405 DO RECANTO DAS EMAS",
+      "endereco": "QD 405 CONJUNTO 15 LOTE 01 AE",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 12,
+      "eleitorado": 4681,
+      "geo_query": "QD 405 CONJUNTO 15 LOTE 01 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 504 DE SAMAMBAIA",
+      "endereco": "QN 504 CONJUNTO 09 AREA ESPECIAL 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 15,
+      "eleitorado": 5857,
+      "geo_query": "QN 504 CONJUNTO 09 AREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 507 DE SAMAMBAIA",
+      "endereco": "QR 507 CONJUNTO 07 LOTE 1",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 7,
+      "eleitorado": 2580,
+      "geo_query": "QR 507 CONJUNTO 07 LOTE 1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 519 DE SAMAMBAIA",
+      "endereco": "QR 519 AREA ESPECIAL 1 SAMAMBAIA SUL",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 6,
+      "eleitorado": 2231,
+      "geo_query": "QR 519 AREA ESPECIAL 1 SAMAMBAIA SUL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 602 DO RECANTO DAS EMAS",
+      "endereco": "QUADRA 602 CONJUNTO 01 LOTE 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 4,
+      "eleitorado": 1614,
+      "geo_query": "QUADRA 602 CONJUNTO 01 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO FUNDAMENTAL 801 DO RECANTO DAS EMAS",
+      "endereco": "QUADRA 801 ÁREA ESPECIAL CONJUNTO 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 5,
+      "eleitorado": 2011,
+      "geo_query": "QUADRA 801 ÁREA ESPECIAL CONJUNTO 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 111 DO RECANTO DAS EMAS",
+      "endereco": "QD 111 AE 1",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 15,
+      "eleitorado": 5419,
+      "geo_query": "QD 111 AE 1, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO DE ENSINO MÉDIO 804 DO RECANTO DAS EMAS",
+      "endereco": "QD 804 ÁREA ESPECIAL 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 20,
+      "eleitorado": 7749,
+      "geo_query": "QD 804 ÁREA ESPECIAL 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 104 DO RECANTO DAS EMAS",
+      "endereco": "QUADRA 104 CONJUNTO 08A ÁREA ESPECIAL",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 12,
+      "eleitorado": 4065,
+      "geo_query": "QUADRA 104 CONJUNTO 08A ÁREA ESPECIAL, Brasília - DF, Brasil"
+    },
+    {
+      "local": "CENTRO EDUCACIONAL 308 DO RECANTO DAS EMAS",
+      "endereco": "QD 308 AE 1 CONJUNTO 12",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 13,
+      "eleitorado": 4421,
+      "geo_query": "QD 308 AE 1 CONJUNTO 12, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 102 DO RECANTO DAS EMAS",
+      "endereco": "QD 102 CONJ 03 A LOTE 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 8,
+      "eleitorado": 3062,
+      "geo_query": "QD 102 CONJ 03 A LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 203 / REGIONAL DE ENSINO - RECANTO DAS EMAS",
+      "endereco": "QUADRA 203, LOTE 32",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 10,
+      "eleitorado": 3009,
+      "geo_query": "QUADRA 203, LOTE 32, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 317 DE SAMAMBAIA",
+      "endereco": "QR 317 AREA ESPECIAL 3 LOTE 11",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 6,
+      "eleitorado": 1669,
+      "geo_query": "QR 317 AREA ESPECIAL 3 LOTE 11, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 401 DO RECANTO DAS EMAS",
+      "endereco": "QD 401 AE CONJUNTO 08 LT 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 14,
+      "eleitorado": 4973,
+      "geo_query": "QD 401 AE CONJUNTO 08 LT 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 404 DO RECANTO DAS EMAS",
+      "endereco": "QD 404 CONJUNTO 09 LOTE 01",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 12,
+      "eleitorado": 3977,
+      "geo_query": "QD 404 CONJUNTO 09 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 501 DE SAMAMBAIA",
+      "endereco": "QR 501 CONJUNTO 03 LOTE 01",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 13,
+      "eleitorado": 2956,
+      "geo_query": "QR 501 CONJUNTO 03 LOTE 01, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 510 DE SAMAMBAIA",
+      "endereco": "QN 510 CONJUNTO 07 LOTE 1 AE",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 11,
+      "eleitorado": 2831,
+      "geo_query": "QN 510 CONJUNTO 07 LOTE 1 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 510 DO RECANTO DAS EMAS / CENTRO DE ENSINO FUNDAMENT 511",
+      "endereco": "QUADRA 511, CONJUNTO 11, EPC 2",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 12,
+      "eleitorado": 4133,
+      "geo_query": "QUADRA 511, CONJUNTO 11, EPC 2, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 511 DE SAMAMBAIA",
+      "endereco": "QR 511 AREA ESPECIAL 02 SAMAMBAIA-DF",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 9,
+      "eleitorado": 2998,
+      "geo_query": "QR 511 AREA ESPECIAL 02 SAMAMBAIA-DF, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 512 DE SAMAMBAIA",
+      "endereco": "QN 512 CONJUNTO 06 AE",
+      "ra": "SAMAMBAIA",
+      "bairro_2022": "SAMAMBAIA",
+      "secoes_2022": 14,
+      "eleitorado": 5217,
+      "geo_query": "QN 512 CONJUNTO 06 AE, Brasília - DF, Brasil"
+    },
+    {
+      "local": "ESCOLA CLASSE 803 DO RECANTO DAS EMAS",
+      "endereco": "QUADRA 803 CONJUNTO 1. RECANTO DAS EMAS. 72650405",
+      "ra": "RECANTO DAS EMAS",
+      "bairro_2022": "RECANTO DAS EMAS",
+      "secoes_2022": 12,
+      "eleitorado": 5856,
+      "geo_query": "QUADRA 803 CONJUNTO 1. RECANTO DAS EMAS. 72650405, Brasília - DF, Brasil"
+    }
+  ]
+}
