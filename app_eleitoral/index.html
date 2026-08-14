@@ -28,7 +28,7 @@
     <h1 class="sr-only">Mapa Eleitoral DF 2026</h1>
 
     <div class="app-container">
-        <!-- Sidebar / Menu -->
+        <!-- Sidebar / Menu Principal (Esquerda) -->
         <aside class="sidebar">
             <div class="sidebar-header">
                 <h2>Zonas Eleitorais DF</h2>
@@ -36,11 +36,10 @@
                 <div class="nav-tabs">
                     <button class="tab-btn active" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
-                    <button class="tab-btn" onclick="switchTab('zonas')" aria-label="Zonas Eleitorais">Zonas</button>
                 </div>
             </div>
 
-            <!-- Sidebar: Mapa -->
+            <!-- Sidebar: Conteúdo do Mapa -->
             <div id="map-sidebar">
                 <div class="search-container">
                     <input type="text" id="search-input" placeholder="Buscar RA, Bairro ou Local..." autocomplete="off" aria-label="Buscar">
@@ -48,12 +47,12 @@
                 </div>
                 <div id="sidebar-content" class="sidebar-content">
                     <div class="instruction">
-                        Selecione uma Zona Eleitoral no mapa para visualizar os locais de votação.
+                        Selecione uma Zona Eleitoral na coluna ao lado para visualizar os detalhes.
                     </div>
                 </div>
             </div>
 
-            <!-- Sidebar: Dashboard -->
+            <!-- Sidebar: Conteúdo do Dashboard -->
             <div id="dash-sidebar" style="display: none;">
                 <div class="sidebar-content" style="padding-top: 20px;">
                     <h3>📊 Resumo Geral DF</h3>
@@ -75,24 +74,23 @@
                 </div>
             </div>
 
-            <!-- Sidebar: Zonas Eleitorais -->
-            <div id="zonas-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 15px;">
-                    <div id="zonas-detail-panel">
-                        <div class="instruction" id="zonas-instruction">
-                            Passe o mouse ou clique em uma zona no mapa ao lado para ver os detalhes.
-                        </div>
-                    </div>
-                </div>
-            </div>
-
         </aside>
 
         <!-- Main Content Area -->
         <main class="main-content">
-            <!-- Container do Mapa Leaflet -->
+            <!-- Container Unificado: Mapa + Coluna de Zonas Eleitorais -->
             <div id="view-map" class="view-container active-view">
-                <div id="map"></div>
+                <div class="map-view-layout">
+                    <div id="map" class="map-area"></div>
+                    <!-- Coluna Direita: Zonas Eleitorais -->
+                    <div class="zonas-column" id="zonas-legend">
+                        <h3>Zonas Eleitorais</h3>
+                        <p class="zonas-column-subtitle">Clique em uma zona para filtrar</p>
+                        <div id="zonas-legend-list" class="zonas-legend-list">
+                            <!-- Lista gerada via JS -->
+                        </div>
+                    </div>
+                </div>
             </div>
 
             <!-- Container do Dashboard -->
@@ -110,26 +108,6 @@
                     <div class="chart-card full-width">
                         <h3>Quantidade de Locais de Votação por RA</h3>
                         <canvas id="chartLocaisRA"></canvas>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container do Mapa SVG de Zonas Eleitorais -->
-            <div id="view-zonas" class="view-container" style="display: none;">
-                <div class="zonas-layout">
-                    <div class="zonas-map-area">
-                        <div class="zonas-title-bar">
-                            <h2>Zonas Eleitorais — Distrito Federal</h2>
-                        </div>
-                        <div class="zonas-svg-wrapper" id="zonas-svg-wrapper">
-                            <!-- SVG será injetado via JS -->
-                        </div>
-                        <!-- Tooltip flutuante -->
-                        <div id="zonas-tooltip" class="zonas-tooltip"></div>
-                    </div>
-                    <div class="zonas-legend-area" id="zonas-legend">
-                        <h3>Zonas Eleitorais</h3>
-                        <!-- Legenda será gerada via JS -->
                     </div>
                 </div>
             </div>
@@ -163,9 +141,8 @@
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
 
-    <!-- KML Parser & Georeferenced GeoJSON -->
+    <!-- KML Parser -->
     <script src="kmlParser.js"></script>
-    <script src="df_zonas_geojson.js"></script>
 
     <!-- Zonas Data -->
     <script src="zonas_data.js"></script>

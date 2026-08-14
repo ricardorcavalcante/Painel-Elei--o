@@ -1,12 +1,12 @@
 // Estado da Aplicação
 let map;
-let geojsonLayer;
 let kmlMarkersGroup;
 let locaisData = {};
 let kmlSecoesList = [];
 let activeZone = null;
+let markerMap = {}; // Mapeamento zoneId -> lista de marcadores Leaflet
 
-// Configuração de Cores para as Zonas (conforme zonas eleitorais df.png)
+// Configuração de Cores para as Zonas Eleitorais (conforme zonas eleitorais df.png)
 const zoneColors = {
     "1": "#63d692", "2": "#869bf0", "3": "#c894e1", "4": "#e15eac",
     "5": "#9a7c64", "6": "#f6eda5", "8": "#f59f8a", "9": "#e47171",
@@ -16,41 +16,34 @@ const zoneColors = {
 };
 
 // ==========================================
-// TABS E NAVEGAÇÃO
+// TABS E NAVEGAÇÃO (FUSÃO: MAPA & DASHBOARD)
 // ==========================================
 function switchTab(tab) {
     const btns = document.querySelectorAll('.tab-btn');
     btns[0].classList.toggle('active', tab === 'map');
     btns[1].classList.toggle('active', tab === 'dashboard');
-    btns[2].classList.toggle('active', tab === 'zonas');
 
     // Sidebars
     document.getElementById('map-sidebar').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
-    document.getElementById('zonas-sidebar').style.display = tab === 'zonas' ? 'block' : 'none';
 
     // Main Views
     document.getElementById('view-map').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
-    document.getElementById('view-zonas').style.display = tab === 'zonas' ? 'flex' : 'none';
 
     if (tab === 'map' && map) {
         setTimeout(() => { map.invalidateSize(); }, 100);
-    }
-
-    if (tab === 'zonas') {
-        initZonasMap();
     }
 }
 
 
 // ==========================================
-// MAPA GEORREFERENCIADO (LEAFLET + GEOJSON + KML)
+// MAPA GEORREFERENCIADO (LEAFLET + KML COLORIDO POR ZONA)
 // ==========================================
 function initMap() {
     map = L.map('map').setView([-15.793889, -47.882778], 10);
 
-    // Mapa claro (CartoDB Light)
+    // Mapa claro vetorial (CartoDB Light)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
         subdomains: 'abcd',
@@ -68,12 +61,10 @@ async function loadData() {
         const responseData = await fetch('locais_votacao.json');
         locaisData = await responseData.json();
 
-        // 1. Renderizar Polígonos Georreferenciados das Zonas Eleitorais (WGS84)
-        if (typeof DF_ZONAS_GEOJSON !== 'undefined') {
-            renderGeoreferencedZonas(DF_ZONAS_GEOJSON);
-        }
+        // 1. Gerar Coluna de Zonas Eleitorais na Direita
+        buildZonasColumn();
 
-        // 2. Carregar e Plotar o KML das Seções Eleitorais
+        // 2. Carregar e Plotar o KML com as Cores das Zonas
         if (typeof loadKmlSecoes === 'function') {
             kmlSecoesList = await loadKmlSecoes(locaisData);
             plotKmlSecoesMarkers(kmlSecoesList);
@@ -84,49 +75,12 @@ async function loadData() {
     }
 }
 
-// Renderizar Polígonos Georreferenciados das Zonas
-function renderGeoreferencedZonas(geojsonData) {
-    if (geojsonLayer) map.removeLayer(geojsonLayer);
-
-    geojsonLayer = L.geoJSON(geojsonData, {
-        style: function(feature) {
-            let zoneId = feature.properties.zona;
-            return {
-                fillColor: zoneColors[zoneId] || feature.properties.color || '#cccccc',
-                weight: 2,
-                opacity: 0.9,
-                color: '#ffffff',
-                dashArray: '3',
-                fillOpacity: 0.55
-            };
-        },
-        onEachFeature: function(feature, layer) {
-            let zoneId = feature.properties.zona;
-            let nomeZona = feature.properties.nome || `Zona ${zoneId}`;
-
-            layer.on({
-                mouseover: function(e) {
-                    let l = e.target;
-                    l.setStyle({ weight: 4, color: '#1F4E78', fillOpacity: 0.75 });
-                    l.bringToFront();
-                },
-                mouseout: function(e) { geojsonLayer.resetStyle(e.target); },
-                click: function(e) {
-                    map.fitBounds(e.target.getBounds());
-                    showZoneData(zoneId);
-                }
-            });
-            layer.bindTooltip(nomeZona, { className: 'custom-tooltip', sticky: true });
-        }
-    }).addTo(map);
-}
-
-// Plotar Marcadores das Seções do KML no Mapa Georreferenciado
+// Plotar Marcadores das Seções do KML com as CORES das Zonas
 function plotKmlSecoesMarkers(secoes) {
     if (!kmlMarkersGroup) return;
     kmlMarkersGroup.clearLayers();
+    markerMap = {};
 
-    // Mapeamento aproximado de coordenadas por RA para plotagem georreferenciada
     const raCoordinates = {
         "PLANO PILOTO": [-15.793889, -47.882778],
         "VARJÃO": [-15.7198, -47.8860],
@@ -161,38 +115,140 @@ function plotKmlSecoesMarkers(secoes) {
 
     secoes.forEach((sec, index) => {
         const baseCoord = raCoordinates[sec.ra] || [-15.793889, -47.882778];
-        // Jitter sutil para espalhar os pontos dentro de cada RA georreferenciada
         const lat = baseCoord[0] + ((index % 11) - 5) * 0.0035 + (Math.sin(index) * 0.001);
         const lng = baseCoord[1] + ((index % 13) - 6) * 0.0035 + (Math.cos(index) * 0.001);
 
+        // Obter a cor exata da Zona Eleitoral
+        const markerColor = zoneColors[sec.zona] || '#1F4E78';
+
         const circleMarker = L.circleMarker([lat, lng], {
-            radius: 5,
-            fillColor: '#1F4E78',
+            radius: 6,
+            fillColor: markerColor,
             color: '#ffffff',
             weight: 1.5,
             opacity: 1,
-            fillOpacity: 0.85
+            fillOpacity: 0.9
         });
 
-        // POPUP CONFORME SOLICITADO: Apenas Nome do Local, Número de Seções e Eleitorado
-        const popupContent = `
-            <div class="kml-popup">
-                <h4>${sec.local}</h4>
-                <div class="kml-popup-info">
-                    <p><strong>Seções:</strong> ${sec.secoes || '—'}</p>
-                    <p><strong>Eleitorado:</strong> ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : '—'}</p>
-                </div>
+        // POPUP / TOOLTIP HOVER: Nome, Bairro e Eleitores
+        const hoverTooltipContent = `
+            <div class="kml-hover-tooltip">
+                <strong>${sec.local}</strong>
+                <div>📍 Bairro/RA: ${sec.bairro || sec.ra || 'N/A'}</div>
+                <div>👥 Eleitores: ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : 'N/A'}</div>
             </div>
         `;
 
-        circleMarker.bindPopup(popupContent, { className: 'custom-kml-popup' });
+        circleMarker.bindTooltip(hoverTooltipContent, {
+            className: 'kml-hover-tooltip-container',
+            direction: 'top',
+            offset: [0, -5]
+        });
+
+        circleMarker.bindPopup(`
+            <div class="kml-popup">
+                <h4>${sec.local}</h4>
+                <div class="kml-popup-info">
+                    <p><strong>Bairro / RA:</strong> ${sec.bairro || sec.ra || 'N/A'}</p>
+                    <p><strong>Seções:</strong> ${sec.secoes || '—'}</p>
+                    <p><strong>Eleitorado:</strong> ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : '—'}</p>
+                    <p><strong>Zona Eleitoral:</strong> ${sec.zona || '—'}</p>
+                </div>
+            </div>
+        `, { className: 'custom-kml-popup' });
+
+        // Ao clicar no ponto, ativa a Zona Eleitoral correspondente
+        circleMarker.on('click', () => {
+            if (sec.zona && sec.zona !== 'N/A') {
+                selectZone(sec.zona);
+            }
+        });
+
         kmlMarkersGroup.addLayer(circleMarker);
+
+        // Guardar referência do marcador por Zona
+        if (sec.zona && sec.zona !== 'N/A') {
+            if (!markerMap[sec.zona]) markerMap[sec.zona] = [];
+            markerMap[sec.zona].push(circleMarker);
+        }
     });
+}
+
+// ==========================================
+// COLUNA DE ZONAS ELEITORAIS (DIREITA)
+// ==========================================
+function buildZonasColumn() {
+    const container = document.getElementById('zonas-legend-list');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const zoneOrder = ["1","2","3","4","5","6","8","9","10","11","13","14","15","16","17","18","19","20","21"];
+
+    zoneOrder.forEach(zoneId => {
+        const zoneInfo = ZONAS_DATA ? ZONAS_DATA[zoneId] : null;
+        const color = zoneColors[zoneId] || '#999';
+        const nome = zoneInfo ? zoneInfo.nome : `Zona ${zoneId}`;
+        const rasText = zoneInfo ? zoneInfo.ras.join(', ') : '';
+
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.setAttribute('data-zone', zoneId);
+        item.innerHTML = `
+            <div class="legend-color" style="background-color: ${color};"></div>
+            <div class="legend-text">
+                <span class="legend-zona-name">${zoneId} — ${zoneInfo ? zoneInfo.ras[0] : ''}</span>
+                <span class="legend-zona-ras">${rasText}</span>
+            </div>
+        `;
+
+        item.addEventListener('click', () => selectZone(zoneId));
+        container.appendChild(item);
+    });
+}
+
+// Selecionar Zona: Filtra os marcadores, foca o mapa e carrega os detalhes na Sidebar
+function selectZone(zoneId) {
+    // 1. Atualizar classe active na coluna da direita
+    if (activeZone) {
+        const prevItem = document.querySelector(`.legend-item[data-zone="${activeZone}"]`);
+        if (prevItem) prevItem.classList.remove('active');
+    }
+    activeZone = zoneId;
+    const item = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
+    if (item) {
+        item.classList.add('active');
+        item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // 2. Destacar marcadores KML da zona selecionada e esmaecer os outros
+    const zoneBounds = [];
+    Object.entries(markerMap).forEach(([zId, markers]) => {
+        const isTarget = zId === zoneId;
+        markers.forEach(m => {
+            if (isTarget) {
+                m.setStyle({ fillOpacity: 1.0, radius: 8, weight: 2.5 });
+                m.bringToFront();
+                zoneBounds.push(m.getLatLng());
+            } else {
+                m.setStyle({ fillOpacity: 0.25, radius: 4, weight: 1.0 });
+            }
+        });
+    });
+
+    // 3. Ajustar zoom do mapa nos marcadores da zona
+    if (zoneBounds.length > 0) {
+        const bounds = L.latLngBounds(zoneBounds);
+        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
+    }
+
+    // 4. Exibir dados e estatísticas da Zona na Sidebar Esquerda
+    showZoneData(zoneId);
 }
 
 function showZoneData(zoneId) {
     const sidebar = document.getElementById('sidebar-content');
     const locais = locaisData[zoneId];
+    const zoneInfo = ZONAS_DATA ? ZONAS_DATA[zoneId] : null;
 
     if (!locais || locais.length === 0) {
         sidebar.innerHTML = `<div class="instruction">Nenhum dado encontrado para a Zona ${zoneId}.</div>`;
@@ -210,7 +266,7 @@ function showZoneData(zoneId) {
                 <div class="stat-box"><span>Seções</span><strong>${totalSecoes}</strong></div>
                 <div class="stat-box"><span>Eleitorado</span><strong>${totalEleitores.toLocaleString('pt-BR')}</strong></div>
             </div>
-            <button class="btn-open-table" onclick="openModal('${zoneId}')">Ver Tabela Completa</button>
+            <button class="btn-open-table" onclick="openModal('${zoneId}')">📋 Ver Tabela Completa</button>
             <h4>Locais de Votação (Amostra):</h4>
             <div style="margin-top: 10px;">
     `;
@@ -370,213 +426,6 @@ async function loadDashboardData() {
     }
 }
 
-
-// ==========================================
-// ZONAS ELEITORAIS — SVG INTERATIVO & LEGENDA
-// ==========================================
-let zonasMapInitialized = false;
-
-function initZonasMap() {
-    if (zonasMapInitialized) return;
-    zonasMapInitialized = true;
-
-    const wrapper = document.getElementById('zonas-svg-wrapper');
-    const legendContainer = document.getElementById('zonas-legend');
-
-    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
-    svg.setAttribute('viewBox', '0 0 850 680');
-    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
-
-    const zoneOrder = ["16","5","6","2","14","11","3","19","8","20","9","1","15","10","18","13","21","17","4"];
-
-    zoneOrder.forEach((zoneId, index) => {
-        const pathData = ZONAS_PATHS[zoneId];
-        const zoneInfo = ZONAS_DATA[zoneId];
-        if (!pathData || !zoneInfo) return;
-
-        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
-        path.setAttribute('d', pathData);
-        path.setAttribute('fill', zoneInfo.cor);
-        path.setAttribute('class', 'zona-path');
-        path.setAttribute('data-zone', zoneId);
-        path.style.animationDelay = `${index * 0.05}s`;
-
-        path.addEventListener('mouseenter', (e) => {
-            showZonaTooltip(e, zoneId);
-            highlightLegendItem(zoneId, true);
-        });
-        path.addEventListener('mousemove', (e) => moveZonaTooltip(e));
-        path.addEventListener('mouseleave', () => {
-            hideZonaTooltip();
-            highlightLegendItem(zoneId, false);
-        });
-        path.addEventListener('click', () => selectZone(zoneId));
-
-        svg.appendChild(path);
-
-        const labelPos = ZONAS_LABELS[zoneId];
-        if (labelPos) {
-            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
-            text.setAttribute('x', labelPos.x);
-            text.setAttribute('y', labelPos.y);
-            text.setAttribute('class', 'zona-label');
-            text.textContent = zoneId;
-            svg.appendChild(text);
-        }
-    });
-
-    wrapper.appendChild(svg);
-    buildZonasLegend(legendContainer);
-}
-
-function buildZonasLegend(container) {
-    const zoneOrder = ["1","2","3","4","5","6","8","9","10","11","13","14","15","16","17","18","19","20","21"];
-
-    zoneOrder.forEach(zoneId => {
-        const zoneInfo = ZONAS_DATA[zoneId];
-        if (!zoneInfo) return;
-
-        const item = document.createElement('div');
-        item.className = 'legend-item';
-        item.setAttribute('data-zone', zoneId);
-        item.innerHTML = `
-            <div class="legend-color" style="background-color: ${zoneInfo.cor};"></div>
-            <div class="legend-text">
-                <span class="legend-zona-name">${zoneId} — ${zoneInfo.ras[0]}</span>
-                <span class="legend-zona-ras">${zoneInfo.ras.length > 1 ? zoneInfo.ras.slice(1).join(', ') : ''}</span>
-            </div>
-        `;
-
-        item.addEventListener('mouseenter', () => {
-            const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
-            if (path) path.classList.add('active');
-        });
-        item.addEventListener('mouseleave', () => {
-            const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
-            if (path && activeZone !== zoneId) path.classList.remove('active');
-        });
-        item.addEventListener('click', () => selectZone(zoneId));
-
-        container.appendChild(item);
-    });
-}
-
-function showZonaTooltip(e, zoneId) {
-    const tooltip = document.getElementById('zonas-tooltip');
-    const zoneInfo = ZONAS_DATA[zoneId];
-    if (!zoneInfo) return;
-
-    tooltip.innerHTML = `
-        <div class="tooltip-title">Zona ${zoneId}</div>
-        <div class="tooltip-ras">${zoneInfo.ras.join(', ')}</div>
-        <div style="margin-top:4px; font-size:0.8rem;">${zoneInfo.eleitorado.toLocaleString('pt-BR')} eleitores</div>
-    `;
-    tooltip.style.display = 'block';
-    moveZonaTooltip(e);
-}
-
-function moveZonaTooltip(e) {
-    const tooltip = document.getElementById('zonas-tooltip');
-    const mapArea = document.querySelector('.zonas-map-area');
-    const rect = mapArea.getBoundingClientRect();
-    tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
-    tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
-}
-
-function hideZonaTooltip() {
-    document.getElementById('zonas-tooltip').style.display = 'none';
-}
-
-function highlightLegendItem(zoneId, active) {
-    const item = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
-    if (item) {
-        if (active) {
-            item.style.background = 'rgba(255,255,255,0.1)';
-        } else if (activeZone !== zoneId) {
-            item.style.background = '';
-        }
-    }
-}
-
-function selectZone(zoneId) {
-    if (activeZone) {
-        const prevPath = document.querySelector(`.zona-path[data-zone="${activeZone}"]`);
-        if (prevPath) prevPath.classList.remove('active');
-        const prevLegend = document.querySelector(`.legend-item[data-zone="${activeZone}"]`);
-        if (prevLegend) prevLegend.classList.remove('active');
-    }
-
-    activeZone = zoneId;
-
-    const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
-    if (path) path.classList.add('active');
-    const legendItem = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
-    if (legendItem) {
-        legendItem.classList.add('active');
-        legendItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
-    }
-
-    showZonasDetail(zoneId);
-
-    // Zoom/Fit no polígono georreferenciado do Leaflet se disponível
-    if (geojsonLayer) {
-        geojsonLayer.eachLayer(layer => {
-            if (layer.feature && layer.feature.properties.zona === zoneId) {
-                map.fitBounds(layer.getBounds());
-            }
-        });
-    }
-}
-
-function showZonasDetail(zoneId) {
-    const panel = document.getElementById('zonas-detail-panel');
-    const zoneInfo = ZONAS_DATA[zoneId];
-    if (!zoneInfo) return;
-
-    const locais = locaisData[zoneId];
-    const totalLocais = locais ? locais.length : zoneInfo.locais;
-    let totalSecoes = 0;
-    if (locais) locais.forEach(l => { totalSecoes += l.secoes_2022; });
-
-    panel.innerHTML = `
-        <div class="zonas-detail-card">
-            <div class="detail-header">
-                <div class="detail-color-badge" style="background-color: ${zoneInfo.cor};"></div>
-                <div>
-                    <h3>${zoneInfo.nome}</h3>
-                    <p>${zoneInfo.percentual}% do eleitorado do DF</p>
-                </div>
-            </div>
-
-            <div class="detail-kpis">
-                <div class="detail-kpi">
-                    <span>Eleitorado</span>
-                    <strong>${zoneInfo.eleitorado.toLocaleString('pt-BR')}</strong>
-                </div>
-                <div class="detail-kpi">
-                    <span>Locais</span>
-                    <strong>${totalLocais}</strong>
-                </div>
-                <div class="detail-kpi">
-                    <span>Seções</span>
-                    <strong>${totalSecoes || '—'}</strong>
-                </div>
-                <div class="detail-kpi">
-                    <span>Média/Local</span>
-                    <strong>${totalLocais > 0 ? Math.round(zoneInfo.eleitorado / totalLocais).toLocaleString('pt-BR') : '—'}</strong>
-                </div>
-            </div>
-
-            <div class="detail-ras-list">
-                <h4>Regiões Administrativas:</h4>
-                ${zoneInfo.ras.map(ra => `<span class="ra-tag">${ra}</span>`).join('')}
-            </div>
-
-            ${locais ? `<button class="detail-locais-btn" onclick="openModal('${zoneId}')">📋 Ver Locais de Votação</button>` : ''}
-        </div>
-    `;
-}
-
 // Expor funções globais para manipuladores de evento HTML
 window.switchTab = switchTab;
 window.openModal = openModal;
@@ -586,4 +435,3 @@ window.selectZone = selectZone;
 
 // Iniciar Aplicação
 window.onload = initMap;
-
