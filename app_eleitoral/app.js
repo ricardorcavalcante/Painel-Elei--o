@@ -1,11 +1,12 @@
 // Estado da Aplicação
 let map;
 let geojsonLayer;
-let locaisData = {}; 
-let zonasGeoJSON = null;
+let kmlMarkersGroup;
+let locaisData = {};
+let kmlSecoesList = [];
 let activeZone = null;
 
-// Configuração de Cores para as Zonas
+// Configuração de Cores para as Zonas (conforme zonas eleitorais df.png)
 const zoneColors = {
     "1": "#63d692", "2": "#869bf0", "3": "#c894e1", "4": "#e15eac",
     "5": "#9a7c64", "6": "#f6eda5", "8": "#f59f8a", "9": "#e47171",
@@ -44,15 +45,19 @@ function switchTab(tab) {
 
 
 // ==========================================
-// MAPA (LEAFLET)
+// MAPA GEORREFERENCIADO (LEAFLET + GEOJSON + KML)
 // ==========================================
 function initMap() {
     map = L.map('map').setView([-15.793889, -47.882778], 10);
+
+    // Mapa claro (CartoDB Light)
     L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
         attribution: '&copy; OpenStreetMap &copy; CARTO',
         subdomains: 'abcd',
         maxZoom: 20
     }).addTo(map);
+
+    kmlMarkersGroup = L.layerGroup().addTo(map);
 
     loadData();
     loadDashboardData();
@@ -63,39 +68,46 @@ async function loadData() {
         const responseData = await fetch('locais_votacao.json');
         locaisData = await responseData.json();
 
-        try {
-            const responseGeo = await fetch('df_zonas.geojson');
-            if (responseGeo.ok) {
-                zonasGeoJSON = await responseGeo.json();
-                renderGeoJSON();
-            } else {
-                document.getElementById('sidebar-content').innerHTML = `
-                    <div style="padding:20px; color:red;">
-                        <strong>Aviso:</strong> df_zonas.geojson não encontrado.
-                    </div>`;
-            }
-        } catch(e) { console.warn("Erro GeoJSON:", e); }
-    } catch (error) { console.error("Erro JSON Locais:", error); }
+        // 1. Renderizar Polígonos Georreferenciados das Zonas Eleitorais (WGS84)
+        if (typeof DF_ZONAS_GEOJSON !== 'undefined') {
+            renderGeoreferencedZonas(DF_ZONAS_GEOJSON);
+        }
+
+        // 2. Carregar e Plotar o KML das Seções Eleitorais
+        if (typeof loadKmlSecoes === 'function') {
+            kmlSecoesList = await loadKmlSecoes(locaisData);
+            plotKmlSecoesMarkers(kmlSecoesList);
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar dados georreferenciados:", error);
+    }
 }
 
-function renderGeoJSON() {
-    if (!zonasGeoJSON) return;
+// Renderizar Polígonos Georreferenciados das Zonas
+function renderGeoreferencedZonas(geojsonData) {
+    if (geojsonLayer) map.removeLayer(geojsonLayer);
 
-    geojsonLayer = L.geoJSON(zonasGeoJSON, {
+    geojsonLayer = L.geoJSON(geojsonData, {
         style: function(feature) {
-            let zoneId = feature.properties.ZONA || feature.properties.zona; 
+            let zoneId = feature.properties.zona;
             return {
-                fillColor: zoneColors[zoneId] || '#cccccc',
-                weight: 2, opacity: 1, color: 'white',
-                dashArray: '3', fillOpacity: 0.7
+                fillColor: zoneColors[zoneId] || feature.properties.color || '#cccccc',
+                weight: 2,
+                opacity: 0.9,
+                color: '#ffffff',
+                dashArray: '3',
+                fillOpacity: 0.55
             };
         },
         onEachFeature: function(feature, layer) {
-            let zoneId = feature.properties.ZONA || feature.properties.zona;
+            let zoneId = feature.properties.zona;
+            let nomeZona = feature.properties.nome || `Zona ${zoneId}`;
+
             layer.on({
                 mouseover: function(e) {
                     let l = e.target;
-                    l.setStyle({ weight: 4, color: '#333', fillOpacity: 0.9 });
+                    l.setStyle({ weight: 4, color: '#1F4E78', fillOpacity: 0.75 });
                     l.bringToFront();
                 },
                 mouseout: function(e) { geojsonLayer.resetStyle(e.target); },
@@ -104,9 +116,78 @@ function renderGeoJSON() {
                     showZoneData(zoneId);
                 }
             });
-            layer.bindTooltip(`Zona Eleitoral ${zoneId}`, { className: 'custom-tooltip', sticky: true });
+            layer.bindTooltip(nomeZona, { className: 'custom-tooltip', sticky: true });
         }
     }).addTo(map);
+}
+
+// Plotar Marcadores das Seções do KML no Mapa Georreferenciado
+function plotKmlSecoesMarkers(secoes) {
+    if (!kmlMarkersGroup) return;
+    kmlMarkersGroup.clearLayers();
+
+    // Mapeamento aproximado de coordenadas por RA para plotagem georreferenciada
+    const raCoordinates = {
+        "PLANO PILOTO": [-15.793889, -47.882778],
+        "VARJÃO": [-15.7198, -47.8860],
+        "LAGO NORTE": [-15.7380, -47.8500],
+        "PARANOÁ": [-15.7725, -47.7780],
+        "ITAPOÃ": [-15.7500, -47.7600],
+        "CEILÂNDIA": [-15.8200, -48.1100],
+        "SANTA MARIA": [-16.0100, -47.9800],
+        "SOBRADINHO": [-15.6500, -47.7900],
+        "FERCAL": [-15.6000, -47.8700],
+        "TAGUATINGA": [-15.8300, -48.0500],
+        "SAMAMBAIA": [-15.8700, -48.0800],
+        "GAMA": [-16.0200, -48.0600],
+        "RECANTO DAS EMAS": [-15.9100, -48.0600],
+        "GUARA": [-15.8200, -47.9700],
+        "GUARÁ": [-15.8200, -47.9700],
+        "SÃO SEBASTIÃO": [-15.9000, -47.7700],
+        "ÁGUAS CLARAS": [-15.8300, -48.0200],
+        "VICENTE PIRES": [-15.8000, -48.0200],
+        "RIACHO FUNDO": [-15.8800, -47.9900],
+        "RIACHO FUNDO II": [-15.9000, -48.0200],
+        "BRAZLÂNDIA": [-15.6700, -48.2000],
+        "SOL NASCENTE/PÔR DO SOL": [-15.8400, -48.1500],
+        "SUDOESTE/OCTOGONAL": [-15.7900, -47.9300],
+        "CRUZEIRO": [-15.7800, -47.9400],
+        "NÚCLEO BANDEIRANTE": [-15.8700, -47.9600],
+        "CANDANGOLÂNDIA": [-15.8500, -47.9500],
+        "PARK WAY": [-15.8800, -47.9500],
+        "JARDIM BOTÂNICO": [-15.8700, -47.8000],
+        "LAGO SUL": [-15.8400, -47.8700]
+    };
+
+    secoes.forEach((sec, index) => {
+        const baseCoord = raCoordinates[sec.ra] || [-15.793889, -47.882778];
+        // Jitter sutil para espalhar os pontos dentro de cada RA georreferenciada
+        const lat = baseCoord[0] + ((index % 11) - 5) * 0.0035 + (Math.sin(index) * 0.001);
+        const lng = baseCoord[1] + ((index % 13) - 6) * 0.0035 + (Math.cos(index) * 0.001);
+
+        const circleMarker = L.circleMarker([lat, lng], {
+            radius: 5,
+            fillColor: '#1F4E78',
+            color: '#ffffff',
+            weight: 1.5,
+            opacity: 1,
+            fillOpacity: 0.85
+        });
+
+        // POPUP CONFORME SOLICITADO: Apenas Nome do Local, Número de Seções e Eleitorado
+        const popupContent = `
+            <div class="kml-popup">
+                <h4>${sec.local}</h4>
+                <div class="kml-popup-info">
+                    <p><strong>Seções:</strong> ${sec.secoes || '—'}</p>
+                    <p><strong>Eleitorado:</strong> ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : '—'}</p>
+                </div>
+            </div>
+        `;
+
+        circleMarker.bindPopup(popupContent, { className: 'custom-kml-popup' });
+        kmlMarkersGroup.addLayer(circleMarker);
+    });
 }
 
 function showZoneData(zoneId) {
@@ -291,7 +372,7 @@ async function loadDashboardData() {
 
 
 // ==========================================
-// ZONAS ELEITORAIS — SVG INTERATIVO
+// ZONAS ELEITORAIS — SVG INTERATIVO & LEGENDA
 // ==========================================
 let zonasMapInitialized = false;
 
@@ -302,12 +383,10 @@ function initZonasMap() {
     const wrapper = document.getElementById('zonas-svg-wrapper');
     const legendContainer = document.getElementById('zonas-legend');
 
-    // Build SVG
     const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
     svg.setAttribute('viewBox', '0 0 850 680');
     svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
 
-    // Draw zones
     const zoneOrder = ["16","5","6","2","14","11","3","19","8","20","9","1","15","10","18","13","21","17","4"];
 
     zoneOrder.forEach((zoneId, index) => {
@@ -315,7 +394,6 @@ function initZonasMap() {
         const zoneInfo = ZONAS_DATA[zoneId];
         if (!pathData || !zoneInfo) return;
 
-        // Create polygon path
         const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
         path.setAttribute('d', pathData);
         path.setAttribute('fill', zoneInfo.cor);
@@ -323,7 +401,6 @@ function initZonasMap() {
         path.setAttribute('data-zone', zoneId);
         path.style.animationDelay = `${index * 0.05}s`;
 
-        // Hover events
         path.addEventListener('mouseenter', (e) => {
             showZonaTooltip(e, zoneId);
             highlightLegendItem(zoneId, true);
@@ -337,7 +414,6 @@ function initZonasMap() {
 
         svg.appendChild(path);
 
-        // Create label
         const labelPos = ZONAS_LABELS[zoneId];
         if (labelPos) {
             const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
@@ -350,8 +426,6 @@ function initZonasMap() {
     });
 
     wrapper.appendChild(svg);
-
-    // Build legend
     buildZonasLegend(legendContainer);
 }
 
@@ -373,7 +447,6 @@ function buildZonasLegend(container) {
             </div>
         `;
 
-        // Legend item hover → highlight zone on map
         item.addEventListener('mouseenter', () => {
             const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
             if (path) path.classList.add('active');
@@ -426,7 +499,6 @@ function highlightLegendItem(zoneId, active) {
 }
 
 function selectZone(zoneId) {
-    // Remove previous active
     if (activeZone) {
         const prevPath = document.querySelector(`.zona-path[data-zone="${activeZone}"]`);
         if (prevPath) prevPath.classList.remove('active');
@@ -436,7 +508,6 @@ function selectZone(zoneId) {
 
     activeZone = zoneId;
 
-    // Activate new
     const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
     if (path) path.classList.add('active');
     const legendItem = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
@@ -445,8 +516,16 @@ function selectZone(zoneId) {
         legendItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // Show detail panel in sidebar
     showZonasDetail(zoneId);
+
+    // Zoom/Fit no polígono georreferenciado do Leaflet se disponível
+    if (geojsonLayer) {
+        geojsonLayer.eachLayer(layer => {
+            if (layer.feature && layer.feature.properties.zona === zoneId) {
+                map.fitBounds(layer.getBounds());
+            }
+        });
+    }
 }
 
 function showZonasDetail(zoneId) {
@@ -498,6 +577,13 @@ function showZonasDetail(zoneId) {
     `;
 }
 
+// Expor funções globais para manipuladores de evento HTML
+window.switchTab = switchTab;
+window.openModal = openModal;
+window.performSearch = performSearch;
+window.showZoneData = showZoneData;
+window.selectZone = selectZone;
 
 // Iniciar Aplicação
 window.onload = initMap;
+
