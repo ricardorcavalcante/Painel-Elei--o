@@ -2,7 +2,8 @@
 let map;
 let geojsonLayer;
 let locaisData = {}; 
-let zonasGeoJSON = null; 
+let zonasGeoJSON = null;
+let activeZone = null;
 
 // Configuração de Cores para as Zonas
 const zoneColors = {
@@ -17,22 +18,27 @@ const zoneColors = {
 // TABS E NAVEGAÇÃO
 // ==========================================
 function switchTab(tab) {
-    // Atualiza botões
     const btns = document.querySelectorAll('.tab-btn');
     btns[0].classList.toggle('active', tab === 'map');
     btns[1].classList.toggle('active', tab === 'dashboard');
+    btns[2].classList.toggle('active', tab === 'zonas');
 
-    // Atualiza Sidebars
+    // Sidebars
     document.getElementById('map-sidebar').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
+    document.getElementById('zonas-sidebar').style.display = tab === 'zonas' ? 'block' : 'none';
 
-    // Atualiza Main Views
+    // Main Views
     document.getElementById('view-map').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+    document.getElementById('view-zonas').style.display = tab === 'zonas' ? 'flex' : 'none';
 
-    // O Leaflet tem um bug visual quando seu container fica display:none e volta. Precisamos forçar a revalidação.
-    if(tab === 'map' && map) {
+    if (tab === 'map' && map) {
         setTimeout(() => { map.invalidateSize(); }, 100);
+    }
+
+    if (tab === 'zonas') {
+        initZonasMap();
     }
 }
 
@@ -80,11 +86,8 @@ function renderGeoJSON() {
             let zoneId = feature.properties.ZONA || feature.properties.zona; 
             return {
                 fillColor: zoneColors[zoneId] || '#cccccc',
-                weight: 2,
-                opacity: 1,
-                color: 'white',
-                dashArray: '3',
-                fillOpacity: 0.7
+                weight: 2, opacity: 1, color: 'white',
+                dashArray: '3', fillOpacity: 0.7
             };
         },
         onEachFeature: function(feature, layer) {
@@ -218,16 +221,14 @@ async function loadDashboardData() {
         const response = await fetch('estatisticas.json');
         const stats = await response.json();
 
-        // Populate KPIs
         document.getElementById('kpi-eleitores').innerText = stats.total_df.eleitorado.toLocaleString('pt-BR');
         document.getElementById('kpi-locais').innerText = stats.total_df.locais;
         document.getElementById('kpi-media').innerText = stats.total_df.media_geral.toLocaleString('pt-BR');
 
-        // Create Chart 1: Eleitorado por RA (Bar)
         new Chart(document.getElementById('chartRA'), {
             type: 'bar',
             data: {
-                labels: stats.by_ra.labels.slice(0, 10), // Mostrando os 10 maiores
+                labels: stats.by_ra.labels.slice(0, 10),
                 datasets: [{
                     label: 'Eleitores',
                     data: stats.by_ra.eleitorado.slice(0, 10),
@@ -242,7 +243,6 @@ async function loadDashboardData() {
             }
         });
 
-        // Create Chart 2: Eleitorado por Zona (Doughnut)
         const bgColors = stats.by_zona.labels.map(z => zoneColors[z] || '#999');
         new Chart(document.getElementById('chartZona'), {
             type: 'doughnut',
@@ -263,7 +263,6 @@ async function loadDashboardData() {
             }
         });
 
-        // Create Chart 3: Locais por RA (Line)
         new Chart(document.getElementById('chartLocaisRA'), {
             type: 'line',
             data: {
@@ -281,7 +280,7 @@ async function loadDashboardData() {
                 responsive: true,
                 maintainAspectRatio: false,
                 plugins: { legend: { display: false } },
-                scales: { x: { display: false }, y: { beginAtZero: true } } // Ocultar eixo X por ter mtos labels
+                scales: { x: { display: false }, y: { beginAtZero: true } }
             }
         });
 
@@ -289,6 +288,216 @@ async function loadDashboardData() {
         console.error("Erro ao carregar Dashboard:", error);
     }
 }
+
+
+// ==========================================
+// ZONAS ELEITORAIS — SVG INTERATIVO
+// ==========================================
+let zonasMapInitialized = false;
+
+function initZonasMap() {
+    if (zonasMapInitialized) return;
+    zonasMapInitialized = true;
+
+    const wrapper = document.getElementById('zonas-svg-wrapper');
+    const legendContainer = document.getElementById('zonas-legend');
+
+    // Build SVG
+    const svg = document.createElementNS('http://www.w3.org/2000/svg', 'svg');
+    svg.setAttribute('viewBox', '0 0 850 680');
+    svg.setAttribute('preserveAspectRatio', 'xMidYMid meet');
+
+    // Draw zones
+    const zoneOrder = ["16","5","6","2","14","11","3","19","8","20","9","1","15","10","18","13","21","17","4"];
+
+    zoneOrder.forEach((zoneId, index) => {
+        const pathData = ZONAS_PATHS[zoneId];
+        const zoneInfo = ZONAS_DATA[zoneId];
+        if (!pathData || !zoneInfo) return;
+
+        // Create polygon path
+        const path = document.createElementNS('http://www.w3.org/2000/svg', 'path');
+        path.setAttribute('d', pathData);
+        path.setAttribute('fill', zoneInfo.cor);
+        path.setAttribute('class', 'zona-path');
+        path.setAttribute('data-zone', zoneId);
+        path.style.animationDelay = `${index * 0.05}s`;
+
+        // Hover events
+        path.addEventListener('mouseenter', (e) => {
+            showZonaTooltip(e, zoneId);
+            highlightLegendItem(zoneId, true);
+        });
+        path.addEventListener('mousemove', (e) => moveZonaTooltip(e));
+        path.addEventListener('mouseleave', () => {
+            hideZonaTooltip();
+            highlightLegendItem(zoneId, false);
+        });
+        path.addEventListener('click', () => selectZone(zoneId));
+
+        svg.appendChild(path);
+
+        // Create label
+        const labelPos = ZONAS_LABELS[zoneId];
+        if (labelPos) {
+            const text = document.createElementNS('http://www.w3.org/2000/svg', 'text');
+            text.setAttribute('x', labelPos.x);
+            text.setAttribute('y', labelPos.y);
+            text.setAttribute('class', 'zona-label');
+            text.textContent = zoneId;
+            svg.appendChild(text);
+        }
+    });
+
+    wrapper.appendChild(svg);
+
+    // Build legend
+    buildZonasLegend(legendContainer);
+}
+
+function buildZonasLegend(container) {
+    const zoneOrder = ["1","2","3","4","5","6","8","9","10","11","13","14","15","16","17","18","19","20","21"];
+
+    zoneOrder.forEach(zoneId => {
+        const zoneInfo = ZONAS_DATA[zoneId];
+        if (!zoneInfo) return;
+
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.setAttribute('data-zone', zoneId);
+        item.innerHTML = `
+            <div class="legend-color" style="background-color: ${zoneInfo.cor};"></div>
+            <div class="legend-text">
+                <span class="legend-zona-name">${zoneId} — ${zoneInfo.ras[0]}</span>
+                <span class="legend-zona-ras">${zoneInfo.ras.length > 1 ? zoneInfo.ras.slice(1).join(', ') : ''}</span>
+            </div>
+        `;
+
+        // Legend item hover → highlight zone on map
+        item.addEventListener('mouseenter', () => {
+            const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
+            if (path) path.classList.add('active');
+        });
+        item.addEventListener('mouseleave', () => {
+            const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
+            if (path && activeZone !== zoneId) path.classList.remove('active');
+        });
+        item.addEventListener('click', () => selectZone(zoneId));
+
+        container.appendChild(item);
+    });
+}
+
+function showZonaTooltip(e, zoneId) {
+    const tooltip = document.getElementById('zonas-tooltip');
+    const zoneInfo = ZONAS_DATA[zoneId];
+    if (!zoneInfo) return;
+
+    tooltip.innerHTML = `
+        <div class="tooltip-title">Zona ${zoneId}</div>
+        <div class="tooltip-ras">${zoneInfo.ras.join(', ')}</div>
+        <div style="margin-top:4px; font-size:0.8rem;">${zoneInfo.eleitorado.toLocaleString('pt-BR')} eleitores</div>
+    `;
+    tooltip.style.display = 'block';
+    moveZonaTooltip(e);
+}
+
+function moveZonaTooltip(e) {
+    const tooltip = document.getElementById('zonas-tooltip');
+    const mapArea = document.querySelector('.zonas-map-area');
+    const rect = mapArea.getBoundingClientRect();
+    tooltip.style.left = (e.clientX - rect.left + 15) + 'px';
+    tooltip.style.top = (e.clientY - rect.top - 10) + 'px';
+}
+
+function hideZonaTooltip() {
+    document.getElementById('zonas-tooltip').style.display = 'none';
+}
+
+function highlightLegendItem(zoneId, active) {
+    const item = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
+    if (item) {
+        if (active) {
+            item.style.background = 'rgba(255,255,255,0.1)';
+        } else if (activeZone !== zoneId) {
+            item.style.background = '';
+        }
+    }
+}
+
+function selectZone(zoneId) {
+    // Remove previous active
+    if (activeZone) {
+        const prevPath = document.querySelector(`.zona-path[data-zone="${activeZone}"]`);
+        if (prevPath) prevPath.classList.remove('active');
+        const prevLegend = document.querySelector(`.legend-item[data-zone="${activeZone}"]`);
+        if (prevLegend) prevLegend.classList.remove('active');
+    }
+
+    activeZone = zoneId;
+
+    // Activate new
+    const path = document.querySelector(`.zona-path[data-zone="${zoneId}"]`);
+    if (path) path.classList.add('active');
+    const legendItem = document.querySelector(`.legend-item[data-zone="${zoneId}"]`);
+    if (legendItem) {
+        legendItem.classList.add('active');
+        legendItem.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    // Show detail panel in sidebar
+    showZonasDetail(zoneId);
+}
+
+function showZonasDetail(zoneId) {
+    const panel = document.getElementById('zonas-detail-panel');
+    const zoneInfo = ZONAS_DATA[zoneId];
+    if (!zoneInfo) return;
+
+    const locais = locaisData[zoneId];
+    const totalLocais = locais ? locais.length : zoneInfo.locais;
+    let totalSecoes = 0;
+    if (locais) locais.forEach(l => { totalSecoes += l.secoes_2022; });
+
+    panel.innerHTML = `
+        <div class="zonas-detail-card">
+            <div class="detail-header">
+                <div class="detail-color-badge" style="background-color: ${zoneInfo.cor};"></div>
+                <div>
+                    <h3>${zoneInfo.nome}</h3>
+                    <p>${zoneInfo.percentual}% do eleitorado do DF</p>
+                </div>
+            </div>
+
+            <div class="detail-kpis">
+                <div class="detail-kpi">
+                    <span>Eleitorado</span>
+                    <strong>${zoneInfo.eleitorado.toLocaleString('pt-BR')}</strong>
+                </div>
+                <div class="detail-kpi">
+                    <span>Locais</span>
+                    <strong>${totalLocais}</strong>
+                </div>
+                <div class="detail-kpi">
+                    <span>Seções</span>
+                    <strong>${totalSecoes || '—'}</strong>
+                </div>
+                <div class="detail-kpi">
+                    <span>Média/Local</span>
+                    <strong>${totalLocais > 0 ? Math.round(zoneInfo.eleitorado / totalLocais).toLocaleString('pt-BR') : '—'}</strong>
+                </div>
+            </div>
+
+            <div class="detail-ras-list">
+                <h4>Regiões Administrativas:</h4>
+                ${zoneInfo.ras.map(ra => `<span class="ra-tag">${ra}</span>`).join('')}
+            </div>
+
+            ${locais ? `<button class="detail-locais-btn" onclick="openModal('${zoneId}')">📋 Ver Locais de Votação</button>` : ''}
+        </div>
+    `;
+}
+
 
 // Iniciar Aplicação
 window.onload = initMap;
