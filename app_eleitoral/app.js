@@ -290,18 +290,5 @@ async function loadDashboardData() {
     }
 }
 
-// Dark mode toggle handling
-const themeToggle = document.getElementById('theme-toggle');
-if (themeToggle) {
-  const savedTheme = localStorage.getItem('theme') || 'light';
-  if (savedTheme === 'dark') document.body.classList.add('dark-mode');
-  themeToggle.addEventListener('click', () => {
-    document.body.classList.toggle('dark-mode');
-    const newTheme = document.body.classList.contains('dark-mode') ? 'dark' : 'light';
-    localStorage.setItem('theme', newTheme);
-  });
-}
-
 // Iniciar Aplicação
-window.onload = initMap;
 window.onload = initMap;

@@ -1,98 +1,38 @@
+/* =============================================
+   CSS Variables & Design Tokens
+   ============================================= */
 :root {
-  --primary: #1F4E78;
-  --bg-light: #f5f5f5;
-  --bg-dark: #121212;
-  --card-bg: #ffffff;
-  --card-bg-dark: rgba(255, 255, 255, 0.08);
-  --text-light: #eeeeee;
-  --text-dark: #222222;
-  --glass-bg: rgba(255, 255, 255, 0.7);
-  --glass-bg-dark: rgba(0, 0, 0, 0.5);
-  --transition: 0.25s ease;
+    --primary: #1F4E78;
+    --primary-light: #2a6da8;
+    --bg-body: #f5f5f5;
+    --bg-card: #ffffff;
+    --bg-main: #f0f2f5;
+    --text-primary: #222222;
+    --text-secondary: #666666;
+    --border-light: #eeeeee;
+    --glass-bg: rgba(255, 255, 255, 0.85);
+    --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.06);
+    --shadow-md: 0 4px 20px rgba(0, 0, 0, 0.1);
+    --transition: 0.25s ease;
 }
 
 /* sr-only class for accessibility */
 .sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
-  overflow: hidden;
-  clip: rect(0,0,0,0);
-  white-space: nowrap;
-  border: 0;
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
-/* Global reset */
+/* =============================================
+   Global Reset
+   ============================================= */
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-  font-family: 'Inter', sans-serif;
-}
-
-body {
-  overflow: hidden;
-  background-color: var(--bg-light);
-  transition: var(--transition);
-}
-
-/* Dark mode */
-.dark-mode {
-  --bg-light: var(--bg-dark);
-  --card-bg: var(--card-bg-dark);
-  --text-light: var(--text-light);
-  --text-dark: var(--text-light);
-}
-
-.dark-mode body {
-  background-color: var(--bg-dark);
-  color: var(--text-light);
-}
-
-  color: var(--text-light);
-}
-
-.dark-mode .sidebar {
-  background: var(--glass-bg-dark);
-  backdrop-filter: blur(12px);
-  color: var(--text-light);
-}
-
-.dark-mode .chart-card {
-  background: var(--glass-bg-dark);
-  color: var(--text-light);
-}
-
-.dark-mode .stat-box {
-  background: var(--card-bg-dark);
-  color: var(--text-light);
-}
-
-.dark-mode .modal-content {
-  background: var(--glass-bg-dark);
-  color: var(--text-light);
-}
-
-/* Glassmorphism for cards */
-.sidebar, .chart-card, .stat-box, .modal-content {
-  background: var(--glass-bg);
-  backdrop-filter: blur(10px);
-  box-shadow: 0 4px 30px rgba(0,0,0,0.1);
-  transition: var(--transition);
-}
-
-/* Button hover micro-animations */
-button, .tab-btn {
-  transition: var(--transition);
-}
-
-.tab-btn:hover, button:hover {
-  transform: translateY(-2px);
-  box-shadow: 0 4px 6px rgba(0,0,0,0.2);
-}
-
     margin: 0;
     padding: 0;
     box-sizing: border-box;
@@ -101,27 +41,32 @@ button, .tab-btn {
 
 body {
     overflow: hidden;
-    background-color: #f5f5f5;
+    background-color: var(--bg-body);
 }
 
+/* =============================================
+   App Layout
+   ============================================= */
 .app-container {
     display: flex;
     height: 100vh;
     width: 100vw;
 }
 
-/* Sidebar */
+/* =============================================
+   Sidebar
+   ============================================= */
 .sidebar {
     width: 380px;
-    background-color: #ffffff;
-    box-shadow: 2px 0 10px rgba(0,0,0,0.1);
+    background-color: var(--bg-card);
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
     display: flex;
     flex-direction: column;
     z-index: 1000;
 }
 
 .sidebar-header {
-    background-color: #1F4E78;
+    background: linear-gradient(135deg, var(--primary) 0%, var(--primary-light) 100%);
     color: white;
     padding: 20px;
 }
@@ -137,6 +82,9 @@ body {
     margin-bottom: 15px;
 }
 
+/* =============================================
+   Nav Tabs
+   ============================================= */
 .nav-tabs {
     display: flex;
     gap: 10px;
@@ -145,52 +93,67 @@ body {
 .tab-btn {
     flex: 1;
     padding: 8px;
-    background: rgba(255,255,255,0.2);
-    border: 1px solid rgba(255,255,255,0.4);
+    background: rgba(255, 255, 255, 0.2);
+    border: 1px solid rgba(255, 255, 255, 0.4);
     color: white;
     cursor: pointer;
-    border-radius: 4px;
-    transition: all 0.2s;
+    border-radius: 6px;
+    transition: all var(--transition);
     font-weight: 600;
+    font-size: 0.9rem;
 }
 
 .tab-btn:hover {
-    background: rgba(255,255,255,0.3);
+    background: rgba(255, 255, 255, 0.35);
+    transform: translateY(-1px);
 }
 
 .tab-btn.active {
     background: white;
-    color: #1F4E78;
+    color: var(--primary);
+    box-shadow: var(--shadow-sm);
 }
 
-
+/* =============================================
+   Search
+   ============================================= */
 .search-container {
     padding: 15px;
     display: flex;
-    border-bottom: 1px solid #eeeeee;
+    border-bottom: 1px solid var(--border-light);
 }
 
 .search-container input {
     flex: 1;
     padding: 10px;
     border: 1px solid #cccccc;
-    border-radius: 4px 0 0 4px;
+    border-radius: 6px 0 0 6px;
     outline: none;
+    transition: border-color var(--transition);
 }
 
 .search-container input:focus {
-    border-color: #1F4E78;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(31, 78, 120, 0.1);
 }
 
 .search-container button {
     padding: 10px 15px;
-    background-color: #1F4E78;
+    background-color: var(--primary);
     color: white;
     border: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 0 6px 6px 0;
     cursor: pointer;
+    transition: background var(--transition);
 }
 
+.search-container button:hover {
+    background-color: var(--primary-light);
+}
+
+/* =============================================
+   Sidebar Content
+   ============================================= */
 .sidebar-content {
     flex: 1;
     overflow-y: auto;
@@ -199,16 +162,18 @@ body {
 
 .instruction {
     text-align: center;
-    color: #666;
+    color: var(--text-secondary);
     margin-top: 50px;
     font-style: italic;
 }
 
-/* Main content */
+/* =============================================
+   Main Content
+   ============================================= */
 .main-content {
     flex: 1;
     position: relative;
-    background: #f0f2f5;
+    background: var(--bg-main);
 }
 
 .view-container {
@@ -221,9 +186,11 @@ body {
     height: 100%;
 }
 
-/* Card Info Styling (Side panel) */
+/* =============================================
+   Zone Info Cards (Sidebar)
+   ============================================= */
 .zone-info h3 {
-    color: #1F4E78;
+    color: var(--primary);
     margin-bottom: 15px;
     padding-bottom: 10px;
     border-bottom: 2px solid #f0f0f0;
@@ -236,12 +203,19 @@ body {
 }
 
 .stat-box {
-    background: #f8f9fa;
-    padding: 10px;
-    border-radius: 6px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(8px);
+    padding: 12px;
+    border-radius: 8px;
     flex: 1;
     text-align: center;
-    border: 1px solid #e9ecef;
+    border: 1px solid rgba(0, 0, 0, 0.06);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.stat-box:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-sm);
 }
 
 .stat-box span {
@@ -258,25 +232,32 @@ body {
 .btn-open-table {
     width: 100%;
     padding: 12px;
-    background-color: #28a745;
+    background: linear-gradient(135deg, #28a745 0%, #20c997 100%);
     color: white;
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     font-weight: 600;
     cursor: pointer;
     margin-bottom: 20px;
-    transition: background 0.2s;
+    transition: all var(--transition);
 }
 
 .btn-open-table:hover {
-    background-color: #218838;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(40, 167, 69, 0.3);
 }
 
 .local-list-item {
     padding: 12px;
     border: 1px solid #eee;
-    border-radius: 6px;
+    border-radius: 8px;
     margin-bottom: 10px;
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.local-list-item:hover {
+    transform: translateX(4px);
+    box-shadow: var(--shadow-sm);
 }
 
 .local-list-item h4 {
@@ -291,27 +272,43 @@ body {
     margin-bottom: 3px;
 }
 
-/* Modal Table */
+/* =============================================
+   Modal Table
+   ============================================= */
 .modal {
-    display: none; 
-    position: fixed; 
-    z-index: 2000; 
+    display: none;
+    position: fixed;
+    z-index: 2000;
     left: 0;
     top: 0;
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0,0,0,0.5); 
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(4px);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 5% auto; 
+    margin: 5% auto;
     padding: 20px;
-    border-radius: 8px;
-    width: 90%; 
+    border-radius: 12px;
+    width: 90%;
     max-height: 80vh;
     display: flex;
     flex-direction: column;
+    box-shadow: var(--shadow-md);
+    animation: modalSlideIn 0.3s ease;
+}
+
+@keyframes modalSlideIn {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .close-btn {
@@ -320,6 +317,7 @@ body {
     font-size: 28px;
     font-weight: bold;
     cursor: pointer;
+    transition: color var(--transition);
 }
 
 .close-btn:hover {
@@ -344,7 +342,7 @@ th, td {
 }
 
 th {
-    background-color: #1F4E78;
+    background-color: var(--primary);
     color: white;
     position: sticky;
     top: 0;
@@ -354,18 +352,26 @@ tr:nth-child(even) {
     background-color: #f9f9f9;
 }
 
-/* Custom Tooltip map */
+tr:hover {
+    background-color: #e8f4fd;
+}
+
+/* =============================================
+   Custom Tooltip (Map)
+   ============================================= */
 .custom-tooltip {
     background: rgba(255, 255, 255, 0.95);
     border: none;
-    border-radius: 4px;
-    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    border-radius: 6px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
     padding: 8px 12px;
     font-weight: 600;
     color: #333;
 }
 
-/* Dashboard Grid */
+/* =============================================
+   Dashboard Grid
+   ============================================= */
 .charts-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -373,10 +379,16 @@ tr:nth-child(even) {
 }
 
 .chart-card {
-    background: white;
-    border-radius: 8px;
+    background: var(--bg-card);
+    border-radius: 12px;
     padding: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition);
+}
+
+.chart-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
 }
 
 .chart-card h3 {

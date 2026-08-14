@@ -4,28 +4,29 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mapa Eleitoral DF 2026</title>
+
     <!-- SEO Meta Tags -->
     <meta name="description" content="Mapa interativo das zonas eleitorais do Distrito Federal para as Eleições 2026.">
     <meta property="og:title" content="Mapa Eleitoral DF 2026">
     <meta property="og:description" content="Explore as zonas eleitorais e locais de votação do DF para as eleições de 2026.">
-    <meta property="og:image" content="/og-image.png">
     <meta property="og:type" content="website">
-    <!-- Favicon -->
-    <link rel="icon" href="favicon.png" type="image/png">
-    <!-- Manifest for PWA -->
-    <link rel="manifest" href="manifest.json">
+
     <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <!-- Hidden H1 for accessibility -->
+
     <h1 class="sr-only">Mapa Eleitoral DF 2026</h1>
+
     <div class="app-container">
         <!-- Sidebar / Menu -->
         <aside class="sidebar">
@@ -36,20 +37,21 @@
                     <button class="tab-btn active" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                 </div>
-                <!-- Dark mode toggle -->
-                <button id="theme-toggle" aria-label="Alternar modo escuro">🌙</button>
             </div>
+
             <div id="map-sidebar">
                 <div class="search-container">
                     <input type="text" id="search-input" placeholder="Buscar RA, Bairro ou Local..." autocomplete="off" aria-label="Buscar">
                     <button id="search-btn" aria-label="Buscar">🔍</button>
                 </div>
+
                 <div id="sidebar-content" class="sidebar-content">
                     <div class="instruction">
                         Selecione uma Zona Eleitoral no mapa para visualizar os locais de votação.
                     </div>
                 </div>
             </div>
+
             <div id="dash-sidebar" style="display: none;">
                 <div class="sidebar-content" style="padding-top: 20px;">
                     <h3>📊 Resumo Geral DF</h3>
@@ -70,25 +72,31 @@
                     <p class="instruction" style="font-size: 0.85rem;">Utilize o painel principal ao lado para visualizar os gráficos extraídos das Tabelas Dinâmicas.</p>
                 </div>
             </div>
+
         </aside>
+
         <!-- Main Content Area -->
         <main class="main-content">
             <!-- Container do Mapa -->
             <div id="view-map" class="view-container active-view">
                 <div id="map"></div>
             </div>
+
             <!-- Container do Dashboard -->
             <div id="view-dashboard" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
                 <h2 style="margin-bottom: 20px; color: #1F4E78;">Painel de Indicadores (Estatísticas 2026)</h2>
+
                 <div class="charts-grid">
                     <div class="chart-card">
                         <h3>Eleitorado por Região Administrativa (RA)</h3>
                         <canvas id="chartRA"></canvas>
                     </div>
+
                     <div class="chart-card">
                         <h3>Eleitorado por Zona Eleitoral</h3>
                         <canvas id="chartZona"></canvas>
                     </div>
+
                     <div class="chart-card full-width">
                         <h3>Quantidade de Locais de Votação por RA</h3>
                         <canvas id="chartLocaisRA"></canvas>
@@ -97,137 +105,11 @@
             </div>
         </main>
     </div>
+
     <!-- Modal para tabela detalhada -->
     <div id="data-modal" class="modal">
         <div class="modal-content">
             <span class="close-btn" aria-label="Fechar">&times;</span>
-            <h3 id="modal-title">Detalhes da Zona</h3>
-            <div class="table-container">
-                <table id="data-table">
-                    <thead>
-                        <tr>
-                            <th>Local de Votação</th>
-                            <th>Endereço</th>
-                            <th>RA</th>
-                            <th>Bairro (2022)</th>
-                            <th>Seções</th>
-                            <th>Eleitorado</th>
-                        </tr>
-                    </thead>
-                    <tbody id="table-body"></tbody>
-                </table>
-            </div>
-        </div>
-    </div>
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    <!-- App Logic -->
-    <script type="module" src="app.js"></script>
-</body>
-</html>
-<html lang="pt-BR">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mapa Eleitoral DF 2026</title>
-    
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-    
-    <!-- Google Fonts -->
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
-    
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
-    <!-- Custom CSS -->
-    <link rel="stylesheet" href="style.css">
-</head>
-<body>
-
-    <div class="app-container">
-        <!-- Sidebar / Menu -->
-        <aside class="sidebar">
-            <div class="sidebar-header">
-                <h2>Zonas Eleitorais DF</h2>
-                <p>Eleições 2026</p>
-                <div class="nav-tabs">
-                    <button class="tab-btn active" onclick="switchTab('map')">Mapa</button>
-                    <button class="tab-btn" onclick="switchTab('dashboard')">Dashboard</button>
-                </div>
-            </div>
-            
-            <div id="map-sidebar">
-                <div class="search-container">
-                    <input type="text" id="search-input" placeholder="Buscar RA, Bairro ou Local..." autocomplete="off">
-                    <button id="search-btn">🔍</button>
-                </div>
-
-                <div id="sidebar-content" class="sidebar-content">
-                    <div class="instruction">
-                        Selecione uma Zona Eleitoral no mapa para visualizar os locais de votação.
-                    </div>
-                </div>
-            </div>
-            
-            <div id="dash-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>📊 Resumo Geral DF</h3>
-                    <div class="summary-stats" style="flex-direction: column; margin-top: 15px;">
-                        <div class="stat-box" style="margin-bottom: 10px;">
-                            <span>Total de Eleitores</span>
-                            <strong id="kpi-eleitores">--</strong>
-                        </div>
-                        <div class="stat-box" style="margin-bottom: 10px;">
-                            <span>Locais de Votação</span>
-                            <strong id="kpi-locais">--</strong>
-                        </div>
-                        <div class="stat-box">
-                            <span>Média de Eleitores/Local</span>
-                            <strong id="kpi-media">--</strong>
-                        </div>
-                    </div>
-                    <p class="instruction" style="font-size: 0.85rem;">Utilize o painel principal ao lado para visualizar os gráficos extraídos das Tabelas Dinâmicas.</p>
-                </div>
-            </div>
-
-        </aside>
-
-        <!-- Main Content Area -->
-        <main class="main-content">
-            <!-- Container do Mapa -->
-            <div id="view-map" class="view-container active-view">
-                <div id="map"></div>
-            </div>
-            
-            <!-- Container do Dashboard -->
-            <div id="view-dashboard" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <h2 style="margin-bottom: 20px; color: #1F4E78;">Painel de Indicadores (Estatísticas 2026)</h2>
-                
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <h3>Eleitorado por Região Administrativa (RA)</h3>
-                        <canvas id="chartRA"></canvas>
-                    </div>
-                    
-                    <div class="chart-card">
-                        <h3>Eleitorado por Zona Eleitoral</h3>
-                        <canvas id="chartZona"></canvas>
-                    </div>
-                    
-                    <div class="chart-card full-width">
-                        <h3>Quantidade de Locais de Votação por RA</h3>
-                        <canvas id="chartLocaisRA"></canvas>
-                    </div>
-                </div>
-            </div>
-        </main>
-    </div>
-
-    <!-- Modal para tabela detalhada -->
-    <div id="data-modal" class="modal">
-        <div class="modal-content">
-            <span class="close-btn">&times;</span>
             <h3 id="modal-title">Detalhes da Zona</h3>
             <div class="table-container">
                 <table id="data-table">
@@ -250,7 +132,7 @@
 
     <!-- Leaflet JS -->
     <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-    
+
     <!-- App Logic -->
     <script src="app.js"></script>
 </body>
