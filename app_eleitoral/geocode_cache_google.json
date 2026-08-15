@@ -1,0 +1,5456 @@
+{
+  "SGAS 708/908 MÓDULOS 25/26 ÁREA ESPECIAL - ALA SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8396949,
+      "lng": -47.919568,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SGAS II SGAS 616 - Asa Sul, Brasília - DF, 70200-760, Brazil"
+    }
+  },
+  "SGAS 611/612 CONJUNTO E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8298463,
+      "lng": -47.9042002,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 611 - Asa Sul, Brasília - DF, 70200-710, Brazil"
+    }
+  },
+  "CENTRO DE ENSINO FUNDAMENTAL 01 (ANTIGO CENTRO EDUCACIONAL), Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8129752,
+      "lng": -47.8975102,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Asa Sul, Brasília - Federal District, 70345-000, Brazil"
+    }
+  },
+  "SQS 106 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8124752,
+      "lng": -47.8989462,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 106 - Asa Sul, Brasília - DF, 70345-000, Brazil"
+    }
+  },
+  "SQS 103 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8060278,
+      "lng": -47.8915297,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 103 - Asa Sul, Brasília - DF, 70342-000, Brazil"
+    }
+  },
+  "QUADRA SQS 408, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.821857,
+      "lng": -47.8989462,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 408 - Asa Sul, Brasília - DF, 70257-000, Brazil"
+    }
+  },
+  "SQS 214 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8309444,
+      "lng": -47.9174921,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 214 - Asa Sul, Brasília - DF, 70293-000, Brazil"
+    }
+  },
+  "SQS 405 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8154083,
+      "lng": -47.8915297,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 405 - Asa Sul, Brasília - DF, 70239-000, Brazil"
+    }
+  },
+  "SGAS 906 CONJUNTO E LOTE 06, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8348862,
+      "lng": -48.0109187,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote 6 - R. 4 Norte - Águas Claras, Brasília - DF, 71907-540, Brazil"
+    }
+  },
+  "SGAS Quadra 906, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.823167,
+      "lng": -47.8836838,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Setor de clubes esportivos sul - trecho 01-conj.3-lote5/6 - Asa Sul, Brasília - DF, 70200-001, Brazil"
+    }
+  },
+  "SGAS 602 PROJ D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8095475,
+      "lng": -47.8816425,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 602 - Asa Sul, Brasília - DF, 70200-620, Brazil"
+    }
+  },
+  "SGAS 907/908 MÓDULOS 25/26 - ASA SUL - JUNTO AO CEM ELEF BRANCO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8069011,
+      "lng": -47.910073,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS I St. de Grandes Áreas Sul 907 - Asa Sul, Brasília - DF, 70390-070, Brazil"
+    }
+  },
+  "SGAS 615 LOTE 110, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8376166,
+      "lng": -47.9171829,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 615 - Asa Sul, Brasília - DF, 70200-750, Brazil"
+    }
+  },
+  "SGAS 609 MODULO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8256684,
+      "lng": -47.90018240000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 609 - Asa Sul, Brasília - DF, 70200-690, Brazil"
+    }
+  },
+  "SGAS 615 MÓDULO C, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8376166,
+      "lng": -47.9171829,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 615 - Asa Sul, Brasília - DF, 70200-750, Brazil"
+    }
+  },
+  "fica na SGAS 606, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8192926,
+      "lng": -47.8918387,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS II St. de Grandes Áreas Sul 606 - Asa Sul, Brasília - DF, 70200-660, Brazil"
+    }
+  },
+  "SQS 102 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.80361,
+      "lng": -47.8899847,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 102 - Asa Sul, Brasília - DF, 70330-000, Brazil"
+    }
+  },
+  "SQS 206 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070889,
+      "lng": -48.0853207,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNH Área Especial - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "SQS 209 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8218562,
+      "lng": -47.9038911,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 209 - Asa Sul, Brasília - DF, 70272-000, Brazil"
+    }
+  },
+  "SQS 305 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8084444,
+      "lng": -47.8980191,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 305 - Asa Sul, Brasília - DF, 70352-000, Brazil"
+    }
+  },
+  "SQS 316 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8297692,
+      "lng": -47.9273859,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 316 - Asa Sul, Brasília - DF, 70377-510, Brazil"
+    }
+  },
+  "SQS 413 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8321181,
+      "lng": -47.9125459,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 413 - Asa Sul, Brasília - DF, 70296-000, Brazil"
+    }
+  },
+  "SQS 416 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8376895,
+      "lng": -47.921202,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Superquadra Sul 416 - Asa Sul, Brasília - DF, 70299-000, Brazil"
+    }
+  },
+  "EQS 313/314 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8250416,
+      "lng": -47.9204291,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCS Entrequadra Sul 313/314 - Asa Sul, Brasília - DF, 70382-400, Brazil"
+    }
+  },
+  "SHIGS 702 CONJUNTO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8355534,
+      "lng": -47.9749252,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II QE 17 Conj. A - Guará, Brasília - DF, 71050-012, Brazil"
+    }
+  },
+  "SEPS 704/904 CONJUNTO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8082697,
+      "lng": -47.9063324,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SEPS - Asa Sul, Brasília - DF, Brazil"
+    }
+  },
+  "SGAS 913 S/N CONJUNTO B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8180392,
+      "lng": -47.9224387,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAS I St. de Grandes Áreas Sul 913 - Asa Sul, Brasília - DF, 70390-130, Brazil"
+    }
+  },
+  "SEPS 712/912 CONJUNTO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151226,
+      "lng": -47.9163907,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Conjunto A - SEPS 712/912 - Plano Piloto, Brasília - DF, 70390-125, Brazil"
+    }
+  },
+  "QUADRA 05 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "SHIN QI 04/06 AE LAGO NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7209422,
+      "lng": -47.8849445,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIN CA 4 05 - Plano Piloto, Brasília - DF, 71503-504, Brazil"
+    }
+  },
+  "QD. 07, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9152152,
+      "lng": -47.7614707,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Quadra 07 - Q 07 - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 04 CONJ. A LOTE 05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Varjão PqEAT a 05 - Lago Norte, Brasília - DF, 71555-100, Brazil"
+    }
+  },
+  "QUADRA 378, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081512,
+      "lng": -47.9146953,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 378 - Lago Norte, Brasília - DF, 71593-621, Brazil"
+    }
+  },
+  "QUADRA 4 CONJ. A LOTE 05 - PARANOA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8494146,
+      "lng": -47.9488105,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "5 - QR 4 - Candangolândia, Brasília - DF, 71725-400, Brazil"
+    }
+  },
+  "QUADRA 26 AREA ESPECIAL S/N. PARANOÁ. 71572608, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "St. H Norte QNH s/n - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 31 CJ. F AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8470945,
+      "lng": -47.8053313,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 31 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "SHIN CA 02 LOTE 24 LAGO NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7126519,
+      "lng": -47.8867085,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Shin Ca 2, s/n - lt F - Plano Piloto, Brasília - DF, 71505-000, Brazil"
+    }
+  },
+  "QUADRA 2/3, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7872711,
+      "lng": -47.9117717,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "SIG Q. 2, 3 - Plano Piloto, Brasília - DF, 70655-775, Brazil"
+    }
+  },
+  "QUADRA 03 ÁREA ESPECIAL LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070061,
+      "lng": -48.0852095,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 3 - 01 - Taguatinga, Brasília - DF, 72130-603, Brazil"
+    }
+  },
+  "Quadra 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8016852,
+      "lng": -47.8704459,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Administração Federal Sul Q 1 - Asa Sul, Brasília - DF, Brazil"
+    }
+  },
+  "SHIN QL 9/11- AE S/N LOTE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7092952,
+      "lng": -47.9154875,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "PqEAT 11 ae s/n lote - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "SHIN QI 3 CONJUNTO D A.E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7911189,
+      "lng": -47.8796112,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Condomínio Vista Bela - SBN Q. 1, 3 - d - Plano Piloto, Brasília - DF, 72227-922, Brazil"
+    }
+  },
+  "Chácara N - Rodovia DF 250, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081869,
+      "lng": -47.5586374,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-250, Brasília - DF, Brazil"
+    }
+  },
+  "CA 06 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "DEL LAGO QUADRA 61 CONJUNTO E ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081516,
+      "lng": -47.9146947,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 61 - e - Itapuã, Brasília - DF, 71570-000, Brazil"
+    }
+  },
+  "QD 26 CJ G LT 01 - AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081549,
+      "lng": -47.9146969,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 26 - g 01 - Lago Norte, Brasília - DF, 72405-260, Brazil"
+    }
+  },
+  "DEL LAGO QD. 378 CONJ. L ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081512,
+      "lng": -47.9146953,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 378 - l - Lago Norte, Brasília - DF, 71593-621, Brazil"
+    }
+  },
+  "QD 30 CJ E LT 17, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9092974,
+      "lng": -47.7647665,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 30 - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 17 CONJ. C LOTE 08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QD 14 CJ F LT 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7088488,
+      "lng": -47.9141112,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 14 - f 01 - Lago Norte, Brasília - DF, 71699-760, Brazil"
+    }
+  },
+  "QUADRA 24 CJ. I AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081815,
+      "lng": -47.9146604,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 24 - i - Dellago, Brasília - DF, 71591-270, Brazil"
+    }
+  },
+  "QUADRA 33, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8449395,
+      "lng": -47.80645879999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 33 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "CHÁCARA INTERLAGOS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7000603,
+      "lng": -47.8972708,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. de Chacaras - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "COND. ENTRELAGOS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7588601,
+      "lng": -47.8877399,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Etapa - Comércio Local Norte, 1 - lojas 24 e 25 - Sobradinho, Brasília - DF, 73255-901, Brazil"
+    }
+  },
+  "AE S/N GRANJA DO TORTO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7031688,
+      "lng": -47.9122668,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Granja do Torto, Brasília - DF, Brazil"
+    }
+  },
+  "DF- 003 KM 7]]>, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7776132,
+      "lng": -47.9383783,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-003 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "DF 250 - VIA LAGO NORTE - KM 07 - NR, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081869,
+      "lng": -47.5586374,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-250, Brasília - DF, Brazil"
+    }
+  },
+  "Parque Tecnológico Capital Digital, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7734516,
+      "lng": -47.8889602,
+      "location_type": "ROOFTOP",
+      "formatted_address": "AH - TEC CAPITAL - SCLRN, 705 - Bloco E Loja 08 – Parte - Asa Norte, Brasília - DF, 70730-555, Brazil"
+    }
+  },
+  "QNM 36 CONJUNTO B-2 LOTE 60 - VILA MUTIRAO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8034959,
+      "lng": -48.0956028,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNM 36 Cj. O - St. M-Norte QNM 36 Conj. O - Taguatinga, Brasília - DF, 72145-615, Brazil"
+    }
+  },
+  "EQNJ 23/25 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8065106,
+      "lng": -48.0856638,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 25 - Taguatinga, Brasília - DF, 72130-710, Brazil"
+    }
+  },
+  "EQNL 17/19 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8201696,
+      "lng": -48.08936809999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. L Norte EQNL 17/19 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "EQNL 05/07 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "7 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QNL 22 AE 24, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8247361,
+      "lng": -48.0908521,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. L Norte QNL 22 - Ceilândia, Brasília - DF, 72161-200, Brazil"
+    }
+  },
+  "EQNM 38/40 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "EQNL 10/12 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8202908,
+      "lng": -48.07926759999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. L Norte EQNL 10/12 - Taguatinga, Brasília - DF, 72155-520, Brazil"
+    }
+  },
+  "QNJ 56, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8141564,
+      "lng": -48.0869507,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. J Norte QNJ 56 - Taguatinga, Brasília - DF, 72140-560, Brazil"
+    }
+  },
+  "EQNL 13/15, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8245402,
+      "lng": -48.0873375,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. L Norte EQNL 13/15 - Taguatinga, Brasília - DF, 72151-510, Brazil"
+    }
+  },
+  "QNL 16 VIA 2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8320513,
+      "lng": -48.0881011,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. L Norte QNL 16 - Taguatinga, Brasília - DF, 72160-600, Brazil"
+    }
+  },
+  "QNL 28 AREA ESPECIAL 27, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 28 - Taguatinga, Brasília - DF, 72130-700, Brazil"
+    }
+  },
+  "CL 103 LOTE 1-B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8078364,
+      "lng": -47.9377948,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "103 - Octogonal AOS 1 - Plano Piloto, Brasília - DF, 70660-010, Brazil"
+    }
+  },
+  "CL 201 LOTE 1 A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8134989,
+      "lng": -47.9131341,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote, 1 - Asa Sul, Brasília - DF, 73270-625, Brazil"
+    }
+  },
+  "CL 209 LOTE 1-A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8083167,
+      "lng": -47.9386336,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Quadra - AOS 1 B. A, 209 - Octogonal, Brasília - DF, 70660-011, Brazil"
+    }
+  },
+  "CL 213 LOTE 01 - G, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8554508,
+      "lng": -48.0398819,
+      "location_type": "ROOFTOP",
+      "formatted_address": "LOTE 01 - Taguatinga, Brasília - DF, 72025-020, Brazil"
+    }
+  },
+  "CL 308 LOTE 1-B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8078843,
+      "lng": -47.9378045,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "308 - Octogonal AOS 1 - Plano Piloto, Brasília - DF, 70660-010, Brazil"
+    }
+  },
+  "CL 316 LOTE 1-A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8082002,
+      "lng": -47.93867710000001,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "316 - Octogonal AOS 1 - Plano Piloto, Brasília - DF, 70660-011, Brazil"
+    }
+  },
+  "CL 403 - LOTE 1-A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8082001,
+      "lng": -47.9386775,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "403 - Octogonal AOS 1 - Plano Piloto, Brasília - DF, 70660-011, Brazil"
+    }
+  },
+  "E/Q 417/418 - 517/518 - LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081511,
+      "lng": -47.91469540000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 417 - 01 - Lago Norte, Brasília - DF, 72547-707, Brazil"
+    }
+  },
+  "AVENIDA S/N - RESIDENCIAL SANTOS DUMONT- SANTA MARIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9978757,
+      "lng": -47.99865519999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QRC9 - Santa Maria, Brasília - DF, 72594-000, Brazil"
+    }
+  },
+  "RUA DAS ADALIAS LOTES 2/6 - DVO - CIDADE NOVA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6014866,
+      "lng": -47.6833617,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "DVO, Brasília - DF, Brazil"
+    }
+  },
+  "CL 404 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "QR 417 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "CL 310 - CONJ H - AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7459195,
+      "lng": -47.9218315,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SOFN Q 4 Conj. H - SIA, Brasília - DF, 70634-400, Brazil"
+    }
+  },
+  "Colégio Paloma - QR 307, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.026616,
+      "lng": -48.025752,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Qr 307, Conjunto V, Lote 2 - Santa Maria, Brasília - DF, 72507-522, Brazil"
+    }
+  },
+  "QUADRA 17 - LOTE 14-C - 3 ETAPA - CONDOMINIO PORTO RICO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0326145,
+      "lng": -48.0253885,
+      "location_type": "ROOFTOP",
+      "formatted_address": "segunda etapa - Q G Condomínio Porto Rico, casa 5 - Santa Maria, Brasília - DF, Brazil"
+    }
+  },
+  "QR 100 - CONJUNTO T - AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0453643,
+      "lng": -48.0379764,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QR 100 - Santa Maria, Brasília - DF, 72500-400, Brazil"
+    }
+  },
+  "CL 116 LOTE 1-M, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "Q.203 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067884,
+      "lng": -48.085256,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "203 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "CL 206 LOTE 1-C, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067019,
+      "lng": -48.0431317,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Hab. Vicente Pires - Vicente Pires, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "CL 215 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "CL 218 LOTE 01 F, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0042904,
+      "lng": -47.98867310000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "CL 218 - Santa Maria, Brasília - DF, Brazil"
+    }
+  },
+  "AR 13 CONJUNTO 3 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6451834,
+      "lng": -47.82275869999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "AR 13 - Sobradinho II, Brasília - DF, 73062-320, Brazil"
+    }
+  },
+  "QUADRA 02 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.80679,
+      "lng": -48.0844396,
+      "location_type": "ROOFTOP",
+      "formatted_address": "02 - St. H Norte Área Especial - Taguatinga, Brasília - DF, 72130-613, Brazil"
+    }
+  },
+  "QUADRA 16 AREA ESPECIAL D/1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8418337,
+      "lng": -47.8027169,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 16 - Jardim Botânico, Brasília - DF, 71680-357, Brazil"
+    }
+  },
+  "SH MANSÕES SOBRADINHO CONDOMÍNIO MINI-CHÁCARAS ES 11B - SOBRADINHO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6367694,
+      "lng": -47.84376,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Sh Mansões Sobradinho/Condomínio Mini-Chácaras Es 11B - SH Mansões Sobradinho Condomínio Mini-Chácaras - Sobradinho II, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 14 AREA ESPECIAL RUA 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8424715,
+      "lng": -47.8016304,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 14 - Jardim Botânico, Brasília - DF, 72425-140, Brazil"
+    }
+  },
+  "QUADRA 02 C/D LOTE F, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7896789,
+      "lng": -47.8867687,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHN Q. 2 - Asa Norte, Brasília - DF, 70740-610, Brazil"
+    }
+  },
+  "QUADRA 6 AREA ESPECIAL 3, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070061,
+      "lng": -48.0852095,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 3 - Taguatinga, Brasília - DF, 72130-603, Brazil"
+    }
+  },
+  "QUADRA 15 AREA ESPECIAL 2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8396779,
+      "lng": -47.8033994,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 15 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 10 RUA 4 AREA ESPECIAL 4/5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8412211,
+      "lng": -47.9850163,
+      "location_type": "ROOFTOP",
+      "formatted_address": "4 - St. Res. Norte A EQ 4 - JARDIM RORIZ, Brasília - DF, 73340-364, Brazil"
+    }
+  },
+  "AR 13 CONJUNTO 05 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7841094,
+      "lng": -47.8535772,
+      "location_type": "ROOFTOP",
+      "formatted_address": "conjunto 05 - Plano Piloto, Brasília - DF, 70800-200, Brazil"
+    }
+  },
+  "AR 03 LOTE 04 AREA ESP. ST OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7787864,
+      "lng": -48.0005271,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Oeste - SCIA, Brasília - DF, Brazil"
+    }
+  },
+  "AR 13 CONJ 1 AREA ESPECIAL 3, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070061,
+      "lng": -48.0852095,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 3 - Taguatinga, Brasília - DF, 72130-603, Brazil"
+    }
+  },
+  "RODOVIA DF-01 KM 13 RUA 8 CHACARA 187-LAGO OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8018459,
+      "lng": -48.0244077,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 8 Chácara 187 - St. Hab. Vicente Pires - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "SITIO PATRICIA DF 325 KM 8/9 LOBERAL ZONA RURAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5914632,
+      "lng": -47.8357383,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Sobradinho, Brasília - Federal District, Brazil"
+    }
+  },
+  "QUADRA 04 AREA ESPECIAL 4, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8412211,
+      "lng": -47.9850163,
+      "location_type": "ROOFTOP",
+      "formatted_address": "4 - St. Res. Norte A EQ 4 - JARDIM RORIZ, Brasília - DF, 73340-364, Brazil"
+    }
+  },
+  "QUADRA 09 AREA ESPECIAL 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "2 - Setor C Norte QNH - Taguatinga, Brasília - DF, 72115-700, Brazil"
+    }
+  },
+  "QUADRA 12 AREA ESPECIAL 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "QUADRA 5 AREA ESPECIAL 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "Quadra 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786789,
+      "lng": -47.8889265,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SCN Q 5 - Asa Norte, Brasília - DF, 70740-610, Brazil"
+    }
+  },
+  "DF 205 OESTE KM 19 FERCAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5654521,
+      "lng": -47.8471737,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-205 - Fercal, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 14 AREA ESP. LOTES 24/27, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8424715,
+      "lng": -47.8016304,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 14 - Jardim Botânico, Brasília - DF, 72425-140, Brazil"
+    }
+  },
+  "QUADRA 11 AREA RESERVADA 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8392247,
+      "lng": -47.8017884,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 11 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "Quadra 04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9108971,
+      "lng": -47.7609242,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Q. 04 - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 6 AREA ESPECIAL 1 RUA 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7920614,
+      "lng": -47.8496968,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "1 - Acamp Pacheco Fernandes - Vila Planalto, Brasília - DF, 70804-080, Brazil"
+    }
+  },
+  "QUADRA 15 AREA ESPECIAL 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "2 - Setor C Norte QNH - Taguatinga, Brasília - DF, 72115-700, Brazil"
+    }
+  },
+  "QUADRA 9 AREA ESPECIAL 05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7955551,
+      "lng": -47.8931645,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SRTVS Q. 9 - Asa Sul, Brasília - DF, 70360-510, Brazil"
+    }
+  },
+  "QUADRA 02 CONJUNTO B/C LOTE E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0471648,
+      "lng": -48.0435013,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Vila DVO Conj. B/C - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 11 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8392247,
+      "lng": -47.8017884,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 11 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 01 AREA ESPECIAL SETOR DE INDUSTRIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "AR 05 AREA ESPECIAL 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "AR 19 CONJUNTO 07 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6440916,
+      "lng": -47.81703,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "AR 19 - Sobradinho II, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 3 AREA ESPECIAL 1/2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8186593,
+      "lng": -48.06264960000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Área Especial 1 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "CONDOMINIO NOVO SETOR DE MANSÕES - ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6508399,
+      "lng": -47.7571816,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH Nova Colina Condomínio Novo St. de Mansões Sobradinho - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "AV CENTRAL AE VILA RABELO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7926736,
+      "lng": -47.8468509,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Central - Acamp Pacheco Fernandes Travessa dos Ficos - Vila Planalto, Brasília - DF, 70804-200, Brazil"
+    }
+  },
+  "DF 001 KM 6 VILA BASEVI, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7486911,
+      "lng": -48.049745,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-001 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "ROD DF 205 OESTE KM 06 COMUNIDADE BOA VISTA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5853142,
+      "lng": -47.9218705,
+      "location_type": "ROOFTOP",
+      "formatted_address": "DF-205, km 06 - Boa Vista, Brasília - DF, 73151-010, Brazil"
+    }
+  },
+  "DF 205 KM 13 ESTRADA SECUNDARIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.58321,
+      "lng": -47.93007,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-205, km 13 leste - Sobradinho II, Brasília - DF, Brazil"
+    }
+  },
+  "BR 020 KM 13/14 NUCLEO RURAL CORREGO DO ARROZAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5984302,
+      "lng": -47.6138735,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-020, Distrito Federal, Brazil"
+    }
+  },
+  "DF 205 FAZENDA CORREGO DO OURO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "ROD DF 150 KM 12 CD ENGENHO VELHO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6016255,
+      "lng": -47.8674928,
+      "location_type": "ROOFTOP",
+      "formatted_address": "DF-150, Km 12 - Fercal, Brasília - DF, 73150-065, Brazil"
+    }
+  },
+  "FAZENDA SOBRADINHO PROX. AO POLO DE CINEMA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6144044,
+      "lng": -47.8185338,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Polo de Cinema - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "DF 150 KM 11 CHACARA 4 ESTRADA DA FERCAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6085739,
+      "lng": -47.8799416,
+      "location_type": "ROOFTOP",
+      "formatted_address": "DF-150, KM 11 - Fercal, Brasília - DF, 73150-150, Brazil"
+    }
+  },
+  "DF 001 GRANJA SANTA HELENA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7486911,
+      "lng": -48.049745,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-001 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 11 AREA RESERVADA 3, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8392247,
+      "lng": -47.8017884,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 11 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "BR 020 KM 2 COND. GRAN VILLE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -9.7493786,
+      "lng": -43.2081475,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-020, Brazil"
+    }
+  },
+  "ST.DE IND. DE SOB., Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8518702,
+      "lng": -47.882429,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Shis Qi 15 - St. de Habitações Individuais Sul QI 15 - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "AREA ESPECIAL 04 SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070738,
+      "lng": -48.0852567,
+      "location_type": "ROOFTOP",
+      "formatted_address": "04 - Guará II QNH - Taguatinga, Brasília - DF, 71070-901, Brazil"
+    }
+  },
+  "SETOR EDUCACIONAL LT 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8409747,
+      "lng": -48.0585966,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. C Sul QSC 15 5W5R+HHR LT 01 - Taguatinga, Brasília - DF, 72016-150, Brazil"
+    }
+  },
+  "SETOR EDUCACIONAL LT M, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.736208,
+      "lng": -47.8960661,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Shln M - Plano Piloto, Brasília - DF, 70770-560, Brazil"
+    }
+  },
+  "AV. SÃO PAULO QD 52 LOTE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081516,
+      "lng": -47.9146947,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "Q. B, 52 - b - Granja do Torto, Brasília - DF, 70636-010, Brazil"
+    }
+  },
+  "Quadra 21, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8403191,
+      "lng": -47.8058473,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 21 - Jardim Botânico, Brasília - DF, 71680-357, Brazil"
+    }
+  },
+  "EQ 10/20 CONJ H LOTE 01-BURITIS II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7459195,
+      "lng": -47.9218315,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SOFN Q 4 Conj. H - SIA, Brasília - DF, 70634-400, Brazil"
+    }
+  },
+  "SETOR EDUCACIONAL LOTE C/D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7946504,
+      "lng": -47.8933064,
+      "location_type": "ROOFTOP",
+      "formatted_address": "C - Asa Sul, Brasília - DF, 70308-200, Brazil"
+    }
+  },
+  "Setor Educacional, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7826946,
+      "lng": -47.9890526,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Leste - SCIA, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 03/04 LOTE H-SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "ÁREA ESPECIAL COND. ARAPOANGA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.773121,
+      "lng": -47.8751462,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHCN Cond Arapoanga Condomínio Residencial das Americas - Planaltina, Brasília - DF, 73370-100, Brazil"
+    }
+  },
+  "BR 020 MOD. 07 LOTES 16/19-COND. MESTRE DARMAS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5984302,
+      "lng": -47.6138735,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-020, Distrito Federal, Brazil"
+    }
+  },
+  "AREA ESPECIAL 01 VNS DE FATIMA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.809975,
+      "lng": -48.0939452,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. M Norte QNM 34 Área especial 01 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "BR 020 DF 365 DF 017 NUCLEO RURAL PIPIRIPAU, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6530122,
+      "lng": -47.7815289,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "BR-020, 365 - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "DF 320 NÚCLEO RURAL RIO PRETO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7827163,
+      "lng": -47.4709745,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-320 - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "DF 250 NUCLEO RURAL SÃO JOSÉ, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7190337,
+      "lng": -47.3708135,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-250 & Núcleo Rural São José - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "SETOR EDUCACIONAL LOTES J/L, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.816117,
+      "lng": -47.980251,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Guará I QE 2 Lote J - Guará, Brasília - DF, 71010-003, Brazil"
+    }
+  },
+  "EQ 02/03 SETOR RESIDENCIAL NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7826954,
+      "lng": -47.98905,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "3 - St. Leste - Plano Piloto, Brasília - DF, 71261-660, Brazil"
+    }
+  },
+  "QUADRA 01 CONJ. F LOTES 21/31, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 01 - Conj F - Fazendinha, Brasília - DF, 71596-168, Brazil"
+    }
+  },
+  "Q. 10K CONJ.C - ÁREA ESPECIAL - ST. HAB. ARAPOANGA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7087031,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 10 - Lago Norte, Brasília - DF, 71571-029, Brazil"
+    }
+  },
+  "Módulo 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7508493,
+      "lng": -47.8845987,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Asa Norte SCLN CLN 212 BL D - Asa Norte, Brasília - DF, 70864-060, Brazil"
+    }
+  },
+  "GLEBA G LOTE 22 NÚCLEO RURAL JARDIM MORUMBI, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7781109,
+      "lng": -48.1781826,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Núcleo Rural Alexandre Gusmão - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "COND. MESTRE DARMAS MOD 1 LOTE 13, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6024265,
+      "lng": -47.68802609999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Mte. D'armas - DVO, Brasília - DF, Brazil"
+    }
+  },
+  "RUA HUGO LOBO QD 97 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081515,
+      "lng": -47.9146948,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "Q. B, 97 - Granja do Torto, Brasília - DF, 70636-010, Brazil"
+    }
+  },
+  "BR 020 DF 019 NUCLEO RURAL TAQUARA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6017709,
+      "lng": -47.6818157,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "19 - Condomínio Mansões Itiquira - Planaltina, Brasília - DF, 73380-100, Brazil"
+    }
+  },
+  "AE 03 LOTE 01-VILA PACHECO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6534167,
+      "lng": -47.7862207,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Esportivo Q 2 AE 03 - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "DF 120 NÚCLEO RURAL TABATINGA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8711656,
+      "lng": -47.5527568,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-120, Brasília - DF, Brazil"
+    }
+  },
+  "AV. INDEPENDÊNCIA 102, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.5948788,
+      "lng": -47.6526543,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Independência - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 15/16 CONJ. I AREA ESPECIAL-ARAPOANGA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6091175,
+      "lng": -47.6312168,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Res. Leste | Buritís III EQ 15/16 - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "Q.1/2 PROJEÇÃO G-SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7996002,
+      "lng": -47.8788311,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SAUS Q. 1 - Asa Sul, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 3/4 PROJEÇÃO G SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "AV. CONTORNO Q. 17-VILA VICENTINA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.791248,
+      "lng": -47.8470624,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. do Contorno - Plano Piloto, Brasília - DF, 72597-100, Brazil"
+    }
+  },
+  "EQ 05/06 LOTE G-SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8669951,
+      "lng": -47.9611969,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Área Especial, 12 Lote G - núcleo bandeirantes, Brasília - DF, 71710-120, Brazil"
+    }
+  },
+  "QUADRA 45 BAIRRO NOSSA SRA FÁTIMA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081548,
+      "lng": -47.9146971,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 45 - Lago Norte, Brasília - DF, 71254-856, Brazil"
+    }
+  },
+  "LOTE 01 VIA WL 01-SRN, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7393112,
+      "lng": -47.901051,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Asa Norte, Brasília - Federal District, 70770-535, Brazil"
+    }
+  },
+  "EQ 4/5 SETOR RESIDENCIAL NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQ 6/7 SETOR RESIDENCIAL NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QD 13 CONJ A LT 01 BURITIS III, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7087993,
+      "lng": -47.91422679999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 13 - a 01 - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "ESTÂNCIA NOVA PLANALTINA QUADRA 01 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070889,
+      "lng": -48.0853207,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNH Área Especial - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "COND. NOVA PLANALTINA Q. 01 RUA A ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8873231,
+      "lng": -47.8165603,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 01 Rua A - Jardins Mangueiral - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "DF 128 KM 8 BICA DO DER, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6018281,
+      "lng": -47.6732085,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-128 - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "FAZENDA MESTRE DARMAS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "DF 14 LT 63/67 COND. ESTÂNCIA PLANALTINA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6063989,
+      "lng": -47.6692264,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Estância - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "BR 020 KM 18 NUCLEO EXPERIMENTAL EMBRAPA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.604876,
+      "lng": -47.7138419,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-020, km 18 - Planaltina, Brasília - DF, 73310-970, Brazil"
+    }
+  },
+  "CR 02]]>, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "BR 020 DF 335 FAZENDA MONJOLO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6530122,
+      "lng": -47.7815289,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "BR-020, 335 - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 01/02 LOTE H-SRL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "DF 006 NÚCLEO RURAL RAJADINHA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.745708,
+      "lng": -47.6621283,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Núcleo Rural Rajadinha - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "DF 130 KM 18-NÚCLEO RURAL SANTOS DUMONT, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6825086,
+      "lng": -47.6512524,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-130 - Núcleo Rural Santos Dumont, Brasília - DF, Brazil"
+    }
+  },
+  "COND VALE DO SOL DF 134 AREA ESPECIAL LT 1/6, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "ENTRE AV. CONTORNO/AV. INDEPENDÊNCIA - SETOR HOSPITALAR, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.791248,
+      "lng": -47.8470624,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. do Contorno - Plano Piloto, Brasília - DF, 72597-100, Brazil"
+    }
+  },
+  "EQNN 23/25, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.804311,
+      "lng": -48.12258,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "N 2, QNN 25/23, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72225-591, Brazil"
+    }
+  },
+  "EQNM 22/24, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8024758,
+      "lng": -48.1079462,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 22/24 - Ceilândia, Brasília - DF, 72210-570, Brazil"
+    }
+  },
+  "EQNM 08/10, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8268007,
+      "lng": -48.1039608,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 3/5 - Ceilândia, Brasília - DF, 72215-530, Brazil"
+    }
+  },
+  "EQNP 05/01 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.821115,
+      "lng": -48.12766999999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNP 05 Conj Z, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72240-424, Brazil"
+    }
+  },
+  "EQNM 01/03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQNM 21/23, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8285824,
+      "lng": -48.0944016,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 21/23 - Ceilândia, Brasília - DF, 72215-580, Brazil"
+    }
+  },
+  "EQNM 05/07, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.829849,
+      "lng": -48.097767,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 05/07, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72215-545, Brazil"
+    }
+  },
+  "EQNN 21/23, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8105651,
+      "lng": -48.1233429,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N EQNN 21/23 - Ceilândia, Brasília - DF, 72225-580, Brazil"
+    }
+  },
+  "QNM 13 A.E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8224973,
+      "lng": -48.0993548,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M QNM 13 - Ceilândia, Brasília - DF, 72215-130, Brazil"
+    }
+  },
+  "QNM 14, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8095939,
+      "lng": -48.1064838,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M QNM 14 - Ceilândia, Brasília - DF, 72210-140, Brazil"
+    }
+  },
+  "QNP 09 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QNN 13, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQNM 23/25, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8334836,
+      "lng": -48.09246779999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 23/25 - Ceilândia, Brasília - DF, 72215-590, Brazil"
+    }
+  },
+  "EQNM 19/21, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.822697,
+      "lng": -48.0946235,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 19/21 - Ceilândia, Brasília - DF, 72215-570, Brazil"
+    }
+  },
+  "EQNM 18/20, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8114281,
+      "lng": -48.1011393,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 18/20 - Ceilândia, Brasília - DF, 72210-550, Brazil"
+    }
+  },
+  "EQNM 04/06, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7209422,
+      "lng": -47.8849445,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIN CA 4 05 - Plano Piloto, Brasília - DF, 71503-504, Brazil"
+    }
+  },
+  "EQNN 01/03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.81685,
+      "lng": -48.11002999999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Eqnn 01/03, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72210-512, Brazil"
+    }
+  },
+  "EQNN 05/07, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.829849,
+      "lng": -48.097767,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 05/07, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72215-545, Brazil"
+    }
+  },
+  "EQNM 02/04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.814852,
+      "lng": -48.10615,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 02/04, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72210-515, Brazil"
+    }
+  },
+  "EQNM 06/08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806921,
+      "lng": -48.115303,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 06/ 08 - Leste, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72225-540, Brazil"
+    }
+  },
+  "EQNM 20/22, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8077324,
+      "lng": -48.1056416,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 20/22 - Ceilândia, Brasília - DF, 72210-560, Brazil"
+    }
+  },
+  "EQNM 24/26, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.799056,
+      "lng": -48.1127925,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 24/26 - Ceilândia, Brasília - DF, 72210-580, Brazil"
+    }
+  },
+  "EQNN 08/10, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8337459,
+      "lng": -48.1002085,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. N Qnn 8 Conjunto A, 12 - Ceilândia, Brasília - DF, 72220-081, Brazil"
+    }
+  },
+  "EQNM 03/05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.824922,
+      "lng": -48.100464,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 03/05 - Comercio Local, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72215-535, Brazil"
+    }
+  },
+  "EQNM 07/09, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQNN 02/04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.814852,
+      "lng": -48.10615,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 02/04, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72210-515, Brazil"
+    }
+  },
+  "EQNN 04/06, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7209422,
+      "lng": -47.8849445,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIN CA 4 05 - Plano Piloto, Brasília - DF, 71503-504, Brazil"
+    }
+  },
+  "EQNN 06/08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7209422,
+      "lng": -47.8849445,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIN CA 4 05 - Plano Piloto, Brasília - DF, 71503-504, Brazil"
+    }
+  },
+  "EQNN 03/05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.824922,
+      "lng": -48.100464,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "EQNM 03/05 - Comercio Local, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72215-535, Brazil"
+    }
+  },
+  "EQNN 07/09, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQNN 17/19, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8213253,
+      "lng": -48.1202213,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N EQNN 17/19 - Ceilândia, Brasília - DF, 72225-560, Brazil"
+    }
+  },
+  "EQNN 19/21, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8160975,
+      "lng": -48.122166,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N EQNN 19/21 - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "EQNP 13/09 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8097171,
+      "lng": -48.1292331,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 13 - Ceilândia, Brasília - DF, 72241-300, Brazil"
+    }
+  },
+  "EQNP 05/09, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.821115,
+      "lng": -48.12766999999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNP 05 Conj Z, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72240-424, Brazil"
+    }
+  },
+  "EQNP 15/11 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8111721,
+      "lng": -48.1333562,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 15 - Ceilândia, Brasília - DF, 72241-600, Brazil"
+    }
+  },
+  "EQNP 11/07 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8161434,
+      "lng": -48.1306384,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 11 - Ceilândia, Brasília - DF, 72241-100, Brazil"
+    }
+  },
+  "EQNM 17/19, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8185396,
+      "lng": -48.099608,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. M EQNM 17/19 - Ceilândia, Brasília - DF, 72215-560, Brazil"
+    }
+  },
+  "QNN 31 ÀREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8064632,
+      "lng": -48.0855483,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "31 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QE 20 LT A AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070889,
+      "lng": -48.0853207,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNH Área Especial - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QD 02 AE CONJUNTO 01/02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7079472,
+      "lng": -47.9133088,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. Leste PqEAT Conj 01 - estrutural, Brasília - DF, 71261-105, Brazil"
+    }
+  },
+  "QE 4 AE J, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8085689,
+      "lng": -47.99103359999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QELC QE 4 - Guará, Brasília - DF, Brazil"
+    }
+  },
+  "QE 46 AE 05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8498594,
+      "lng": -47.962646,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QE 46 - Guará II - Guará, Brasília - DF, Brazil"
+    }
+  },
+  "QE 7 AE Q, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8197995,
+      "lng": -47.9791697,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Sria I Qe 7 Ae - Guará I QE 7 - Guará, Brasília - DF, 71020-626, Brazil"
+    }
+  },
+  "QE 12 AE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8202019,
+      "lng": -47.9915854,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QE 12 - Guará, Brasília - DF, 71010-111, Brazil"
+    }
+  },
+  "EQ 32/34 LT B - AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0313752,
+      "lng": -48.0555127,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste EQ 32/34 - Gama, Brasília - DF, 72460-325, Brazil"
+    }
+  },
+  "EQ 13/15 AE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8287978,
+      "lng": -47.9809269,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II EQ 13/15 - Guará, Brasília - DF, 71050-135, Brazil"
+    }
+  },
+  "EQ 34/36 AE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0302188,
+      "lng": -48.0573973,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste EQ 34/36 - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 17/19 AE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7453766,
+      "lng": -47.9145552,
+      "location_type": "ROOFTOP",
+      "formatted_address": "A - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QE 09 AE D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7098573,
+      "lng": -47.9131757,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. L, 9 - Lago Norte, Brasília - DF, 71020-019, Brazil"
+    }
+  },
+  "QUADRA 03 AE 01 SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 03 - Oeste, Brasília - DF, 72425-030, Brazil"
+    }
+  },
+  "Setor Central, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7823524,
+      "lng": -47.9979918,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Central - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QE 07 AE M, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7103636,
+      "lng": -47.9135266,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. L, 07 - Lago Norte, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "QE 07 AE Q (AO LADO DO CEF 02), Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.81534,
+      "lng": -47.90120169999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SHCS SQS 107 - Asa Sul, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "QE 08 AREA ESPECIAL 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8186593,
+      "lng": -48.06264960000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Área Especial 1 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "Quadra SRIA II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8359059,
+      "lng": -47.9792314,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II - Guará, Brasília - Federal District, Brazil"
+    }
+  },
+  "QE 38 AREA ESPECIAL 8 LOTE C, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Setor C QNC AE c - Taguatinga, Brasília - DF, 72115-700, Brazil"
+    }
+  },
+  "QE 20 AREA ESPECIAL E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8238765,
+      "lng": -47.9818343,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QE 20 - Guará, Brasília - DF, 71015-205, Brazil"
+    }
+  },
+  "AREA ESPECIAL 08 MODULO B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "8 - Setor C QNC AE - Taguatinga, Brasília - DF, 72115-700, Brazil"
+    }
+  },
+  "EQ 34/34 LOTE D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8546708,
+      "lng": -48.0759634,
+      "location_type": "ROOFTOP",
+      "formatted_address": "D - Qs 612 Conjunto e - Samambaia Norte, Brasília - DF, 72322-564, Brazil"
+    }
+  },
+  "QI 01/03 LT A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8586292,
+      "lng": -47.9260494,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "3 - St. de Habitações Individuais Sul QI 1 - Plano Piloto, Brasília - DF, 71605-001, Brazil"
+    }
+  },
+  "QE 2 AE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8132682,
+      "lng": -47.9802,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QE 2 - Guará, Brasília - DF, 71010-003, Brazil"
+    }
+  },
+  "QD 03 CJ A AE 06 - VILA ESTRUTURAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 03 - Conj A - Núcleo Bandeirante, Brasília - DF, 71736-301, Brazil"
+    }
+  },
+  "QE 42 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8478544,
+      "lng": -47.9667574,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II QE 42 - Guará, Brasília - DF, 71070-420, Brazil"
+    }
+  },
+  "EQ 28/30 AE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0263804,
+      "lng": -48.0532268,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste EQ 28 - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "QE 7 LT J AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7103636,
+      "lng": -47.9135266,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. L, 07 - j - Lago Norte, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "QE 20 AE K, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8199258,
+      "lng": -47.9836326,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Sria I Qe 20 Ae - Guará I QE 20 - Guará, Brasília - DF, 71015-205, Brazil"
+    }
+  },
+  "EQ 24/26 AE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8294505,
+      "lng": -47.98292980000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II EQ 24/26 - Guará, Brasília - DF, 71060-245, Brazil"
+    }
+  },
+  "QE 38 CONJ. D AE 12, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8470129,
+      "lng": -47.973745,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qe 38 Conjunto D - Guará II QE 38 - Guará, Brasília - DF, 71070-380, Brazil"
+    }
+  },
+  "PRACA CENTRAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8731523,
+      "lng": -47.9661989,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Praça Central - Núcleo Bandeirante, Brasília - DF, Brazil"
+    }
+  },
+  "EQE 19/17 - LOTE A - GUARÁ II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8359059,
+      "lng": -47.9792314,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II - Guará, Brasília - Federal District, Brazil"
+    }
+  },
+  "AREA ESPECIAL 10 LOTE C, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "St. H Norte QNH c - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "SMPW QUADRA 6 CONJUNTO 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.879082,
+      "lng": -47.9602743,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 6 Cj. 1 - Park Way Trecho 2 Q 6 Conj. 1 - Park Way, Brasília - DF, 71740-600, Brazil"
+    }
+  },
+  "2A AV. ENTREBLOCOS 960/1040, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975608,
+      "lng": -47.8919122,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QN 14A CONJ 07 AE 1/2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8536447,
+      "lng": -47.9496969,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "AE 1 - Candangolândia, Brasília - DF, Brazil"
+    }
+  },
+  "QN 07, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8820458,
+      "lng": -48.0196576,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Qn, 07 - Riacho Fundo, Brasília - DF, 71805-708, Brazil"
+    }
+  },
+  "QN 07 LOTE D AREA ESPECIAL 1/2 - RIACHO FUNDO II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8786866,
+      "lng": -48.0203657,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "Riacho Fundo I QN 7 d - Riacho Fundo, Brasília - DF, 71805-700, Brazil"
+    }
+  },
+  "AV CONTORNO AE 07 -NÚCLEO BANDEIRANTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8758678,
+      "lng": -47.9744865,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Contorno - Núcleo Bandeirante, Brasília - DF, Brazil"
+    }
+  },
+  "QS 8, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8614713,
+      "lng": -48.02401709999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 8 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 01 LOTE 06 METROPOLITANA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9167003,
+      "lng": -47.7691061,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 01 - Núcleo Rural Morro da Cruz - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "QRO A AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QUADRA 14 LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7093991,
+      "lng": -47.91470529999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. D, 14 - Conj A - Lago Norte, Brasília - DF, 71571-401, Brazil"
+    }
+  },
+  "3 AVENIDA AREA ESPECIAL 04 - NÚCLEO BANDEIRANTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.870066,
+      "lng": -47.97281539999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Núcleo Bandeirante, Brasília - Federal District, Brazil"
+    }
+  },
+  "QN 01 LOTE 01/02 - RIACHO FUNDO I, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8833172,
+      "lng": -48.0175172,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Riacho Fundo I - Riacho Fundo, Brasília - DF, Brazil"
+    }
+  },
+  "QN 07 AE 1/2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8536447,
+      "lng": -47.9496969,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "AE 1 - Candangolândia, Brasília - DF, Brazil"
+    }
+  },
+  "COMBINADO AGROURBANO I (CAUB I) IPE/RIACHO FUNDO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.947404,
+      "lng": -48.0148197,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Caub I, 34 - Riacho Fundo II, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "QR 1-A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8598931,
+      "lng": -47.9541669,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qr 1A - Candangolândia, Brasília - DF, Brazil"
+    }
+  },
+  "NUCLEO HABIT. SUL-AE 01 LOT F-PROX Q17 PARK WAY VARGEM BONITA 71750, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.89076,
+      "lng": -47.96136,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Vargem Bonita - Park Way, Brasília - DF, Brazil"
+    }
+  },
+  "QN 05 AE 02 - RIACHO FUNDO I, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8833172,
+      "lng": -48.0175172,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Riacho Fundo I - Riacho Fundo, Brasília - DF, Brazil"
+    }
+  },
+  "QD 18 AE 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7085352,
+      "lng": -47.9142635,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 18 - Lago Norte, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "QS 14, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8860794,
+      "lng": -48.0139017,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Riacho Fundo QS 14 - Riacho Fundo, Brasília - DF, Brazil"
+    }
+  },
+  "QN 07 AREA ESPECIAL 11 RIACHO FUNDO I, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 11 - Taguatinga, Brasília - DF, 71950-904, Brazil"
+    }
+  },
+  "2 AVENIDA AREA ESPECIAL 11 - NÚCLEO BANDEIRANTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.870066,
+      "lng": -47.97281539999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Núcleo Bandeirante, Brasília - Federal District, Brazil"
+    }
+  },
+  "QN 14B CONJ 6 LOTES 19/20 RIACHO FUNDO II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8977001,
+      "lng": -48.04899,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Riacho Fundo II - 1A Etapa QN 14B - Recanto das Emas, Brasília - DF, 71881-120, Brazil"
+    }
+  },
+  "EQ 02/03 AE - CANDANGOLÂNDIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.854534,
+      "lng": -47.9503366,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Candangolândia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QN 05 ÁREA ESPECIAL 07 - RIACHO FUNDO I, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "EQ 05/07, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8240469,
+      "lng": -47.9218784,
+      "location_type": "ROOFTOP",
+      "formatted_address": "05 - SHCS, 514 - Plano Piloto, Brasília - DF, 70380-515, Brazil"
+    }
+  },
+  "QC 4 CONJ 18 LOTE 2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7989049,
+      "lng": -47.8779751,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SAUS Quadra 1 Lote 2 - Ed. Terra Brasilis, Brasília - DF, 70070-010, Brazil"
+    }
+  },
+  "QN 14 CONJUNTO D LOTE A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "2 AV ENTREBLOCOS 440/540, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975608,
+      "lng": -47.8919122,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "2 AV ENTREBLOCOS 1400/1500, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975608,
+      "lng": -47.8919122,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EPCT DF 001 - SENTIDO GAMA/TAGUAT-CAUB II -, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8043666,
+      "lng": -48.0576948,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-001 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "SHRF E/Q 2/4 LOTE A QS 4, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8840563,
+      "lng": -48.0146758,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Riacho Fundo QS 4 - Riacho Fundo, Brasília - DF, 71820-400, Brazil"
+    }
+  },
+  "3 AVENIDA AE 5 LOTE A/F- NÚCLEO BANDEIRANTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8734091,
+      "lng": -47.9722089,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "3ª Avenida - Núcleo Bandeirante, Brasília - DF, Brazil"
+    }
+  },
+  "AVENIDA CEDRO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.878112,
+      "lng": -47.9921938,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Cedro, Brasília - DF, Brazil"
+    }
+  },
+  "QN 8-C AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9018413,
+      "lng": -48.044034,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QN 8C - Riacho Fundo II - 1A Etapa - Riacho Fundo II, Brasília - DF, Brazil"
+    }
+  },
+  "SHCSW/EQSW 301/302, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.796383,
+      "lng": -47.92281029999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "EQSW 301, 302 - Sudoeste/Octogonal, Brasília - DF, 70673-150, Brazil"
+    }
+  },
+  "SRES Q 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7852592,
+      "lng": -47.934039,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SRES - Cruzeiro Velho, Brasília - DF, Brazil"
+    }
+  },
+  "SHCES Q. 309, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7948234,
+      "lng": -47.9417207,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCES Qd 309 - Cruzeiro Novo, Brasília - DF, Brazil"
+    }
+  },
+  "SRES AREA ESPECIAL F, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7852592,
+      "lng": -47.934039,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SRES - Cruzeiro Velho, Brasília - DF, Brazil"
+    }
+  },
+  "SHCES Q 805, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7977375,
+      "lng": -47.9389528,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SHCES Q. 805 - Plano Piloto, Brasília - DF, 70655-850, Brazil"
+    }
+  },
+  "SH/AOS ENTRE AREAS 01/04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQSW 101/102, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8001081,
+      "lng": -47.931282,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. Sudoeste SQSW 504 EQSW - Plano Piloto, Brasília - DF, 70673-450, Brazil"
+    }
+  },
+  "SHCES Q 609, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7929629,
+      "lng": -47.9392759,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SHCES Q. 609 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "SQSW/EQSW 303/304, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8001081,
+      "lng": -47.931282,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. Sudoeste SQSW 504 EQSW - Plano Piloto, Brasília - DF, 70673-450, Brazil"
+    }
+  },
+  "SIG QUADRA 08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 08 - Lago Norte, Brasília - DF, 73015-210, Brazil"
+    }
+  },
+  "SHCES Q. 407, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7970223,
+      "lng": -47.9417968,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SHCES Qd. 407 B. E - SHCES - Cruzeiro Novo, Brasília - DF, 70650-273, Brazil"
+    }
+  },
+  "SHCES Q 201/203, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8002642,
+      "lng": -47.9439799,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "SHCES Qd 201, 203 - Plano Piloto, Brasília - DF, 70650-413, Brazil"
+    }
+  },
+  "SHCES Q 807, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.793031,
+      "lng": -47.9374815,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCES Q. 807 - Cruzeiro Novo, Brasília - DF, 70655-012, Brazil"
+    }
+  },
+  "AOS 06/08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7209422,
+      "lng": -47.8849445,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIN CA 4 05 - Plano Piloto, Brasília - DF, 71503-504, Brazil"
+    }
+  },
+  "VILA DO RCG, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.762432,
+      "lng": -47.9497934,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Regimento de Cavalaria e Guarda Setores Militar Complementar - 0, Brasília - DF, 70631-000, Brazil"
+    }
+  },
+  "QRO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQSW 303/304, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8001081,
+      "lng": -47.931282,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. Sudoeste SQSW 504 EQSW - Plano Piloto, Brasília - DF, 70673-450, Brazil"
+    }
+  },
+  "QR 117 SETOR URBANO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0026749,
+      "lng": -47.9922792,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QR 117 - Santa Maria, Brasília - DF, 72547-400, Brazil"
+    }
+  },
+  "QR 409 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QN 401 CONJUNTO D LOTES 01/02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8665146,
+      "lng": -48.0952883,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qn 401 Conjunto D - QN 401 - Samambaia, Brasília - DF, Brazil"
+    }
+  },
+  "QR 307 CONJUNTO 08 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0283139,
+      "lng": -48.0267856,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qr 307 Cj. L - QR 307 - Santa Maria, Brasília - DF, 72507-500, Brazil"
+    }
+  },
+  "QN 412 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8560003,
+      "lng": -48.07633800000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QN 412 - Samambaia, Brasília - DF, 72320-540, Brazil"
+    }
+  },
+  "QN 120/122 CONJUNTO 04 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8615468,
+      "lng": -48.001711,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Col. Agrícola Arniqueira Conj. 04 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "QS 312 CONJUNTO 05 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7841094,
+      "lng": -47.8535772,
+      "location_type": "ROOFTOP",
+      "formatted_address": "conjunto 05 - Plano Piloto, Brasília - DF, 70800-200, Brazil"
+    }
+  },
+  "QS 404 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8672293,
+      "lng": -48.0857153,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qs 404 - QS 404 - Samambaia, Brasília - DF, 72318-100, Brazil"
+    }
+  },
+  "QN 411 AE SETOR NORTE - SAMAMBAIA NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8586973,
+      "lng": -48.079621,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Setor Norte QN 410 Ae Setor Norte - Samambaia, Brasília - DF, 72320-500, Brazil"
+    }
+  },
+  "QN 427 AE 2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6896137,
+      "lng": -47.8296108,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH Região dos Lagos Q N - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "QS 619 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QR 304 CONJUNTO 04 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8615468,
+      "lng": -48.001711,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Col. Agrícola Arniqueira Conj. 04 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "QS 414 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "DF 280 KM 14 - SAMAMBAIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9406571,
+      "lng": -48.2418224,
+      "location_type": "ROOFTOP",
+      "formatted_address": "DF-280, Km 14 - Rural, Brasília - DF, 72000-000, Brazil"
+    }
+  },
+  "QS 108/110 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QS 111 AREA ESPECIAL 10, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "10 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QS 121 CONJUNTO 01 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8930956,
+      "lng": -48.1189196,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 121 - Samambaia, Brasília - DF, 72301-580, Brazil"
+    }
+  },
+  "QR 303 CONJUNTO 12, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8316022,
+      "lng": -47.85971199999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Habitações Individuais Sul QI 12 Conj. 12 - Asa Sul, Brasília - DF, Brazil"
+    }
+  },
+  "QN 318 CONJUNTO 04 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8615468,
+      "lng": -48.001711,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Col. Agrícola Arniqueira Conj. 04 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "QR 325 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QN 403/405 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8587184,
+      "lng": -48.0879283,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Qn 403 - Samambaia, Brasília - DF, Brazil"
+    }
+  },
+  "QR 407/409 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QS 419 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8852446,
+      "lng": -48.1185076,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 419 - Samambaia, Brasília - DF, 72325-520, Brazil"
+    }
+  },
+  "QS 431 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8961597,
+      "lng": -48.142643,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 431 - Samambaia, Brasília - DF, 72329-550, Brazil"
+    }
+  },
+  "QS 604 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8616289,
+      "lng": -48.0880363,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 604 - Samambaia, Brasília - DF, Brazil"
+    }
+  },
+  "QR 614 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QR 831 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6906372,
+      "lng": -47.8302281,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH Região dos Lagos Q R - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "SGAN 610, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7547516,
+      "lng": -47.8779353,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Setor de Grandes Áreas Norte 610 - Asa Norte, Brasília - DF, 70830-450, Brazil"
+    }
+  },
+  "SGAN 606 MODULO G/H, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.767938,
+      "lng": -47.8742284,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Setor de Grandes Áreas Norte 606 - Asa Norte, Brasília - DF, 70830-250, Brazil"
+    }
+  },
+  "SQN 316, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7392064,
+      "lng": -47.8964739,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 316 - Asa Norte, Brasília - DF, 70775-000, Brazil"
+    }
+  },
+  "SQN 104, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7758441,
+      "lng": -47.8828783,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 104 - Asa Norte, Brasília - DF, 70733-000, Brazil"
+    }
+  },
+  "SQN 410 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7553356,
+      "lng": -47.8804068,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 410 - Asa Norte, Brasília - DF, 70865-000, Brazil"
+    }
+  },
+  "SGAN 912 MODULO A/B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7543923,
+      "lng": -47.9017265,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SGAN 912 Modulo D - SGAN 912 - Asa Norte, Brasília - DF, 70790-120, Brazil"
+    }
+  },
+  "SGAN 603/604, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7781935,
+      "lng": -47.8729928,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Setor de Grandes Áreas Norte 603 - Asa Norte, Brasília - DF, 70830-100, Brazil"
+    }
+  },
+  "SGAN 610 MODULO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7547516,
+      "lng": -47.8779353,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Setor de Grandes Áreas Norte 610 - Asa Norte, Brasília - DF, 70830-450, Brazil"
+    }
+  },
+  "SGAN 907 MODULO A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.768509,
+      "lng": -47.8964739,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAN 907 - Asa Norte, Brasília - DF, 70790-070, Brazil"
+    }
+  },
+  "SGAN 914 CONJUNTO I, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.746603,
+      "lng": -47.9008751,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SGAN 914 Conjunto I - Asa Norte, Brasília - DF, 70790-140, Brazil"
+    }
+  },
+  "SGAN 910 MÓDULO E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.761358,
+      "lng": -47.8973608,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Grandes Áreas Norte - Asa Norte, Brasília - DF, Brazil"
+    }
+  },
+  "SGAN 604 LOTE D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7746775,
+      "lng": -47.8729928,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Setor de Grandes Áreas Norte 604 - Asa Norte, Brasília - DF, 70830-150, Brazil"
+    }
+  },
+  "SEPN 702 LOTE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.753456,
+      "lng": -47.8941562,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SEPN - Asa Norte, Brasília - DF, Brazil"
+    }
+  },
+  "SGAN 906 LOTE C, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7946504,
+      "lng": -47.8933064,
+      "location_type": "ROOFTOP",
+      "formatted_address": "C - Asa Sul, Brasília - DF, 70308-200, Brazil"
+    }
+  },
+  "SGAN 911 MODULO B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7564908,
+      "lng": -47.90018240000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SGAN 911 - Asa Norte, Brasília - DF, 70790-110, Brazil"
+    }
+  },
+  "SGAN 916 MODULO B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7389913,
+      "lng": -47.903187,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SGAN 916 - STN St. de Grandes Áreas Norte 916 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "SQN 113 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7482954,
+      "lng": -47.8902937,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 113 - Asa Norte, Brasília - DF, 70763-000, Brazil"
+    }
+  },
+  "SQN 115, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7418472,
+      "lng": -47.8927657,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 115 - Asa Norte, Brasília - DF, 70772-000, Brazil"
+    }
+  },
+  "SQN 304, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7757689,
+      "lng": -47.8862769,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 304 - Asa Norte, Brasília - DF, 70736-000, Brazil"
+    }
+  },
+  "SQN 312, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7512231,
+      "lng": -47.8927657,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 312 - Asa Norte, Brasília - DF, 70765-000, Brazil"
+    }
+  },
+  "SQN 403 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7787783,
+      "lng": -47.875464,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 403 - Asa Norte, Brasília - DF, 70835-000, Brazil"
+    }
+  },
+  "SQN 405 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7708665,
+      "lng": -47.8766997,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 405 - Asa Norte, Brasília - DF, 70846-000, Brazil"
+    }
+  },
+  "SQN 407 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7641268,
+      "lng": -47.8779353,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 407 - Asa Norte, Brasília - DF, 70855-000, Brazil"
+    }
+  },
+  "SQN 411 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7521119,
+      "lng": -47.8816425,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 411 - Asa Norte, Brasília - DF, 70866-000, Brazil"
+    }
+  },
+  "SQN 415, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7392168,
+      "lng": -47.8865859,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHCN Superquadra Norte 415 - Asa Norte, Brasília - DF, 70878-000, Brazil"
+    }
+  },
+  "EQN 210/211 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7528498,
+      "lng": -47.8862387,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "ERL - Norte - Shcn - Asa Norte, Brasília - DF, 70863-110, Brazil"
+    }
+  },
+  "HCGN 704 A/E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7761335,
+      "lng": -47.8890577,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Habitações Coletivas e Geminadas Norte 704 - Asa Norte, Brasília - DF, 70730-730, Brazil"
+    }
+  },
+  "HEAVENLY INTERNATIONAL SCHOOL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7692072,
+      "lng": -47.8746692,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SGAN SGAN 606 - Asa Norte, Brasília - DF, 70830-251, Brazil"
+    }
+  },
+  "CAMPUS UNIVERSITARIO DARCY RIBEIRO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7658436,
+      "lng": -47.87217510000001,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "s/n - UnB - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "SEPN 707/907, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.753456,
+      "lng": -47.8941562,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SEPN - Asa Norte, Brasília - DF, Brazil"
+    }
+  },
+  "QSE 05/07 ÁREA ESPECIAL N 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QSA 03/04 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070738,
+      "lng": -48.0852567,
+      "location_type": "ROOFTOP",
+      "formatted_address": "04 - Guará II QNH - Taguatinga, Brasília - DF, 71070-901, Brazil"
+    }
+  },
+  "EQSA 25/24 QSD 09/11 ÁREA ESPECIAL S/ N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7786532,
+      "lng": -47.99423849999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Norte - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QNA 52 ÁREA ESPECIAL S/ N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8178935,
+      "lng": -48.0586267,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Norte QNA 52 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QS 11, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8694658,
+      "lng": -48.0170964,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QS 11 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "QSA 03/05 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "QSE 05 ÁREA ESPECIAL N 14, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8594149,
+      "lng": -48.04241709999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. E Sul QSE - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "SETOR C 07 - PARTE B - AE P/ IGREJA CATÓLICA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7826946,
+      "lng": -47.9890526,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Leste - SCIA, Brasília - DF, Brazil"
+    }
+  },
+  "QS 07 LOTE 1 EPCT - TAGUATINGA SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.85181,
+      "lng": -48.04185,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Taguatinga Sul - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "EQSA 25/24 QSD 09/11 AE S/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8424922,
+      "lng": -48.04966109999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. D Sul QSD - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 14 SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8387693,
+      "lng": -48.0194076,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 14 Sul - Águas Claras, Brasília - DF, Brazil"
+    }
+  },
+  "AVENIDA CASTANHEIRAS LOTE 370, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8366629,
+      "lng": -48.0337199,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Av. das Castanheiras, 370 - Águas Claras, Brasília - DF, 71928-720, Brazil"
+    }
+  },
+  "RUA 214 LOTE 1/17 QS 01 TAGUATINGA SUL - DF, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8361918,
+      "lng": -48.04516779999999,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "1 - QS 1 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QSB 02/03 ÁREA ESPECIAL N 03/04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6110636,
+      "lng": -47.65228320000001,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "3 - St. de Áreas Especiais Norte - Planaltina, Brasília - DF, Brazil"
+    }
+  },
+  "QS 03 RUA 420 LOTE 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8448247,
+      "lng": -48.0429401,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "QS 3 R. 420, 3 - 02 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QSC 19, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8487241,
+      "lng": -48.0642269,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Chácaras QSC 19 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "AVENIDA JEQUITIBÁ N. 325, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8401401,
+      "lng": -48.0376916,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Jequitibá, 325 - Águas Claras, Brasília - DF, 71929-540, Brazil"
+    }
+  },
+  "QNG, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.80164,
+      "lng": -48.0658287,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. G Norte QNG - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "Rua Manacá, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8323907,
+      "lng": -48.0091527,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. Manacá, Brasília - DF, Brazil"
+    }
+  },
+  "RUA TAMBORIL LOTE 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8371041,
+      "lng": -48.0086147,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. Tamboril, 1 - Águas Claras, Brasília - DF, 71936-000, Brazil"
+    }
+  },
+  "COLÉGIO OBJETIVO - ÁGUAS CLARAS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8369065,
+      "lng": -48.025643,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Av. Pau Brasil, 02 - Bloco F - Águas Claras, Brasília - DF, 71916-000, Brazil"
+    }
+  },
+  "RUA 7 SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8365769,
+      "lng": -48.0135088,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 7 Sul - Águas Claras, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 25 NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6550164,
+      "lng": -47.7985009,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 4 Conjunto E - Q 4 - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 204, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8411529,
+      "lng": -48.0186648,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 204 - Q 204 - Águas Claras, Brasília - DF, Brazil"
+    }
+  },
+  "QSD 32 ÁREA P/ ESCOLA N 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.853167,
+      "lng": -48.0483804,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. D Sul Qsd 32 - Taguatinga, Brasília - DF, 72020-320, Brazil"
+    }
+  },
+  "SMPW 04 CJ 04 LT 05 - COL. AGR. ARNIQUEIRA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8240469,
+      "lng": -47.9218784,
+      "location_type": "ROOFTOP",
+      "formatted_address": "05 - SHCS, 514 - Plano Piloto, Brasília - DF, 70380-515, Brazil"
+    }
+  },
+  "QSC 01 AE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8349224,
+      "lng": -48.0548126,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. A Sul AE 01 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "QSE 12/14 AE S/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8560191,
+      "lng": -48.0436749,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. e Sul Qse 12, lote 14 - s/n - Taguatinga, Brasília - DF, 72025-120, Brazil"
+    }
+  },
+  "QS 06 CONJUNTO 430, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6913725,
+      "lng": -47.8271418,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH Região dos Lagos Q S - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 301 ÁREA ESPECIAL S/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8690632,
+      "lng": -47.92106680000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Subsolo - Área Especial, s/n - Lago Sul, Brasília - DF, 71608-900, Brazil"
+    }
+  },
+  "QS 07 LOTE 02/08 - AVENIDA ÁGUAS CLARAS - VILA AREAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8623084,
+      "lng": -48.0252908,
+      "location_type": "ROOFTOP",
+      "formatted_address": "8 - QS 8 - Águas Claras, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "AVENIDA ARAUCÁRIAS N. 4400, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8332553,
+      "lng": -48.0457889,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. das Araucárias, 4400 - Brasil, Brasília - DF, 71936-250, Brazil"
+    }
+  },
+  "AVENIDA PAU BRASIL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8421909,
+      "lng": -48.0276591,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Pau Brasil - Águas Claras, Brasília - DF, Brazil"
+    }
+  },
+  "AE 05 - SETOR TRADICIONAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151487,
+      "lng": -47.9884322,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QI 10 AE - Guará, Brasília - DF, 71010-001, Brazil"
+    }
+  },
+  "AE 01 LOTE K/L/M/N - SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7826946,
+      "lng": -47.9890526,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Leste - SCIA, Brasília - DF, Brazil"
+    }
+  },
+  "PIQ 05, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7694725,
+      "lng": -47.7787406,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q 18 Conjunto K M, 5 - Paranoá, Brasília - DF, 71571-802, Brazil"
+    }
+  },
+  "EQ 2/4 LOTE A - SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6818191,
+      "lng": -48.1927795,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Norte Eq 2/4 - Veredas, Brasília - DF, 72710-026, Brazil"
+    }
+  },
+  "EQNO 02/04 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.796282,
+      "lng": -48.120754,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Eqno 02/04 - Via Leste, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72250-536, Brazil"
+    }
+  },
+  "EQNO 5/7 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7863968,
+      "lng": -48.1256419,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. O EQNO 5/7 - Ceilândia, Brasília - DF, 72251-500, Brazil"
+    }
+  },
+  "QNR 01 AREA ESPECIAL03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8081258,
+      "lng": -48.1570538,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNR - NET live - Ceilândia, Brasília - DF, 72275-178, Brazil"
+    }
+  },
+  "QNP 21 AREA ESPECIAL - SETOR HABITACIONAL SOL NASCENTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.820354,
+      "lng": -48.1229297,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Área Especial - Ceilândia, Brasília - DF, 72225-270, Brazil"
+    }
+  },
+  "AREA ESPECIAL FRENTE MODULO 07 - CONDOMINIO PRIVE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8096677,
+      "lng": -47.7762912,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH São Bartolomeu Condomínio Privê - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "EQNO 17 CONJUNTO H LOTE 02 - EXPANSÃO SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7998913,
+      "lng": -48.1351333,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Expansão do St. O QNO 17 - Ceilândia, Brasília - DF, 72260-700, Brazil"
+    }
+  },
+  "QNO 19 CONJUNTO B LOTE 01 - EXPANSÃO DO SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7904132,
+      "lng": -48.1399712,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Expansão do St. O QNO 19 Conj. B - Ceilândia, Brasília - DF, 72261-000, Brazil"
+    }
+  },
+  "BR 070 - DF 180/190 FAZENDA CACHOEIRA NUCLEO RURAL BOA ESPERANCA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6986777,
+      "lng": -47.89878059999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Núcleo Rural- Núcleo - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "PIQ( PROGRAMA DE INTEGRAÇÃO DE QUADRAS) Q. 06 LT. 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 06 - 02 - cjb, Brasília - DF, 73340-602, Brazil"
+    }
+  },
+  "QUADRA 12 ÁREA ESPECIAL 05 - SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7786532,
+      "lng": -47.99423849999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Norte - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "AE - QUADRA 046, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081516,
+      "lng": -47.9146947,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 46 - Brazlândia, Brasília - DF, 72746-003, Brazil"
+    }
+  },
+  "BR - 080 KM 25 ESTRADA DE BRAZLÂNDIA PARA PADRE BERNARDO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6125144,
+      "lng": -48.1979997,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-080 - Brazlândia, Brasília - DF, Brazil"
+    }
+  },
+  "ZR - DF 070, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7884196,
+      "lng": -48.1441174,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-070, Distrito Federal, Brazil"
+    }
+  },
+  "QNP 13 - AREA ESPECIAL - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8097171,
+      "lng": -48.1292331,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 13 - Ceilândia, Brasília - DF, 72241-300, Brazil"
+    }
+  },
+  "QD. 04 AE N. 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "04 - Varjão PqEAT - Lago Norte, Brasília - DF, 71555-100, Brazil"
+    }
+  },
+  "EQNO 03/05 SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7868315,
+      "lng": -48.1268204,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. O EQNO 5/7 - Ceilândia, Brasília - DF, 72251-500, Brazil"
+    }
+  },
+  "PRACA DO LAÇO - SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6816628,
+      "lng": -48.19781709999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Praça do Laço - St. Norte - Veredas, Brasília - DF, Brazil"
+    }
+  },
+  "BR 080 KM 37 FAZ. CURRALINHO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6125144,
+      "lng": -48.1979997,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-080, Distrito Federal, Brazil"
+    }
+  },
+  "EQNO 11/13 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7928215,
+      "lng": -48.1271484,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. O EQNO 11/13 - Ceilândia, Brasília - DF, 72255-510, Brazil"
+    }
+  },
+  "QNQ 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "NRAG - NUCLEO RURAL ALEXANDRE GUSMAO KM 16 BR 070 INCRA 09, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7779876,
+      "lng": -48.1210748,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Núcleo Rural Alexandre Gusmão - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "ZR DF 001 (EPCT) DF 430, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6681104,
+      "lng": -48.147212,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-430 - Brazlândia, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 36 AE 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6534167,
+      "lng": -47.7862207,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Esportivo Q 2 AE 03 - Sobradinho, Brasília - DF, Brazil"
+    }
+  },
+  "ÁREA ESPECIAL 07 QUADRA 02 - SETOR TRADICIONAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7896789,
+      "lng": -47.8867687,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SHN Q. 2 - Asa Norte, Brasília - DF, 70740-610, Brazil"
+    }
+  },
+  "AE N. 02 LT. M/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "Q. 38 AE N. 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6308835,
+      "lng": -47.8326898,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SH Mansões Sobradinho Condomínio Sobradinho Novo Q 38 - Sobradinho II, Brasília - DF, Brazil"
+    }
+  },
+  "Q. 04 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Varjão PqEAT 01 - Lago Norte, Brasília - DF, 71555-100, Brazil"
+    }
+  },
+  "EQ 45/55 - VILA SÃO JOSÉ, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8074055,
+      "lng": -47.9423964,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Octogonal - Plano Piloto, Brasília - DF, 70660-030, Brazil"
+    }
+  },
+  "EQNO 04/06 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.791071,
+      "lng": -48.12274000000001,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Via 1, Eqno 04/06, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72250-514, Brazil"
+    }
+  },
+  "EQNO 01/03 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.796512,
+      "lng": -48.120907,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Eqno 01/ 03 - Via Leste, Ceilandia, Distrito Federal - Ceilândia, Brasília - DF, 72250-536, Brazil"
+    }
+  },
+  "EQNO 09/11 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7868315,
+      "lng": -48.1268204,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. O EQNO 5/7 - Ceilândia, Brasília - DF, 72251-500, Brazil"
+    }
+  },
+  "EQNO 13/15 - SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7876587,
+      "lng": -48.1291447,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. O EQNO 13/15 - Ceilândia, Brasília - DF, 72255-520, Brazil"
+    }
+  },
+  "EQNP 17/13 - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8066412,
+      "lng": -48.1290161,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 17/13 - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "EQNP 15/19 - AREA ESPECIAL - SETOR P NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8081129,
+      "lng": -48.13313249999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 19/15 - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "EQNO 19/20 - CONJUNTO C - ÁREA ESPECIAL - EXPANSÃO SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7923664,
+      "lng": -48.1385915,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Expansão do St. O QNO 19 - Ceilândia, Brasília - DF, 72261-000, Brazil"
+    }
+  },
+  "EQNO 18 CONJUNTO I LOTE 2 - EXPANSÃO DO SETOR O, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7965686,
+      "lng": -48.1363717,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Expansão do St. O QNO 18 - Ceilândia, Brasília - DF, 72260-800, Brazil"
+    }
+  },
+  "QNQ 4 LOTE A SETOR Q, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.786891,
+      "lng": -47.8922328,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote A - Sgan Q 901 - Asa Norte, Brasília - DF, 70040-000, Brazil"
+    }
+  },
+  "QNQ 01 - AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QNR 02 - ÁREA ESPECIAL 04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070738,
+      "lng": -48.0852567,
+      "location_type": "ROOFTOP",
+      "formatted_address": "04 - Guará II QNH - Taguatinga, Brasília - DF, 71070-901, Brazil"
+    }
+  },
+  "AV.CORREGO DAS CORUJAS S/N - SETOR HABITACIONAL SOL NASCENTE TRECHO 3, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8183246,
+      "lng": -48.159653,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Av. Córrego das Corujas - Sol Nascente/Pôr do Sol, Brasília - DF, Brazil"
+    }
+  },
+  "ZONA RURAL FAZ. ALMECEGAS BR-080 - DF 206 VC 505, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.525913,
+      "lng": -48.1911054,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-080 & DF-206 - Brazlândia, Brasília - DF, Brazil"
+    }
+  },
+  "ZR-DF-240-ACESSO P/VSJ, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7597376,
+      "lng": -47.880567,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHCN CLN 409 bl A loja 39 - Asa Norte, Brasília - DF, 70857-510, Brazil"
+    }
+  },
+  "RUA DA CASCALHEIRA S/N - VC 311, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8365842,
+      "lng": -48.1526933,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "VC-311, Brasília - DF, Brazil"
+    }
+  },
+  "ZR - ROD. DF 180, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8662864,
+      "lng": -48.1638316,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-180, Brasília - DF, Brazil"
+    }
+  },
+  "ZR - DF 249 - DF 008, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "AE N 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151487,
+      "lng": -47.9884322,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QI 10 AE - Guará, Brasília - DF, 71010-001, Brazil"
+    }
+  },
+  "EQ 6/8, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "INCRA 08 - QUADRA 18 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 8 - LOTE 1 - SOBRADINHO, Brasília - DF, 73006-005, Brazil"
+    }
+  },
+  "AE N. 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151487,
+      "lng": -47.9884322,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QI 10 AE - Guará, Brasília - DF, 71010-001, Brazil"
+    }
+  },
+  "QD. 38 AE N. 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151487,
+      "lng": -47.9884322,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QI 10 AE - Guará, Brasília - DF, 71010-001, Brazil"
+    }
+  },
+  "ZR - DF 001 (EPCT) DF 430/415 KM 06, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6681104,
+      "lng": -48.147212,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-430 - Brazlândia, Brasília - DF, Brazil"
+    }
+  },
+  "ZR - DF 240 (DF 008) DF 445, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6694524,
+      "lng": -48.1400827,
+      "location_type": "ROOFTOP",
+      "formatted_address": "DF-445, 8 - Brazlândia, Brasília - DF, 72701-997, Brazil"
+    }
+  },
+  "QUADRA EQ 15/17, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8320321,
+      "lng": -47.9749959,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II EQ 15/17 - Guará, Brasília - DF, 71050-155, Brazil"
+    }
+  },
+  "EQ 26/29 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8066172,
+      "lng": -48.0853438,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 29 - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "PRACA 2, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7462124,
+      "lng": -47.899545,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHCGN SHCGN 714 2 - Plano Piloto, Brasília - DF, 72502-244, Brazil"
+    }
+  },
+  "EQ 16/26 E 19-22, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Brasilia, Brasília - Federal District, 72006-600, Brazil"
+    }
+  },
+  "QUADRA 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8016852,
+      "lng": -47.8704459,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Administração Federal Sul Q 1 - Asa Sul, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 02/07 A.E. S.LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "E Q 4/10 A.E.SETOR SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8790924,
+      "lng": -48.0678742,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QR 512 Ae Setor Sul - Samambaia, Brasília - DF, 72312-800, Brazil"
+    }
+  },
+  "N RURAL CASA GRANDE CH 16 SETOR DE CHACARAS NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6990703,
+      "lng": -47.8989918,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Chácara Calvaria MC - Antiga, Núcleo Rural Granja do Torto - St. de Chacaras, 16 - Chácara Luiz, Brasília - DF, 70636-000, Brazil"
+    }
+  },
+  "BR 060 KM 30 - RODOVIA BSB/GOIANIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -18.6098375,
+      "lng": -52.29588,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-060, Brazil"
+    }
+  },
+  "EQ 1/2 A.E. SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8091723,
+      "lng": -47.9868682,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QELC EQ 1/2 - Guará, Brasília - DF, Brazil"
+    }
+  },
+  "E Q 6/11 A. E.S.LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6042775,
+      "lng": -47.6437348,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Res. Norte A EQ 6 - Planaltina, Brasília - DF, 73340-530, Brazil"
+    }
+  },
+  "E Q 29/33 PR 03 A E. SETOR LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7830172,
+      "lng": -47.9923461,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 16/26 E 19/22 A.E. S.OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0082704,
+      "lng": -48.0727329,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SOE - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "E/Q 18/21 AREA ESPECIAL - SETOR LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0182748,
+      "lng": -48.051235,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "Q. 18, 21 - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "LOTE 27/36 A.E. S.CENTRAL LADO OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8083896,
+      "lng": -47.902753,
+      "location_type": "ROOFTOP",
+      "formatted_address": "27 - Asa Sul, Brasília - DF, 70360-510, Brazil"
+    }
+  },
+  "EQ 5/11 A.E. SETOR SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0361178,
+      "lng": -48.0632289,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SSU EQ 5/11 - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 12/16 A.ESPECIALSETOR OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQ. 55/56 AE 02 SETOR CENTRAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0143961,
+      "lng": -48.0633175,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Central EQ 55/56 - Gama, Brasília - DF, 72405-610, Brazil"
+    }
+  },
+  "EQ 15/17 - PRACA 01 LOTE 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8320321,
+      "lng": -47.9749959,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II EQ 15/17 - Guará, Brasília - DF, 71050-155, Brazil"
+    }
+  },
+  "EQ 16/18, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8084819,
+      "lng": -47.9024009,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIGS SHIGS 706 16 - Plano Piloto, Brasília - DF, 70350-750, Brazil"
+    }
+  },
+  "EQ 18/21 PR. 2 A.E. S.LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.00838,
+      "lng": -48.0802256,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "SOE EQ 18/21 - Pte. Alta Norte (Gama), Brasília - DF, 72420-185, Brazil"
+    }
+  },
+  "EQ 2/4, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6818191,
+      "lng": -48.1927795,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Norte Eq 2/4 - Veredas, Brasília - DF, 72710-026, Brazil"
+    }
+  },
+  "E/Q 10/15 - AE SETOR LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7809619,
+      "lng": -47.9968395,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste Q 10 - SCIA, Brasília - DF, Brazil"
+    }
+  },
+  "Quadra 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8107644,
+      "lng": -48.2077975,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Vista Bela Q. 03 - Ceilândia, Brasília - DF, Brazil"
+    }
+  },
+  "E/Q 29/33 AE SETOR LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0252968,
+      "lng": -48.0556274,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste Q 29 - Gama, Brasília - DF, Brazil"
+    }
+  },
+  "E/Q 30/49 A.E SETOR LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7830172,
+      "lng": -47.9923461,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "E Q 44/45 A.E S.LESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQ 33/49 A.E. S.CENTRAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7936771,
+      "lng": -47.88347359999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Central - Plano Piloto, Brasília - DF, 70740-610, Brazil"
+    }
+  },
+  "EQ 02/04 AREA ESPECIAL SETOR OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070738,
+      "lng": -48.0852567,
+      "location_type": "ROOFTOP",
+      "formatted_address": "04 - Guará II QNH - Taguatinga, Brasília - DF, 71070-901, Brazil"
+    }
+  },
+  "Q 03 AE SETOR SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8790924,
+      "lng": -48.0678742,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QR 512 Ae Setor Sul - Samambaia, Brasília - DF, 72312-800, Brazil"
+    }
+  },
+  "EQ 10/21 AREA ESPECIAL SETOR OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8064672,
+      "lng": -48.0845321,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 21 - TAGUATINGA NORTE, Brasília - DF, 72130-710, Brazil"
+    }
+  },
+  "QUADRA 02 AREA ESPECIAL SETOR NORTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7786532,
+      "lng": -47.99423849999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Norte - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA A LOTE B VILA RORIZ SETOR OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -16.0066609,
+      "lng": -48.08345389999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Vila Roriz, Brasília - DF, Brazil"
+    }
+  },
+  "EQ 13/15 AE SETOR SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8287978,
+      "lng": -47.9809269,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará II EQ 13/15 - Guará, Brasília - DF, 71050-135, Brazil"
+    }
+  },
+  "QUADRA 10 - ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8423133,
+      "lng": -47.7965187,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 10 - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "SIGA A.E. 02 SETOR LESTE INDÚSTRIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7830172,
+      "lng": -47.9923461,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Leste - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "PRACA DE ATIVIDADES 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8517779,
+      "lng": -47.9536197,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Qr 3, 01 - Candangolândia, Brasília - DF, 71725-300, Brazil"
+    }
+  },
+  "CENTRO DE MULTIPLAS FUNCOES, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7798981,
+      "lng": -47.99261019999999,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Leste - SCIA, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "SHIS QI 15 AREA ESPECIAL 02 - LAGO SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8518702,
+      "lng": -47.882429,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Shis Qi 15 - St. de Habitações Individuais Sul QI 15 - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9167003,
+      "lng": -47.7691061,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 01 - Núcleo Rural Morro da Cruz - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "ÁREA INSTITUCIONAL Nº 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6588182,
+      "lng": -48.1930287,
+      "location_type": "ROOFTOP",
+      "formatted_address": "14 - Vila São José Q 20 - Brazlândia, Brasília - DF, 72746-009, Brazil"
+    }
+  },
+  "DF 285 KM 20 NÚCLEO RURAL JARDIM II, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "QD 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 02 - Conj. I, Brasília - DF, 72415-109, Brazil"
+    }
+  },
+  "BR 251 KM 38 NOVA BETANIA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.94275,
+      "lng": -47.79869,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-251, km 38,8 leste - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 202/203 AREA ESPECIAL -RESIDENCIAL OESTE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.90151,
+      "lng": -47.7786937,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 202 - São Sebastião, Brasília - DF, 71692-560, Brazil"
+    }
+  },
+  "SHIS QI 09 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8527224,
+      "lng": -47.9026376,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIS QI 5 Chácaras, 09 - Plano Piloto, Brasília - DF, 71600-500, Brazil"
+    }
+  },
+  "BR-251, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9338686,
+      "lng": -47.8178065,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-251, Distrito Federal, Brazil"
+    }
+  },
+  "AE QUADRA 02 CONJUNTO 03 LOTE 04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.708703,
+      "lng": -47.91437519999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 02 - 03 04 - Conj. I, Brasília - DF, 72415-109, Brazil"
+    }
+  },
+  "QUADRA 16 AREA ESPECIAL BAIRRO SAO JOSE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8418337,
+      "lng": -47.8027169,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 16 - Jardim Botânico, Brasília - DF, 71680-357, Brazil"
+    }
+  },
+  "QUADRA 17, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8398803,
+      "lng": -47.8042135,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Ville de Montagne Q. 17 - Jardim Botânico, Brasília - DF, 71680-357, Brazil"
+    }
+  },
+  "SH ESTRADA DO SOL COND. MANSÕES SERRANA KM 5 CHÁCARA IRMÃOS CARVALHO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8630533,
+      "lng": -47.7842651,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Condomínio Mansões Serrana - Jardim Botânico, Brasília - DF, Brazil"
+    }
+  },
+  "SHIS QI 05 CHACARA 72, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8551423,
+      "lng": -47.9047894,
+      "location_type": "ROOFTOP",
+      "formatted_address": "BLOCO D EDIFÍCIO HANGAR 5 - SHIS QI 5 Chácaras, 05 - Chácara 05, Brasília - DF, 71615-485, Brazil"
+    }
+  },
+  "PRAÇA DE ATIVIDADES PA 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7403681,
+      "lng": -47.89990419999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHCGN SHCGN 716 Praça, BL G - Plano Piloto, Brasília - DF, 70297-400, Brazil"
+    }
+  },
+  "SHIS QI 26, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.829148,
+      "lng": -47.8151758,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Shis Qi 26 - St. de Habitações Individuais Sul - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "SHIS QI 19, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.860341,
+      "lng": -47.8603435,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Shis Qi 19 - St. de Habitações Individuais Sul - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 9 QUADRA 01 CONJUNTO A CHACARA 07 VILA NOVA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9102098,
+      "lng": -47.7618356,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Quadra 01 - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "SHIS EQL 06/08 CONJUNTO A1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8435089,
+      "lng": -47.8504629,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Habitações Individuais Sul - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "SHIS QI 05 CHACARA 74/79, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8551423,
+      "lng": -47.9047894,
+      "location_type": "ROOFTOP",
+      "formatted_address": "BLOCO D EDIFÍCIO HANGAR 5 - SHIS QI 5 Chácaras, 05 - Chácara 05, Brasília - DF, 71615-485, Brazil"
+    }
+  },
+  "SHIS QI 05 CONJUNTO 17 LOTE 15, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8551423,
+      "lng": -47.9047894,
+      "location_type": "ROOFTOP",
+      "formatted_address": "BLOCO D EDIFÍCIO HANGAR 5 - SHIS QI 5 Chácaras, 05 - 17 15 - Chácara 05, Brasília - DF, 71615-485, Brazil"
+    }
+  },
+  "QUADRA 104 CJ. 01 LOTE 01 BAIRRO RESIDENCIAL OESTE SAO SEBASTIAO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8964057,
+      "lng": -47.7824767,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Quadra 104 Conjunto 01 - St. Res. Oeste (São Sebastião), Brasília - DF, 71692-300, Brazil"
+    }
+  },
+  "QD 303 CONJ 01 LOTE 34, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081513,
+      "lng": -47.9146952,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 303 - 01 34 - Residencial Oeste São Sebastião, Brasília - DF, 71692-815, Brazil"
+    }
+  },
+  "QUADRA 100 - CONJ. Q - AREA ESPECIAL N. 01BAIRRO VILA NOVA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081514,
+      "lng": -47.91469499999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 100 - q - Santa Maria, Brasília - DF, 72500-408, Brazil"
+    }
+  },
+  "RUA 01 LT 221- BAIRRO BELA VISTA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9153064,
+      "lng": -47.7569939,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Bairro Bela Vista - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "DF-130, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8482407,
+      "lng": -47.6252719,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "DF-130, Brasília - DF, Brazil"
+    }
+  },
+  "RUA DA GAMELEIRA 331 CENTRO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9042492,
+      "lng": -47.769228,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Rua da Gameleira, 331 - São Sebastião, Brasília - DF, 71691-049, Brazil"
+    }
+  },
+  "BR 251, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9338686,
+      "lng": -47.8178065,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "BR-251, Distrito Federal, Brazil"
+    }
+  },
+  "VILA DO BOA SEM NUMERO SAO SEBASTIAO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8823981,
+      "lng": -47.7905476,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Vila do Boa - São Sebastião, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 31 NUMERO 200 BAIRRO SÃO JOSÉ, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9135437,
+      "lng": -47.75929259999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Rua 31, 200, 200 - São José, São Sebastião - DF, 71693-032, Brazil"
+    }
+  },
+  "SHIS QI 21 AREA ESPECIAL CONJUNTO 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070889,
+      "lng": -48.0853207,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "QNH Área Especial - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "SHIS QI 21 BLOCO D, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8541008,
+      "lng": -47.89895629999999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "SHIS QI 5 Chácaras, 21 - d - Lago Sul, Brasília - DF, 71600-500, Brazil"
+    }
+  },
+  "SHIS QI 11 ÁREA ESPECIAL B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8356941,
+      "lng": -47.8710958,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. de Habitações Individuais Sul QI 11 - Lago Sul, Brasília - DF, Brazil"
+    }
+  },
+  "CND 05 ÁREA ESPECIAL - PRAÇA DO BICALHO, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "QNB 15 ÁREA ESPECIAL S/ Nº, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8187976,
+      "lng": -48.0648496,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. B Norte QNB 15 - Taguatinga, Brasília - DF, 72115-150, Brazil"
+    }
+  },
+  "QND 59 ÁREA ESPECIAL Nº 37, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8064632,
+      "lng": -48.0855483,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "37 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QNF 24 AREA ESPECIAL S/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8068865,
+      "lng": -48.0848252,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 24 - s/n - Taguatinga Norte, Brasília - DF, 72130-613, Brazil"
+    }
+  },
+  "QNG 39 AREA ESPECIAL 03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070061,
+      "lng": -48.0852095,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 3 - Taguatinga, Brasília - DF, 72130-603, Brazil"
+    }
+  },
+  "QNC AREA PARA ESCOLA 01/03, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8235466,
+      "lng": -48.0681929,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Via Qnc - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "EQNG 06/07 AE 20, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8629244,
+      "lng": -48.04198969999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. E Sul AE 20 - Taguatinga, Brasília - DF, 72025-300, Brazil"
+    }
+  },
+  "QNB 01 AE 01 SETOR CENTRAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7823524,
+      "lng": -47.9979918,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Central - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QNG 40 AREA ESPECIAL 5/6, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.805102,
+      "lng": -48.086417,
+      "location_type": "ROOFTOP",
+      "formatted_address": "5 - St. H Norte QNH CNH 5 - Taguatinga, Brasília - DF, 72130-555, Brazil"
+    }
+  },
+  "St. Hab. Vicente Pires Lote 08/09/10 - Vicente Pires, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7946431,
+      "lng": -48.0513318,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. Hab. Vicente Pires Lote 08 - Vicente Pires, Brasília - DF, 72007-750, Brazil"
+    }
+  },
+  "COLÔNIA AGRÍCOLA VICENTE PIRES - RUA 08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8051178,
+      "lng": -48.0028565,
+      "location_type": "ROOFTOP",
+      "formatted_address": "08 - CA Vicente Pires Col. Agrícola Vicente Pires - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "QNG 09/11, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.80164,
+      "lng": -48.0658287,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. G Norte QNG - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "COLÔNIA AGRÍCOLA VICENTE PIRES RUA 06 CH 255 LT 2/4, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8052989,
+      "lng": -48.0047964,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Col. Agrícola Vicente Píres, 6 - 2 - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 06 CH 253 LT. A, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8073516,
+      "lng": -48.0395948,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 06 Ch. 253 - St. Hab. Vicente Pires - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "RUA 03 CHÁCARA N 82 LOTE 07/08, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8175819,
+      "lng": -48.0458184,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Rua 03 - Colônia Agrícola Samambaia - Vicente Pires, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "RUA 6 CHÁCARA 274 VICENTE PIRES, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8107062,
+      "lng": -48.0268859,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "6 - St. Hab. Vicente Pires - Vicente Pires, Brasília - DF, 72006-600, Brazil"
+    }
+  },
+  "Rua 06, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7531511,
+      "lng": -48.0214332,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Col. Agrícola 26 de Setembro - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "EQNH 01/03 AE S/N, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8151487,
+      "lng": -47.9884322,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Guará I QI 10 AE - Guará, Brasília - DF, 71010-001, Brazil"
+    }
+  },
+  "COLÔNIA AGRÍCOLA VILA SÃO JOSÉ - RUA 11 ÁREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8005469,
+      "lng": -48.0485776,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "R. 11, Area Especial 01 - St. Hab. Vicente Pires - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "QNH 06 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "6 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QND 43 LT 23 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806323,
+      "lng": -48.0847584,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 23 - Setor de oficina, Brasília - DF, 72130-700, Brazil"
+    }
+  },
+  "EQNG 06/07 AREA ESPECIAL N 15, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "15 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "QND 12 LOTE 41 ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8133145,
+      "lng": -48.0597331,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. D Norte QND 12 - Taguatinga, Brasília - DF, 72110-600, Brazil"
+    }
+  },
+  "ECNF 01/QNF 19 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8128753,
+      "lng": -48.06886739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. F Norte QNF 19 - Taguatinga, Brasília - DF, 72125-690, Brazil"
+    }
+  },
+  "QNC 15 AREA ESPECIAL N 15, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8067435,
+      "lng": -48.0854463,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "15 - St. H Norte QNH - Taguatinga, Brasília - DF, Brazil"
+    }
+  },
+  "CNB 12 ÁREA ESPECIAL Nº 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "01 - St. H Norte QNM 34 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QNG 12 AREA ESPECIAL 14, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.806768,
+      "lng": -48.085519,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 12 - Taguatinga, Brasília - DF, 72410-100, Brazil"
+    }
+  },
+  "COLÔNIA AGRÍCOLA VICENTE PIRES - AREA ESPECIAL N 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7965625,
+      "lng": -48.0015835,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "CA Vicente Pires Col. Agrícola Vicente Pires - Vicente Pires, Brasília - DF, Brazil"
+    }
+  },
+  "ÁREA ESPECIAL 4 E 5, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8074291,
+      "lng": -48.0847481,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 4 - 5 - Taguatinga, Brasília - DF, 72130-613, Brazil"
+    }
+  },
+  "RUA 10 CH 323/1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8082002,
+      "lng": -47.9386772,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "323 - Octogonal AOS 1 - Plano Piloto, Brasília - DF, 70660-011, Brazil"
+    }
+  },
+  "EQNP 10/14, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8403645,
+      "lng": -48.11461730000001,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 10/14 - Ceilândia, Brasília - DF, 72231-500, Brazil"
+    }
+  },
+  "EQNN 24/26, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8404361,
+      "lng": -48.1050517,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N EQNN 24/26 - Ceilândia, Brasília - DF, 72220-580, Brazil"
+    }
+  },
+  "EQNP 30/34, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8480729,
+      "lng": -48.1157333,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 30/34 - Vila Nova, Brasília - DF, 72236-500, Brazil"
+    }
+  },
+  "EQNP 28/32, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8461224,
+      "lng": -48.1227118,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 28/32 - Ceilândia, Brasília - DF, 72235-560, Brazil"
+    }
+  },
+  "QNP 10 A.E., Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8368911,
+      "lng": -48.1157313,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 10 - Ceilândia, Brasília - DF, 72231-100, Brazil"
+    }
+  },
+  "EQNN 18/20, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8279199,
+      "lng": -48.1165005,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N EQNN 18/20 - Ceilândia, Brasília - DF, 72220-550, Brazil"
+    }
+  },
+  "SHPS - EQ. 500/700 A.E - COND. POR DO SOL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.85765,
+      "lng": -48.12301,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "SHPS EQ 500/700 - CEF 32 (Portaria Lateral) - Sol Nascente/Pôr do Sol, Brasília - DF, Brazil"
+    }
+  },
+  "QNP 12 A.E., Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8393809,
+      "lng": -48.1192357,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 12 - Ceilândia, Brasília - DF, 72231-200, Brazil"
+    }
+  },
+  "QNN 14 A.E., Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8309663,
+      "lng": -48.10886559999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. N QNN 14 - Ceilândia, Brasília - DF, 72220-140, Brazil"
+    }
+  },
+  "QNP 16 A.E, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8447235,
+      "lng": -48.11589499999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P QNP 16 - Ceilândia, Brasília - DF, 72231-600, Brazil"
+    }
+  },
+  "EQNN 20/22 AE B, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8566096,
+      "lng": -47.9088773,
+      "location_type": "RANGE_INTERPOLATED",
+      "formatted_address": "Aeb, 22 - Plano Piloto, Brasília - DF, 70200-001, Brazil"
+    }
+  },
+  "EQNN 22/24, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7975154,
+      "lng": -47.89188739999999,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Brasília - Brasilia, Brasília - Federal District, Brazil"
+    }
+  },
+  "EQNP 14/18, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8433932,
+      "lng": -48.1091939,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 14/18 - Vila Nova, Brasília - DF, Brazil"
+    }
+  },
+  "EQNP 16/20, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8455894,
+      "lng": -48.1122244,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 16/20 - Vila Nova, Brasília - DF, 72231-560, Brazil"
+    }
+  },
+  "EQNP 22/26, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8391196,
+      "lng": -48.1225995,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 22/26 - Ceilândia, Brasília - DF, 72235-500, Brazil"
+    }
+  },
+  "EQNP 26/30, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8454257,
+      "lng": -48.1216534,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 26/30 - Ceilândia, Brasília - DF, 72235-540, Brazil"
+    }
+  },
+  "EQNP 24/28, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8438229,
+      "lng": -48.1291119,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 24/28 - Ceilândia, Brasília - DF, 72235-520, Brazil"
+    }
+  },
+  "EQNP 32/36, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8504763,
+      "lng": -48.1191244,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. P EQNP 32/36 - Vila Nova, Brasília - DF, 72236-530, Brazil"
+    }
+  },
+  "QD. 101 CONJ. 10B LOTES 1/2 RECANTO DAS EMAS, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9020554,
+      "lng": -48.0590137,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 101 - Q 101 - Recanto das Emas, Brasília - DF, 72600-116, Brazil"
+    }
+  },
+  "QD 106 - ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8358843,
+      "lng": -48.0308945,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 106 - Águas Claras, Brasília - DF, Brazil"
+    }
+  },
+  "QD. 113 CONJ 8-A LOTE 01 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081548,
+      "lng": -47.9146971,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 113 - 8 a 01 ae - Lago Norte, Brasília - DF, 72603-114, Brazil"
+    }
+  },
+  "QUADRA 115 CONJUNTO 7-C LOTE 1 AREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081548,
+      "lng": -47.9146971,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 115 - 7 c 1 - Lago Norte, Brasília - DF, 72603-319, Brazil"
+    }
+  },
+  "QD 206 CONJUNTO 02 LOTE 02, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081514,
+      "lng": -47.9146951,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 206 - 02 02 - Lago Norte, Brasília - DF, 72610-618, Brazil"
+    }
+  },
+  "QD 301 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8290854,
+      "lng": -48.0109737,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "RUA A, CONJUNTO 2, QUADRA 301 LOTE 01, LOJAS 01 E 03 - Águas Claras, Brasília - DF, 71901-020, Brazil"
+    }
+  },
+  "QD 306 AVENIDA MONJOLO LOTE 06 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7083875,
+      "lng": -47.9145816,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. B - PqEAT - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "QD 405 CONJUNTO 15 LOTE 01 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081512,
+      "lng": -47.9146953,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 405 - 15 01 ae - Lago Norte, Brasília - DF, 72631-105, Brazil"
+    }
+  },
+  "QN 504 CONJUNTO 09 AREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070873,
+      "lng": -48.0853676,
+      "location_type": "ROOFTOP",
+      "formatted_address": "St. H Norte QNM 34 09 - Taguatinga, Brasília - DF, 72145-450, Brazil"
+    }
+  },
+  "QR 507 CONJUNTO 07 LOTE 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8134989,
+      "lng": -47.9131341,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Lote, 1 - Asa Sul, Brasília - DF, 73270-625, Brazil"
+    }
+  },
+  "QR 519 AREA ESPECIAL 1 SAMAMBAIA SUL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8963375,
+      "lng": -48.1138282,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QR 519 - Samambaia, Brasília - DF, 72315-300, Brazil"
+    }
+  },
+  "QUADRA 602 CONJUNTO 01 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081512,
+      "lng": -47.9146953,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 602 - 01 01 - Lago Norte, Brasília - DF, 72640-217, Brazil"
+    }
+  },
+  "QUADRA 801 ÁREA ESPECIAL CONJUNTO 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081511,
+      "lng": -47.91469540000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 801 - 01 - Lago Norte, Brasília - DF, 72650-060, Brazil"
+    }
+  },
+  "QD 111 AE 1, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8536447,
+      "lng": -47.9496969,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "AE 1 - Candangolândia, Brasília - DF, Brazil"
+    }
+  },
+  "QD 804 ÁREA ESPECIAL 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7083875,
+      "lng": -47.9145816,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. B - PqEAT - Lago Norte, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 104 CONJUNTO 08A ÁREA ESPECIAL, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081548,
+      "lng": -47.9146971,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 104 - 08a - Lago Norte, Brasília - DF, 71692-320, Brazil"
+    }
+  },
+  "QD 308 AE 1 CONJUNTO 12, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081513,
+      "lng": -47.9146952,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 308 - 12 - Recanto das Emas, Brasília - DF, 72600-000, Brazil"
+    }
+  },
+  "QD 102 CONJ 03 A LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081548,
+      "lng": -47.9146971,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 102 - 03 a 01 - Samambaia, Brasília - DF, 72300-601, Brazil"
+    }
+  },
+  "QUADRA 203, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8401186,
+      "lng": -48.0168727,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 203 - Plano Piloto, Brasília - DF, Brazil"
+    }
+  },
+  "QR 317 AREA ESPECIAL 3 LOTE 11, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8070061,
+      "lng": -48.0852095,
+      "location_type": "ROOFTOP",
+      "formatted_address": "QNH Área Especial, 3 - 11 - Taguatinga, Brasília - DF, 72130-603, Brazil"
+    }
+  },
+  "QD 401 AE CONJUNTO 08 LT 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081511,
+      "lng": -47.91469540000001,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 401 - 08 - Santa Maria, Brasília - DF, 72580-500, Brazil"
+    }
+  },
+  "QD 404 CONJUNTO 09 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081513,
+      "lng": -47.9146952,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 404 - 09 01 - Lago Norte, Brasília - DF, 72630-412, Brazil"
+    }
+  },
+  "QR 501 CONJUNTO 03 LOTE 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8875465,
+      "lng": -48.0885021,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QR 501 - Samambaia, Brasília - DF, 72311-300, Brazil"
+    }
+  },
+  "QN 510 CONJUNTO 07 LOTE 1 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.819561,
+      "lng": -47.9530786,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Sgcv Lt 1 Ae - SGCV - Guará, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 511, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.7081512,
+      "lng": -47.9146953,
+      "location_type": "ROOFTOP",
+      "formatted_address": "Q. B, 511 - Lago Norte, Brasília - DF, 72660-351, Brazil"
+    }
+  },
+  "QR 511 AREA ESPECIAL 02 SAMAMBAIA-DF, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8920894,
+      "lng": -48.1010173,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "QR 511 - Samambaia, Brasília - DF, 72313-700, Brazil"
+    }
+  },
+  "QN 512 CONJUNTO 06 AE, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8464159,
+      "lng": -48.009109,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "Conj. 06 - St. Hab. Arniqueira, Brasília - DF, Brazil"
+    }
+  },
+  "QUADRA 803 CONJUNTO 1. RECANTO DAS EMAS. 72650405, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.9215103,
+      "lng": -48.0543105,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Q. 803 Conjunto 1/2 - Recanto das Emas, Brasília - DF, 72650-405, Brazil"
+    }
+  },
+  "CENTRO DE EDUCAÇÃO INFANTIL Nº 04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8997816,
+      "lng": -48.0536115,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "Riacho Fundo II-1A Etapa - Riacho Fundo II - 1A Etapa - Riacho Fundo II, Brasília - DF, 71881-522, Brazil"
+    }
+  },
+  "CENTRO DE ENSINO MÉDIO 01, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.686935,
+      "lng": -48.19645430000001,
+      "location_type": "GEOMETRIC_CENTER",
+      "formatted_address": "St. Sul Ae 2 Ae 4 Conjunto C - Centro, Brasília - DF, 72710-046, Brazil"
+    }
+  },
+  "CENTRO DE ENSINO MÉDIO 04, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.6465266,
+      "lng": -47.8261999,
+      "location_type": "ROOFTOP",
+      "formatted_address": "ar 10 - área especial Sobradinho 2 conjunto 9 lote 1 - setor oeste, Brasília - DF, 73062-100, Brazil"
+    }
+  },
+  "COLÉGIO ADVENTISTA, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8297894,
+      "lng": -47.9046048,
+      "location_type": "ROOFTOP",
+      "formatted_address": "s/n - SGAS II SGAS 611 - Asa Sul, Brasília - DF, 70200-710, Brazil"
+    }
+  },
+  "Setor Habitacional Sol Nascente, Brasília, DF, Brasil": {
+    "status": "OK",
+    "result": {
+      "lat": -15.8274071,
+      "lng": -48.1306989,
+      "location_type": "APPROXIMATE",
+      "formatted_address": "St. Hab. Sol Nascente - Sol Nascente/Pôr do Sol, Brasília - DF, Brazil"
+    }
+  }
+}

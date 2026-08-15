@@ -11,9 +11,6 @@
     <meta property="og:description" content="Explore as zonas eleitorais e locais de votação do DF para as eleições de 2026.">
     <meta property="og:type" content="website">
 
-    <!-- Leaflet CSS -->
-    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
-
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
@@ -138,11 +135,8 @@
         </div>
     </div>
 
-    <!-- Leaflet JS -->
-    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
-
-    <!-- KML Parser -->
-    <script src="kmlParser.js"></script>
+    <!-- Google Maps JavaScript API (chave injetada via .env pelo Vite em build time) -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%"></script>
 
     <!-- Zonas Data -->
     <script src="zonas_data.js"></script>

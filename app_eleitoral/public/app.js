@@ -1,10 +1,25 @@
 // Estado da Aplicação
 let map;
-let kmlMarkersGroup;
+let markers = [];
+let sharedInfoWindow;
 let locaisData = {};
-let kmlSecoesList = [];
 let activeZone = null;
-let markerMap = {}; // Mapeamento zoneId -> lista de marcadores Leaflet
+let markerMap = {}; // Mapeamento zoneId -> lista de marcadores Google Maps
+
+// Estilo leve/minimalista do mapa (aproxima o visual anterior em CartoDB Light)
+const LIGHT_MAP_STYLE = [
+    { elementType: 'geometry', stylers: [{ color: '#f5f5f5' }] },
+    { elementType: 'labels.icon', stylers: [{ visibility: 'off' }] },
+    { elementType: 'labels.text.fill', stylers: [{ color: '#616161' }] },
+    { elementType: 'labels.text.stroke', stylers: [{ color: '#f5f5f5' }] },
+    { featureType: 'administrative.land_parcel', stylers: [{ visibility: 'off' }] },
+    { featureType: 'poi', stylers: [{ visibility: 'off' }] },
+    { featureType: 'road', elementType: 'geometry', stylers: [{ color: '#ffffff' }] },
+    { featureType: 'road.arterial', elementType: 'labels.text.fill', stylers: [{ color: '#757575' }] },
+    { featureType: 'road.highway', elementType: 'geometry', stylers: [{ color: '#dadada' }] },
+    { featureType: 'transit', stylers: [{ visibility: 'off' }] },
+    { featureType: 'water', elementType: 'geometry', stylers: [{ color: '#c9e6f0' }] }
+];
 
 // Configuração de Cores para as Zonas Eleitorais (conforme zonas eleitorais df.png)
 const zoneColors = {
@@ -32,25 +47,29 @@ function switchTab(tab) {
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
 
     if (tab === 'map' && map) {
-        setTimeout(() => { map.invalidateSize(); }, 100);
+        const currentCenter = map.getCenter();
+        setTimeout(() => {
+            google.maps.event.trigger(map, 'resize');
+            if (currentCenter) map.setCenter(currentCenter);
+        }, 100);
     }
 }
 
 
 // ==========================================
-// MAPA GEORREFERENCIADO (LEAFLET + KML COLORIDO POR ZONA)
+// MAPA GEORREFERENCIADO (GOOGLE MAPS + PONTOS COLORIDOS POR ZONA)
 // ==========================================
 function initMap() {
-    map = L.map('map').setView([-15.793889, -47.882778], 10);
+    map = new google.maps.Map(document.getElementById('map'), {
+        center: { lat: -15.793889, lng: -47.882778 },
+        zoom: 10,
+        styles: LIGHT_MAP_STYLE,
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false
+    });
 
-    // Mapa claro vetorial (CartoDB Light)
-    L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
-        attribution: '&copy; OpenStreetMap &copy; CARTO',
-        subdomains: 'abcd',
-        maxZoom: 20
-    }).addTo(map);
-
-    kmlMarkersGroup = L.layerGroup().addTo(map);
+    sharedInfoWindow = new google.maps.InfoWindow();
 
     loadData();
     loadDashboardData();
@@ -64,210 +83,64 @@ async function loadData() {
         // 1. Gerar Coluna de Zonas Eleitorais na Direita
         buildZonasColumn();
 
-        // 2. Carregar e Plotar o KML com as Cores das Zonas
-        if (typeof loadKmlSecoes === 'function') {
-            kmlSecoesList = await loadKmlSecoes(locaisData);
-            plotKmlSecoesMarkers(kmlSecoesList);
-        }
+        // 2. Carregar e Plotar os Locais de Votação (coordenadas geocodificadas
+        // via Google Geocoding API — ver scripts/geocode-google.mjs)
+        const pontosResponse = await fetch('locais_pontos.json');
+        const pontos = await pontosResponse.json();
+        plotMarkers(pontos);
 
     } catch (error) {
         console.error("Erro ao carregar dados georreferenciados:", error);
     }
 }
 
-// Algoritmo de Georreferenciamento de Precisão por Endereço, Quadra e RA
-function getAccurateLocationCoordinates(sec, index) {
-    const addr = ((sec.endereco || '') + ' ' + (sec.local || '') + ' ' + (sec.bairro || '')).toUpperCase();
-    const ra = (sec.ra || '').toUpperCase();
-
-    // 1. PLANO PILOTO - ASA SUL
-    if (addr.includes('ASA SUL') || addr.includes('SQS') || addr.includes('SGAS') || addr.includes('SEPS') || addr.includes('SHIGS') || addr.includes('EQS') || addr.includes('504 SUL') || addr.includes('214 SUL') || addr.includes('405 SUL') || addr.includes('413 SUL') || addr.includes('416 SUL') || addr.includes('102 SUL') || addr.includes('206 SUL') || addr.includes('209 SUL') || addr.includes('305 SUL') || addr.includes('316 SUL')) {
-        let quadraNum = 100;
-        const match = addr.match(/(?:SQS|SGAS|SEPS|EQS|SHIGS|SUL)\s*(\d{3})/);
-        if (match) quadraNum = parseInt(match[1]);
-        
-        const axisOffset = (quadraNum % 100) * 0.0018;
-        const lat = -15.800 - axisOffset;
-        let lng = -47.895;
-        if (quadraNum >= 600) lng = -47.920;
-        else if (quadraNum >= 400) lng = -47.885;
-        else if (quadraNum >= 200) lng = -47.892;
-        else if (quadraNum >= 100) lng = -47.900;
-
-        return [lat, lng];
-    }
-
-    // 2. PLANO PILOTO - ASA NORTE
-    if (addr.includes('ASA NORTE') || addr.includes('SQN') || addr.includes('SGN') || addr.includes('SEPN') || addr.includes('SHCGN') || addr.includes('EQN') || addr.includes('NORTE')) {
-        let quadraNum = 100;
-        const match = addr.match(/(?:SQN|SGN|SEPN|EQN|SHCGN|NORTE)\s*(\d{3})/);
-        if (match) quadraNum = parseInt(match[1]);
-        
-        const axisOffset = (quadraNum % 100) * 0.0018;
-        const lat = -15.785 + axisOffset;
-        let lng = -47.885;
-        if (quadraNum >= 600) lng = -47.905;
-        else if (quadraNum >= 400) lng = -47.875;
-        else if (quadraNum >= 200) lng = -47.882;
-        else if (quadraNum >= 100) lng = -47.890;
-
-        return [lat, lng];
-    }
-
-    // 3. LAGO NORTE
-    if (ra.includes('LAGO NORTE') || addr.includes('LAGO NORTE') || addr.includes('SHIN') || addr.includes('CA ')) {
-        let lat = -15.735, lng = -47.855;
-        if (addr.includes('CA ')) { lat = -15.725; lng = -47.870; }
-        else if (addr.includes('QI ') || addr.includes('QL ')) {
-            const match = addr.match(/(?:QI|QL)\s*(\d+)/);
-            const q = match ? parseInt(match[1]) : 5;
-            lat = -15.730 - (q * 0.002);
-            lng = -47.860 + (q * 0.001);
-        }
-        return [lat, lng];
-    }
-
-    // 4. VARJÃO / GRANJA DO TORTO / ESTRUTURAL
-    if (ra.includes('VARJÃO') || addr.includes('VARJÃO')) return [-15.719, -47.884 + (index % 5) * 0.001];
-    if (ra.includes('GRANJA DO TORTO') || addr.includes('GRANJA DO TORTO')) return [-15.735, -47.915 + (index % 5) * 0.001];
-    if (ra.includes('ESTRUTURAL') || addr.includes('SCIA') || addr.includes('ESTRUTURAL')) return [-15.782, -47.985 + (index % 5) * 0.001];
-
-    // 5. SUDOESTE / CRUZEIRO / OCTOGONAL
-    if (ra.includes('SUDOESTE') || ra.includes('CRUZEIRO') || addr.includes('SUDOESTE') || addr.includes('CRUZEIRO') || addr.includes('OCTOGONAL')) {
-        if (addr.includes('CRUZEIRO')) return [-15.782, -47.942 + (index % 4) * 0.001];
-        if (addr.includes('OCTOGONAL')) return [-15.798, -47.935 + (index % 4) * 0.001];
-        return [-15.792, -47.925 + (index % 4) * 0.001];
-    }
-
-    // 6. GUARÁ
-    if (ra.includes('GUARÁ') || addr.includes('GUARÁ') || addr.includes('QE ')) {
-        let q = 15;
-        const match = addr.match(/QE\s*(\d+)/);
-        if (match) q = parseInt(match[1]);
-        const lat = -15.818 - (q > 20 ? 0.008 : 0);
-        const lng = -47.982 + ((q % 20) * 0.0015);
-        return [lat, lng];
-    }
-
-    // 7. VICENTE PIRES / ARNIQUEIRA / ÁGUAS CLARAS
-    if (ra.includes('VICENTE PIRES') || addr.includes('VICENTE PIRES')) return [-15.805, -48.025 + (index % 5) * 0.0015];
-    if (ra.includes('ARNIQUEIRA') || addr.includes('ARNIQUEIRA')) return [-15.855, -48.015 + (index % 5) * 0.0015];
-    if (ra.includes('ÁGUAS CLARAS') || addr.includes('ÁGUAS CLARAS')) return [-15.838, -48.028 + (index % 5) * 0.0015];
-
-    // 8. TAGUATINGA NORTE / SUL / CENTRO
-    if (ra.includes('TAGUATINGA') || addr.includes('TAGUATINGA') || addr.includes('QNG') || addr.includes('QNJ') || addr.includes('QNL') || addr.includes('QNM') || addr.includes('QNA') || addr.includes('QSA') || addr.includes('QSD') || addr.includes('CSB')) {
-        if (addr.includes('QNJ') || addr.includes('QNL') || addr.includes('QNG') || addr.includes('NORTE')) return [-15.812, -48.068 + (index % 6) * 0.0015];
-        if (addr.includes('QSA') || addr.includes('QSB') || addr.includes('QSD') || addr.includes('SUL')) return [-15.845, -48.052 + (index % 6) * 0.0015];
-        return [-15.830, -48.058 + (index % 6) * 0.0015];
-    }
-
-    // 9. CEILÂNDIA NORTE / CENTRO / SUL / SOL NASCENTE
-    if (ra.includes('CEILÂNDIA') || addr.includes('CEILÂNDIA') || ra.includes('SOL NASCENTE') || addr.includes('SOL NASCENTE') || addr.includes('QNO') || addr.includes('QNN') || addr.includes('QNP') || addr.includes('EQNP')) {
-        if (addr.includes('QNO') || addr.includes('QNR') || addr.includes('NORTE')) return [-15.800, -48.132 + (index % 6) * 0.0015];
-        if (addr.includes('QNP') || addr.includes('EQNP') || addr.includes('SOL NASCENTE') || addr.includes('SUL')) return [-15.848, -48.145 + (index % 6) * 0.0015];
-        return [-15.820, -48.112 + (index % 6) * 0.0015];
-    }
-
-    // 10. SAMAMBAIA
-    if (ra.includes('SAMAMBAIA') || addr.includes('SAMAMBAIA') || addr.includes('QN') || addr.includes('QR')) {
-        let q = 300;
-        const match = addr.match(/(?:QN|QR)\s*(\d{3})/);
-        if (match) q = parseInt(match[1]);
-        const isNorte = q < 400 || q >= 600;
-        const lat = isNorte ? -15.865 : -15.885;
-        const lng = -48.095 + ((q % 100) * 0.0008);
-        return [lat, lng];
-    }
-
-    // 11. RECANTO DAS EMAS & RIACHO FUNDO II
-    if (ra.includes('RECANTO DAS EMAS') || addr.includes('RECANTO DAS EMAS')) {
-        let q = 100;
-        const match = addr.match(/(?:QD|QUADRA|QR)\s*(\d{3})/);
-        if (match) q = parseInt(match[1]);
-        const lat = -15.905 - ((q / 100) * 0.003);
-        const lng = -48.075 + ((q % 10) * 0.002);
-        return [lat, lng];
-    }
-    if (ra.includes('RIACHO FUNDO II') || addr.includes('RIACHO FUNDO II')) return [-15.900, -48.025 + (index % 4) * 0.0015];
-    if (ra.includes('RIACHO FUNDO') || addr.includes('RIACHO FUNDO')) return [-15.880, -47.995 + (index % 4) * 0.0015];
-
-    // 12. NÚCLEO BANDEIRANTE / CANDANGOLÂNDIA / PARK WAY
-    if (ra.includes('NÚCLEO BANDEIRANTE') || addr.includes('NÚCLEO BANDEIRANTE')) return [-15.868, -47.962 + (index % 4) * 0.001];
-    if (ra.includes('CANDANGOLÂNDIA') || addr.includes('CANDANGOLÂNDIA')) return [-15.852, -47.950 + (index % 4) * 0.001];
-    if (ra.includes('PARK WAY') || addr.includes('PARK WAY')) return [-15.885, -47.955 + (index % 4) * 0.001];
-
-    // 13. GAMA
-    if (ra.includes('GAMA') || addr.includes('GAMA')) {
-        let sectorOffset = 0;
-        if (addr.includes('LESTE')) sectorOffset = 0.005;
-        if (addr.includes('OESTE')) sectorOffset = -0.005;
-        if (addr.includes('SUL')) sectorOffset -= 0.008;
-        return [-16.020 + sectorOffset, -48.060 + (sectorOffset * 0.5) + (index % 5) * 0.001];
-    }
-
-    // 14. SANTA MARIA & DVO & SANTOS DUMONT
-    if (ra.includes('SANTA MARIA') || addr.includes('SANTA MARIA')) {
-        if (addr.includes('SANTOS DUMONT')) return [-16.002, -47.952 + (index % 4) * 0.001];
-        if (addr.includes('DVO') || addr.includes('PORTO RICO')) return [-16.035, -47.985 + (index % 4) * 0.001];
-        let q = 100;
-        const match = addr.match(/(?:CL|QR|EQ)\s*(\d{3})/);
-        if (match) q = parseInt(match[1]);
-        const lat = -16.012 - ((q / 100) * 0.004);
-        const lng = -47.990 + ((q % 10) * 0.002);
-        return [lat, lng];
-    }
-
-    // 15. SOBRADINHO & SOBRADINHO II & FERCAL
-    if (ra.includes('SOBRADINHO') || addr.includes('SOBRADINHO') || ra.includes('FERCAL') || addr.includes('FERCAL')) {
-        if (ra.includes('FERCAL') || addr.includes('FERCAL')) return [-15.600, -47.875 + (index % 4) * 0.0015];
-        if (addr.includes('NOVA COLINA') || addr.includes('RABELO')) return [-15.632, -47.765 + (index % 4) * 0.0015];
-        let q = 5;
-        const match = addr.match(/(?:QUADRA|AR)\s*(\d+)/);
-        if (match) q = parseInt(match[1]);
-        return [-15.650 - (q * 0.001), -47.788 + (q * 0.0008)];
-    }
-
-    // 16. PLANALTINA & ARAPOANGA
-    if (ra.includes('PLANALTINA') || addr.includes('PLANALTINA') || ra.includes('ARAPOANGA') || addr.includes('ARAPOANGA')) {
-        if (addr.includes('ARAPOANGA')) return [-15.642, -47.615 + (index % 5) * 0.0015];
-        return [-15.618, -47.652 + (index % 5) * 0.0015];
-    }
-
-    // 17. LAGO SUL / JARDIM BOTÂNICO / SÃO SEBASTIÃO
-    if (ra.includes('LAGO SUL') || addr.includes('LAGO SUL') || addr.includes('SHIS')) return [-15.845, -47.875 + (index % 5) * 0.0015];
-    if (ra.includes('JARDIM BOTÂNICO') || addr.includes('JARDIM BOTÂNICO')) return [-15.875, -47.795 + (index % 5) * 0.0015];
-    if (ra.includes('SÃO SEBASTIÃO') || addr.includes('SÃO SEBASTIÃO')) return [-15.905, -47.772 + (index % 5) * 0.0015];
-
-    // Fallback por RA genérico ou centro
-    return [-15.793889 + (index % 10) * 0.005, -47.882778 + (index % 10) * 0.005];
+function makeCircleIcon(color, scale, opacity) {
+    return {
+        path: google.maps.SymbolPath.CIRCLE,
+        scale,
+        fillColor: color,
+        fillOpacity: opacity,
+        strokeColor: '#ffffff',
+        strokeWeight: 1.5
+    };
 }
 
-// Plotar Marcadores das Seções do KML com Georreferenciamento de Precisão
-function plotKmlSecoesMarkers(secoes) {
-    if (!kmlMarkersGroup) return;
-    kmlMarkersGroup.clearLayers();
+const LOCATION_TYPE_LABELS = {
+    ROOFTOP: 'Endereço exato',
+    RANGE_INTERPOLATED: 'Interpolado no trecho da via',
+    GEOMETRIC_CENTER: 'Centro geométrico (quadra/área)',
+    APPROXIMATE: 'Aproximado'
+};
+
+function buildHoverContent(sec) {
+    return `
+        <div class="kml-hover-tooltip">
+            <strong>${sec.local}</strong>
+            <div>📍 Endereço: ${sec.endereco || 'N/A'}</div>
+            <div>🏘️ Bairro/RA: ${sec.bairro && sec.bairro !== 'N/A' ? sec.bairro : sec.ra || 'N/A'}</div>
+            <div>👥 Eleitores: ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : 'N/A'}</div>
+            <div>🗳️ Seções: ${sec.secoes || 'N/A'}</div>
+        </div>
+    `;
+}
+
+// Plotar Marcadores dos Locais de Votação com Coordenadas Reais (Google Geocoding)
+function plotMarkers(pontos) {
+    markers.forEach(m => m.setMap(null));
+    markers = [];
     markerMap = {};
 
-    // Vários locais podem cair na mesma coordenada (ex: mesma quadra ou,
-    // no pior caso, mesmo centro de RA quando não há endereço geocodificável).
+    // Vários locais podem cair na mesma coordenada (mesmo endereço/quadra).
     // Para não empilhar marcadores exatamente um sobre o outro, aplicamos um
-    // pequeno leque visual em espiral — a coordenada real (e a exibida no
-    // popup/precisão) não muda, só o ponto de desenho do pino.
+    // pequeno leque visual em espiral — a coordenada real não muda, só o
+    // ponto de desenho do pino.
     const GOLDEN_ANGLE = 137.508 * (Math.PI / 180);
     const coordOccurrences = {};
 
-    secoes.forEach((sec, index) => {
-        // Prioriza a coordenada real obtida por geocodificação (locais_geocoded.json).
-        // Só recorre à estimativa heurística por endereço quando a geocodificação falhou.
-        let lat, lng, precisao;
-        if (sec.lat != null && sec.lng != null) {
-            [lat, lng] = [sec.lat, sec.lng];
-            precisao = sec.precisao;
-        } else {
-            [lat, lng] = getAccurateLocationCoordinates(sec, index);
-            precisao = 'estimado';
-        }
+    pontos.forEach((sec) => {
+        if (sec.lat == null || sec.lng == null) return; // sem coordenada geocodificada
 
+        let lat = sec.lat, lng = sec.lng;
         const coordKey = `${lat.toFixed(5)},${lng.toFixed(5)}`;
         const n = coordOccurrences[coordKey] || 0;
         coordOccurrences[coordKey] = n + 1;
@@ -281,63 +154,36 @@ function plotKmlSecoesMarkers(secoes) {
         // Obter a cor exata da Zona Eleitoral
         const markerColor = zoneColors[sec.zona] || '#1F4E78';
 
-        const circleMarker = L.circleMarker([lat, lng], {
-            radius: 6,
-            fillColor: markerColor,
-            color: '#ffffff',
-            weight: 1.5,
-            opacity: 1,
-            fillOpacity: 0.9
+        const marker = new google.maps.Marker({
+            position: { lat, lng },
+            map,
+            icon: makeCircleIcon(markerColor, 6, 0.9),
+            zIndex: 1
         });
+        marker._baseColor = markerColor;
 
-        // POPUP / TOOLTIP HOVER: Nome, Bairro e Eleitores
-        const hoverTooltipContent = `
-            <div class="kml-hover-tooltip">
-                <strong>${sec.local}</strong>
-                <div>📍 Bairro/RA: ${sec.bairro || sec.ra || 'N/A'}</div>
-                <div>👥 Eleitores: ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : 'N/A'}</div>
-            </div>
-        `;
-
-        circleMarker.bindTooltip(hoverTooltipContent, {
-            className: 'kml-hover-tooltip-container',
-            direction: 'top',
-            offset: [0, -5]
+        // HOVER: Local, Endereço, Bairro/RA, Eleitores e Seções
+        marker.addListener('mouseover', () => {
+            sharedInfoWindow.setContent(buildHoverContent(sec));
+            sharedInfoWindow.open({ map, anchor: marker });
         });
-
-        const precisaoLabels = {
-            endereco: 'Endereço geocodificado',
-            quadra: 'Quadra/Setor geocodificado',
-            ra: 'Aproximado (centro da RA)',
-            estimado: 'Estimado (endereço não localizado)'
-        };
-
-        circleMarker.bindPopup(`
-            <div class="kml-popup">
-                <h4>${sec.local}</h4>
-                <div class="kml-popup-info">
-                    <p><strong>Bairro / RA:</strong> ${sec.bairro || sec.ra || 'N/A'}</p>
-                    <p><strong>Seções:</strong> ${sec.secoes || '—'}</p>
-                    <p><strong>Eleitorado:</strong> ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : '—'}</p>
-                    <p><strong>Zona Eleitoral:</strong> ${sec.zona || '—'}</p>
-                    <p class="kml-popup-precisao"><strong>Localização:</strong> ${precisaoLabels[precisao] || precisao}</p>
-                </div>
-            </div>
-        `, { className: 'custom-kml-popup' });
+        marker.addListener('mouseout', () => {
+            sharedInfoWindow.close();
+        });
 
         // Ao clicar no ponto, ativa a Zona Eleitoral correspondente
-        circleMarker.on('click', () => {
+        marker.addListener('click', () => {
             if (sec.zona && sec.zona !== 'N/A') {
                 selectZone(sec.zona);
             }
         });
 
-        kmlMarkersGroup.addLayer(circleMarker);
+        markers.push(marker);
 
         // Guardar referência do marcador por Zona
         if (sec.zona && sec.zona !== 'N/A') {
             if (!markerMap[sec.zona]) markerMap[sec.zona] = [];
-            markerMap[sec.zona].push(circleMarker);
+            markerMap[sec.zona].push(marker);
         }
     });
 }
@@ -388,25 +234,31 @@ function selectZone(zoneId) {
         item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // 2. Destacar marcadores KML da zona selecionada e esmaecer os outros
-    const zoneBounds = [];
-    Object.entries(markerMap).forEach(([zId, markers]) => {
+    // 2. Destacar marcadores da zona selecionada e esmaecer os outros
+    const zoneBounds = new google.maps.LatLngBounds();
+    let hasBounds = false;
+    Object.entries(markerMap).forEach(([zId, zMarkers]) => {
         const isTarget = zId === zoneId;
-        markers.forEach(m => {
+        zMarkers.forEach(m => {
             if (isTarget) {
-                m.setStyle({ fillOpacity: 1.0, radius: 8, weight: 2.5 });
-                m.bringToFront();
-                zoneBounds.push(m.getLatLng());
+                m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
+                m.setZIndex(999);
+                zoneBounds.extend(m.getPosition());
+                hasBounds = true;
             } else {
-                m.setStyle({ fillOpacity: 0.25, radius: 4, weight: 1.0 });
+                m.setIcon(makeCircleIcon(m._baseColor, 4, 0.25));
+                m.setZIndex(1);
             }
         });
     });
 
-    // 3. Ajustar zoom do mapa nos marcadores da zona
-    if (zoneBounds.length > 0) {
-        const bounds = L.latLngBounds(zoneBounds);
-        map.fitBounds(bounds, { padding: [40, 40], maxZoom: 13 });
+    // 3. Ajustar zoom do mapa nos marcadores da zona (o Google Maps não tem
+    // parâmetro nativo de maxZoom no fitBounds, então capamos manualmente)
+    if (hasBounds) {
+        map.fitBounds(zoneBounds, 40);
+        google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+            if (map.getZoom() > 13) map.setZoom(13);
+        });
     }
 
     // 4. Exibir dados e estatísticas da Zona na Sidebar Esquerda
