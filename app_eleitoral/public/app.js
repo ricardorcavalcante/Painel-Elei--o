@@ -120,6 +120,7 @@ function buildHoverContent(sec) {
             <div>🏘️ Bairro/RA: ${sec.bairro && sec.bairro !== 'N/A' ? sec.bairro : sec.ra || 'N/A'}</div>
             <div>👥 Eleitores: ${sec.eleitorado ? sec.eleitorado.toLocaleString('pt-BR') : 'N/A'}</div>
             <div>🗳️ Seções: ${sec.secoes || 'N/A'}</div>
+            ${sec.confianca ? `<div>🎯 Confiança: ${sec.confianca === 'alta' ? 'Alta' : 'Média'}</div>` : ''}
         </div>
     `;
 }
