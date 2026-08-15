@@ -1154,10 +1154,12 @@
     "zona": "11",
     "secoes": 20,
     "eleitorado": 6049,
-    "lat": -15.788191,
-    "lng": -47.93882780000001,
-    "location_type": "APPROXIMATE",
-    "eleitorado_estimado": true
+    "lat": -15.7846209,
+    "lng": -47.9365231,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ6387+59",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 03",
@@ -1387,10 +1389,12 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 3201,
-    "lat": -15.7964177,
-    "lng": -47.9416699,
-    "location_type": "GEOMETRIC_CENTER",
-    "eleitorado_estimado": true
+    "lat": -15.7959706,
+    "lng": -47.9415157,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ6335+J9",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 05",
@@ -1400,10 +1404,12 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 2914,
-    "lat": -15.8401374,
-    "lng": -48.0168592,
-    "location_type": "GEOMETRIC_CENTER",
-    "eleitorado_estimado": true
+    "lat": -15.7985299,
+    "lng": -47.9435526,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ6324+HH",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 10",
@@ -1686,9 +1692,11 @@
     "zona": "11",
     "secoes": 20,
     "eleitorado": 6049,
-    "lat": -15.736208,
-    "lng": -47.8960661,
-    "location_type": "ROOFTOP"
+    "lat": -15.7846209,
+    "lng": -47.9365231,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6387+59",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 02",
@@ -2012,9 +2020,11 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 3201,
-    "lat": -15.7975154,
-    "lng": -47.89188739999999,
-    "location_type": "APPROXIMATE"
+    "lat": -15.7959706,
+    "lng": -47.9415157,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6335+J9",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 05",
@@ -2024,9 +2034,11 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 2914,
-    "lat": -15.791248,
-    "lng": -47.8470624,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.7985299,
+    "lng": -47.9435526,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6324+HH",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 06",
@@ -2036,10 +2048,12 @@
     "zona": "11",
     "secoes": 15,
     "eleitorado": 4521,
-    "lat": -15.793031,
-    "lng": -47.9374815,
-    "location_type": "APPROXIMATE",
-    "eleitorado_estimado": true
+    "lat": -15.7944393,
+    "lng": -47.9376693,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ6346+6W",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 07",
@@ -2461,9 +2475,11 @@
     "zona": "11",
     "secoes": 15,
     "eleitorado": 4521,
-    "lat": -15.7209422,
-    "lng": -47.8849445,
-    "location_type": "ROOFTOP"
+    "lat": -15.7944393,
+    "lng": -47.9376693,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6346+6W",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 07 ( CEF 35 )",
@@ -2748,9 +2764,11 @@
     "zona": "9",
     "secoes": 6,
     "eleitorado": 2068,
-    "lat": -15.8238765,
-    "lng": -47.9818343,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8190631,
+    "lng": -47.985892,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52J7+9J",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 02 - VILA ESTRUTURAL",
@@ -2760,9 +2778,11 @@
     "zona": "9",
     "secoes": 18,
     "eleitorado": 6808,
-    "lat": -15.7829951,
-    "lng": -47.7870258,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.7861428,
+    "lng": -47.989404,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6276+G6",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 1",
@@ -2772,10 +2792,12 @@
     "zona": "10",
     "secoes": 13,
     "eleitorado": 4517,
-    "lat": -15.8752459,
-    "lng": -47.9749132,
-    "location_type": "GEOMETRIC_CENTER",
-    "eleitorado_estimado": true
+    "lat": -15.8771006,
+    "lng": -47.9764229,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ42FF+5C",
+    "confianca": "media"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 10",
@@ -2785,9 +2807,11 @@
     "zona": "9",
     "secoes": 6,
     "eleitorado": 2075,
-    "lat": -15.848837,
-    "lng": -47.9625757,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.850894,
+    "lng": -47.9625639,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42XP+JX",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 2",
@@ -2797,9 +2821,11 @@
     "zona": "9",
     "secoes": 13,
     "eleitorado": 2631,
-    "lat": -15.8163774,
-    "lng": -47.9801814,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8153132,
+    "lng": -47.9783673,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52MC+VM",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 4",
@@ -2809,9 +2835,11 @@
     "zona": "9",
     "secoes": 20,
     "eleitorado": 5567,
-    "lat": -15.7570178,
-    "lng": -47.8836321,
-    "location_type": "ROOFTOP"
+    "lat": -15.8187853,
+    "lng": -47.9877923,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52J6+FV",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 5",
@@ -2821,9 +2849,11 @@
     "zona": "9",
     "secoes": 10,
     "eleitorado": 3579,
-    "lat": -15.8353575,
-    "lng": -47.9768719,
-    "location_type": "APPROXIMATE"
+    "lat": -15.84336555,
+    "lng": -47.97387072,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ524G+MF",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 8",
@@ -2833,9 +2863,11 @@
     "zona": "9",
     "secoes": 17,
     "eleitorado": 5473,
-    "lat": -15.8287978,
-    "lng": -47.9809269,
-    "location_type": "APPROXIMATE"
+    "lat": -15.82775398,
+    "lng": -47.97860601,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52CC+VH",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 1",
@@ -2845,9 +2877,11 @@
     "zona": "9",
     "secoes": 15,
     "eleitorado": 5237,
-    "lat": -15.8412763,
-    "lng": -47.9687756,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.84311015,
+    "lng": -47.96853893,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ524J+QH",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 3",
@@ -2857,9 +2891,11 @@
     "zona": "9",
     "secoes": 25,
     "eleitorado": 8626,
-    "lat": -15.8359059,
-    "lng": -47.9792314,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8388619,
+    "lng": -47.9755835,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ526F+FQ",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 4",
@@ -2869,9 +2905,11 @@
     "zona": "9",
     "secoes": 14,
     "eleitorado": 3481,
-    "lat": -15.8078317,
-    "lng": -47.9861572,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.82112549,
+    "lng": -47.97507028,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52HF+GX",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 416 DE SANTA MARIA",
@@ -2881,9 +2919,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 3349,
-    "lat": -15.7098573,
-    "lng": -47.9131757,
-    "location_type": "ROOFTOP"
+    "lat": -16.0162402,
+    "lng": -47.9931464,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58MJX2M4+GP",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL INFANTIL 01 DA VILA ESTRUTURAL",
@@ -2893,9 +2933,11 @@
     "zona": "9",
     "secoes": 9,
     "eleitorado": 2502,
-    "lat": -15.8186593,
-    "lng": -48.06264960000001,
-    "location_type": "ROOFTOP"
+    "lat": -15.7790348,
+    "lng": -47.9942879,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ62C4+97",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO ENSINO EDUCACIONAL 01 - VILA ESTRUTURAL(MILITAR)",
@@ -2905,9 +2947,11 @@
     "zona": "9",
     "secoes": 20,
     "eleitorado": 7036,
-    "lat": -15.8340637,
-    "lng": -48.055969,
-    "location_type": "ROOFTOP"
+    "lat": -15.7830497,
+    "lng": -47.9970904,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6283+Q5",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO ENSINO MEDIO 01 DO GUARA - CEM (GG)",
@@ -2917,9 +2961,11 @@
     "zona": "9",
     "secoes": 19,
     "eleitorado": 5135,
-    "lat": -15.8143606,
-    "lng": -47.9774816,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8182964,
+    "lng": -47.9809231,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52J9+MJ",
+    "confianca": "alta"
   },
   {
     "local": "CILG -CENTRO INTERESCOLAR DE LINGUAS",
@@ -2929,9 +2975,11 @@
     "zona": "9",
     "secoes": 9,
     "eleitorado": 3009,
-    "lat": -15.8078317,
-    "lng": -47.9861572,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.81583,
+    "lng": -47.978495,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52MC+MJ",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO ELITE (ANTIGO JK)",
@@ -2941,9 +2989,11 @@
     "zona": "9",
     "secoes": 11,
     "eleitorado": 3922,
-    "lat": -15.8078317,
-    "lng": -47.9861572,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.81846,
+    "lng": -47.98593,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52J7+JJ",
+    "confianca": "media"
   },
   {
     "local": "COLEGIO LICEU GUARA",
@@ -2953,9 +3003,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 2875,
-    "lat": -15.8500865,
-    "lng": -47.9725306,
-    "location_type": "APPROXIMATE"
+    "lat": -15.84291,
+    "lng": -47.98271,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ5248+RW",
+    "confianca": "media"
   },
   {
     "local": "COLEGIO OBJETIVO DO GUARA",
@@ -2965,9 +3017,11 @@
     "zona": "9",
     "secoes": 18,
     "eleitorado": 6147,
-    "lat": -15.8471722,
-    "lng": -47.9696121,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.84646,
+    "lng": -47.97075,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ523H+CM",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO PROJEÇÃO",
@@ -2977,9 +3031,11 @@
     "zona": "9",
     "secoes": 14,
     "eleitorado": 4321,
-    "lat": -15.8142422,
-    "lng": -47.97426840000001,
-    "location_type": "ROOFTOP"
+    "lat": -15.820737,
+    "lng": -47.981256,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52H9+PF",
+    "confianca": "media"
   },
   {
     "local": "COLEGIO ROGACIONISTA",
@@ -2989,9 +3045,11 @@
     "zona": "9",
     "secoes": 20,
     "eleitorado": 7081,
-    "lat": -15.806768,
-    "lng": -48.085519,
-    "location_type": "ROOFTOP"
+    "lat": -15.84638,
+    "lng": -47.97129,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ523H+CF",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO ROGACIONISTA - INFANTIL NUCLEO 01",
@@ -3001,9 +3059,11 @@
     "zona": "9",
     "secoes": 8,
     "eleitorado": 2792,
-    "lat": -15.8359059,
-    "lng": -47.9792314,
-    "location_type": "APPROXIMATE"
+    "lat": -15.84225,
+    "lng": -47.97434,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ525G+37",
+    "confianca": "media"
   },
   {
     "local": "EC 10 - ESCOLA CLASSE 10 DO GAMA",
@@ -3013,9 +3073,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 3165,
-    "lat": -16.0082704,
-    "lng": -48.0727329,
-    "location_type": "APPROXIMATE"
+    "lat": -16.00804991,
+    "lng": -48.07882743,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58MHXWRC+QF",
+    "confianca": "alta"
   },
   {
     "local": "EC 15 - ESCOLA CLASSE 15 DO GAMA",
@@ -3025,9 +3087,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 2174,
-    "lat": -15.7798456,
-    "lng": -47.9983106,
-    "location_type": "APPROXIMATE"
+    "lat": -16.0035264,
+    "lng": -48.060982,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58MHXWWQ+HJ",
+    "confianca": "alta"
   },
   {
     "local": "EC 28 - ESCOLA CLASSE 28 DO GAMA",
@@ -3037,9 +3101,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 1559,
-    "lat": -16.0056909,
-    "lng": -48.0727018,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -16.00720422,
+    "lng": -48.08309899,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58MHXWV8+4Q",
+    "confianca": "alta"
   },
   {
     "local": "EC 29 - ESCOLA CLASSE 29 DO GAMA",
@@ -3049,9 +3115,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 2170,
-    "lat": -15.7786532,
-    "lng": -47.99423849999999,
-    "location_type": "APPROXIMATE"
+    "lat": -16.0403905,
+    "lng": -48.0588624,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58MHXW5R+RF",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 02 - VILA ESTRUTURAL",
@@ -3061,9 +3129,11 @@
     "zona": "9",
     "secoes": 14,
     "eleitorado": 4189,
-    "lat": -15.7823524,
-    "lng": -47.9979918,
-    "location_type": "APPROXIMATE"
+    "lat": -15.782519,
+    "lng": -47.9986716,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6282+XG",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 03 (ANTIGO PADRE DI FRANCIA)",
@@ -3073,9 +3143,11 @@
     "zona": "9",
     "secoes": 4,
     "eleitorado": 1575,
-    "lat": -15.8200797,
-    "lng": -47.9794841,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8466471,
+    "lng": -47.9669564,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ523M+86",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 08 (ANTIGO CEF 07)",
@@ -3085,9 +3157,11 @@
     "zona": "9",
     "secoes": 21,
     "eleitorado": 6825,
-    "lat": -15.786891,
-    "lng": -47.8922328,
-    "location_type": "ROOFTOP"
+    "lat": -15.83929406,
+    "lng": -47.98100978,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ5269+7H",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 1 - 9ª ZE - BRASÍLIA",
@@ -3097,9 +3171,11 @@
     "zona": "9",
     "secoes": 0,
     "eleitorado": 3110,
-    "lat": -15.8147395,
-    "lng": -47.9733876,
-    "location_type": "APPROXIMATE"
+    "lat": -15.81437354,
+    "lng": -47.97478521,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52PG+73",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 2",
@@ -3109,9 +3185,11 @@
     "zona": "9",
     "secoes": 5,
     "eleitorado": 2017,
-    "lat": -15.8132682,
-    "lng": -47.9802,
-    "location_type": "APPROXIMATE"
+    "lat": -15.81437333,
+    "lng": -47.98377833,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52P8+7F",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 3",
@@ -3121,9 +3199,11 @@
     "zona": "9",
     "secoes": 5,
     "eleitorado": 3452,
-    "lat": -15.8200797,
-    "lng": -47.9794841,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8194536,
+    "lng": -47.9794868,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52JC+66",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 5",
@@ -3133,10 +3213,12 @@
     "zona": "10",
     "secoes": 6,
     "eleitorado": 2084,
-    "lat": -15.870066,
-    "lng": -47.97281539999999,
-    "location_type": "APPROXIMATE",
-    "eleitorado_estimado": true
+    "lat": -15.8728501,
+    "lng": -47.9762044,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "eleitorado_estimado": true,
+    "plus_code": "58PJ42GF+VG",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 6",
@@ -3146,9 +3228,11 @@
     "zona": "9",
     "secoes": 14,
     "eleitorado": 4942,
-    "lat": -15.8294505,
-    "lng": -47.98292980000001,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8299477,
+    "lng": -47.9847402,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ52C8+24",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 7",
@@ -3158,9 +3242,11 @@
     "zona": "9",
     "secoes": 5,
     "eleitorado": 1678,
-    "lat": -15.8492542,
-    "lng": -47.970975,
-    "location_type": "APPROXIMATE"
+    "lat": -15.84790644,
+    "lng": -47.96983536,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ522J+R3",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE VILA ESTRUTURAL",
@@ -3170,9 +3256,11 @@
     "zona": "9",
     "secoes": 14,
     "eleitorado": 3919,
-    "lat": -15.7863376,
-    "lng": -47.9968294,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.78127634,
+    "lng": -47.99758156,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6292+FX",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA TÉCNICA DO GUARÁ - CEPAG / GUARÁ II",
@@ -3182,9 +3270,11 @@
     "zona": "9",
     "secoes": 7,
     "eleitorado": 2468,
-    "lat": -15.8451662,
-    "lng": -47.9663413,
-    "location_type": "ROOFTOP"
+    "lat": -15.8391897,
+    "lng": -47.9765768,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ526F+89",
+    "confianca": "alta"
   },
   {
     "local": "FACULDADE PROJEÇÃO- PERTO TERMINAL RODOVIARIO GUARA II",
@@ -3194,9 +3284,11 @@
     "zona": "9",
     "secoes": 25,
     "eleitorado": 4296,
-    "lat": -15.8067435,
-    "lng": -48.0854463,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.83156,
+    "lng": -47.98748,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ5297+92",
+    "confianca": "media"
   },
   {
     "local": "CAIC JUSCELINO KUBITSCHEK DO NUCLEO BANDEIRANTE",
@@ -3206,9 +3298,11 @@
     "zona": "10",
     "secoes": 0,
     "eleitorado": 650,
-    "lat": -15.879082,
-    "lng": -47.9602743,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8773717,
+    "lng": -47.9626655,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42FP+3W",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE EDUCACAO INFANTIL DO NÚCLEO BANDEIRANTE",
@@ -3218,9 +3312,11 @@
     "zona": "10",
     "secoes": 7,
     "eleitorado": 2480,
-    "lat": -15.8677851,
-    "lng": -47.965595,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8701478,
+    "lng": -47.9710099,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42HH+WH",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE EDUCACAO INFANTIL DO RIACHO FUNDO II",
@@ -3230,9 +3326,11 @@
     "zona": "10",
     "secoes": 12,
     "eleitorado": 4762,
-    "lat": -15.8975118,
-    "lng": -48.0512627,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8958054,
+    "lng": -48.0510402,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4W3X+MH",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE EDUCAÇÃO INFANTIL 01 - RF I",
@@ -3242,9 +3340,11 @@
     "zona": "10",
     "secoes": 10,
     "eleitorado": 3866,
-    "lat": -15.8787,
-    "lng": -48.0204006,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8797909,
+    "lng": -48.0219626,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4XCH+36",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 01 DO RIACHO FUNDO II",
@@ -3254,9 +3354,11 @@
     "zona": "10",
     "secoes": 11,
     "eleitorado": 4574,
-    "lat": -15.9025073,
-    "lng": -48.0469909,
-    "location_type": "APPROXIMATE"
+    "lat": -15.902126,
+    "lng": -48.0480511,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3XX2+4Q",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 1",
@@ -3266,9 +3368,11 @@
     "zona": "10",
     "secoes": 13,
     "eleitorado": 4517,
-    "lat": -15.8758678,
-    "lng": -47.9744865,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8771006,
+    "lng": -47.9764229,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42FF+5C",
+    "confianca": "media"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL LOBO GUARA",
@@ -3278,9 +3382,11 @@
     "zona": "10",
     "secoes": 0,
     "eleitorado": 4606,
-    "lat": -15.806768,
-    "lng": -48.085519,
-    "location_type": "ROOFTOP"
+    "lat": -15.9380992,
+    "lng": -48.0388461,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3X66+QF",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL METROPOLITANA",
@@ -3290,9 +3396,11 @@
     "zona": "10",
     "secoes": 9,
     "eleitorado": 3303,
-    "lat": -15.878085,
-    "lng": -47.9737078,
-    "location_type": "ROOFTOP"
+    "lat": -15.8817063,
+    "lng": -47.9751202,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ429F+8X",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO MÉDIO - JULIA KUBITSCHEK",
@@ -3302,9 +3410,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 2929,
-    "lat": -15.8498126,
-    "lng": -47.9513927,
-    "location_type": "ROOFTOP"
+    "lat": -15.8531038,
+    "lng": -47.9462036,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ43W3+QG",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO MÉDIO 1 DO RIACHO FUNDO I",
@@ -3314,9 +3424,11 @@
     "zona": "10",
     "secoes": 15,
     "eleitorado": 5653,
-    "lat": -15.8860794,
-    "lng": -48.0139017,
-    "location_type": "APPROXIMATE"
+    "lat": -15.88814096,
+    "lng": -48.01430702,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X6P+P7",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO MÉDIO URSO BRANCO",
@@ -3326,9 +3438,11 @@
     "zona": "10",
     "secoes": 13,
     "eleitorado": 5705,
-    "lat": -15.840716,
-    "lng": -47.984031,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8723956,
+    "lng": -47.9690437,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42HJ+29",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO TELEBRASILIA",
@@ -3338,9 +3452,11 @@
     "zona": "10",
     "secoes": 17,
     "eleitorado": 2683,
-    "lat": -15.878865,
-    "lng": -48.00064649999999,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8798946,
+    "lng": -48.0059199,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4XCV+2J",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 02 RIACHO FUNDO I",
@@ -3350,9 +3466,11 @@
     "zona": "10",
     "secoes": 14,
     "eleitorado": 5301,
-    "lat": -15.8781409,
-    "lng": -48.01994269999999,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8834439,
+    "lng": -48.019722,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X8J+J4",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL AGROURBANO IPÊ",
@@ -3362,9 +3480,11 @@
     "zona": "10",
     "secoes": 5,
     "eleitorado": 1841,
-    "lat": -15.923,
-    "lng": -47.97542,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.9474912,
+    "lng": -48.0149527,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3X3P+22",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL INFANTIL DA CANDANGOLANDIA",
@@ -3374,9 +3494,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 2901,
-    "lat": -15.8559545,
-    "lng": -47.9503857,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.8557675,
+    "lng": -47.9519123,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42VX+M6",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL VARGEM BONITA",
@@ -3386,9 +3508,11 @@
     "zona": "10",
     "secoes": 16,
     "eleitorado": 5890,
-    "lat": -15.7975154,
-    "lng": -47.89188739999999,
-    "location_type": "APPROXIMATE"
+    "lat": -15.9344132,
+    "lng": -47.9407657,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ3385+6M",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCATIVO PASSIONISTA MÃE DA SANTA ESPERANÇA",
@@ -3398,9 +3522,11 @@
     "zona": "10",
     "secoes": 13,
     "eleitorado": 4529,
-    "lat": -15.8833172,
-    "lng": -48.0175172,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8793478,
+    "lng": -48.0178684,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4XCJ+7V",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO ENSINO MEDIO 01 RFII (ANTIGO CED 01 RFII)",
@@ -3410,9 +3536,11 @@
     "zona": "10",
     "secoes": 0,
     "eleitorado": 3776,
-    "lat": -15.840716,
-    "lng": -47.984031,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.9488427,
+    "lng": -48.0324866,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3X29+F2",
+    "confianca": "alta"
   },
   {
     "local": "CIL-CENTRO INTERESCOLAR DE LINGUAS DO RIACHO FUNDO I",
@@ -3422,9 +3550,11 @@
     "zona": "10",
     "secoes": 0,
     "eleitorado": 3251,
-    "lat": -15.8840563,
-    "lng": -48.0146758,
-    "location_type": "APPROXIMATE"
+    "lat": -15.88443335,
+    "lng": -48.01455181,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X8P+65",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO ISAAC NEWTON",
@@ -3434,9 +3564,11 @@
     "zona": "10",
     "secoes": 10,
     "eleitorado": 3445,
-    "lat": -15.8820458,
-    "lng": -48.0196576,
-    "location_type": "ROOFTOP"
+    "lat": -15.8808887,
+    "lng": -48.0209718,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X9H+JJ",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO LA SALLE",
@@ -3446,9 +3578,11 @@
     "zona": "10",
     "secoes": 18,
     "eleitorado": 6425,
-    "lat": -15.8705378,
-    "lng": -47.9686399,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8688657,
+    "lng": -47.9672642,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42JM+F3",
+    "confianca": "alta"
   },
   {
     "local": "COLÉGIO EDUCANDÁRIO DE FÁTIMA",
@@ -3458,9 +3592,11 @@
     "zona": "10",
     "secoes": 4,
     "eleitorado": 1936,
-    "lat": -15.8977001,
-    "lng": -48.04899,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8980366,
+    "lng": -48.04885,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X22+QG",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 02 DA CANDANGOLÂNDIA (ANTIGA ZOOBOTANICA)",
@@ -3470,9 +3606,11 @@
     "zona": "10",
     "secoes": 0,
     "eleitorado": 3088,
-    "lat": -15.854534,
-    "lng": -47.9503366,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8520791,
+    "lng": -47.9516536,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42XX+58",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 02 DO RIACHO FUNDO I",
@@ -3482,9 +3620,11 @@
     "zona": "10",
     "secoes": 5,
     "eleitorado": 1150,
-    "lat": -15.8820706,
-    "lng": -48.0146069,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.8817203,
+    "lng": -48.0157625,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X9M+8M",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 1 CANDANGOLANDIA",
@@ -3494,9 +3634,11 @@
     "zona": "10",
     "secoes": 9,
     "eleitorado": 2490,
-    "lat": -15.84867,
-    "lng": -47.95220579999999,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8481129,
+    "lng": -47.9511841,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ522X+QG",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 1 DO RIACHO FUNDO II",
@@ -3506,9 +3648,11 @@
     "zona": "10",
     "secoes": 12,
     "eleitorado": 4986,
-    "lat": -15.9147202,
-    "lng": -48.0467692,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.9151714,
+    "lng": -48.0463353,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3XM3+WF",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 2 DO RIACHO FUNDO II",
@@ -3518,9 +3662,11 @@
     "zona": "10",
     "secoes": 10,
     "eleitorado": 3766,
-    "lat": -15.8950311,
-    "lng": -48.04932830000001,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8965718,
+    "lng": -48.0495967,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X32+95",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 4",
@@ -3530,9 +3676,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 2755,
-    "lat": -15.8677851,
-    "lng": -47.965595,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.8676204,
+    "lng": -47.9654487,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42JM+XR",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 410",
@@ -3542,9 +3690,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 5098,
-    "lat": -15.8586853,
-    "lng": -48.07957529999999,
-    "location_type": "ROOFTOP"
+    "lat": -15.8588603,
+    "lng": -48.0799455,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4WRC+F2",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 42",
@@ -3554,9 +3704,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 3678,
-    "lat": -15.809975,
-    "lng": -48.0939452,
-    "location_type": "ROOFTOP"
+    "lat": -15.8075644,
+    "lng": -48.095692,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH5WR3+XP",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 425",
@@ -3566,9 +3718,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 4578,
-    "lat": -15.865757,
-    "lng": -48.0930639,
-    "location_type": "ROOFTOP"
+    "lat": -15.8612014,
+    "lng": -48.08536175,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4WQ7+GV",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 45",
@@ -3578,9 +3732,11 @@
     "zona": "10",
     "secoes": 8,
     "eleitorado": 4441,
-    "lat": -15.8062302,
-    "lng": -48.08538919999999,
-    "location_type": "ROOFTOP"
+    "lat": -15.7945917,
+    "lng": -48.1069983,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH6V4V+56",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE 5",
@@ -3590,9 +3746,11 @@
     "zona": "10",
     "secoes": 6,
     "eleitorado": 2084,
-    "lat": -15.7975608,
-    "lng": -47.8919122,
-    "location_type": "APPROXIMATE"
+    "lat": -15.8728501,
+    "lng": -47.9762044,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42GF+VG",
+    "confianca": "media"
   },
   {
     "local": "ESCOLA CLASSE AGROVILA II",
@@ -3602,9 +3760,11 @@
     "zona": "10",
     "secoes": 4,
     "eleitorado": 1174,
-    "lat": -15.9394563,
-    "lng": -48.0339574,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.9394254,
+    "lng": -48.0347822,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3X68+63",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE VERDE DO RIACHO FUNDO I",
@@ -3614,9 +3774,11 @@
     "zona": "10",
     "secoes": 3,
     "eleitorado": 2003,
-    "lat": -15.8820706,
-    "lng": -48.0146069,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.884602,
+    "lng": -48.0144029,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X8P+56",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA SALESIANA SAO DOMINGOS SAVIO",
@@ -3626,9 +3788,11 @@
     "zona": "10",
     "secoes": 15,
     "eleitorado": 5133,
-    "lat": -15.8745612,
-    "lng": -47.9748109,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.87288598,
+    "lng": -47.97048249,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ42GH+RR",
+    "confianca": "alta"
   },
   {
     "local": "INSTITUTO FEDERAL DE BRASÍLIA - CAMPUS RIACHO FUNDO",
@@ -3638,9 +3802,11 @@
     "zona": "10",
     "secoes": 5,
     "eleitorado": 1935,
-    "lat": -15.8833172,
-    "lng": -48.0175172,
-    "location_type": "APPROXIMATE"
+    "lat": -15.88157238,
+    "lng": -48.00915479,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH4X9R+98",
+    "confianca": "alta"
   },
   {
     "local": "JARDIM DE INFANCIA 1 DO RIACHO FUNDO II",
@@ -3650,9 +3816,11 @@
     "zona": "10",
     "secoes": 9,
     "eleitorado": 3325,
-    "lat": -15.9026804,
-    "lng": -48.0446632,
-    "location_type": "APPROXIMATE"
+    "lat": -15.9020902,
+    "lng": -48.0446354,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PH3XX4+54",
+    "confianca": "alta"
   },
   {
     "local": "CASA THOMAS JEFFERSON",
@@ -3662,9 +3830,11 @@
     "zona": "11",
     "secoes": 20,
     "eleitorado": 6458,
-    "lat": -15.796383,
-    "lng": -47.92281029999999,
-    "location_type": "ROOFTOP"
+    "lat": -15.7965,
+    "lng": -47.9233,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ633G+CM",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL 01",
@@ -3674,9 +3844,11 @@
     "zona": "11",
     "secoes": 20,
     "eleitorado": 6049,
-    "lat": -15.7852592,
-    "lng": -47.934039,
-    "location_type": "APPROXIMATE"
+    "lat": -15.7846209,
+    "lng": -47.9365231,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6387+59",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO FUNDAMENTAL ATHOS BULCÃO",
@@ -3686,9 +3858,11 @@
     "zona": "11",
     "secoes": 19,
     "eleitorado": 5757,
-    "lat": -15.7946175,
-    "lng": -47.9420471,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.7936565,
+    "lng": -47.9415967,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6345+G9",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO DE ENSINO MÉDIO INTEGRADO DO CRUZEIRO - CEMI DO CRUZEIRO",
@@ -3698,9 +3872,11 @@
     "zona": "11",
     "secoes": 14,
     "eleitorado": 4036,
-    "lat": -15.8076032,
-    "lng": -47.9388262,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.7832543,
+    "lng": -47.9385156,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6386+MH",
+    "confianca": "alta"
   },
   {
     "local": "CENTRO EDUCACIONAL 02",
@@ -3724,9 +3900,11 @@
     "zona": "11",
     "secoes": 29,
     "eleitorado": 8405,
-    "lat": -15.8070873,
-    "lng": -48.0853676,
-    "location_type": "ROOFTOP"
+    "lat": -15.808186,
+    "lng": -47.9401705,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ53R5+PW",
+    "confianca": "alta"
   },
   {
     "local": "COLEGIO IN-NOVA ( ANTIGO COC )",
@@ -3736,9 +3914,11 @@
     "zona": "11",
     "secoes": 0,
     "eleitorado": 1081,
-    "lat": -15.8001081,
-    "lng": -47.931282,
-    "location_type": "ROOFTOP"
+    "lat": -15.8001304,
+    "lng": -47.9312809,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ53X9+WF",
+    "confianca": "media"
   },
   {
     "local": "COLEGIO SOMA",
@@ -3748,9 +3928,11 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 2930,
-    "lat": -15.7929629,
-    "lng": -47.9392759,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.79323822,
+    "lng": -47.93916899,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6346+P8",
+    "confianca": "alta"
   },
   {
     "local": "COLÉGIO DROMOS",
@@ -3760,9 +3942,11 @@
     "zona": "11",
     "secoes": 12,
     "eleitorado": 3670,
-    "lat": -15.8001081,
-    "lng": -47.931282,
-    "location_type": "ROOFTOP"
+    "lat": -15.7997904,
+    "lng": -47.928611,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ632C+3H",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CANADENSE DE BRASÍLIA ( ANTIGA MAPLE BEAR )",
@@ -3772,9 +3956,11 @@
     "zona": "11",
     "secoes": 16,
     "eleitorado": 5164,
-    "lat": -15.7964221,
-    "lng": -47.9150834,
-    "location_type": "ROOFTOP"
+    "lat": -15.796218,
+    "lng": -47.9148365,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ633P+G3",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 04",
@@ -3784,9 +3970,11 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 3201,
-    "lat": -15.7970223,
-    "lng": -47.9417968,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.7959706,
+    "lng": -47.9415157,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6335+J9",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 05",
@@ -3796,9 +3984,11 @@
     "zona": "11",
     "secoes": 10,
     "eleitorado": 2914,
-    "lat": -15.8002642,
-    "lng": -47.9439799,
-    "location_type": "RANGE_INTERPOLATED"
+    "lat": -15.7985299,
+    "lng": -47.9435526,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6324+HH",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 06",
@@ -3808,9 +3998,11 @@
     "zona": "11",
     "secoes": 15,
     "eleitorado": 4521,
-    "lat": -15.793031,
-    "lng": -47.9374815,
-    "location_type": "APPROXIMATE"
+    "lat": -15.7944393,
+    "lng": -47.9376693,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ6346+6W",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE 08",
@@ -3834,9 +4026,11 @@
     "zona": "11",
     "secoes": 4,
     "eleitorado": 1097,
-    "lat": -15.7763265,
-    "lng": -47.9258398,
-    "location_type": "APPROXIMATE"
+    "lat": -15.76258424,
+    "lng": -47.95000043,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ62PX+XX",
+    "confianca": "alta"
   },
   {
     "local": "ESCOLA CLASSE SMU",
@@ -3846,9 +4040,11 @@
     "zona": "11",
     "secoes": 8,
     "eleitorado": 2452,
-    "lat": -15.7720549,
-    "lng": -47.9196312,
-    "location_type": "GEOMETRIC_CENTER"
+    "lat": -15.7749422,
+    "lng": -47.930947,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ63G9+2J",
+    "confianca": "alta"
   },
   {
     "local": "MAPLE BEAR ( ANTIGO CANDANGUINHO - CECAN )",
@@ -3858,9 +4054,11 @@
     "zona": "11",
     "secoes": 21,
     "eleitorado": 6721,
-    "lat": -15.8001081,
-    "lng": -47.931282,
-    "location_type": "ROOFTOP"
+    "lat": -15.800362,
+    "lng": -47.9282001,
+    "location_type": "MANUAL_ESCOLASNOBRASIL",
+    "plus_code": "58PJ53XC+VP",
+    "confianca": "alta"
   },
   {
     "local": "CAIC AYRTON SENNA",
