@@ -14,11 +14,11 @@ let raListItems = {}; // Mapeamento ra -> elemento DOM na coluna "RAs" (evita se
 // Chave especial de activeRA para a opção "TODOS" (mostra todas as RAs de uma vez, sem filtrar)
 const ALL_RA_KEY = '__TODOS__';
 
-// Camadas de POI (Escolas / Saúde / Segurança Pública) — só aparecem com uma RA
-// selecionada (incl. "TODOS") e o checkbox da categoria marcado.
-let poiData = { escolas: [], saude: [], seguranca: [] };
-let poiMarkers = { escolas: [], saude: [], seguranca: [] };
-let activePoiLayers = { escolas: false, saude: false, seguranca: false };
+// Camadas de POI (Escolas / Saúde / Segurança Pública / Instituições Religiosas) —
+// só aparecem com uma RA selecionada (incl. "TODOS") e o checkbox da categoria marcado.
+let poiData = { escolas: [], saude: [], seguranca: [], religiao: [] };
+let poiMarkers = { escolas: [], saude: [], seguranca: [], religiao: [] };
+let activePoiLayers = { escolas: false, saude: false, seguranca: false, religiao: false };
 
 // Estado das camadas da aba Mapa (Zonas Eleitorais)
 let activeMapTabLayers = {
@@ -26,9 +26,10 @@ let activeMapTabLayers = {
     zonas: true,
     escolas: false,
     saude: false,
-    seguranca: false
+    seguranca: false,
+    religiao: false
 };
-let mapTabPoiMarkers = { escolas: [], saude: [], seguranca: [] };
+let mapTabPoiMarkers = { escolas: [], saude: [], seguranca: [], religiao: [] };
 
 // O campo "ra" salvo em cada ponto (public/locais_pontos.json) nem sempre bate
 // literalmente com o nome da RA no shapefile (public/regioes_administrativas.geojson)
@@ -151,7 +152,7 @@ async function loadData() {
         await loadRABoundaries();
         buildRAsColumn();
 
-        // 5. Carregar as camadas de POI (Escolas / Saúde / Segurança) da aba "RAs"
+        // 5. Carregar as camadas de POI (Escolas / Saúde / Segurança / Instituições Religiosas) da aba "RAs"
         await loadPoiData();
 
         // 6. Inicializar toggles de camadas da aba Mapa (Zonas Eleitorais)
@@ -198,21 +199,24 @@ function buildHoverContent(sec) {
 // ==========================================
 async function loadPoiData() {
     try {
-        const [escolas, saude, seguranca] = await Promise.all([
+        const [escolas, saude, seguranca, religiao] = await Promise.all([
             fetch('poi_escolas.json').then(r => r.json()),
             fetch('poi_saude.json').then(r => r.json()),
-            fetch('poi_seguranca.json').then(r => r.json())
+            fetch('poi_seguranca.json').then(r => r.json()),
+            fetch('poi_religiao.json').then(r => r.json())
         ]);
-        poiData = { escolas, saude, seguranca };
+        poiData = { escolas, saude, seguranca, religiao };
     } catch (err) {
-        console.warn('Erro ao carregar camadas de POI (Escolas/Saúde/Segurança):', err);
+        console.warn('Erro ao carregar camadas de POI (Escolas/Saúde/Segurança/Religiosas):', err);
     }
 }
 
 const POI_ICON_CONFIG = {
     escolas: { path: 'M -6,-6 6,-6 6,6 -6,6 z', fillColor: '#2E7DD7' },
     saude: { path: 'M -2,-6 2,-6 2,-2 6,-2 6,2 2,2 2,6 -2,6 -2,2 -6,2 -6,-2 -2,-2 z', fillColor: '#D7263D' },
-    seguranca: { path: 'M 0,-7 6,0 0,7 -6,0 z', fillColor: '#2B2D42' }
+    seguranca: { path: 'M 0,-7 6,0 0,7 -6,0 z', fillColor: '#2B2D42' },
+    // Marcador neutro (hexágono) — não representa símbolo de nenhuma religião específica.
+    religiao: { path: 'M 6,0 3,5.2 -3,5.2 -6,0 -3,-5.2 3,-5.2 z', fillColor: '#7B5EA7' }
 };
 
 function makePoiIcon(category) {
@@ -259,14 +263,27 @@ function buildSegurancaHoverContent(p) {
     `;
 }
 
+function buildReligiaoHoverContent(p) {
+    return `
+        <div class="kml-hover-tooltip">
+            <strong>⛪ ${p.nome}</strong>
+            <div>🏘️ RA: ${p.ra}</div>
+            ${p.endereco ? `<div>📍 ${p.endereco}</div>` : ''}
+        </div>
+    `;
+}
+
 const POI_HOVER_BUILDERS = {
     escolas: buildEscolaHoverContent,
     saude: buildSaudeHoverContent,
-    seguranca: buildSegurancaHoverContent
+    seguranca: buildSegurancaHoverContent,
+    religiao: buildReligiaoHoverContent
 };
 
+const POI_CATEGORIES = ['escolas', 'saude', 'seguranca', 'religiao'];
+
 function clearPoiMarkers(category) {
-    const categorias = category ? [category] : ['escolas', 'saude', 'seguranca'];
+    const categorias = category ? [category] : POI_CATEGORIES;
     categorias.forEach(cat => {
         (poiMarkers[cat] || []).forEach(m => m.setMap(null));
         poiMarkers[cat] = [];
@@ -276,7 +293,7 @@ function clearPoiMarkers(category) {
 // Recria os marcadores de POI visíveis: só desenha algo se houver uma RA
 // selecionada (incl. "TODOS") e a categoria estiver com o checkbox marcado.
 function updatePoiMarkers() {
-    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+    POI_CATEGORIES.forEach(cat => {
         clearPoiMarkers(cat);
         if (!activeRA || !activePoiLayers[cat]) return;
 
@@ -298,7 +315,7 @@ function updatePoiMarkers() {
     });
 }
 
-['escolas', 'saude', 'seguranca'].forEach(cat => {
+POI_CATEGORIES.forEach(cat => {
     const checkbox = document.getElementById(`poi-toggle-${cat}`);
     if (!checkbox) return;
     checkbox.addEventListener('change', () => {
@@ -346,7 +363,7 @@ function updateMapZonasVisibility() {
 }
 
 function updateMapTabPoiMarkers() {
-    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+    POI_CATEGORIES.forEach(cat => {
         (mapTabPoiMarkers[cat] || []).forEach(m => m.setMap(null));
         mapTabPoiMarkers[cat] = [];
 
@@ -395,7 +412,7 @@ function initMapTabLayerToggles() {
         });
     }
 
-    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+    POI_CATEGORIES.forEach(cat => {
         const checkbox = document.getElementById(`map-toggle-${cat}`);
         if (!checkbox) return;
         checkbox.addEventListener('change', () => {
