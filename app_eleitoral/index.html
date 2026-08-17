@@ -52,6 +52,21 @@
 
             <!-- Sidebar: Conteúdo do Detalhamento por RA -->
             <div id="ra-sidebar" style="display: none;">
+                <div class="poi-layers-panel">
+                    <p class="poi-layers-title">Camadas (exibidas ao selecionar uma RA)</p>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="poi-toggle-escolas" data-poi="escolas">
+                        <span class="poi-swatch poi-swatch-escolas"></span> Escolas
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="poi-toggle-saude" data-poi="saude">
+                        <span class="poi-swatch poi-swatch-saude"></span> Saúde
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="poi-toggle-seguranca" data-poi="seguranca">
+                        <span class="poi-swatch poi-swatch-seguranca"></span> Segurança Pública
+                    </label>
+                </div>
                 <div id="ra-sidebar-content" class="sidebar-content">
                     <div class="instruction">
                         Selecione uma Região Administrativa na coluna ao lado para visualizar os detalhes.

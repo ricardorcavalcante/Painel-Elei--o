@@ -1,0 +1,322 @@
+FID,fid,the_geom,id,endereco,orgao,telefone,unidade_op,sigla,cpr,georef,area_upm,atualizaca,nome_ra,tipo_2
+seguranca_2.1,1,MULTIPOINT ((168936.1445000004 8247968.0065)),1,Setor L Norte QNL 22 Cj F Lt 4,PMDF,,77ª Posto Comunitário Segurança,PCS 077,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.2,2,MULTIPOINT ((169946.37789999973 8249009.5914)),2,Setor J Norte QNJ 43 Lt 18,PMDF,,89ª Posto Comunitário Segurança,PCS 089,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.3,3,MULTIPOINT ((168789.97640000004 8246506.361)),3,Centro Metropolitano Praça da Estrela Lt 1,PCDF,3336 3335,Academia de Polícia Civil,APC,,,,,Taguatinga,Policia Civil
+seguranca_2.4,4,MULTIPOINT ((172386.9458999997 8250956.3291)),4,Setor G Norte QNG AE 22 PMDF,PMDF,96666012,Batalhao de Aviacao Operacional,BAvOp,CME,NUACRI/SOSP,BAvOp,,Taguatinga,Batalhao da PM
+seguranca_2.5,5,MULTIPOINT ((171311.1797000002 8249216.8991)),5,Setor F Norte CNF 2 Lt 10,PMDF,,67ª Posto Comunitário Segurança,PCS 067,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.6,6,MULTIPOINT ((172153.0845999997 8247146.0518)),6,Setor Central AE 8 2º BPM,PMDF,3561 6090,2º Batalhao de Policia Militar,2º BPM,,,,,Taguatinga,Batalhao da PM
+seguranca_2.7,7,MULTIPOINT ((172211.89209999982 8247166.0934)),7,Setor Central AE 7 CBMDF,CBMDF,3202 5245,2º Grupamento de Bombeiro Militar,2º GBM,,,,,Taguatinga,Batalhao ou Grupamento de Bombeiros
+seguranca_2.8,8,MULTIPOINT ((172804.14829999954 8247301.1873)),8,Setor Central AE Delegacia,PCDF,3352 0735,12ª  Delegacia Policial,12ª DP,,,,,Taguatinga,Delegacia
+seguranca_2.9,9,MULTIPOINT ((174741.8694000002 8243709.529)),9,Setor F Sul QSF 2 Lt 110,PMDF,,66ª Posto Comunitário Segurança,PCS 066,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.10,10,MULTIPOINT ((174553.9369000001 8246680.3069)),10,Rua 34 Sul Lt 8,PMDF,,94ª Posto Comunitário Segurança,PCS 094,CPRO,NUACRI/SOSP,17º BPM,,Águas Claras,Posto Comunitario
+seguranca_2.11,11,MULTIPOINT ((176769.5416000001 8247161.3791)),11,Q 103 Praça Juriti Lt 4,PMDF,,12ª Posto Comunitário Segurança,PCS 012,CPRO,NUACRI/SOSP,17º BPM,,Águas Claras,Posto Comunitario
+seguranca_2.12,12,MULTIPOINT ((175757.0708999997 8242718.8435)),12,QS 9 Rua 123 Lt 9,PCDF,3356 3322,21ª  Delegacia Policial,21ª DP,,,,,Taguatinga,Delegacia
+seguranca_2.13,13,MULTIPOINT ((177008.91079999972 8249373.6282)),13,Setor Habitacional Vicente Pires/Gleba 2 Rua da Feira Q 2E Lt 3,PMDF,,11ª Posto Comunitário Segurança,PCS 011,CPRO,NUACRI/SOSP,17º BPM,,Vicente Pires,Posto Comunitario
+seguranca_2.14,14,MULTIPOINT ((172670.26219999976 8250545.8323)),14,SH Vicente Pires/Colônia Agrícola São José Chac 15B Lt 1,PMDF,,88ª Posto Comunitário Segurança,PCS 088,CPRO,NUACRI/SOSP,17º BPM,,Vicente Pires,Posto Comunitario
+seguranca_2.15,15,MULTIPOINT ((168460.84379999992 8249338.2676)),15,Setor L Norte QNL 30 Cj A Lt 2/4/6,DETRANDF,3901 4259,DIVTRAN III,DIVTRAN III,,,,,Ceilândia,DETRAN
+seguranca_2.16,16,MULTIPOINT ((202667.98249999993 8239783.6609)),16,Bairro Resid Oeste EQ 201/202 Lt 2,PMDF,96182674,21ª Batalhao Policia Militar,21º BPM,CPRL,NUACRI/SOSP,21º BPM,,Sao Sebastiao,Batalhao da PM
+seguranca_2.17,17,MULTIPOINT ((202693.3515999997 8239755.2608)),17,Bairro Resid Oeste EQ 201/202 Lt 1,CBMDF,3901 8560,17ª Grupamento de Bombeiro Militar,17ª GBM,,,,,São Sebastião,Batalhao ou Grupamento de Bombeiros
+seguranca_2.18,18,MULTIPOINT ((202558.45390000008 8240675.2772)),18,"Quadra 02 - Conjunto 02 - Lote 01,Av. Comercial",PCDF,3335 3738,30ª  Delegacia Policial,30ª DP,,,,,São Sebastião,Delegacia
+seguranca_2.19,19,MULTIPOINT ((205229.88379999995 8239334.6498)),19,Bairro Resid do Bosque Rua 13 Lt 231,PMDF,,31ª Posto Comunitário Segurança,PCS 031,CPRL,NUACRI/SOSP,21º BPM,,São Sebastião,Posto Comunitario
+seguranca_2.20,20,MULTIPOINT ((200377.80169999972 8267397.2213)),20,Setor Administrativo Q Central Lt M,PCDF,3591 2053,13ª  Delegacia Policial,13ª DP,,,,,Sobradinho,Delegacia
+seguranca_2.21,21,MULTIPOINT ((200691.2921000002 8267539.8951)),21,Setor Administrativo Q Central Lt O,CBMDF,3901 2924,22º Grupamento de Bombeiro Militar,22º GBM,,,,,Sobradinho,Batalhao ou Grupamento de Bombeiros
+seguranca_2.22,22,MULTIPOINT ((201834.13570000045 8267596.9828)),22,Q 14 AE 29,DETRANDF,3901 3350,SERTRAN I,SERTRAN I,,,,,Sobradinho,DETRAN
+seguranca_2.23,23,MULTIPOINT ((200294.02219999954 8266466.748)),23,Setor de Expansão Econômica Q 4 Lt 8,PMDF,,75ª Posto Comunitário Segurança,PCS 075,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho,Posto Comunitario
+seguranca_2.24,24,MULTIPOINT ((196912.3970999997 8268724.0066)),24,AR 5 Cj 11 Lt 7,PCDF,3485 4004,35ª  Delegacia Policial,35ª DP,,,,,Sobradinho II,Delegacia
+seguranca_2.25,25,MULTIPOINT ((197118.7577999998 8268303.1471)),25,Avenida Central Cj 5 Lt 24,PMDF,,111ª Posto Comunitário Segurança,PCS 111,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho II,Posto Comunitario
+seguranca_2.26,26,MULTIPOINT ((202285.39360000007 8256057.2165)),26,SH Itapoã/Cond Itapoã I Q 2 Cj A Lt 1A,PMDF,,41ª Posto Comunitário Segurança,PCS 041,CPRL,NUACRI/SOSP,20º BPM,,Itapoã,Posto Comunitario
+seguranca_2.27,27,MULTIPOINT ((176444.85400000028 8224576.0878)),27,SH Ribeirão/Cond Porto Rico Etapa 1 Q 8 Lt 14,PMDF,,81ª Posto Comunitário Segurança,PCS 081,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.28,28,MULTIPOINT ((180102.71140000038 8228958.3335)),28,AC 118 Cj A Lt 2,CBMDF,3901 8562,18ª Grupamento de Bombeiro Militar,18ª GBM,,,,,Santa Maria,Batalhao ou Grupamento de Bombeiros
+seguranca_2.29,29,MULTIPOINT ((179492.74920000043 8228706.918)),29,QR 121 Cj D Lt 1,PMDF,,95ª Posto Comunitário Segurança,PCS 095,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.30,30,MULTIPOINT ((178650.75289999973 8228003.2057)),30,CL 114 Lt A,PCDF,3395 2000,33ª  Delegacia Policial,33ª DP,,,,,Santa Maria,Delegacia
+seguranca_2.31,31,MULTIPOINT ((169988.09250000026 8243537.3697)),31,QN 206 Cj A Lt 2,PMDF,,17ª Posto Comunitário Segurança,PCS 017,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.32,32,MULTIPOINT ((167269.14639999997 8241940.8656)),32,QS 411 AE 1,PCDF,3359 1413,26ª  Delegacia Policial,26ª DP,,,,,Samambaia,Delegacia
+seguranca_2.33,33,MULTIPOINT ((167452.28870000038 8240823.2269)),33,QR 313 Cj 14 Lt 5,PMDF,,65ª Posto Comunitário Segurança,PCS 065,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.34,34,MULTIPOINT ((171036.6163999997 8243088.3575)),34,QR 112 Cj 5 Lt 9,PMDF,,69ª Posto Comunitário Segurança,PCS 069,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.35,35,MULTIPOINT ((168494.1118999999 8242522.3754)),35,QN 203 AE 1 PMDF,PMDF,99652144,11ª Batalhao Policia Militar,11º BPM,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Batalhao da PM
+seguranca_2.36,36,MULTIPOINT ((173251.66959999967 8239710.1068)),36,Riacho Fundo II QN 9A Cj 2 Lt 3,PMDF,,3ª Posto Comunitário Segurança,PCS 003,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo II,Posto Comunitario
+seguranca_2.37,37,MULTIPOINT ((177124.68039999995 8240974.6602)),37,Colônia Agrícola Sucupira Chac 7 Lt 14,PMDF,,51ª Posto Comunitário Segurança,PCS 051,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo I,Posto Comunitario
+seguranca_2.38,38,MULTIPOINT ((167757.57440000027 8236339.4222)),38,Q 510 Cj 19 Lt 1,PMDF,,4ª Posto Comunitário Segurança,PCS 004,CPRS,NUACRI/SOSP,27º BPM,,Recanto das Emas,Posto Comunitario
+seguranca_2.39,39,MULTIPOINT ((177493.80080000032 8242074.1309)),39,Riacho Fundo I QN 3 AE 3,CBMDF,3901 8374,21ª Grupamento de Bombeiro Militar,21ª GBM,,,,,Riacho Fundo,Batalhao ou Grupamento de Bombeiros
+seguranca_2.40,40,MULTIPOINT ((174961.60369999986 8234764.4904)),40,Riacho Fundo II - 3a Etapa QS 14 Cj 6 Lt 3,PMDF,,36ª Posto Comunitário Segurança,PCS 036,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo II,Posto Comunitario
+seguranca_2.41,41,MULTIPOINT ((173734.47080000024 8240460.8079)),41,Riacho Fundo II - 1a Etapa QN 15D Cj 6 Lt 10,PMDF,,33ª Posto Comunitário Segurança,PCS 033,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo II,Posto Comunitario
+seguranca_2.42,42,MULTIPOINT ((172720.30370000005 8239627.4467)),42,Av Recanto das Emas Q 201 Lt 1,PMDF,,84ª Posto Comunitário Segurança,PCS 084,CPRS,NUACRI/SOSP,27º BPM,,Recanto das Emas,Posto Comunitario
+seguranca_2.43,43,MULTIPOINT ((171644.92540000007 8239244.9644)),43,Av Recanto das Emas Q 203 Lt 38,PMDF,,64ª Posto Comunitário Segurança,PCS 064,CPRS,NUACRI/SOSP,27º BPM,,Recanto das Emas,Posto Comunitario
+seguranca_2.44,44,MULTIPOINT ((214583.19639999978 8270850.0394)),44,Setor Tradicional Av Salvador Coelho Q 59 Lt 12,PMDF,,116ª Posto Comunitário Segurança,PCS 116,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.45,45,MULTIPOINT ((215230.1470999997 8270308.6261)),45,Setor Tradicional Av Independência Q 121 Lt 8,SSPDF,3901-3559,POSTO DE ATENDIMENTO,,,,,,Planaltina,
+seguranca_2.46,46,MULTIPOINT ((215729.21019999962 8264713.7761)),46,SH Vale do Amanhecer/Cond Vale do Amanhecer CR 82 Lt 2,PMDF,,39ª Posto Comunitário Segurança,PCS 039,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.47,47,MULTIPOINT ((168629.78969999962 8238314.7505)),47,Av Recanto das Emas Q 304 Lt 10,PMDF,3331 5147,18a Compahia de Polícia Militar Independente,18ª CPMInd,,,,,Recanto das Emas,Batalhao da PM
+seguranca_2.48,48,MULTIPOINT ((168446.58970000036 8238154.1584)),48,Av Recanto das Emas Q 305 Lt 2,PCDF,3331 5227,27ª  Delegacia Policial,27ª DP,,,,,Recanto das Emas,Delegacia
+seguranca_2.49,49,MULTIPOINT ((216073.15070000011 8271178.352)),49,Setor Resid Leste/Vila Buritis Q 4 Cj J Lt 33,PMDF,,40ª Posto Comunitário Segurança,PCS 040,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.50,50,MULTIPOINT ((215324.33880000003 8270924.1615)),50,Setor Comercial Central Q 2 Bl K,PCDF,3389 2312,16ª  Delegacia Policial,16ª DP,,,,,Planaltina,Delegacia
+seguranca_2.51,51,MULTIPOINT ((217412.5719999997 8271711.0419)),51,Setor Resid Leste/Buritis IV Q 19 AE 1,PCDF,3388 8502,31ª Delegacia Policial,31ª DP,,,,,Planaltina,Delegacia
+seguranca_2.52,52,MULTIPOINT ((182717.46030000038 8243307.4978)),52,3ª Avenida QG Bombeiros,CBMDF,3901 8371,6ª Grupamento de Bombeiro Militar,6ª GBM,,,,,Núcleo Bandeirante,Batalhao ou Grupamento de Bombeiros
+seguranca_2.53,53,MULTIPOINT ((181195.18630000018 8242375.7669)),53,Núcleo Rural NB 1 Chac 1,PMDF,,44ª Posto Comunitário Segurança,PCS 044,CPRS,NUACRI/SOSP,25º BPM,,Núcleo Bandeirante,Posto Comunitario
+seguranca_2.54,54,MULTIPOINT ((182215.12799999956 8243170.6031)),54,3ª Avenida AE G,PCDF,3486 1403,11ª  Delegacia Policial,11ª DP,,,,,Núcleo Bandeirante,Delegacia
+seguranca_2.55,55,MULTIPOINT ((201854.76360000018 8255505.3102)),55,Q 33 Lt 5,PMDF,99831821,20ª Batalhao Policia Militar,20º BPM,CPRL,NUACRI/SOSP,20º BPM,,Paranoa,Batalhao da PM
+seguranca_2.56,56,MULTIPOINT ((201893.39140000008 8255554.7178)),56,Q 33 Lt 4,PCDF,3369 4304,6ª  Delegacia Policial,6ª DP,,,,,Paranoá,Delegacia
+seguranca_2.57,57,MULTIPOINT ((201765.03390000015 8255461.4435)),57,Q 33 Lt 6,CBMDF,3202 5230,10ª Grupamento de Bombeiro Militar,10ª GBM,,,,,Paranoá,Batalhao ou Grupamento de Bombeiros
+seguranca_2.58,58,MULTIPOINT ((216867.92190000042 8269043.1548)),58,SH Arapoanga/Cond Arapoanga Q 8 Cj I AC,PMDF,,6ª Posto Comunitário Segurança,PCS 006,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.59,59,MULTIPOINT ((215677.12519999966 8272166.6168)),59,Setor de Áreas Especiais Norte AE 9A CBMDF,CBMDF,3901 2880,9ª Companhia Regional de Incêndio,9ª CRI,,,,,Planaltina,Batalhao ou Grupamento de Bombeiros
+seguranca_2.60,60,MULTIPOINT ((181920.36259999964 8250485.2811)),60,SIA Trecho 2 CBMDF,CBMDF,3901 2944,3ª Grupamento de Bombeiro Militar,3º GBM,,,,,SIA,Batalhao ou Grupamento de Bombeiros
+seguranca_2.61,61,MULTIPOINT ((181843.74959999975 8245540.444)),61,SRIA II QE 38 Cj N Lt 5,PMDF,,63ª Posto Comunitário Segurança,PCS 063,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Posto Comunitario
+seguranca_2.62,62,MULTIPOINT ((182388.49010000005 8246258.0746)),62,SRIA II AE 10 Lt A PM,PMDF,99657787,4ª Batalhao Policia Militar,4º BPM,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Batalhao da PM
+seguranca_2.63,63,MULTIPOINT ((180712.2581000002 8247364.0551)),63,SRIA II Centro Comunal I Lt 1 Delegacia de polícia,PCDF,3568 5180,4ª  Delegacia Policial,4ª DP,,,,,Guará II,Delegacia
+seguranca_2.64,64,MULTIPOINT ((180421.28839999996 8245980.9176)),64,SRIA II QE 40 Cj Q Lt 27,PMDF,,97ª Posto Comunitário Segurança,PCS 097,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Posto Comunitario
+seguranca_2.65,65,MULTIPOINT ((181156.37399999984 8245642.5369)),65,SRIA II Pólo de Moda Rua 15 AE 6B CBMDF,CBMDF,3901 2886,2º Grupamento de Atendimento de Emergência Pré-hospitalar,2º GAEPH,,,,,Guará,Batalhao ou Grupamento de Bombeiros
+seguranca_2.66,66,MULTIPOINT ((192760.5762 8246773.9635)),66,SHIS QI 11 Lt C,PCDF,3364 0383,10ª  Delegacia Policial,10ª DP,,,,,Lago Sul,Delegacia
+seguranca_2.67,67,MULTIPOINT ((196717.73120000027 8244702.8261)),67,SMDB Cj 12 Lt 2,PMDF,,30ª Posto Comunitário Segurança,PCS 030,CPRM,NUACRI/SOSP,5º BPM,,Lago Sul,Posto Comunitario
+seguranca_2.68,68,MULTIPOINT ((186988.86280000024 8243493.4431)),68,AeB Aeroporto,CBMDF,3364 9826,5ª Companhia Regional de Incêndio,5ª CRI,,,,,Lago Sul,Batalhao ou Grupamento de Bombeiros
+seguranca_2.69,69,MULTIPOINT ((189196.13320000004 8245738.6655)),69,SHIS QI 5 Cj 19 Lt 24,PMDF,3364 6018,1ª Companhia 5º Batalhao de Policia Militar,,,,,,Lago Sul,Batalhao da PM
+seguranca_2.70,70,MULTIPOINT ((192727.40919999965 8246710.3664)),70,SHIS QI 11 AE 1,CBMDF,3901 2920,11ª Grupamento de Bombeiro Militar,11ª GBM,,,,,Lago Sul,Batalhao ou Grupamento de Bombeiros
+seguranca_2.71,71,MULTIPOINT ((182144.37939999998 8250584.004)),71,SIA Trecho 2 Lt 1655,PCDF,3234 1315,Divisão de Estatística e Planejamento Operacional,DEPO,,,,,Brasília,Delegacia
+seguranca_2.72,72,MULTIPOINT ((171100.9205 8225407.29)),72,Setor Sul Q 7 AE 7 Lt C,PMDF,,48ª Posto Comunitário Segurança,PCS 048,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.73,73,MULTIPOINT ((181776.35479999986 8250756.3277)),73,SIA Trecho 3 Lt 2050/2060,SSPDF,3363 5153,Corregedoria,CORREGEDORIA,,,,,Guará,
+seguranca_2.74,74,MULTIPOINT ((180498.84399999958 8249157.8259)),74,SRIA I QI 2 Bl B Lt 23,PMDF,96117145,1ª Batalhao Policia Escolar,1º BPEsc,,NUACRI/SOSP,1º BPEsc,,Guará,Batalhao da PM
+seguranca_2.75,75,MULTIPOINT ((168097.8680999996 8249447.4152)),75,Setor M AE 2,CBMDF,3901 8363,8ª Grupamento de Bombeiro Militar,8ª GBM,,,,,Ceilândia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.76,76,MULTIPOINT ((180529.73539999966 8249015.09)),76,SRIA I QE 2 Lt Q Bombeiros,CBMDF,3901 2899,13ª Grupamento de Bombeiro Militar,13ª GBM,,,,,Guará,Batalhao ou Grupamento de Bombeiros
+seguranca_2.77,77,MULTIPOINT ((179738.2625000002 8252476.1518)),77,SCIA Q 10 Cj 1 Lt 1,PMDF,,57ª Posto Comunitário Segurança,PCS 057,CPRM,NUACRI/SOSP,4º BPM,,SCIA,Posto Comunitario
+seguranca_2.78,78,MULTIPOINT ((179872.3075000001 8249227.7656)),78,SRIA I QI 10 Praça,PMDF,,113ª Posto Comunitário Segurança,PCS 113,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Posto Comunitario
+seguranca_2.79,79,MULTIPOINT ((185312.69539999962 8251032.6613)),79,SHCES Q 1101 Lt 12,CBMDF,3901 2902,14ª Grupamento de Bombeiro Militar,14ª GBM,,,,,Cruzeiro,Batalhao ou Grupamento de Bombeiros
+seguranca_2.80,80,MULTIPOINT ((185366.47190000024 8252814.0817)),80,SRES SE Lt 3,PMDF,3361 5607,11ª Companhia de Policia Militar Independente,11ª CPMInd,,,,,Cruzeiro,Batalhao da PM
+seguranca_2.81,81,MULTIPOINT ((166045.50719999988 8250519.1301)),81,Setor M QNM 8 Cj H Lt 39,PMDF,,91ª Posto Comunitário Segurança,PCS 091,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.82,82,MULTIPOINT ((184876.93549999967 8252200.4322)),82,SRES AE Lt 16,PCDF,3233 6480,3ª  Delegacia Policial,3ª DP,,,,,Cruzeiro Velho,Delegacia
+seguranca_2.83,83,MULTIPOINT ((167179.31170000043 8248967.1138)),83,Setor M QNM 2 Cj F Lt 2,PCDF,3581 3365,Delegacia da Criança e do Adolescente II,DCA II,,,,,Ceilandia,Delegacia
+seguranca_2.84,84,MULTIPOINT ((167228.27660000045 8248994.1029)),84,Setor M QNM 2 DP,PCDF,3373 1252,15ª  Delegacia Policial,15ª DP,,,,,Ceilândia,Delegacia
+seguranca_2.85,85,MULTIPOINT ((172294.7287999997 8228949.6189)),85,Av Contorno Norte Lt 1,DETRANDF,3901 1070,SERTRAN II,SERTRAN II,,,,,Gama,DETRAN
+seguranca_2.86,86,MULTIPOINT ((186093.30370000005 8251869.877)),86,SHCSW EQRSW 2/3 Lt 3,PMDF,99721022,7ª Batalhao Policia Militar,7º BPM,CPRM,NUACRI/SOSP,7º BPM,,Cruzeiro,Batalhao da PM
+seguranca_2.87,87,MULTIPOINT ((186688.42599999998 8251009.6337)),87,SHCSW CLSW 102 Bl C,PMDF,,34ª Posto Comunitário Segurança,PCS 034,CPRM,NUACRI/SOSP,7º BPM,,Sudoeste,Posto Comunitario
+seguranca_2.88,88,MULTIPOINT ((172082.08559999987 8227089.128)),88,Setor Central EQ 55/56 AE 2,PMDF,,83ª Posto Comunitário Segurança,PCS 083,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.89,89,MULTIPOINT ((172537.48780000024 8225650.9701)),89,Setor Leste Q 39 Lt 35,PMDF,,109ª Posto Comunitário Segurança,PCS 109,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.90,90,MULTIPOINT ((172822.46449999977 8226218.1006)),90,Setor Leste Q 24 CL Lt 3,PMDF,,8ª Posto Comunitário Segurança,PCS 008,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.91,91,MULTIPOINT ((171890.31109999958 8226733.8272)),91,Setor Central Delegacia,PCDF,3384 4088,14ª  Delegacia Policial,14ª DP,,,,,Gama,Delegacia
+seguranca_2.92,92,MULTIPOINT ((172413.98539999966 8227838.7758)),92,Setor Norte EQ 1/2 CBDF,CBMDF,3901 8570,16º Grupamento de Bombeiro Militar,3ª GBM,,,,,Gama,Batalhao ou Grupamento de Bombeiros
+seguranca_2.93,93,MULTIPOINT ((173196.9441999998 8227666.1763)),93,Setor Leste EQ 7/9 AE 7/9,PMDF,,76ª Posto Comunitário Segurança,PCS 076,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.94,94,MULTIPOINT ((170094.24590000045 8227907.43)),94,Setor Oeste Q 18 Lt 80,PMDF,,93ª Posto Comunitário Segurança,PCS 093,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.95,95,MULTIPOINT ((170711.57299999986 8227561.2014)),95,Setor Oeste EQ 13/17,PCDF,3556 8389,20ª  Delegacia Policial,20ª DP,,,,,Gama,Delegacia
+seguranca_2.96,96,MULTIPOINT ((167338.03749999963 8247283.5139)),96,Setor N QNN 6 Lt S/n,PMDF,3376 6060,8º Batalhao de Policia Militar,8º BPM,,,,,Ceilândia,Batalhao da PM
+seguranca_2.97,97,MULTIPOINT ((166188.3468000004 8245323.808)),97,Setor P EQNP 30/34 AE B,PCDF,3376 3748,23ª  Delegacia Policial,23ª DP,,,,,Ceilândia,Delegacia
+seguranca_2.98,98,MULTIPOINT ((188265.50349999964 8253681.467)),98,SAM Lt D,PMDF,3901 8578,Quartel do Comando Geral,QCG,,,,,Brasília,Batalhao da PM
+seguranca_2.99,99,MULTIPOINT ((164578.36089999974 8248565.1865)),99,Setor P EQNP 11/7 EC,PMDF,,105ª Posto Comunitário Segurança,PCS 105,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.100,100,MULTIPOINT ((164221.70689999964 8249748.3004)),100,Setor P EQNP 19/15 AE A,PCDF,3375 9911,19ª  Delegacia Policial,19ª DP,,,,,Ceilândia,Delegacia
+seguranca_2.101,101,MULTIPOINT ((166204.02840000018 8245815.8097)),101,Setor P QNP 16 EC,PMDF,,110ª Posto Comunitário Segurança,PCS 110,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.102,102,MULTIPOINT ((165801.5569000002 8244625.7589)),102,Cond Pôr do Sol Q 401 Cj A Lt 10,PMDF,,72ª Posto Comunitário Segurança,PCS 072,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.103,103,MULTIPOINT ((164424.45179999992 8247429.5435)),103,SETOR HABITACIONAL SOL NASCENTE TRECHO 02 Q 206 Cj F Lt 36,PMDF,,74ª Posto Comunitário Segurança,PCS 074,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.104,104,MULTIPOINT ((161614.85529999994 8250530.9421)),104,Setor de Indústria QI 18 Lt 66,PMDF,,100ª Posto Comunitário Segurança,PCS 100,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.105,105,MULTIPOINT ((164381.5959999999 8251275.9011)),105,Setor O EQNO 10/12 Lt E,PCDF,3374 0359,24ª Delegacia Policial,24ª DP,,,,,Ceilândia,Delegacia
+seguranca_2.106,106,MULTIPOINT ((184055.48149999976 8244906.9252)),106,QR 01-A Lt 02 Praça do Bosque,CBMDF,3901 2910,19ª Grupamento de Bombeiro Militar,19ª GBM,,,,,Candangolândia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.107,107,MULTIPOINT ((183458.37359999958 8244555.3982)),107,Área a ser parcelada,PMDF,,22ª Posto Comunitário Segurança,PCS 022,CPRS,NUACRI/SOSP,25º BPM,,Candangolândia,Posto Comunitario
+seguranca_2.108,108,MULTIPOINT ((184117.40029999986 8244657.5723)),108,Praça do Bosque Lt 10,PMDF,96666017,Batalhao Policia Militar Ambiental,BPMA,CME,NUACRI/SOSP,BPMA,,Candangolândia,Batalhao da PM
+seguranca_2.109,109,MULTIPOINT ((156925.67810000014 8264720.327)),109,Bairro Veredas Q 1 Cj H Lt 9,PMDF,,103ª Posto Comunitário Segurança,PCS 103,CPRO,NUACRI/SOSP,16º BPM,,Brazlandia,Posto Comunitario
+seguranca_2.110,110,MULTIPOINT ((156952.39379999973 8265989.1018)),110,Vila São José Q 37 Cj J Lt 19,PMDF,,1ª Posto Comunitário Segurança,PCS 001,CPRO,NUACRI/SOSP,16º BPM,,Brazlandia,Posto Comunitario
+seguranca_2.111,111,MULTIPOINT ((186082.05920000002 8247462.4294)),111,SPO Lt 1,CBMDF,3901 3463,15ª Grupamento de Bombeiro Militar,15ª GBM,,,,,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.112,112,MULTIPOINT ((189265.6972000003 8248699.5794)),112,SHCS EQS 208/408 Lt B,PCDF,3242 3529,Divisão de Controle de Denúncias e Ocorrências Eletrônicas,DICOE,,,,,Brasília,Delegacia
+seguranca_2.113,113,MULTIPOINT ((189604.0861999998 8251705.3088)),113,SRPS Parque da Cidade,PMDF,,99ª Posto Comunitário Segurança,PCS 099,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.114,114,MULTIPOINT ((157528.90859999973 8263908.1794)),114,Setor Norte Q 4 Rua E Lt 45,PMDF,,118ª Posto Comunitário Segurança,PCS 118,CPRO,NUACRI/SOSP,16º BPM,,Brazlandia,Posto Comunitario
+seguranca_2.115,115,MULTIPOINT ((157340.3459999999 8263262.899)),115,Setor Norte AE 1N Lt A,PMDF,96666010,16ª Batalhao Policia Militar,16º BPM,CPRO,NUACRI/SOSP,16º BPM,,Brazlandia,Batalhao da PM
+seguranca_2.116,116,MULTIPOINT ((157936.88650000002 8263815.0793)),116,SN Quadra 03 AE 04,PCDF,3391 1120,18ª  Delegacia Policial,18ª DP,,,,,Brazlândia,Delegacia
+seguranca_2.117,117,MULTIPOINT ((190917.69770000037 8251544.18)),117,SDS Bl L,PMDF,3325 8209,7a Companhia de Policia Militar Independente,7ª CPMInd,,,,,Brasília,Batalhao da PM
+seguranca_2.118,118,MULTIPOINT ((190124.69680000003 8249737.8401)),118,SHCS EQS 204/205 Lt A,PCDF,3244 9566,Delegacia  Especial de Atendimento à Mulher,DEAM,,,,,Brasília,Delegacia
+seguranca_2.119,119,MULTIPOINT ((189453.97240000032 8251350.3589)),119,SGAS Q 902 Lt 74,PCDF,3323 4210,Divisão de Polícia Comunitária,DIPCOM,,,,,Brasília,Delegacia
+seguranca_2.120,120,MULTIPOINT ((188167.28280000016 8247841.0681)),120,SHCS EQS 212/412 Lt A,PCDF,3346 6775,Divisão de Controle de Denúncias e Ocorrências Eletrônicas,DICOE,,,,,Brasília,Delegacia
+seguranca_2.121,121,MULTIPOINT ((156651.20289999992 8263277.589)),121,Setor Tradicional AE 1 INPS,CBMDF,3901 3609,7ª Grupamento de Bombeiro Militar,7ª GBM,,,,,Brazlândia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.122,122,MULTIPOINT ((162431.91640000045 8249702.2149)),122,SH Sol Nascente/Cond Chac 616 Cj A Lt 2,PMDF,,71ª Posto Comunitário Segurança,PCS 071,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.123,123,MULTIPOINT ((190360.0376000004 8254749.6236)),123,SEPN Q 507 Bl D,DETRANDF,3340 8869,POSTO DE LICENCIAMENTO,,,,,,Brasília,DETRAN
+seguranca_2.124,124,MULTIPOINT ((191582.31269999966 8252432.6216)),124,SBN Q 2 Bl K,PCDF,3312 8061,Delegacia de Crimes Contra a Ordem Tributária,DOT,,,,,Brasília,Delegacia
+seguranca_2.125,125,MULTIPOINT ((191446.49670000002 8253986.7217)),125,SHCN EQN 204/205 Lt A,PCDF,3347 0100,Delegacia da Criança e do Adolescente,DCA,,,,,Brasília,Delegacia
+seguranca_2.126,126,MULTIPOINT ((194963.67080000043 8252531.885)),126,SCEN Trecho 1 Lt 3A/3B,CBMDF,3901 3448,1º Batalhão de Busca e Salvamento,1º BBS,,,,,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.127,127,MULTIPOINT ((188712.27219999954 8258039.808)),127,STN Lt G,CBMDF,3901 2927,4º Batalhão de Incêndio/Florestal,4º BI/F,,,,,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.128,128,MULTIPOINT ((186113.54370000027 8249946.8237)),128,SPO IML/CPE,PCDF,3362 5714,"Depto de Ativ Especiais, Ins Criminal, Inst Pesq Forense DNA, DPE",DEPATE,,,,,Brasília,Policia Civil
+seguranca_2.129,129,MULTIPOINT ((185797.02080000006 8247255.2468)),129,SPO Lt 2B,PCDF,3245 1567,1ª  Delegacia Policial,1ª DP,,,,,Brasília,Delegacia
+seguranca_2.130,130,MULTIPOINT ((190938.22800000012 8252405.833)),130,SCN Q 2 Bl E,PCDF,3327 0003,Delegacia de Repressão à Pequenas Infrações,DRPI,,,,,Brasília,Delegacia
+seguranca_2.131,131,MULTIPOINT ((189212.85869999975 8254333.8613)),131,SAM DETRAN,DETRANDF,,Depósito do DETRAN _ Plano Piloto,,,,,,Brasília,DETRAN
+seguranca_2.132,132,MULTIPOINT ((187123.4896999998 8248840.1929)),132,SHIGS Q 713 Bl I Lt 74,PMDF,,45ª Posto Comunitário Segurança,PCS 045,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.133,133,MULTIPOINT ((193084.6752000004 8251852.5835)),133,SAFN Garagem do Congresso 1,PMDF,3216 9910,6º Batalhao Policia Militar,6º BPM,,,,,Brasília,Batalhao da PM
+seguranca_2.134,134,MULTIPOINT ((179277.21310000028 8229396.2896)),134,Cond Resid Santos Dumont Rua Min Araripe Macedo QC 5 Lt 22,PMDF,,78ª Posto Comunitário Segurança,PCS 078,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.135,135,MULTIPOINT ((185012.2575000003 8246379.8258)),135,SHIP Setor Hípico Canteiro de Obras do Metrô - Parque das Aves,PMDF,3345 4238,16ª Companhia de Policia Militar Independente,16ª CPMInd,,,,,Brasília,Batalhao da PM
+seguranca_2.136,136,MULTIPOINT ((175620.2525000004 8242123.8184)),136,BR 060 -Granja Modelo Riacho Fundo,PMDF,3356 1880,Regimento Policia Montada,RPMon,,,,,Riacho Fundo,Batalhao da PM
+seguranca_2.137,137,MULTIPOINT ((186277.72240000032 8250349.9325)),137,SQSW 104 Área Especial - Sudoeste,PMDF,3342 2033 - 99831362,1º Batalhao Policiamento de Transito,1 ºBPTrans,CPRM,NUACRI/SOSP,1º BPTran,,Sudoeste,Batalhao da PM
+seguranca_2.138,138,MULTIPOINT ((194370.2625000002 8251003.8334)),138,Via N-1 Lt 04 Leste Área Especial S/Nº,CBMDF,3901 2961,1º Grupamento de Bombeiro Militar,1º GBM,,,,,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.139,139,MULTIPOINT ((188697.6568 8253835.4623)),139,"SAM Quadra ""B"" Bloco ""D""",CBMDF,3343 9035,3º Batalhão de Busca e Salvamento,3º BBS,,,,,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.140,140,MULTIPOINT ((157223.87310000043 8251098.8477)),140,BR 070 Km 22,SSPDF,3500 2150,Sierra 5,,,,,,Ceilandia,
+seguranca_2.141,141,MULTIPOINT ((184957.50820000004 8252276.2785)),141,SRES Q 01 Lote 14  AE,PCDF,3361 9798,Divisão de Telecomunicações,DITEL,,,,,Cruzeiro,Delegacia
+seguranca_2.142,142,MULTIPOINT ((192961.1752000004 8258641.2149)),142,SHIN 3/5,PCDF,3577 4516,9ª  Delegacia Policial,9ª DP,,,,,Lago Norte,Delegacia
+seguranca_2.143,143,MULTIPOINT ((191136.25980000012 8251724.8325)),143,Rodoviária do Plano Piloto - próxima a estação do Metrô,SSPDF,3218 8600,POSTO - NA HORA,,,,,,Brasília,
+seguranca_2.144,144,MULTIPOINT ((157287.4254999999 8263056.6903)),144,Área Especial 1 Sul Lote 02/05,DETRANDF,3901-1073,POSTO DE ATENDIMENTO,,,,,,Brazlândia,DETRAN
+seguranca_2.145,145,MULTIPOINT ((190533.97929999977 8257808.3502)),145,SQN 415 em frente ao Bloco C,PMDF,,98ª Posto Comunitário Segurança,PCS 098,CPRM,NUACRI/SOSP,3º BPM,,Asa Norte,Posto Comunitario
+seguranca_2.146,146,MULTIPOINT ((181038.00229999982 8246535.0191)),146,QI 27/29 ao lado do Guará Shopping,PMDF,,15ª Posto Comunitário Segurança,PCS 015,CPRM,NUACRI/SOSP,4º BPM,,Guará I,Posto Comunitario
+seguranca_2.147,147,MULTIPOINT ((180525.31259999983 8248639.7068)),147,QE 20 ao lado do Posto Esso,PMDF,,38ª Posto Comunitário Segurança,PCS 038,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Posto Comunitario
+seguranca_2.148,148,MULTIPOINT ((179895.0504999999 8249716.9772)),148,QE 02 AE 01 - Lúcio Costa,PMDF,,117ª Posto Comunitário Segurança,PCS 117,CPRM,NUACRI/SOSP,4º BPM,,Guará II,Posto Comunitario
+seguranca_2.149,149,MULTIPOINT ((183837.9793999996 8250440.8982)),149,Canteiro Central entre a CIMFEL e o BRB,PMDF,,68ª Posto Comunitário Segurança,PCS 068,CPRM,NUACRI/SOSP,4º BPM,,SIA,Posto Comunitario
+seguranca_2.150,150,MULTIPOINT ((189717.42540000007 8245975.0425)),150,SHIS QI 05 Ponte das Graças,PMDF,,55ª Posto Comunitário Segurança,PCS 055,CPRM,NUACRI/SOSP,5º BPM,,Lago Sul,Posto Comunitario
+seguranca_2.151,151,MULTIPOINT ((185988.78870000038 8252812.3622)),151,SER/S Quadra 10 próximo Comércio Local,PMDF,,19ª Posto Comunitário Segurança,PCS 019,CPRM,NUACRI/SOSP,7º BPM,,Cruzeiro,Posto Comunitario
+seguranca_2.152,152,MULTIPOINT ((184723.9707000004 8249820.3178)),152,"EQ 4/5 – Área verde, próximo a parada de ônibus",PMDF,,21ª Posto Comunitário Segurança,PCS 021,CPRM,NUACRI/SOSP,7º BPM,,Cruzeiro,Posto Comunitario
+seguranca_2.153,153,MULTIPOINT ((185235.1308000004 8251941.0652)),153,"SHCES 609, Lt. 03, em frente à Feira",PMDF,,32ª Posto Comunitário Segurança,PCS 032,CPRM,NUACRI/SOSP,7º BPM,,Cruzeiro,Posto Comunitario
+seguranca_2.154,154,MULTIPOINT ((185236.69620000012 8253316.0904)),154,"QD 12, frente ao conjunto V",PMDF,,107ª Posto Comunitário Segurança,PCS 107,CPRM,NUACRI/SOSP,7º BPM,,Octogonal,Posto Comunitario
+seguranca_2.155,155,MULTIPOINT ((185849.7154000001 8250214.7676)),155,CLSW 105 (ECS 2),PMDF,,102ª Posto Comunitário Segurança,PCS 102,CPRM,NUACRI/SOSP,7º BPM,,Sudoeste,Posto Comunitario
+seguranca_2.156,156,MULTIPOINT ((164059.09080000035 8252374.4443)),156,"Área ao lado da EC 63, frente à rua 01 Cond. Privê",PMDF,,5ª Posto Comunitário Segurança,PCS 005,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.157,157,MULTIPOINT ((166363.04849999957 8249347.6018)),157,"EQNM 3/5, ao lado dos Conjuntos “E” e “G”",PMDF,,24ª Posto Comunitário Segurança,PCS 024,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.158,158,MULTIPOINT ((164139.34159999993 8250531.0094)),158,Expansão do Setor O QNO 17 Cj D Lt 1,PMDF,,25ª Posto Comunitário Segurança,PCS 025,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.159,159,MULTIPOINT ((165122.69620000012 8245685.3862)),159,QNP 28,PMDF,,26ª Posto Comunitário Segurança,PCS 026,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.160,160,MULTIPOINT ((184928.23950000014 8236176.6957)),160,Quadras 16/17 no conj. 1 acesso a Vargem Bonita,PMDF,,58ª Posto Comunitário Segurança,PCS 058,CPRS,NUACRI/SOSP,25º BPM,,Park Way,Posto Comunitario
+seguranca_2.161,161,MULTIPOINT ((162872.59549999982 8240968.2057)),161,EQ 831 praça entre os conjuntos 01 e 02,PMDF,,104ª Posto Comunitário Segurança,PCS 104,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.162,162,MULTIPOINT ((171532.35360000003 8241749.6744)),162,QR 512/514 em frente ADE,PMDF,,42ª Posto Comunitário Segurança,PCS 042,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.163,163,MULTIPOINT ((165072.39049999975 8241494.069)),163,QN 423 ao lado da Quadra de Esportes,PMDF,,47ª Posto Comunitário Segurança,PCS 047,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.164,164,MULTIPOINT ((170335.38599999994 8244618.4169)),164,QS 612 Cj A Lt 1,PMDF,,87ª Posto Comunitário Segurança,PCS 087,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.165,165,MULTIPOINT ((166688.7291000001 8241590.7189)),165,QS 415 frente ao Conj. F,PMDF,,7ª Posto Comunitário Segurança,PCS 007,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.166,166,MULTIPOINT ((166336.68340000045 8240132.7918)),166,QR 319/321 – Setor Leste,PMDF,,122ª Posto Comunitário Segurança,PCS 122,CPRO,NUACRI/SOSP,11º BPM,,Samambaia,Posto Comunitario
+seguranca_2.167,167,MULTIPOINT ((194668.10830000043 8265705.604)),167,Cond. Jardim Europa e Athenas Grande Colorado,PMDF,,18ª Posto Comunitário Segurança,PCS 018,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho,Posto Comunitario
+seguranca_2.168,168,MULTIPOINT ((183478.2801000001 8271162.5088)),168,DF 001 ao lado da Escola Classe Lago Oeste,PMDF,,28ª Posto Comunitário Segurança,PCS 028,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho II,Posto Comunitario
+seguranca_2.169,169,MULTIPOINT ((195182.1118999999 8269013.3918)),169,Cond. Mini Chácara em frente ES 7B Lote 20,PMDF,,37ª Posto Comunitário Segurança,PCS 037,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho II,Posto Comunitario
+seguranca_2.170,170,MULTIPOINT ((192021.73290000018 8273130.2144)),170,Núcleo Rural Engenho Velho Fercal,PMDF,,90ª Posto Comunitário Segurança,PCS 090,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho II,Posto Comunitario
+seguranca_2.171,171,MULTIPOINT ((216453.53469999973 8271856.0648)),171,AE EQ 01/02 Vila Buritis,PMDF,,79ª Posto Comunitário Segurança,PCS 079,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.172,172,MULTIPOINT ((215650.08640000038 8270294.9558)),172,"AE em frente à Q. 09 lote 26 Vila Vicentina (ECS2)",PMDF,,80ª Posto Comunitário Segurança,PCS 080,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.173,173,MULTIPOINT ((212376.79169999994 8273436.429)),173,"Área em frente ao Mód. I CS 03 Cond. M. D'Ar-mas",PMDF,,85ª Posto Comunitário Segurança,PCS 085,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.174,174,MULTIPOINT ((215147.2494000001 8269949.1479)),174,Av.Mato Grosso em frente à Q.113 Setor Sul,PMDF,,101ª Posto Comunitário Segurança,PCS 101,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.175,175,MULTIPOINT ((215407.91119999997 8271556.7868)),175,Av. Independência VNSF frente ao Conj. “G” (ECS2),PMDF,,108ª Posto Comunitário Segurança,PCS 108,CPRL,NUACRI/SOSP,14º BPM,,Planaltina,Posto Comunitario
+seguranca_2.176,176,MULTIPOINT ((176616.29930000007 8246563.7742)),176,"Praça entre as ruas 13 e 14, frente a Q. 205",PMDF,,46ª Posto Comunitário Segurança,PCS 046,CPRO,NUACRI/SOSP,17º BPM,,Águas Claras,Posto Comunitario
+seguranca_2.177,177,MULTIPOINT ((176695.62480000034 8243117.3052)),177,"Av. Brasília, QS 11, frente ao Conj. “F”- Vila Areal",PMDF,,114ª Posto Comunitário Segurança,PCS 114,CPRO,NUACRI/SOSP,17º BPM,,Águas Claras,Posto Comunitario
+seguranca_2.178,178,MULTIPOINT ((187068.3543999996 8246989.8116)),178,EQS 216/416 Asa Sul,PMDF,,10ª Posto Comunitário Segurança,PCS 010,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.179,179,MULTIPOINT ((189838.44340000022 8250260.2946)),179,EQS 104/304 (ECS 2),PMDF,,56ª Posto Comunitário Segurança,PCS 056,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.180,180,MULTIPOINT ((189513.57610000018 8250735.0064)),180,SEPS 703/704 na Asa Sul,PMDF,,59ª Posto Comunitário Segurança,PCS 059,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.181,181,MULTIPOINT ((187092.6967000002 8246002.1745)),181,Rua 08 entrada principal da Vila Telebrasília,PMDF,,62ª Posto Comunitário Segurança,PCS 062,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.182,182,MULTIPOINT ((188725.7792999996 8249271.1254)),182,"SQS 308, em frente ao bloco A",PMDF,,73ª Posto Comunitário Segurança,PCS 073,CPRM,NUACRI/SOSP,1º BPM,,Asa Sul,Posto Comunitario
+seguranca_2.183,183,MULTIPOINT ((203123.93510000035 8257272.9923)),183,Q. 61 próximo a EC 01 e restaurante comunitário,PMDF,,61ª Posto Comunitário Segurança,PCS 061,CPRL,NUACRI/SOSP,20º BPM,,Itapoã,Posto Comunitario
+seguranca_2.184,184,MULTIPOINT ((202524.4419999998 8254518.2472)),184,"Quadra 20 terreno na praça entre os conjuntos M e I",PMDF,,14ª Posto Comunitário Segurança,PCS 014,CPRL,NUACRI/SOSP,20º BPM,,Paranoá,Posto Comunitario
+seguranca_2.185,185,MULTIPOINT ((201754.34410000034 8255145.531)),185,"Q.29terreno na praça entre os conjuntos M, K e J",PMDF,,49ª Posto Comunitário Segurança,PCS 049,CPRL,NUACRI/SOSP,20º BPM,,Paranoá,Posto Comunitario
+seguranca_2.186,186,MULTIPOINT ((201643.79839999974 8239955.1432)),186,EQ 205/305 balão central do Res. Oeste,PMDF,,2ª Posto Comunitário Segurança,PCS 002,CPRL,NUACRI/SOSP,21º BPM,,São Sebastião,Posto Comunitario
+seguranca_2.187,187,MULTIPOINT ((203442.6305999998 8239856.2619)),187,"Frente a Rua 45B, Campo Central",PMDF,,70ª Posto Comunitário Segurança,PCS 070,CPRL,NUACRI/SOSP,21º BPM,,São Sebastião,Posto Comunitario
+seguranca_2.188,188,MULTIPOINT ((197769.87689999957 8243409.8683)),188,Canteiro entre a DF 001 e a Av. Comercial,PMDF,,23ª Posto Comunitário Segurança,PCS 023,CPRL,NUACRI/SOSP,24º BPM,,Jardim Botânico,Posto Comunitario
+seguranca_2.189,189,MULTIPOINT ((194654.79480000027 8257179.3207)),189,EPPN Quadra 09 Canteiro Central,PMDF,,29ª Posto Comunitário Segurança,PCS 029,CPRL,NUACRI/SOSP,24º BPM,,Lago Norte,Posto Comunitario
+seguranca_2.190,190,MULTIPOINT ((191194.34590000007 8259622.2704)),190,EPPN QI 01 entrada do Lago Norte (ECS 2),PMDF,,53ª Posto Comunitário Segurança,PCS 053,CPRL,NUACRI/SOSP,24º BPM,,Lago Norte,Posto Comunitario
+seguranca_2.191,191,MULTIPOINT ((174901.83430000022 8223823.2846)),191,QR 100 Conjunto “R” casas 01 e 30,PMDF,,96ª Posto Comunitário Segurança,PCS 096,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.192,192,MULTIPOINT ((175669.46600000001 8224422.1186)),192,"QR 202/302, frente ao Conj. “L”",PMDF,,35ª Posto Comunitário Segurança,PCS 035,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.193,193,MULTIPOINT ((180177.77570000011 8227173.0445)),193,QR 417/418,PMDF,,9ª Posto Comunitário Segurança,PCS 009,CPRS,NUACRI/SOSP,26º BPM,,Santa Maria,Posto Comunitario
+seguranca_2.194,194,MULTIPOINT ((172841.70779999997 8237516.103)),194,Q. 805 ao lado da Escola de Madeira,PMDF,,43ª Posto Comunitário Segurança,PCS 043,CPRS,NUACRI/SOSP,27º BPM,,Recanto das Emas,Posto Comunitario
+seguranca_2.195,195,MULTIPOINT ((167188.3984000003 8236534.2198)),195,Q. 310 praça entre os lotes 04 e 06,PMDF,,82ª Posto Comunitário Segurança,PCS 082,CPRS,NUACRI/SOSP,27º BPM,,Recanto das Emas,Posto Comunitario
+seguranca_2.196,196,MULTIPOINT ((176811.60919999983 8241544.2884)),196,AC3 ao lado da Brinquedoteca Praça Central,PMDF,,13ª Posto Comunitário Segurança,PCS 013,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo I,Posto Comunitario
+seguranca_2.197,197,MULTIPOINT ((173918.70440000016 8239755.8114)),197,QN 08 AE (Praça),PMDF,,86ª Posto Comunitário Segurança,PCS 086,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo II,Posto Comunitario
+seguranca_2.198,198,MULTIPOINT ((171117.3180999998 8250463.0758)),198,Praça do antigo Terminal Rodoviário Norte,PMDF,,50ª Posto Comunitário Segurança,PCS 050,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.199,199,MULTIPOINT ((171775.1266999999 8249698.3936)),199,Praça do Bicalho,PMDF,,16ª Posto Comunitário Segurança,PCS 016,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.200,200,MULTIPOINT ((172494.68510000035 8247919.7003)),200,CNA – Praça do DI,PMDF,,119ª Posto Comunitário Segurança,PCS 119,CPRO,NUACRI/SOSP,2º BPM,,Taguatinga,Posto Comunitario
+seguranca_2.201,201,MULTIPOINT ((190942.27460000012 8253709.6949)),201,EQN 104/304-Via W1 Nort –(ECS 2),PMDF,,52ª Posto Comunitário Segurança,PCS 052,CPRM,NUACRI/SOSP,3º BPM,,Asa Norte,Posto Comunitario
+seguranca_2.202,202,MULTIPOINT ((189844.63009999972 8255084.0537)),202,"SEPS. 709/909 - Via W 4 Norte, ao lado do UNI-CEUB",PMDF,,54ª Posto Comunitário Segurança,PCS 054,CPRM,NUACRI/SOSP,3º BPM,,Asa Norte,Posto Comunitario
+seguranca_2.203,203,MULTIPOINT ((190170.48249999993 8256347.331)),203,"W 1 Norte – EQN 112/312, em frente ao Bloco “G”",PMDF,,60ª Posto Comunitário Segurança,PCS 060,CPRM,NUACRI/SOSP,3º BPM,,Asa Norte,Posto Comunitario
+seguranca_2.204,204,MULTIPOINT ((171986.24689999968 8248462.8215)),272,Shopping Top Mall - CNB 12 lotes 11 e 12,SSPDF,,POSTO - NA HORA,,,,,2006-03-05 00:00:00,Taguatinga,
+seguranca_2.205,205,MULTIPOINT ((182630.55069999956 8241896.098)),204,MSPW 6 Conj 2 Área Especial,PMDF,99707204,25ª Batalhao Policia Militar,25º BPM,CPRM,NUACRI/SOSP,25º BPM,,Núcleo Bandeirante,Batalhao da PM
+seguranca_2.206,206,MULTIPOINT ((199256.7117999997 8239503.3073)),205,"DF 465, KM 02 Complexo Penitenciário - Fazenda Papuda",PMDF,99823280,19ª Batalhao Policia Militar,19º BPM,CPRL,NUACRI/SOSP,19º BPM,,São Sebastião,Batalhao da PM
+seguranca_2.207,207,MULTIPOINT ((194342.31290000025 8263254.6454)),206,DF 001 Norte Km 01 Parque Rodoviário DERDF - Colorado,PMDF,96480917,3ª Batalhao Policiamento de Transito,3º BPTran,CPRL,NUACRI/SOSP,3º BPTran,,Sobradinho,Batalhao da PM
+seguranca_2.208,208,MULTIPOINT ((167590.91889999993 8248847.6312)),207,CNM 01 – Ceilândia Centro,PMDF,,27ª Posto Comunitário Segurança,PCS 027,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.209,209,MULTIPOINT ((165301.12260000035 8251659.5397)),208,EQNO 3/5 ao lado do C. E. 09,PMDF,,92ª Posto Comunitário Segurança,PCS 092,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.210,210,MULTIPOINT ((166551.00210000016 8248270.4398)),209,Setor N Norte CNN 2 Área de Feira Livre,PMDF,,106ª Posto Comunitário Segurança,PCS 106,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.211,211,MULTIPOINT ((165614.6160000004 8248941.6743)),210,"EQNM 19/21, próximo a Escola Classe",PMDF,,112ª Posto Comunitário Segurança,PCS 112,CPRO,NUACRI/SOSP,8º BPM,,Ceilândia,Posto Comunitario
+seguranca_2.212,212,MULTIPOINT ((170212.9581000004 8226672.6197)),211,Q. 33 Avenida Pioneiros Setor Oeste,PMDF,,20ª Posto Comunitário Segurança,PCS 020,CPRS,NUACRI/SOSP,9º BPM,,Gama,Posto Comunitario
+seguranca_2.213,213,MULTIPOINT ((170904.1677000001 8240526.6449)),212,Núcleo Rural Vargem da Bênção Chac 22,SSPDF,3500 2138,Sierra 3,,,,,,Samambaia,
+seguranca_2.214,214,MULTIPOINT ((173500.92179999966 8242388.132)),213,Riacho Fundo II - 1A Etapa,PMDF,,PRDF,,,,,,Riacho Fundo II,Posto Policial
+seguranca_2.215,215,MULTIPOINT ((200124.81410000008 8250369.6545)),214,"Estr. Parque Dom Bosco, 595,",PMDF,,PRDF,,,,,,Lago sul,Posto Policial
+seguranca_2.216,216,MULTIPOINT ((180062.32959999982 8230646.6257)),215,"Rod. Juscelino Kubitschek, 191",PRF,,Policia Rodoviaria Federal,,,,,,Santa Maria,Policia Rodoviaria Federal
+seguranca_2.217,217,MULTIPOINT ((176843.21559999976 8252153.9033)),216,"Estr. Parque Ceilândia, 2850 - DF-095",PMDF,,Posto de Policiamento Rodoviario - BPRv,,,,,,Taguatinga,Posto Policial
+seguranca_2.218,218,MULTIPOINT ((194123.47439999972 8263270.6579)),217,"Rodovia DF-001, Km 0,5, s/n",DER,,2º Distrito Rodoviário,,,,,,Sobradinho,DER
+seguranca_2.219,219,MULTIPOINT ((218266.45179999992 8281468.5461)),218,DF-128,PMDF,,PRDF,,,,,,Planaltina,Posto Policial
+seguranca_2.220,220,MULTIPOINT ((157044.31439999957 8271222.8781)),219,"BR-251, 2542",PMDF,,Posto Policial CPRV  (Companhia de Polícia Rodoviária do Distrito Federal),,,,,,Brazlandia,Posto Policial
+seguranca_2.221,221,MULTIPOINT ((220688.7742999997 8240534.5435)),220,"Rodovia DF 130, Km 29 - Setor de Área Especial",DER,,4º Distrito Rodoviário,,,,,,Paranoa,DER
+seguranca_2.222,222,MULTIPOINT ((185524.25760000013 8247063.8265)),221,SPO LT 3,CBMDF,3901 2949,Centro de Hidrante,CH,,,,2006-03-01 00:00:00,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.223,223,MULTIPOINT ((171390.24839999992 8244298.8181)),222,QR 416 Área Especial Nº 01,CBMDF,3901 2913,12ª Grupamento de Bombeiro Militar,12ª GBM,,,,2006-03-01 00:00:00,Samambaia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.224,224,MULTIPOINT ((187143.25980000012 8244830.8256)),223,QNB Área Especial 01,CBMDF,3901 5987,Comando Operacional,COP,,,,2006-03-01 00:00:00,Taguatinga,Batalhao ou Grupamento de Bombeiros
+seguranca_2.225,225,MULTIPOINT ((185720.62229999993 8249878.1109)),224,SAI Sudoeste Bloco A Lote 23 Ed. Sede,PCDF,3361 5926,Departamento de Polícia Circunscricional,DPC,,,,2006-03-31 00:00:00,Brasília,Policia Civil
+seguranca_2.226,226,MULTIPOINT ((186252.9073999999 8250011.3137)),225,SAI Sudoeste  Bloco D  Lote 23,PCDF,3362 5825,Departamento de Polícia Especializada,DPE,,,,2006-03-07 00:00:00,Brasília,Policia Civil
+seguranca_2.227,227,MULTIPOINT ((185720.62229999993 8249878.1109)),226,SAI Sudoeste Bloco A Lote 23 Ed. Sede,PCDF,3233 7151,Departamento de Polícia Técnica,DPT,,,,2006-03-31 00:00:00,Brasília,Policia Civil
+seguranca_2.228,228,MULTIPOINT ((185720.62229999993 8249878.1109)),227,SAI Sudoeste Bloco A Lote 23 Ed. Sede,PCDF,3234 1511,DIREÇÃO-GERAL DA POLÍCIA CIVIL,,,,,2006-03-22 00:00:00,Brasília,Delegacia
+seguranca_2.229,229,MULTIPOINT ((186252.9073999999 8250011.3137)),228,SAI Sudoeste  Bloco D,PCDF,3362 5864,Divisão de Cadastro de Roubos e Furtos de Veículos,DCRFV,,,,2006-03-10 00:00:00,Brasília,Delegacia
+seguranca_2.230,230,MULTIPOINT ((186252.9073999999 8250011.3137)),229,SAI Sudoeste Bloco D  Prédio do DPE,PCDF,3233 5831,"Divisão de Controle de Armas,  Munições e Explosivos",DAME,,,,2006-03-03 00:00:00,Brasília,Delegacia
+seguranca_2.231,231,MULTIPOINT ((187845.28210000042 8253325.3794)),230,SGON Q. 05 Lotes 2/7,PCDF,3343 2234,Divisão de Operações Aéreas,DOA,,,,2006-03-31 00:00:00,Brasília,Delegacia
+seguranca_2.232,232,MULTIPOINT ((187845.28210000042 8253325.3794)),231,SGON Quadra 05 Lotes 2/7,PCDF,3343 2723,Divisão de Operações Especiais,DOE,,,,2006-03-31 00:00:00,Brasília,Delegacia
+seguranca_2.233,233,MULTIPOINT ((187845.28210000042 8253325.3794)),232,SGON Quadra 05 Lotes 2/7 - Brasília,PCDF,3344 5883,Divisão de Repressão a Sequestros,DRS,,,,2006-03-31 00:00:00,Brasília,Delegacia
+seguranca_2.234,234,MULTIPOINT ((182144.37939999998 8250584.004)),233,SIA Trecho 2 Lt 1655,PCDF,3361 9589,Divisão de Repressão aos Crimes de Alta Tecnologia,DICAT,,,,2006-03-31 00:00:00,Brasília,Delegacia
+seguranca_2.235,235,MULTIPOINT ((182284.55099999998 8250478.6968)),234,SAI Sudoeste Bloco C,PCDF,3362 5947,Instituto de Criminalística,IC,,,,2006-03-05 00:00:00,Brasília,Policia Civil
+seguranca_2.236,236,MULTIPOINT ((185720.62229999993 8249878.1109)),235,SAI Sudoeste Bloco A Lote 23 Ed. Sede,PCDF,3233 0800,Instituto de Identificação,II,,,,2006-03-31 00:00:00,Brasília,Policia Civil
+seguranca_2.237,237,MULTIPOINT ((185720.62229999993 8249878.1109)),236,SAI Sudoeste  Bloco B,PCDF,3362 5693,Instituto de Medicina Legal Leonidio Ribeiro,IMLLR,,,,2006-03-04 00:00:00,Brasília,Policia Civil
+seguranca_2.238,238,MULTIPOINT ((182284.55099999998 8250478.6968)),237,SIA Trecho 2 Lt 1510,PCDF,3362 5969,Instituto de Pesquisa de DNA Forense,IPDNA,,,,2006-03-06 00:00:00,Brasília,Policia Civil
+seguranca_2.239,239,MULTIPOINT ((183845.2770999996 8245400.192)),308,LT. EC 13,PMDF,,Posto Policial 25ª BPM,,,,,2015_07_24,Candangolândia,Posto Policial
+seguranca_2.240,240,MULTIPOINT ((185442.25700000022 8248403.8275)),238,"SAIS, Area 4, Setor Policial",PMDF,3445 1219,Quartel do Comando Geral da Policia Militar,QCG,,,,2006-03-01 00:00:00,Brasília,Batalhao da PM
+seguranca_2.241,241,MULTIPOINT ((158012.22900000028 8263936.8268)),239,"Area Especial  nº 01,  lote A, Setor Norte",PMDF,3484 8970,9ª Companhia de Policia Militar Independente,9ª CPMInd,,,,2006-03-01 00:00:00,Brazlandia,Batalhao da PM
+seguranca_2.242,242,MULTIPOINT ((185490.25710000005 8248160.8274)),240,"Setor Policial Sul,  Lote 4",PMDF,3445 1386,Academia de Policia Militar de Brasília,APMB,,,,2006-03-01 00:00:00,Brasília,Batalhao da PM
+seguranca_2.243,243,MULTIPOINT ((184117.40029999986 8244657.5723)),241,Praça do Bosque Lt 10,PMDF,3301 1904,Companhia de Policia Militar Ambiental,CPMA,,,,2006-03-01 00:00:00,Candangolândia,Batalhao da PM
+seguranca_2.244,244,MULTIPOINT ((180500.25289999973 8249163.8259)),242,"QI 02, Bloco B, Area Especial",PMDF,3382 5409,6º Batalhao de Policia Militar,6º BPM,,,,2006-03-01 00:00:00,Guará,Batalhao da PM
+seguranca_2.245,245,MULTIPOINT ((215810.26999999955 8272363.8587)),243,Area Especial  13 - Setor Norte,PMDF,3389 2911,14º Batalhao de Policia Militar,14º BPM,CPRL,NUACRI/SOSP,14º BPM,2006-03-01 00:00:00,Planaltina,Batalhao da PM
+seguranca_2.246,246,MULTIPOINT ((179344.6595999999 8227825.3811)),244,EQ 216/316 Lt A,PMDF,3393 3437,14a Companhia de Policia Independente,14ª CPMInd,,,,2006-03-01 00:00:00,Santa Maria,Batalhao da PM
+seguranca_2.247,247,MULTIPOINT ((173117.2483000001 8247157.821)),245,QNB Área Especial nº 08 Av. Sandu Norte,PMDF,3353 8071,Comando do Policiamento  Regional Oeste,CPRO,,,,2006-03-22 00:00:00,Taguatinga,Batalhao da PM
+seguranca_2.248,248,MULTIPOINT ((188909.35209999979 8258262.5287)),246,SAIN Quadra 916 Lote E,PCDF,3340 2131,2ª  Delegacia Policial,2ª DP,,,,2006-03-02 00:00:00,Brasília,Delegacia
+seguranca_2.249,249,MULTIPOINT ((182144.37939999998 8250584.004)),247,SIA Trecho 2 Lt 1655,PCDF,3234 8166,Corregedoria Geral de Polícia,CGP,,,,2006-03-29 00:00:00,Brasília,Policia Civil
+seguranca_2.250,250,MULTIPOINT ((186252.9073999999 8250011.3137)),248,SAI Sudoeste  Bloco D,PCDF,3234 5545,Delegacia de Capturas e Polícia Interestadual – DCPI,DCPI,,,,2006-03-12 00:00:00,Brasília,Delegacia
+seguranca_2.251,251,MULTIPOINT ((186252.9073999999 8250011.3137)),249,SAI Sudoeste  Bloco D,PCDF,3362 5932,Delegacia de Defesa do Consumidor,DECON,,,,2006-03-15 00:00:00,Brasília,Delegacia
+seguranca_2.252,252,MULTIPOINT ((186252.9073999999 8250011.3137)),250,SAI Sudoeste  Bloco D,PCDF,3362 5901,Delegacia de Falsificações e Defraudações,DEF,,,,2006-03-08 00:00:00,Brasília,Delegacia
+seguranca_2.253,253,MULTIPOINT ((186252.9073999999 8250011.3137)),251,SAI Sudoeste  Bloco D,PCDF,3361 3968,Delegacia de Homicídios,DH,,,,2006-03-11 00:00:00,Brasília,Delegacia
+seguranca_2.254,254,MULTIPOINT ((186252.9073999999 8250011.3137)),252,SAI Sudoeste  Bloco D,PCDF,3361 0992,Delegacia de Proteção à Criança e ao Adolescente,DPCA,,,,2006-03-17 00:00:00,Brasília,Delegacia
+seguranca_2.255,255,MULTIPOINT ((186252.9073999999 8250011.3137)),253,SAI Sudoeste  Bloco D,PCDF,3233 6525,Delegacia de Repressão a Furtos,DRF,,,,2006-03-14 00:00:00,Brasília,Delegacia
+seguranca_2.256,256,MULTIPOINT ((186252.9073999999 8250011.3137)),254,SAI Sudoeste  Bloco D,PCDF,3233 6523,Delegacia de Repressão a Roubos,DRR,,,,2006-03-13 00:00:00,Brasília,Delegacia
+seguranca_2.257,257,MULTIPOINT ((186252.9073999999 8250011.3137)),255,SAI Sudoeste  Bloco D,PCDF,3362 5668,Delegacia de Roubos e Furtos de Veículos,DRFV,,,,2006-03-09 00:00:00,Brasília,Delegacia
+seguranca_2.258,258,MULTIPOINT ((186252.9073999999 8250011.3137)),256,SAI Sudoeste  Bloco D,PCDF,3362 5910,Delegacia de Tóxicos e Entorpecentes,DTE,,,,2006-03-16 00:00:00,Brasília,Delegacia
+seguranca_2.259,259,MULTIPOINT ((190938.25930000003 8252405.833)),257,SCN Q 2 BL E Térreo Asa Norte,PCDF,3327 0003,Delegacia Especial do Meio Ambiente,DEMA,,,,2006-03-01 00:00:00,Brasília,Delegacia
+seguranca_2.260,260,MULTIPOINT ((189424.18780000042 8251366.0585)),258,SGAS 902 Lt 74 Bl C Ed. Athenas 1º Andar,SSPDF,3901 5850,"ANEXO III - Subsecretaria de Doutrina, Ensino e Pesquisa",SUSDEP,,,,2006-03-01 00:00:00,Brasília,
+seguranca_2.261,261,MULTIPOINT ((188398.20820000023 8253155.249)),259,SAM Lote A Bloco B Ed. Sede,SSPDF,3901 5100,CENTRO INTEGRADO DE COORDENAÇÃO OPERACIONAL,CEICO,,,,2006-03-01 00:00:00,Brasília,
+seguranca_2.262,262,MULTIPOINT ((188359.25989999995 8253105.0027)),260,SAM Lote A Bloco A Ed. Sede,SSPDF,3901 5317,SECRETARIA DE ESTADO DE SEGURANÇA PÚBLICA E DEFESA SOCIAL,SSPDS,,,,2006-03-01 00:00:00,Brasília,
+seguranca_2.263,263,MULTIPOINT ((184230.85670000035 8251389.6996)),261,SIA Tr 8 Lt 180 Térreo,SSPDF,3363 1116,Subsecretaria do Sistema Penitenciário,SESIPE,,,,2006-03-01 00:00:00,SIA,
+seguranca_2.264,264,MULTIPOINT ((185534.2575000003 8247380.8268)),262,SAIS 04 Lt 05,PMDF,3901 3596,1ª Companhia Independente de Guarda e Segurança,1ª CIGS,,,,2006-03-01 00:00:00,Brasília,Batalhao da PM
+seguranca_2.265,265,MULTIPOINT ((185154.25719999988 8247463.8267)),263,SAIS Quadra 04 Lote 5,CBMDF,3901 2952,Academia de Bombeiro Militar,ABM,,,,2006-03-01 00:00:00,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.266,266,MULTIPOINT ((185403.25739999954 8247384.8267)),264,SAIS Qd 04 Lt 05,CBMDF,3901 3602,Centro de Investigação e Prevenção de Incêndio,CIPI,,,,2006-03-01 00:00:00,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.267,267,MULTIPOINT ((185433.2572999997 8247563.8269)),265,SAIS Qd 04 Lt 05,CBMDF,3901 3595,Centro de Manutenção,CEMAN,,,,2006-03-01 00:00:00,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.268,268,MULTIPOINT ((185506.25760000013 8247065.8265)),266,SAIS Qd 04 Lt 05,CBMDF,3901 3605,Centro de Treinamento Operacional,CTO,,,,2006-03-01 00:00:00,Brasília,Batalhao ou Grupamento de Bombeiros
+seguranca_2.269,269,MULTIPOINT ((153570.2313000001 8252186.8156)),267,BR 070 Km 22,SSPDF,3500 2150,Sierra 5,,,,,2006-03-01 00:00:00,Ceilândia,
+seguranca_2.270,270,MULTIPOINT ((188309.90550000034 8253174.5745)),268,SAM Lote A Bloco B Ed. Sede,DETRANDF,,DETRAN - Direção,,,,,2006-03-01 00:00:00,Brasília,DETRAN
+seguranca_2.271,271,MULTIPOINT ((188307.25700000022 8253215.8324)),269,"SAM, Lote 'A', bloco 'B'  Ed. Sede -DETRAN/DF",DETRANDF,3342 2555,DIVTRAN I,DIVTRAN I,,,,2006-03-01 00:00:00,Brasília,DETRAN
+seguranca_2.272,272,MULTIPOINT ((169454.23759999964 8246957.9664)),270,SIG Área Especial 02,DETRANDF,,Depósito do DETRAN - TAG,,,,,2006-03-01 00:00:00,Taguatinga,DETRAN
+seguranca_2.273,273,MULTIPOINT ((169462.24569999985 8246961.8192)),271,Setor de Indústrias Gráficas de Taguatinga - AE 2,DETRANDF,3901 3550 ,DIVTRAN II,DIVTRAN II,,,,2006-03-01 00:00:00,Taguatinga,DETRAN
+seguranca_2.274,274,MULTIPOINT ((192807.1353000002 8246846.6175)),273,QI 11 AE 02 - Brasília - Lago Sul,PMDF,99656154,5º Batalhão de Polícia Militar,5º BPM,CPRM,NUACRI/SOSP,5º BPM,,Lago Sul,Batalhao da PM
+seguranca_2.275,275,MULTIPOINT ((176660.98309999984 8242185.9157)),274,QN 5 Área Especial - Riacho Fundo I,PMDF,96666015,28º Batalhão de Polícia Militar,28º BPM,CPRS,NUACRI/SOSP,28º BPM,,Riacho Fundo,Batalhao da PM
+seguranca_2.276,276,MULTIPOINT ((200514.07799999975 8267447.7219)),275,Quadra Central Área Especial nº 2 Lote 02,PMDF,99721016,13º Batalhão de Polícia Militar,13º BPM,CPRL,NUACRI/SOSP,13º BPM,,Sobradinho,Batalhao da PM
+seguranca_2.277,277,MULTIPOINT ((185060.45519999973 8248049.6517)),276,Setor de Areas Isoladas Sudeste - SAISO Área Especial - Asa Sul,PMDF,96662790,Batalhão de Operações Especiais,BOPE,CME,NUACRI/SOSP,BOPE,,Brasilia,Batalhao da PM
+seguranca_2.278,278,MULTIPOINT ((185060.45519999973 8248049.6517)),277,Setor de Areas Isoladas Sudeste - SAISO Área Especial - Asa Sul,PMDF,99693031,Batalhão de Policiamento com Cães,BPCães,CME,NUACRI/SOSP,BPCães,,Brasilia,Batalhao da PM
+seguranca_2.279,279,MULTIPOINT ((185060.45519999973 8248049.6517)),278,Setor de Areas Isoladas Sudeste - SAISO Área Especial - Asa Sul,PMDF,99693031,Batalhão de Policiamento de Choque,BPCHOQUE,CME,NUACRI/SOSP,BPCHOQUE,,Brasilia,Batalhao da PM
+seguranca_2.280,280,MULTIPOINT ((185232.51680000033 8247674.6244)),279,"SAIS, Lote 04, Setor Policial",PMDF,99832178,1º Batalhão de Polícia Militar,1º BPM,CPRM,NUACRI/SOSP,1º BPM,,Brasilia,Batalhao da PM
+seguranca_2.281,281,MULTIPOINT ((188360.55040000007 8253337.7507)),280,"SAIN Bloco A, Módulo D (Sede do 3º BPM) - Asa Norte",PMDF,99772710,24º Batalhão de Polícia Militar,24º BPM,CPRL,NUACRI/SOSP,24º BPM,,Brasilia,Batalhao da PM
+seguranca_2.282,282,MULTIPOINT ((188360.55040000007 8253337.7507)),281,Setor de Áreas Isoladas Norte - Bloco A Modulo-D - Asa Norte,PMDF,99657781,3º Batalhão de Polícia Militar,3º BPM,CPRM,NUACRI/SOSP,3º BPM,,Brasilia,Batalhao da PM
+seguranca_2.283,283,MULTIPOINT ((188319.3728 8252437.5053)),282,TJDFT Ed. Desembargador Milton S. Barbosa Bl B 1º Subsolo,PMDF,99867937,12º Batalhão de Polícia Militar,12º BPM,,NUACRI/SOSP,12º BPM,,Brasilia,Batalhao da PM
+seguranca_2.284,284,MULTIPOINT ((172870.56049999967 8224487.4025)),283,Área Especial 05/13 - Setor Sul,PMDF,99720142,9º Batalhão de Polícia Militar,9º BPM,CPRS,NUACRI/SOSP,9º BPM,,Gama,Batalhao da PM
+seguranca_2.285,285,MULTIPOINT ((215449.19830000028 8270924.0496)),284,SETOR DE EDUCACAO LT. N,CBMDF,,9º Grupamento de Bombeiro Militar,9º GBM,,,,2015/07/24,Planaltina,Batalhao ou Grupamento de Bombeiros
+seguranca_2.286,286,MULTIPOINT ((163449.99170000013 8250831.7627)),285,SETOR INDUSTRIAL I QESP  AREA 05,CBMDF,,41º Grupamento de Bombeiro Militar,41º GBM,,,,2015_07_24,Ceilândia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.287,287,MULTIPOINT ((163335.83279999997 8251172.4134)),286,Setor de Indústria QES Área 7,PMDF,,10º BATALHAO DA POLICIA MILITAR,10º BPM,,,,2015_07_24,Ceilândia,Batalhao da PM
+seguranca_2.288,288,MULTIPOINT ((188812.51099999994 8250202.1701)),287,SEP EQ 706_906 LT. D,DETRANDF,,DETRAN_ SEDE ENGENHARIA,,,,,2015_07_24,Asa Sul,DETRAN
+seguranca_2.289,289,MULTIPOINT ((186362.47250000015 8248397.1691)),288,SGA QD. 915 LT. 71-B,PCDF,,POLICLINICA_ PCDF,,,,,2015_07_24,Asa Sul,Policia Civil
+seguranca_2.290,290,MULTIPOINT ((182144.37939999998 8250584.004)),289,SIA Trecho 2 Lt 1655,PCDF,,Divisão Especial de Repressão ao Crime Organizado,DECO,,,,,SIA,Delegacia
+seguranca_2.291,291,MULTIPOINT ((182339.01169999968 8250562.0746)),290,SIA Trecho 2 Lt 1465,PCDF,,8ª Delegacia Policial,8ª DP,,,,,SIA,Delegacia
+seguranca_2.292,292,MULTIPOINT ((190127.56400000025 8252510.2329)),291,SGA QD. 901 LT. A,PCDF,,5ª Delegacia Policial,5ª DP,,,,2015_07_24,Asa Norte,Delegacia
+seguranca_2.293,293,MULTIPOINT ((187021.24689999968 8246962.5776)),292,EQS 216/416 - SHCS Perto do Quiosque da PM,PCDF,,Ouvidoria da Polícia Civil,,,,,,Asa Sul,Policia Civil
+seguranca_2.294,294,MULTIPOINT ((174021.88320000004 8244361.6312)),293,SETOR E SUL LT. E,PMDF,,128ª Posto Comunitário Segurança,PCS 128,,,,,Taguatinga,Posto Comunitario
+seguranca_2.295,295,MULTIPOINT ((174490.73929999955 8244881.3521)),294,QS 05 LT. 05 EPCT,CBMDF,,46º Grupamento de Bombeiro Militar,46º GBM,,,,2015_07_24,Aguas Claras,Batalhao ou Grupamento de Bombeiros
+seguranca_2.296,296,MULTIPOINT ((170933.1531999996 8250378.0606)),295,QNG AE 12,PCDF,,17ª  Delegacia Policial,17ª DP,,,,2015_07_24,Taguatinga,Delegacia
+seguranca_2.297,297,MULTIPOINT ((175918.6657999996 8244022.0993)),296,AV. AGUAS CLARAS AE 02,PMDF,,POSTO POLICIAL DO 2º BPM,,,,,2015_07_24,Aguas Claras,Posto Policial
+seguranca_2.298,298,MULTIPOINT ((175142.57299999986 8246113.4588)),297,Avenida Sibipiruna Lt 5,PMDF,,17º Batalhão de Polícia Militar,17º BPM,,,,,Aguas Claras,Batalhao da PM
+seguranca_2.299,299,MULTIPOINT ((160320.04279999994 8257028.5903)),298,PICAG NUCLEO 08 QD. 15 LT. 01,PMDF,,POSTO POLICIAL INCRA 08 DA 9ª CPMIND,,,,,2015_07_24,Brazlândia,Posto Policial
+seguranca_2.300,300,MULTIPOINT ((174395.74920000043 8228227.0755)),299,NUCLEO RURAL ALAGADO DF 16 AREA 01,SSPDF,,Penitenciaria Feminina do Distrito Federal,,,,,2015_07_24,Gama,
+seguranca_2.301,301,MULTIPOINT ((182143.80790000036 8250926.6229)),300,SIA QD. 04 LT. 1690/1760,SSPDF,,CENTRO DE PROGRESSAO PENITENCIARIA,,,,,2015_07_24,Guará,
+seguranca_2.302,302,MULTIPOINT ((192383.9029000001 8259116.7949)),301,SHIN QI 03 LT. E,CBMDF,,34º Grupamento de Bombeiro Militar,34º GBM,,,,2015_07_24,Lago Norte,Batalhao ou Grupamento de Bombeiros
+seguranca_2.303,303,MULTIPOINT ((176750.91849999968 8241289.3974)),302,QS 06 LT. A,PCDF,,29ª Delegacia Policial,29ª DP,,,,2015_07_24,Riacho Fundo,Delegacia
+seguranca_2.304,304,MULTIPOINT ((170487.57799999975 8242428.6685)),303,QN 308 CONJ. 01 LT. 01/02,PCDF,,32ª DELEGACIA DE POLICIA,32ª DP,,,,2015_07_24,Samambaia,Delegacia
+seguranca_2.305,305,MULTIPOINT ((168628.78619999997 8242685.5723)),304,CENTRO URBANO QD. 201 CONJ. 02 LT. 01,CBMDF,,37º Grupamento de Bombeiro Militar,37º GBM,,,,2015_07_24,Samambaia,Batalhao ou Grupamento de Bombeiros
+seguranca_2.306,306,MULTIPOINT ((178882.92250000034 8252668.3279)),305,SETOR CENTRAL AE 01,PCDF,,Posto Policial da Estrutural,,,,,2015_07_24,VILA ESTRUTURAL,Policia Civil
+seguranca_2.307,307,MULTIPOINT ((178887.61419999972 8252631.097)),306,SETOR CENTRAL AE 01,PMDF,,115ª Posto Comunitário Segurança,PCS 115,,,,2015_07_24,VILA ESTRUTURAL,Posto Comunitario
+seguranca_2.308,308,MULTIPOINT ((185003.20969999954 8252515.0417)),307,SRES AE N Lt 14,PCDF,,Comissao Permanente de Alienação,CPA,,,,2015_07_24,Cruzeiro,Policia Civil
+seguranca_2.309,309,MULTIPOINT ((186092.4046 8251956.1251)),309,EQRSW 02_03 LTS. 04,PMDF,,CENTRO DE INTELIGENCIA,,,,,2015_07_24,SUDOESTE_ OCTOGONAL,Batalhao da PM
+seguranca_2.310,310,MULTIPOINT ((186456.61950000003 8252621.1864)),310,EQRSW 07_08 LT. 03,CBMDF,,45º Grupamento de Bombeiro Militar,45º GBM,,,,2015_07_24,SUDOESTE_ OCTOGONAL,Batalhao ou Grupamento de Bombeiros
+seguranca_2.311,311,MULTIPOINT ((168005.82320000045 8237743.4821)),311,QD. 307 AV. RECANTO DAS EMAS LT. 01,CBMDF,,20º Grupamento de Bombeiro Militar,20º GBM,,,,2015_07_24,Recanto das Emas,Batalhao ou Grupamento de Bombeiros
+seguranca_2.312,312,MULTIPOINT ((167996.19820000045 8237900.2373)),312,EQ 111/306 Centro Urbano,PMDF,,27º Batalhao Policia Militar,27º BPM,,,,,Recanto das Emas,Batalhao da PM
+seguranca_2.313,313,MULTIPOINT ((170503.48929999955 8239087.3323)),313,QD. 300 AV. RECANTO DAS EMAS LT. 01,CBMDF,,36º Grupamento de Bombeiro Militar,36º GBM,,,,,Recanto das Emas,Batalhao ou Grupamento de Bombeiros
+seguranca_2.314,314,MULTIPOINT ((175117.5985000003 8246049.8732)),314,AV. SIBIPIRUNA LT. 07,CBMDF,,25º Grupamento de Bombeiro Militar,25º GBM,,,,2015_07_24,Aguas Claras,Batalhao ou Grupamento de Bombeiros
+seguranca_2.315,315,MULTIPOINT ((175860.37449999992 8225439.3608)),315,EQ. 304_307 CONJ. E LT. 01,PMDF,,Comando de Policiamento Regional Sul - 2ª Companhia Operacional de Santa Maria,,,,,,Santa Maria,Batalhao da PM
+seguranca_2.316,316,MULTIPOINT ((162874.24089999963 8249960.1338)),316,QNQ 05 LT. C,PMDF,,POSTO POLICIAL DO 8º BPM,,,,,2015_07_24,Ceilândia,Posto Policial
+seguranca_2.317,317,MULTIPOINT ((165648.3289999999 8245721.0418)),317,EQNP 26_30 AE E,PMDF,,1ª e 2ª CIA   Polícia Militara 8º BPM,,,,,2015_07_24,Ceilândia,Batalhao da PM
+seguranca_2.318,318,MULTIPOINT ((170763.33380000014 8227530.4966)),318,Setor Oeste EQ 20 Posto Policial,PMDF,,Junta de serviço Militar,,,,,2015_07_24,Gama,
+seguranca_2.319,319,MULTIPOINT ((157367.15887956423 8251073.56456991)),319,BR-070,PRF,3395-9322,,,,,,,Ceilândia,Policia Rodoviaria Federal
+seguranca_2.320,320,MULTIPOINT ((160819.02093670747 8236324.699416662)),320,"BR-060, km 13",PRF,3395-9320,,,,,,,Recanto das Emas,Policia Rodoviaria Federal
+seguranca_2.321,321,MULTIPOINT ((228078.03011074095 8275655.006491991)),321,"BR-070, km 37",PRF,3395-9330,,,,,,,Planaltina,Policia Rodoviaria Federal

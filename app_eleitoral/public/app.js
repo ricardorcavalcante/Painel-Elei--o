@@ -11,6 +11,15 @@ let markerMapByRA = {}; // Mapeamento ra -> lista de marcadores Google Maps
 let raLayer = null; // Camada google.maps.Data com o contorno de cada RA individualmente
 let raListItems = {}; // Mapeamento ra -> elemento DOM na coluna "RAs" (evita seletor CSS com nomes acentuados/barras)
 
+// Chave especial de activeRA para a opção "TODOS" (mostra todas as RAs de uma vez, sem filtrar)
+const ALL_RA_KEY = '__TODOS__';
+
+// Camadas de POI (Escolas / Saúde / Segurança Pública) — só aparecem com uma RA
+// selecionada (incl. "TODOS") e o checkbox da categoria marcado.
+let poiData = { escolas: [], saude: [], seguranca: [] };
+let poiMarkers = { escolas: [], saude: [], seguranca: [] };
+let activePoiLayers = { escolas: false, saude: false, seguranca: false };
+
 // O campo "ra" salvo em cada ponto (public/locais_pontos.json) nem sempre bate
 // literalmente com o nome da RA no shapefile (public/regioes_administrativas.geojson)
 // — mesma nomenclatura, grafia diferente. Mapeamento só para achar o polígono certo;
@@ -125,6 +134,9 @@ async function loadData() {
         await loadRABoundaries();
         buildRAsColumn();
 
+        // 5. Carregar as camadas de POI (Escolas / Saúde / Segurança) da aba "RAs"
+        await loadPoiData();
+
     } catch (error) {
         console.error("Erro ao carregar dados georreferenciados:", error);
     }
@@ -160,6 +172,120 @@ function buildHoverContent(sec) {
         </div>
     `;
 }
+
+// ==========================================
+// CAMADAS DE POI (ESCOLAS / SAÚDE / SEGURANÇA PÚBLICA) — ABA "RAs"
+// ==========================================
+async function loadPoiData() {
+    try {
+        const [escolas, saude, seguranca] = await Promise.all([
+            fetch('poi_escolas.json').then(r => r.json()),
+            fetch('poi_saude.json').then(r => r.json()),
+            fetch('poi_seguranca.json').then(r => r.json())
+        ]);
+        poiData = { escolas, saude, seguranca };
+    } catch (err) {
+        console.warn('Erro ao carregar camadas de POI (Escolas/Saúde/Segurança):', err);
+    }
+}
+
+const POI_ICON_CONFIG = {
+    escolas: { path: 'M -6,-6 6,-6 6,6 -6,6 z', fillColor: '#2E7DD7' },
+    saude: { path: 'M -2,-6 2,-6 2,-2 6,-2 6,2 2,2 2,6 -2,6 -2,2 -6,2 -6,-2 -2,-2 z', fillColor: '#D7263D' },
+    seguranca: { path: 'M 0,-7 6,0 0,7 -6,0 z', fillColor: '#2B2D42' }
+};
+
+function makePoiIcon(category) {
+    const cfg = POI_ICON_CONFIG[category];
+    return {
+        path: cfg.path,
+        fillColor: cfg.fillColor,
+        fillOpacity: 0.95,
+        strokeColor: '#ffffff',
+        strokeWeight: 1.3,
+        scale: 1
+    };
+}
+
+function buildEscolaHoverContent(p) {
+    return `
+        <div class="kml-hover-tooltip">
+            <strong>🏫 ${p.nome}</strong>
+            <div>🏘️ RA: ${p.ra}</div>
+        </div>
+    `;
+}
+
+function buildSaudeHoverContent(p) {
+    return `
+        <div class="kml-hover-tooltip">
+            <strong>🏥 ${p.nome}</strong>
+            <div>🏘️ RA: ${p.ra}</div>
+            ${p.tipo ? `<div>🔸 Tipo: ${p.tipo}</div>` : ''}
+            <div>${p.abertoAoPublico ? '✅ Aberto ao público' : '⛔ Não aberto ao público'}</div>
+        </div>
+    `;
+}
+
+function buildSegurancaHoverContent(p) {
+    return `
+        <div class="kml-hover-tooltip">
+            <strong>🚓 ${p.nome}</strong>
+            <div>🏘️ RA: ${p.ra}</div>
+            ${p.orgao ? `<div>🏛️ Órgão: ${p.orgao}</div>` : ''}
+            ${p.tipo ? `<div>🔸 Tipo: ${p.tipo}</div>` : ''}
+            ${p.endereco ? `<div>📍 ${p.endereco}</div>` : ''}
+        </div>
+    `;
+}
+
+const POI_HOVER_BUILDERS = {
+    escolas: buildEscolaHoverContent,
+    saude: buildSaudeHoverContent,
+    seguranca: buildSegurancaHoverContent
+};
+
+function clearPoiMarkers(category) {
+    const categorias = category ? [category] : ['escolas', 'saude', 'seguranca'];
+    categorias.forEach(cat => {
+        (poiMarkers[cat] || []).forEach(m => m.setMap(null));
+        poiMarkers[cat] = [];
+    });
+}
+
+// Recria os marcadores de POI visíveis: só desenha algo se houver uma RA
+// selecionada (incl. "TODOS") e a categoria estiver com o checkbox marcado.
+function updatePoiMarkers() {
+    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+        clearPoiMarkers(cat);
+        if (!activeRA || !activePoiLayers[cat]) return;
+
+        const itens = (poiData[cat] || []).filter(p => activeRA === ALL_RA_KEY || p.ra === activeRA);
+        itens.forEach(p => {
+            const marker = new google.maps.Marker({
+                position: { lat: p.lat, lng: p.lng },
+                map,
+                icon: makePoiIcon(cat),
+                zIndex: 500
+            });
+            marker.addListener('mouseover', () => {
+                sharedInfoWindow.setContent(POI_HOVER_BUILDERS[cat](p));
+                sharedInfoWindow.open({ map, anchor: marker });
+            });
+            marker.addListener('mouseout', () => sharedInfoWindow.close());
+            poiMarkers[cat].push(marker);
+        });
+    });
+}
+
+['escolas', 'saude', 'seguranca'].forEach(cat => {
+    const checkbox = document.getElementById(`poi-toggle-${cat}`);
+    if (!checkbox) return;
+    checkbox.addEventListener('change', () => {
+        activePoiLayers[cat] = checkbox.checked;
+        updatePoiMarkers();
+    });
+});
 
 // Plotar Marcadores dos Locais de Votação com Coordenadas Reais (Google Geocoding)
 function plotMarkers(pontos) {
@@ -362,7 +488,7 @@ function updateRALayerStyle() {
         const targetShapefileName = activeRA ? (RA_NAME_TO_SHAPEFILE[activeRA] || activeRA) : null;
         const isSelected = targetShapefileName === raNome;
 
-        if (activeRA) {
+        if (activeRA && activeRA !== ALL_RA_KEY) {
             // Uma RA selecionada: evidencia só o contorno dela, o resto fica invisível
             return {
                 fillColor: '#1F4E78',
@@ -374,7 +500,7 @@ function updateRALayerStyle() {
             };
         }
 
-        // Nenhuma RA selecionada: visão geral neutra de todos os contornos
+        // Nenhuma RA selecionada, ou "TODOS": visão geral neutra de todos os contornos
         return {
             fillColor: '#1F4E78',
             fillOpacity: 0.05,
@@ -396,6 +522,20 @@ function buildRAsColumn() {
         if (!p.ra || p.ra === 'N/A') return;
         counts[p.ra] = (counts[p.ra] || 0) + 1;
     });
+
+    // Item especial "TODOS": mostra todas as RAs de uma vez (locais + POIs), sem filtrar
+    const allItem = document.createElement('div');
+    allItem.className = 'legend-item';
+    allItem.innerHTML = `
+        <div class="legend-color" style="background-color: #1F4E78;"></div>
+        <div class="legend-text">
+            <span class="legend-zona-name">TODOS</span>
+            <span class="legend-zona-ras">${pontosData.length} local(is) de votação no DF</span>
+        </div>
+    `;
+    allItem.addEventListener('click', () => selectRA(ALL_RA_KEY));
+    container.appendChild(allItem);
+    raListItems[ALL_RA_KEY] = allItem;
 
     Object.keys(counts).sort((a, b) => a.localeCompare(b, 'pt-BR')).forEach(raName => {
         const item = document.createElement('div');
@@ -437,12 +577,14 @@ function clearRASelection() {
     activeRA = null;
     resetMarkers();
     updateRALayerStyle();
+    clearPoiMarkers();
     document.getElementById('ra-sidebar-content').innerHTML =
         `<div class="instruction">Selecione uma Região Administrativa na coluna ao lado para visualizar os detalhes.</div>`;
 }
 
 // Selecionar RA: filtra os marcadores (pelo campo "ra" do dado), foca o mapa e
-// evidencia apenas o contorno daquela RA
+// evidencia apenas o contorno daquela RA. raName pode ser ALL_RA_KEY ("TODOS"),
+// que exibe todas as RAs de uma vez, sem esmaecer nenhum marcador.
 function selectRA(raName) {
     if (activeRA && raListItems[activeRA]) raListItems[activeRA].classList.remove('active');
     activeRA = raName;
@@ -451,14 +593,15 @@ function selectRA(raName) {
         raListItems[raName].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
+    const isAll = raName === ALL_RA_KEY;
     const raBounds = new google.maps.LatLngBounds();
     let hasBounds = false;
     Object.entries(markerMapByRA).forEach(([ra, raMarkers]) => {
-        const isTarget = ra === raName;
+        const isTarget = isAll || ra === raName;
         raMarkers.forEach(m => {
             if (isTarget) {
-                m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
-                m.setZIndex(999);
+                m.setIcon(makeCircleIcon(m._baseColor, isAll ? 6 : 8, isAll ? 0.9 : 1.0));
+                m.setZIndex(isAll ? 1 : 999);
                 raBounds.extend(m.getPosition());
                 hasBounds = true;
             } else {
@@ -470,21 +613,26 @@ function selectRA(raName) {
 
     if (hasBounds) {
         map.fitBounds(raBounds, 40);
-        google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
-            if (map.getZoom() > 14) map.setZoom(14);
-        });
+        if (!isAll) {
+            google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+                if (map.getZoom() > 14) map.setZoom(14);
+            });
+        }
     }
 
     updateRALayerStyle();
     showRAData(raName);
+    updatePoiMarkers();
 }
 
 function showRAData(raName) {
     const sidebar = document.getElementById('ra-sidebar-content');
-    const locais = pontosData.filter(p => p.ra === raName);
+    const isAll = raName === ALL_RA_KEY;
+    const locais = isAll ? pontosData.filter(p => p.ra && p.ra !== 'N/A') : pontosData.filter(p => p.ra === raName);
+    const titulo = isAll ? 'Todas as Regiões Administrativas' : raName;
 
     if (locais.length === 0) {
-        sidebar.innerHTML = `<div class="instruction">Nenhum dado encontrado para ${raName}.</div>`;
+        sidebar.innerHTML = `<div class="instruction">Nenhum dado encontrado para ${titulo}.</div>`;
         return;
     }
 
@@ -499,7 +647,7 @@ function showRAData(raName) {
 
     let html = `
         <div class="zone-info">
-            <h3>🏛️ ${raName}</h3>
+            <h3>🏛️ ${titulo}</h3>
             ${zonasTexto ? `<p style="font-size:0.85rem; color:#666; margin-top:-8px; margin-bottom:12px;">Zona(s) Eleitoral(is): ${zonasTexto}</p>` : ''}
             <div class="summary-stats">
                 <div class="stat-box"><span>Locais</span><strong>${locais.length}</strong></div>
@@ -526,10 +674,11 @@ function showRAData(raName) {
 }
 
 function openRAModal(raName) {
-    const locais = pontosData.filter(p => p.ra === raName);
+    const isAll = raName === ALL_RA_KEY;
+    const locais = isAll ? pontosData.filter(p => p.ra && p.ra !== 'N/A') : pontosData.filter(p => p.ra === raName);
     if (!locais.length) return;
 
-    document.getElementById("modal-title").innerText = `Tabela de Locais - ${raName}`;
+    document.getElementById("modal-title").innerText = `Tabela de Locais - ${isAll ? 'Todas as RAs' : raName}`;
     const tbody = document.getElementById("table-body");
     tbody.innerHTML = '';
 

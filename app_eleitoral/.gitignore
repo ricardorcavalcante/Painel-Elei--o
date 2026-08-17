@@ -6,3 +6,8 @@ dist/
 
 .vercel
 .env*
+
+# Playwright / Testes
+test-results/
+playwright-report/
+blob-report/

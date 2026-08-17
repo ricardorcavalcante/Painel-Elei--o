@@ -168,6 +168,50 @@ body {
 }
 
 /* =============================================
+   Camadas de POI (Escolas / Saúde / Segurança)
+   ============================================= */
+.poi-layers-panel {
+    padding: 12px 15px;
+    border-bottom: 1px solid var(--border-light);
+    background-color: #fafafa;
+}
+
+.poi-layers-title {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    margin: 0 0 8px 0;
+    text-transform: uppercase;
+    letter-spacing: 0.03em;
+}
+
+.poi-layer-toggle {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.88rem;
+    padding: 4px 0;
+    cursor: pointer;
+    user-select: none;
+}
+
+.poi-layer-toggle input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.poi-swatch {
+    width: 12px;
+    height: 12px;
+    min-width: 12px;
+    border-radius: 50%;
+    display: inline-block;
+    box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
+}
+
+.poi-swatch-escolas { background-color: #2E7DD7; }
+.poi-swatch-saude { background-color: #D7263D; }
+.poi-swatch-seguranca { background-color: #2B2D42; }
+
+/* =============================================
    Main Content
    ============================================= */
 .main-content {
