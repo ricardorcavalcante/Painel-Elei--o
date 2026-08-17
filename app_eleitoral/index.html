@@ -43,6 +43,29 @@
                     <input type="text" id="search-input" placeholder="Buscar RA, Bairro ou Local..." autocomplete="off" aria-label="Buscar">
                     <button id="search-btn" aria-label="Buscar">🔍</button>
                 </div>
+                <div class="poi-layers-panel">
+                    <p class="poi-layers-title">Camadas do Mapa</p>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-secoes" checked>
+                        <span class="poi-swatch poi-swatch-secoes"></span> Locais / Seções de Votação
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-zonas" checked>
+                        <span class="poi-swatch poi-swatch-zonas"></span> Contornos das Zonas
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-escolas">
+                        <span class="poi-swatch poi-swatch-escolas"></span> Escolas
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-saude">
+                        <span class="poi-swatch poi-swatch-saude"></span> Saúde
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-seguranca">
+                        <span class="poi-swatch poi-swatch-seguranca"></span> Segurança Pública
+                    </label>
+                </div>
                 <div id="sidebar-content" class="sidebar-content">
                     <div class="instruction">
                         Selecione uma Zona Eleitoral na coluna ao lado para visualizar os detalhes.

@@ -20,6 +20,16 @@ let poiData = { escolas: [], saude: [], seguranca: [] };
 let poiMarkers = { escolas: [], saude: [], seguranca: [] };
 let activePoiLayers = { escolas: false, saude: false, seguranca: false };
 
+// Estado das camadas da aba Mapa (Zonas Eleitorais)
+let activeMapTabLayers = {
+    secoes: true,
+    zonas: true,
+    escolas: false,
+    saude: false,
+    seguranca: false
+};
+let mapTabPoiMarkers = { escolas: [], saude: [], seguranca: [] };
+
 // O campo "ra" salvo em cada ponto (public/locais_pontos.json) nem sempre bate
 // literalmente com o nome da RA no shapefile (public/regioes_administrativas.geojson)
 // — mesma nomenclatura, grafia diferente. Mapeamento só para achar o polígono certo;
@@ -80,8 +90,15 @@ function switchTab(tab) {
     if (tab !== 'ra' && activeRA) clearRASelection();
 
     // Alterna qual camada de contorno fica visível no mapa
-    if (map && map.data) map.data.setMap(tab === 'map' ? map : null);
+    if (map && map.data) map.data.setMap((tab === 'map' && activeMapTabLayers.zonas) ? map : null);
     if (raLayer) raLayer.setMap(tab === 'ra' ? map : null);
+
+    if (tab === 'map') {
+        updateMapSecoesVisibility();
+        updateMapTabPoiMarkers();
+    } else if (tab === 'ra') {
+        updatePoiMarkers();
+    }
 
     if (showMapView && map) {
         const currentCenter = map.getCenter();
@@ -136,6 +153,9 @@ async function loadData() {
 
         // 5. Carregar as camadas de POI (Escolas / Saúde / Segurança) da aba "RAs"
         await loadPoiData();
+
+        // 6. Inicializar toggles de camadas da aba Mapa (Zonas Eleitorais)
+        initMapTabLayerToggles();
 
     } catch (error) {
         console.error("Erro ao carregar dados georreferenciados:", error);
@@ -286,6 +306,104 @@ function updatePoiMarkers() {
         updatePoiMarkers();
     });
 });
+
+// ==========================================
+// CAMADAS E TOGGLES DA ABA MAPA (ZONAS ELEITORAIS)
+// ==========================================
+function updateMapSecoesVisibility() {
+    const showSecoes = activeMapTabLayers.secoes;
+    if (!activeZone) {
+        markers.forEach(m => {
+            m.setMap(showSecoes ? map : null);
+            m.setIcon(makeCircleIcon(m._baseColor, 6, 0.9));
+            m.setZIndex(1);
+        });
+    } else {
+        Object.entries(markerMap).forEach(([zId, zMarkers]) => {
+            const isTarget = zId === activeZone;
+            zMarkers.forEach(m => {
+                if (showSecoes) {
+                    m.setMap(map);
+                    if (isTarget) {
+                        m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
+                        m.setZIndex(999);
+                    } else {
+                        m.setIcon(makeCircleIcon(m._baseColor, 4, 0.25));
+                        m.setZIndex(1);
+                    }
+                } else {
+                    m.setMap(null);
+                }
+            });
+        });
+    }
+}
+
+function updateMapZonasVisibility() {
+    if (map && map.data) {
+        map.data.setMap(activeMapTabLayers.zonas ? map : null);
+    }
+}
+
+function updateMapTabPoiMarkers() {
+    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+        (mapTabPoiMarkers[cat] || []).forEach(m => m.setMap(null));
+        mapTabPoiMarkers[cat] = [];
+
+        if (!activeMapTabLayers[cat]) return;
+
+        const itens = (poiData[cat] || []).filter(p => {
+            if (!activeZone) return true;
+            const zoneInfo = ZONAS_DATA ? ZONAS_DATA[activeZone] : null;
+            if (zoneInfo && zoneInfo.ras) {
+                return zoneInfo.ras.some(ra => ra.toLowerCase() === (p.ra || '').toLowerCase());
+            }
+            return true;
+        });
+
+        itens.forEach(p => {
+            const marker = new google.maps.Marker({
+                position: { lat: p.lat, lng: p.lng },
+                map,
+                icon: makePoiIcon(cat),
+                zIndex: 500
+            });
+            marker.addListener('mouseover', () => {
+                sharedInfoWindow.setContent(POI_HOVER_BUILDERS[cat](p));
+                sharedInfoWindow.open({ map, anchor: marker });
+            });
+            marker.addListener('mouseout', () => sharedInfoWindow.close());
+            mapTabPoiMarkers[cat].push(marker);
+        });
+    });
+}
+
+function initMapTabLayerToggles() {
+    const secoesCheckbox = document.getElementById('map-toggle-secoes');
+    if (secoesCheckbox) {
+        secoesCheckbox.addEventListener('change', () => {
+            activeMapTabLayers.secoes = secoesCheckbox.checked;
+            updateMapSecoesVisibility();
+        });
+    }
+
+    const zonasCheckbox = document.getElementById('map-toggle-zonas');
+    if (zonasCheckbox) {
+        zonasCheckbox.addEventListener('change', () => {
+            activeMapTabLayers.zonas = zonasCheckbox.checked;
+            updateMapZonasVisibility();
+        });
+    }
+
+    ['escolas', 'saude', 'seguranca'].forEach(cat => {
+        const checkbox = document.getElementById(`map-toggle-${cat}`);
+        if (!checkbox) return;
+        checkbox.addEventListener('change', () => {
+            activeMapTabLayers[cat] = checkbox.checked;
+            updateMapTabPoiMarkers();
+        });
+    });
+}
 
 // Plotar Marcadores dos Locais de Votação com Coordenadas Reais (Google Geocoding)
 function plotMarkers(pontos) {
@@ -566,8 +684,9 @@ function clearZoneSelection() {
         if (prevItem) prevItem.classList.remove('active');
     }
     activeZone = null;
-    resetMarkers();
+    updateMapSecoesVisibility();
     updateMapDataStyle();
+    updateMapTabPoiMarkers();
     document.getElementById('sidebar-content').innerHTML =
         `<div class="instruction">Selecione uma Zona Eleitoral na coluna ao lado para visualizar os detalhes.</div>`;
 }
@@ -743,20 +862,29 @@ function selectZone(zoneId) {
         item.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
     }
 
-    // 2. Destacar marcadores da zona selecionada e esmaecer os outros
+    // 2. Destacar marcadores da zona selecionada e esmaecer os outros (se seções ativas)
     const zoneBounds = new google.maps.LatLngBounds();
     let hasBounds = false;
     Object.entries(markerMap).forEach(([zId, zMarkers]) => {
         const isTarget = zId === zoneId;
         zMarkers.forEach(m => {
-            if (isTarget) {
-                m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
-                m.setZIndex(999);
-                zoneBounds.extend(m.getPosition());
-                hasBounds = true;
+            if (activeMapTabLayers.secoes) {
+                m.setMap(map);
+                if (isTarget) {
+                    m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
+                    m.setZIndex(999);
+                    zoneBounds.extend(m.getPosition());
+                    hasBounds = true;
+                } else {
+                    m.setIcon(makeCircleIcon(m._baseColor, 4, 0.25));
+                    m.setZIndex(1);
+                }
             } else {
-                m.setIcon(makeCircleIcon(m._baseColor, 4, 0.25));
-                m.setZIndex(1);
+                m.setMap(null);
+                if (isTarget) {
+                    zoneBounds.extend(m.getPosition());
+                    hasBounds = true;
+                }
             }
         });
     });
@@ -773,7 +901,10 @@ function selectZone(zoneId) {
     // 4. Atualizar o destaque visual do polígono da zona no mapa
     updateMapDataStyle();
 
-    // 5. Exibir dados e estatísticas da Zona na Sidebar Esquerda
+    // 5. Atualizar marcadores de POI na aba Mapa para a zona selecionada
+    updateMapTabPoiMarkers();
+
+    // 6. Exibir dados e estatísticas da Zona na Sidebar Esquerda
     showZoneData(zoneId);
 }
 

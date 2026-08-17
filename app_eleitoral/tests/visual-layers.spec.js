@@ -175,4 +175,32 @@ test.describe('Painel Eleitoral — Verificação Visual das Novas Camadas', () 
         expect(consoleErrors.length).toBe(0);
     });
 
+    test('09 — Painel de Camadas da aba Zonas com toggles funcionais', async ({ page }) => {
+        // Aba Mapa já é default
+        const mapSidebar = page.locator('#map-sidebar');
+        await expect(mapSidebar).toBeVisible();
+
+        // Checkboxes do painel de camadas da aba Zonas
+        const secoesToggle = page.locator('#map-toggle-secoes');
+        const zonasToggle = page.locator('#map-toggle-zonas');
+
+        await expect(secoesToggle).toBeVisible();
+        await expect(zonasToggle).toBeVisible();
+        await expect(secoesToggle).toBeChecked();
+        await expect(zonasToggle).toBeChecked();
+
+        // Checkboxes de POIs também devem estar visíveis
+        for (const cat of ['escolas', 'saude', 'seguranca']) {
+            const checkbox = page.locator(`#map-toggle-${cat}`);
+            await expect(checkbox).toBeVisible();
+            await expect(checkbox).not.toBeChecked();
+        }
+
+        // Alternar o toggle de seções para desmarcado
+        await secoesToggle.uncheck();
+        await expect(secoesToggle).not.toBeChecked();
+
+        await page.screenshot({ path: `${SCREENSHOTS}/09-mapa-secoes-desmarcado.png`, fullPage: false });
+    });
+
 });

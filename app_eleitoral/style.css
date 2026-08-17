@@ -207,6 +207,8 @@ body {
     box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.15);
 }
 
+.poi-swatch-secoes { background-color: #1F4E78; }
+.poi-swatch-zonas { background-color: #63d692; }
 .poi-swatch-escolas { background-color: #2E7DD7; }
 .poi-swatch-saude { background-color: #D7263D; }
 .poi-swatch-seguranca { background-color: #2B2D42; }
