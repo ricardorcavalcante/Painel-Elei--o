@@ -44,6 +44,7 @@
                     <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
                     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                     <button class="tab-btn" data-tab="okr" onclick="switchTab('okr')" aria-label="OKRs e Equipe">🎯 OKRs</button>
+                    <button class="tab-btn" data-tab="agenda" onclick="switchTab('agenda')" aria-label="Agenda do Candidato">🗓️ Agenda</button>
                 </div>
             </div>
 
@@ -158,6 +159,18 @@
                 </div>
             </div>
 
+            <!-- Sidebar: Conteúdo da Agenda do Candidato -->
+            <div id="agenda-sidebar" style="display: none;">
+                <div class="sidebar-content" style="padding-top: 20px;">
+                    <h3>🗓️ Agenda do Candidato</h3>
+                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Compromissos públicos confirmados. Coordenadores Regionais podem solicitar visitas ou participações do candidato.</p>
+                    <div id="agenda-btn-group" class="okr-btn-group">
+                        <!-- Botões de ação gerados via JS (renderAgendaActionButtons), conforme
+                             o papel do usuário logado: admin publica direto, coordenador solicita. -->
+                    </div>
+                </div>
+            </div>
+
         </aside>
 
         <!-- Main Content Area -->
@@ -241,6 +254,55 @@
                     <h3>📄 Artefatos & Comprovantes Digitalizados de Campo</h3>
                     <div id="artefatos-list-container" class="artefatos-cards-grid">
                         <!-- Artefatos injetados via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container da Agenda Pública do Candidato -->
+            <div id="view-agenda" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
+                <h2 style="margin-bottom: 20px; color: #1F4E78;">🗓️ Agenda do Candidato</h2>
+
+                <!-- Painel 1: Agenda pública (visível sem login) -->
+                <div class="okr-section">
+                    <h3>📢 Compromissos Confirmados</h3>
+                    <div id="agenda-publica-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 2: Calendário oficial do TSE (referência pública, mesma leitura aberta a todos) -->
+                <div class="okr-section" style="margin-top: 30px;">
+                    <h3>⚖️ Calendário Oficial do TSE — Prazos até a Eleição</h3>
+                    <p class="instruction" style="font-size: 0.85rem;">Fonte: Resolução TSE nº 23.760/2026. Passe o mouse sobre uma linha para ver a descrição completa do prazo.</p>
+                    <div class="table-container">
+                        <table id="prazos-tse-table">
+                            <thead>
+                                <tr>
+                                    <th>Data</th>
+                                    <th>Prazo</th>
+                                    <th>Categoria</th>
+                                </tr>
+                            </thead>
+                            <tbody id="prazos-tse-tbody">
+                                <!-- Linhas injetadas via JS -->
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Painel 3: Solicitações do próprio coordenador (só quando logado) -->
+                <div class="okr-section" id="agenda-minhas-solicitacoes-section" style="margin-top: 30px; display: none;">
+                    <h3>📋 Minhas Solicitações</h3>
+                    <div id="agenda-minhas-solicitacoes-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 4: Fila de aprovação (só para o nível estratégico) -->
+                <div class="okr-section" id="agenda-pendentes-section" style="margin-top: 30px; display: none;">
+                    <h3>⏳ Solicitações Pendentes de Aprovação</h3>
+                    <div id="agenda-pendentes-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
                     </div>
                 </div>
             </div>

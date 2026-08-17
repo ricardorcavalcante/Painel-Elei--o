@@ -78,6 +78,8 @@ function switchTab(tab) {
     document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
     const okrSidebar = document.getElementById('okr-sidebar');
     if (okrSidebar) okrSidebar.style.display = tab === 'okr' ? 'block' : 'none';
+    const agendaSidebar = document.getElementById('agenda-sidebar');
+    if (agendaSidebar) agendaSidebar.style.display = tab === 'agenda' ? 'block' : 'none';
 
     // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
     const showMapView = tab === 'map' || tab === 'ra';
@@ -85,6 +87,8 @@ function switchTab(tab) {
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
     const viewOkr = document.getElementById('view-okr');
     if (viewOkr) viewOkr.style.display = tab === 'okr' ? 'block' : 'none';
+    const viewAgenda = document.getElementById('view-agenda');
+    if (viewAgenda) viewAgenda.style.display = tab === 'agenda' ? 'block' : 'none';
 
     // Coluna direita: Zonas x Regiões Administrativas
     document.getElementById('zonas-legend').style.display = tab === 'map' ? 'flex' : 'none';
@@ -92,6 +96,9 @@ function switchTab(tab) {
 
     if (tab === 'okr') {
         initOKRModule();
+    }
+    if (tab === 'agenda') {
+        initAgendaModule();
     }
 
     // Cada aba começa "limpa": desfaz seleção/realce anterior de zona ou RA
@@ -1622,6 +1629,319 @@ async function uploadArtefato(keyResultId, file) {
     await loadOKRData();
 }
 
+// ==========================================
+// MÓDULO DE AGENDA PÚBLICA DO CANDIDATO
+// Leitura da agenda confirmada é pública (RLS "TO anon" em
+// agenda_eventos, ver supabase/schema.sql) — diferente do resto do
+// painel, funciona mesmo sem login. Coordenadores Regionais (membros
+// de um product) solicitam visita/participação; nível estratégico
+// aprova/recusa ou publica compromisso oficial direto. Reaproveita a
+// sessão/autenticação já mantida pelo módulo de OKRs (okrCurrentUser,
+// okrUserProductIds, okrAuthListenerBound, refreshOKRSession()).
+// ==========================================
+let agendaDataCache = { eventos: [] };
+let prazosTSECache = [];
+
+const PRAZO_CATEGORIA_LABEL = {
+    partidos: 'Partidos', convencao: 'Convenção', candidatura: 'Candidatura',
+    propaganda: 'Propaganda', eleitorado: 'Eleitorado', urnas: 'Urnas',
+    financiamento: 'Financiamento', pesquisas: 'Pesquisas',
+    administrativo: 'Administrativo', votacao: 'Votação', diplomacao: 'Diplomação'
+};
+
+async function initAgendaModule() {
+    const sb = initSupabaseClient();
+    if (!sb) {
+        const container = document.getElementById('agenda-publica-container');
+        if (container) {
+            container.innerHTML = '<div class="instruction">Agenda não configurada: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (ver README).</div>';
+        }
+        return;
+    }
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
+    await Promise.all([loadAgendaData(), loadPrazosTSE()]);
+}
+
+async function loadPrazosTSE() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        const { data, error } = await sb.from('prazos_eleitorais').select('*').order('data', { ascending: true });
+        if (error) throw error;
+        prazosTSECache = data || [];
+        renderPrazosTSE();
+    } catch (err) {
+        console.warn('Erro ao carregar calendário do TSE:', err);
+    }
+}
+
+function formatPrazoDate(dataStr) {
+    const [ano, mes, dia] = dataStr.split('-');
+    return `${dia}/${mes}/${ano}`;
+}
+
+function renderPrazosTSE() {
+    const tbody = document.getElementById('prazos-tse-tbody');
+    if (!tbody) return;
+    if (!prazosTSECache.length) {
+        tbody.innerHTML = '<tr><td colspan="3" class="instruction">Calendário do TSE indisponível no momento.</td></tr>';
+        return;
+    }
+    const hoje = new Date().toISOString().slice(0, 10);
+    tbody.innerHTML = prazosTSECache.map(p => {
+        const passado = p.data < hoje;
+        const style = passado ? 'opacity: 0.55;' : (p.destaque ? 'font-weight: 700;' : '');
+        const descricaoEscapada = (p.descricao || '').replace(/"/g, '&quot;');
+        return `
+            <tr style="${style}" title="${descricaoEscapada}">
+                <td>${formatPrazoDate(p.data)}</td>
+                <td>${p.titulo}</td>
+                <td>${PRAZO_CATEGORIA_LABEL[p.categoria] || p.categoria}</td>
+            </tr>
+        `;
+    }).join('');
+}
+
+async function loadAgendaData() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        const needsProducts = !okrDataCache.products.length;
+        const [agendaRes, productsRes] = await Promise.all([
+            sb.from('agenda_eventos').select('*').order('data_hora', { ascending: true }),
+            needsProducts ? sb.from('products').select('*').order('nome') : Promise.resolve(null)
+        ]);
+        agendaDataCache.eventos = agendaRes.data || [];
+        if (productsRes) okrDataCache.products = productsRes.data || [];
+
+        renderAgendaActionButtons();
+        renderAgendaPublica();
+        renderMinhasSolicitacoes();
+        renderSolicitacoesPendentes();
+    } catch (err) {
+        console.warn('Erro ao carregar agenda:', err);
+    }
+}
+
+function formatAgendaDateTime(iso) {
+    const d = new Date(iso);
+    if (isNaN(d.getTime())) return iso;
+    return d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
+}
+
+function agendaTipoLabel(tipo) {
+    if (tipo === 'oficial') return '📌 Compromisso Oficial';
+    if (tipo === 'visita_solicitada') return '📅 Visita Solicitada';
+    if (tipo === 'participacao_solicitada') return '🎤 Participação Solicitada';
+    return tipo;
+}
+
+function renderAgendaActionButtons() {
+    const box = document.getElementById('agenda-btn-group');
+    if (!box) return;
+    if (!okrCurrentUser) {
+        box.innerHTML = '<p class="okr-auth-hint">Entre pela aba OKRs para solicitar ou publicar compromissos.</p>';
+        return;
+    }
+    const isAdmin = !!okrCurrentUser.is_super_admin;
+    const hasProduct = okrUserProductIds.length > 0;
+    let html = '';
+    if (isAdmin) {
+        html += `<button class="btn-primary" onclick="openNovoCompromissoOficialModal()">📌 Publicar Compromisso Oficial</button>`;
+    }
+    if (hasProduct) {
+        html += `<button class="btn-secondary" onclick="openSolicitarAgendaModal('visita_solicitada')">📅 Solicitar Visita</button>`;
+        html += `<button class="btn-secondary" onclick="openSolicitarAgendaModal('participacao_solicitada')">🎤 Solicitar Participação</button>`;
+    }
+    box.innerHTML = html;
+}
+
+function renderAgendaPublica() {
+    const container = document.getElementById('agenda-publica-container');
+    if (!container) return;
+
+    const confirmados = agendaDataCache.eventos.filter(ev => ev.status === 'confirmado');
+    if (!confirmados.length) {
+        container.innerHTML = '<div class="instruction">Nenhum compromisso confirmado no momento.</div>';
+        return;
+    }
+
+    container.innerHTML = confirmados.map(ev => `
+        <div class="okr-card">
+            <div class="okr-card-header">
+                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
+                <span class="okr-year">${formatAgendaDateTime(ev.data_hora)}</span>
+            </div>
+            <h4>${ev.titulo}</h4>
+            <p>${ev.descricao || ''}</p>
+            <div class="okr-card-footer">
+                <span>${[ev.local, ev.ra_nome].filter(Boolean).join(' · ')}</span>
+            </div>
+        </div>
+    `).join('');
+}
+
+function renderMinhasSolicitacoes() {
+    const section = document.getElementById('agenda-minhas-solicitacoes-section');
+    const container = document.getElementById('agenda-minhas-solicitacoes-container');
+    if (!section || !container) return;
+
+    if (!okrCurrentUser || !okrUserProductIds.length) {
+        section.style.display = 'none';
+        return;
+    }
+
+    const minhas = agendaDataCache.eventos.filter(ev => ev.solicitado_por === okrCurrentUser.id);
+    section.style.display = 'block';
+    if (!minhas.length) {
+        container.innerHTML = '<div class="instruction">Você ainda não fez nenhuma solicitação de agenda.</div>';
+        return;
+    }
+
+    container.innerHTML = minhas.map(ev => `
+        <div class="okr-card">
+            <div class="okr-card-header">
+                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
+                <span class="status-tag status-${ev.status}">${ev.status.toUpperCase()}</span>
+            </div>
+            <h4>${ev.titulo}</h4>
+            <p>${ev.descricao || ''}</p>
+            <div class="okr-card-footer">
+                <span>${formatAgendaDateTime(ev.data_hora)}${ev.local ? ' · ' + ev.local : ''}</span>
+            </div>
+            ${ev.resposta_admin ? `<p><strong>Resposta:</strong> ${ev.resposta_admin}</p>` : ''}
+            ${ev.status === 'pendente' ? `<button class="btn-link" onclick="cancelarSolicitacao('${ev.id}')">✖️ Cancelar solicitação</button>` : ''}
+        </div>
+    `).join('');
+}
+
+function renderSolicitacoesPendentes() {
+    const section = document.getElementById('agenda-pendentes-section');
+    const container = document.getElementById('agenda-pendentes-container');
+    if (!section || !container) return;
+
+    if (!okrCurrentUser || !okrCurrentUser.is_super_admin) {
+        section.style.display = 'none';
+        return;
+    }
+
+    const pendentes = agendaDataCache.eventos.filter(ev => ev.status === 'pendente');
+    section.style.display = 'block';
+    if (!pendentes.length) {
+        container.innerHTML = '<div class="instruction">Nenhuma solicitação pendente.</div>';
+        return;
+    }
+
+    container.innerHTML = pendentes.map(ev => {
+        const produto = findProduct(ev.product_id);
+        return `
+        <div class="okr-card">
+            <div class="okr-card-header">
+                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
+                <span class="okr-year">${produto ? produto.nome + ' (' + produto.ra_nome + ')' : ''}</span>
+            </div>
+            <h4>${ev.titulo}</h4>
+            <p>${ev.descricao || ''}</p>
+            <div class="okr-card-footer">
+                <span>${formatAgendaDateTime(ev.data_hora)}${ev.local ? ' · ' + ev.local : ''}</span>
+            </div>
+            <div class="okr-btn-group" style="margin-top: 10px;">
+                <button class="btn-primary" onclick="responderSolicitacao('${ev.id}', true)">✅ Aprovar</button>
+                <button class="btn-secondary" onclick="responderSolicitacao('${ev.id}', false)">❌ Recusar</button>
+            </div>
+        </div>
+    `;
+    }).join('');
+}
+
+function parseAgendaDateTimeInput(texto) {
+    const d = new Date((texto || '').trim().replace(' ', 'T'));
+    return isNaN(d.getTime()) ? null : d;
+}
+
+async function openSolicitarAgendaModal(tipo) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+
+    const disponiveis = okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
+    if (!disponiveis.length) return alert('Você precisa fazer parte de uma Coordenação Regional para solicitar agenda.');
+
+    let produto = disponiveis[0];
+    if (disponiveis.length > 1) {
+        const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
+        const escolha = prompt(`Solicitar em nome de qual Coordenação?\n${opcoes}`);
+        const idx = parseInt(escolha, 10) - 1;
+        if (isNaN(idx) || !disponiveis[idx]) return alert('Coordenação inválida.');
+        produto = disponiveis[idx];
+    }
+
+    const label = tipo === 'visita_solicitada' ? 'Visita do Candidato' : 'Participação do Candidato';
+    const titulo = prompt(`Título do pedido de ${label}:`);
+    if (!titulo) return;
+    const local = prompt('Local (endereço ou referência):') || null;
+    const data_hora = parseAgendaDateTimeInput(prompt('Data e hora desejada (AAAA-MM-DD HH:MM):'));
+    if (!data_hora) return alert('Data/hora inválida. Use o formato AAAA-MM-DD HH:MM.');
+    const descricao = prompt('Descrição / justificativa (opcional):') || null;
+
+    const { error } = await sb.from('agenda_eventos').insert({
+        titulo, descricao, tipo, local,
+        ra_nome: produto.ra_nome,
+        product_id: produto.id,
+        data_hora: data_hora.toISOString(),
+        status: 'pendente',
+        solicitado_por: okrCurrentUser.id
+    });
+    if (error) return alert('Erro: ' + error.message);
+    alert('Solicitação enviada! Acompanhe o status em "Minhas Solicitações".');
+    await loadAgendaData();
+}
+
+async function openNovoCompromissoOficialModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const titulo = prompt('Título do compromisso oficial:');
+    if (!titulo) return;
+    const local = prompt('Local (endereço ou referência):') || null;
+    const ra_nome = (prompt('Região Administrativa (opcional):') || '').toUpperCase() || null;
+    const data_hora = parseAgendaDateTimeInput(prompt('Data e hora (AAAA-MM-DD HH:MM):'));
+    if (!data_hora) return alert('Data/hora inválida. Use o formato AAAA-MM-DD HH:MM.');
+    const descricao = prompt('Descrição (opcional):') || null;
+
+    const { error } = await sb.from('agenda_eventos').insert({
+        titulo, descricao, tipo: 'oficial', local, ra_nome,
+        data_hora: data_hora.toISOString(),
+        status: 'confirmado'
+    });
+    if (error) return alert('Erro: ' + error.message);
+    await loadAgendaData();
+}
+
+async function responderSolicitacao(id, aprovar) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const resposta_admin = prompt(aprovar ? 'Observação para o coordenador (opcional):' : 'Motivo da recusa (opcional):') || null;
+    const { error } = await sb.from('agenda_eventos').update({
+        status: aprovar ? 'confirmado' : 'recusado',
+        resposta_admin,
+        updated_at: new Date().toISOString()
+    }).eq('id', id);
+    if (error) return alert('Erro: ' + error.message);
+    await loadAgendaData();
+}
+
+async function cancelarSolicitacao(id) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    if (!confirm('Cancelar esta solicitação?')) return;
+    const { error } = await sb.from('agenda_eventos').update({ status: 'cancelado' }).eq('id', id);
+    if (error) return alert('Erro: ' + error.message);
+    await loadAgendaData();
+}
+
 // Expor funções globais para manipuladores de evento HTML
 window.switchTab = switchTab;
 window.openModal = openModal;
@@ -1643,6 +1963,10 @@ window.openNewKRModal = openNewKRModal;
 window.updateKeyResultProgress = updateKeyResultProgress;
 window.openNewEquipeModal = openNewEquipeModal;
 window.openArtefatoModal = openArtefatoModal;
+window.openSolicitarAgendaModal = openSolicitarAgendaModal;
+window.openNovoCompromissoOficialModal = openNovoCompromissoOficialModal;
+window.responderSolicitacao = responderSolicitacao;
+window.cancelarSolicitacao = cancelarSolicitacao;
 
 // Iniciar Aplicação
 window.onload = initMap;
