@@ -89,6 +89,9 @@ async function loadData() {
         const pontos = await pontosResponse.json();
         plotMarkers(pontos);
 
+        // 3. Carregar e Plotar a camada gráfica de Polígonos de Shapefile (.shp / GeoJSON)
+        await loadShapefileLayer();
+
     } catch (error) {
         console.error("Erro ao carregar dados georreferenciados:", error);
     }
@@ -190,6 +193,92 @@ function plotMarkers(pontos) {
 }
 
 // ==========================================
+// CAMADA GRÁFICA DE POLÍGONOS DE SHAPEFILE (.SHP / GEOJSON)
+// ==========================================
+async function loadShapefileLayer() {
+    try {
+        const response = await fetch('zonas_shapefile.json');
+        if (!response.ok) return;
+        const geojson = await response.json();
+
+        // Limpar dados de polígonos anteriores, se houver
+        map.data.forEach(feature => map.data.remove(feature));
+
+        map.data.addGeoJson(geojson);
+
+        // Estilização dinâmica da camada de dados por Zona
+        updateMapDataStyle();
+
+        // Evento HOVER (mouseover): destaca a borda e abre tooltip com dados do DBF
+        map.data.addListener('mouseover', (event) => {
+            map.data.overrideStyle(event.feature, {
+                fillOpacity: 0.45,
+                strokeWeight: 3,
+                strokeOpacity: 1.0
+            });
+
+            const props = {};
+            event.feature.forEachProperty((val, key) => { props[key] = val; });
+            const zonaId = props.zona || props.ZONA || props.NR_ZONA || 'N/A';
+            const nomeZona = props.nome || props.NOME || props.NM_ZONA || `Zona Eleitoral ${zonaId}`;
+
+            let tooltipHtml = `
+                <div class="kml-hover-tooltip">
+                    <strong>🗺️ ${nomeZona}</strong>
+                    <div>📍 Zona: ${zonaId}</div>
+            `;
+
+            // Exibe propriedades adicionais extraídas do .dbf
+            Object.keys(props).forEach(key => {
+                if (!['zona', 'ZONA', 'NR_ZONA', 'nome', 'NOME', 'color', 'style'].includes(key)) {
+                    tooltipHtml += `<div>🔸 <strong>${key}:</strong> ${props[key]}</div>`;
+                }
+            });
+            tooltipHtml += `</div>`;
+
+            sharedInfoWindow.setContent(tooltipHtml);
+            sharedInfoWindow.setPosition(event.latLng);
+            sharedInfoWindow.open(map);
+        });
+
+        // Evento MOUSEOUT: restaura o estilo padrão
+        map.data.addListener('mouseout', () => {
+            map.data.revertStyle();
+            sharedInfoWindow.close();
+        });
+
+        // Evento CLICK: Seleciona e destaca a Zona Eleitoral no painel lateral
+        map.data.addListener('click', (event) => {
+            const zonaId = event.feature.getProperty('zona') || event.feature.getProperty('ZONA') || event.feature.getProperty('NR_ZONA');
+            if (zonaId) {
+                selectZone(String(zonaId));
+            }
+        });
+
+        console.log('✅ Camada gráfica Shapefile (GeoJSON) carregada no mapa.');
+    } catch (err) {
+        console.warn('Erro ao carregar a camada de polígonos Shapefile:', err);
+    }
+}
+
+function updateMapDataStyle() {
+    if (!map || !map.data) return;
+    map.data.setStyle((feature) => {
+        const zonaId = String(feature.getProperty('zona') || feature.getProperty('ZONA') || feature.getProperty('NR_ZONA') || '');
+        const color = zoneColors[zonaId] || feature.getProperty('color') || '#1F4E78';
+        const isSelected = activeZone && String(activeZone) === zonaId;
+
+        return {
+            fillColor: color,
+            fillOpacity: isSelected ? 0.40 : 0.18,
+            strokeColor: color,
+            strokeWeight: isSelected ? 3 : 1.5,
+            strokeOpacity: isSelected ? 1.0 : 0.7
+        };
+    });
+}
+
+// ==========================================
 // COLUNA DE ZONAS ELEITORAIS (DIREITA)
 // ==========================================
 function buildZonasColumn() {
@@ -262,7 +351,10 @@ function selectZone(zoneId) {
         });
     }
 
-    // 4. Exibir dados e estatísticas da Zona na Sidebar Esquerda
+    // 4. Atualizar o destaque visual do polígono da zona no mapa
+    updateMapDataStyle();
+
+    // 5. Exibir dados e estatísticas da Zona na Sidebar Esquerda
     showZoneData(zoneId);
 }
 
