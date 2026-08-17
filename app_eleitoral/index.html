@@ -34,6 +34,7 @@
                     <button class="tab-btn active" data-tab="map" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
                     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
+                    <button class="tab-btn" data-tab="okr" onclick="switchTab('okr')" aria-label="OKRs e Equipe">🎯 OKRs</button>
                 </div>
             </div>
 
@@ -127,6 +128,30 @@
                 </div>
             </div>
 
+            <!-- Sidebar: Conteúdo de OKRs -->
+            <div id="okr-sidebar" style="display: none;">
+                <div class="sidebar-content" style="padding-top: 20px;">
+                    <h3>🎯 Gestão de OKRs</h3>
+                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Acompanhamento dos Objetivos Globais, Coordenadores por RA e Ações da Equipe.</p>
+                    
+                    <div id="okr-auth-status" class="okr-auth-box">
+                        <div id="okr-user-info">
+                            <span class="user-badge" id="okr-user-role">🔑 Nível Estratégico</span>
+                            <p id="okr-user-name">Usuário Conectado</p>
+                        </div>
+                        <button class="btn-secondary-sm" id="btn-okr-login-google" onclick="handleGoogleLogin()">🌐 Entrar com Google</button>
+                    </div>
+
+                    <div class="okr-level-filters">
+                        <p class="poi-layers-title">Filtrar por Nível</p>
+                        <button class="btn-filter-level active" data-level="all" onclick="filterOKRLevel('all')">Todos</button>
+                        <button class="btn-filter-level" data-level="estrategico" onclick="filterOKRLevel('estrategico')">⭐ Estratégico</button>
+                        <button class="btn-filter-level" data-level="tatico" onclick="filterOKRLevel('tatico')">📌 Tático</button>
+                        <button class="btn-filter-level" data-level="operacional" onclick="filterOKRLevel('operacional')">👥 Operacional</button>
+                    </div>
+                </div>
+            </div>
+
         </aside>
 
         <!-- Main Content Area -->
@@ -169,6 +194,43 @@
                     <div class="chart-card full-width">
                         <h3>Quantidade de Locais de Votação por RA</h3>
                         <canvas id="chartLocaisRA"></canvas>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container do Módulo de OKRs e Equipe -->
+            <div id="view-okr" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
+                <div class="okr-header-actions">
+                    <h2>🎯 Gestão de OKRs & Equipes Regionais</h2>
+                    <div class="okr-btn-group">
+                        <button class="btn-primary" onclick="openNewObjectiveModal()">➕ Novo Objetivo (Estratégico)</button>
+                        <button class="btn-primary" onclick="openNewKRModal()">➕ Novo Key Result (Tático)</button>
+                        <button class="btn-secondary" onclick="openNewEquipeModal()">👥 Cadastrar Equipe por RA</button>
+                        <button class="btn-secondary" onclick="openArtefatoModal()">📄 Upload de Artefato</button>
+                    </div>
+                </div>
+
+                <!-- Painel 1: Objetivos Estratégicos & Key Results Táticos por RA -->
+                <div class="okr-section">
+                    <h3>⭐ Nível Estratégico & Tático (Resultados-Chave por Zona/RA)</h3>
+                    <div id="okr-list-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 2: Equipe Regional Operacional & Múltiplos Coordenadores por RA -->
+                <div class="okr-section" style="margin-top: 30px;">
+                    <h3>👥 Coordenadores & Equipe Operacional por Região Administrativa</h3>
+                    <div id="equipe-list-container" class="equipe-cards-grid">
+                        <!-- Integrantes injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 3: Artefatos & Entregáveis Digitalizados -->
+                <div class="okr-section" style="margin-top: 30px;">
+                    <h3>📄 Artefatos & Comprovantes Digitalizados de Campo</h3>
+                    <div id="artefatos-list-container" class="artefatos-cards-grid">
+                        <!-- Artefatos injetados via JS -->
                     </div>
                 </div>
             </div>

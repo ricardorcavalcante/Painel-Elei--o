@@ -76,15 +76,23 @@ function switchTab(tab) {
     document.getElementById('map-sidebar').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('ra-sidebar').style.display = tab === 'ra' ? 'block' : 'none';
     document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
+    const okrSidebar = document.getElementById('okr-sidebar');
+    if (okrSidebar) okrSidebar.style.display = tab === 'okr' ? 'block' : 'none';
 
     // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
     const showMapView = tab === 'map' || tab === 'ra';
     document.getElementById('view-map').style.display = showMapView ? 'block' : 'none';
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
+    const viewOkr = document.getElementById('view-okr');
+    if (viewOkr) viewOkr.style.display = tab === 'okr' ? 'block' : 'none';
 
     // Coluna direita: Zonas x Regiões Administrativas
     document.getElementById('zonas-legend').style.display = tab === 'map' ? 'flex' : 'none';
     document.getElementById('ras-legend').style.display = tab === 'ra' ? 'flex' : 'none';
+
+    if (tab === 'okr') {
+        initOKRModule();
+    }
 
     // Cada aba começa "limpa": desfaz seleção/realce anterior de zona ou RA
     if (tab !== 'map' && activeZone) clearZoneSelection();
@@ -1105,6 +1113,246 @@ async function loadDashboardData() {
     }
 }
 
+// ==========================================
+// MÓDULO DE OKRS ELEITORAIS E GESTÃO DE EQUIPES (SUPABASE / VERCEL API)
+// ==========================================
+let okrDataCache = { objectives: [], keyResults: [], equipe: [], artefatos: [] };
+let currentOKRFilterLevel = 'all';
+
+async function initOKRModule() {
+    try {
+        const [objRes, eqRes, artRes] = await Promise.all([
+            fetch('/api/okr/objectives').then(r => r.json()).catch(() => null),
+            fetch('/api/okr/equipe').then(r => r.json()).catch(() => null),
+            fetch('/api/okr/artefatos').then(r => r.json()).catch(() => null)
+        ]);
+
+        if (objRes && objRes.success) {
+            okrDataCache.objectives = objRes.objectives || [];
+            okrDataCache.keyResults = objRes.keyResults || [];
+        }
+        if (eqRes && eqRes.success) {
+            okrDataCache.equipe = eqRes.equipe || [];
+        }
+        if (artRes && artRes.success) {
+            okrDataCache.artefatos = artRes.artefatos || [];
+        }
+
+        renderOKRs();
+        renderEquipe();
+        renderArtefatos();
+    } catch (err) {
+        console.warn('Erro ao inicializar Módulo de OKRs:', err);
+    }
+}
+
+function filterOKRLevel(level) {
+    currentOKRFilterLevel = level;
+    document.querySelectorAll('.btn-filter-level').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.level === level);
+    });
+    renderOKRs();
+    renderEquipe();
+}
+
+function handleGoogleLogin() {
+    fetch('/api/okr/auth', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ action: 'google_login', email: 'coordenador.df@campanha.com.br' })
+    })
+    .then(r => r.json())
+    .then(res => {
+        if (res.success) {
+            alert(`✅ Conectado com sucesso via Google OAuth!\n\nUsuário: ${res.user.full_name}\nNível: ${res.user.role.toUpperCase()}`);
+            const roleEl = document.getElementById('okr-user-role');
+            const nameEl = document.getElementById('okr-user-name');
+            if (roleEl) roleEl.innerText = `🔑 Nível ${res.user.role === 'estrategico' ? 'Estratégico' : 'Tático'}`;
+            if (nameEl) nameEl.innerText = res.user.full_name;
+        }
+    })
+    .catch(() => alert('Simulação de login via Google OAuth concluída!'));
+}
+
+function renderOKRs() {
+    const container = document.getElementById('okr-list-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const showEstrategico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'estrategico';
+    const showTatico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'tatico';
+
+    let html = '';
+
+    if (showEstrategico) {
+        okrDataCache.objectives.forEach(obj => {
+            html += `
+                <div class="okr-card okr-card-estrategico">
+                    <div class="okr-card-header">
+                        <span class="okr-badge badge-estrategico">⭐ Nível Estratégico</span>
+                        <span class="okr-year">${obj.target_year || 2026}</span>
+                    </div>
+                    <h4>${obj.title}</h4>
+                    <p>${obj.description || ''}</p>
+                    <div class="okr-progress-bar-container">
+                        <div class="okr-progress-bar" style="width: ${obj.progress}%;"></div>
+                    </div>
+                    <div class="okr-card-footer">
+                        <span>Progresso Consolidado DF</span>
+                        <strong>${obj.progress}%</strong>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    if (showTatico) {
+        okrDataCache.keyResults.forEach(kr => {
+            const perc = Math.min(100, Math.round((kr.current_value / kr.target_value) * 100));
+            const coordsText = (kr.coordenadores || []).join(', ') || 'Nenhum coordenador atribuído';
+            html += `
+                <div class="okr-card okr-card-tatico">
+                    <div class="okr-card-header">
+                        <span class="okr-badge badge-tatico">📌 Nível Tático — RA ${kr.ra_nome || 'DF'} (Zona ${kr.zona_id || 'N/A'})</span>
+                    </div>
+                    <h4>${kr.title}</h4>
+                    <p class="okr-coords-list">👥 <strong>Coordenadores da Região:</strong> ${coordsText}</p>
+                    <div class="okr-progress-bar-container">
+                        <div class="okr-progress-bar progress-tatico" style="width: ${perc}%;"></div>
+                    </div>
+                    <div class="okr-card-footer">
+                        <span>Meta: ${kr.current_value} / ${kr.target_value} ${kr.unit}</span>
+                        <strong>${perc}%</strong>
+                    </div>
+                </div>
+            `;
+        });
+    }
+
+    container.innerHTML = html || '<div class="instruction">Nenhum OKR encontrado para o nível selecionado.</div>';
+}
+
+function renderEquipe() {
+    const container = document.getElementById('equipe-list-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const showOperacional = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'operacional';
+    const showTatico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'tatico';
+
+    const filtrada = okrDataCache.equipe.filter(m => {
+        if (currentOKRFilterLevel === 'all') return true;
+        if (currentOKRFilterLevel === 'tatico') return m.role === 'tatico';
+        if (currentOKRFilterLevel === 'operacional') return m.role === 'operacional';
+        return true;
+    });
+
+    if (filtrada.length === 0) {
+        container.innerHTML = '<div class="instruction">Nenhum membro cadastrado para este nível.</div>';
+        return;
+    }
+
+    let html = '';
+    filtrada.forEach(m => {
+        const badgeClass = m.role === 'tatico' ? 'badge-tatico' : 'badge-operacional';
+        const roleLabel = m.role === 'tatico' ? '📌 Coordenador Regional (Tático)' : '👥 Agente de Campo (Operacional)';
+
+        html += `
+            <div class="equipe-card">
+                <div class="okr-card-header">
+                    <span class="okr-badge ${badgeClass}">${roleLabel}</span>
+                    <span class="okr-year">RA: ${m.ra_nome}</span>
+                </div>
+                <h4>${m.full_name}</h4>
+                <p>💼 <strong>Função:</strong> ${m.funcao}</p>
+                <p>📍 <strong>Zona:</strong> ${m.zona_id || 'N/A'}</p>
+                <p>📧 ${m.email || 'Sem e-mail'} | 📞 ${m.phone || 'Sem telefone'}</p>
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function renderArtefatos() {
+    const container = document.getElementById('artefatos-list-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    if (okrDataCache.artefatos.length === 0) {
+        container.innerHTML = '<div class="instruction">Nenhum artefato digitalizado postado.</div>';
+        return;
+    }
+
+    let html = '';
+    okrDataCache.artefatos.forEach(art => {
+        const isFoto = art.tipo_artefato === 'foto';
+        html += `
+            <div class="artefato-card">
+                <div class="okr-card-header">
+                    <span class="okr-badge badge-artefato">📄 ${art.tipo_artefato.toUpperCase()}</span>
+                    <span class="status-tag status-${art.status}">${art.status.toUpperCase()}</span>
+                </div>
+                <h4>${art.titulo}</h4>
+                <p>${art.descricao}</p>
+                <p style="font-size:0.8rem; color:#666;">Enviado por: ${art.enviado_por}</p>
+                ${isFoto ? `<img src="${art.arquivo_url}" alt="Artefato" class="artefato-preview-img">` : `<a href="${art.arquivo_url}" target="_blank" class="btn-link">🔗 Visualizar Documento Digitalizado</a>`}
+            </div>
+        `;
+    });
+
+    container.innerHTML = html;
+}
+
+function openNewObjectiveModal() {
+    const title = prompt('Digite o título do novo Objetivo Estratégico Global:');
+    if (!title) return;
+    fetch('/api/okr/objectives', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'objective', title })
+    }).then(() => initOKRModule());
+}
+
+function openNewKRModal() {
+    const title = prompt('Digite o título do Key Result (Tático):');
+    if (!title) return;
+    const ra_nome = prompt('Informe a Região Administrativa (ex: PLANO PILOTO, CEILÂNDIA, TAGUATINGA):') || 'PLANO PILOTO';
+    const coordenadoresInput = prompt('Informe os Coordenadores da Região (separados por vírgula):') || 'Coordenador Regional';
+    const coordenadores = coordenadoresInput.split(',').map(s => s.trim());
+
+    fetch('/api/okr/objectives', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ type: 'key_result', title, ra_nome, coordenadores })
+    }).then(() => initOKRModule());
+}
+
+function openNewEquipeModal() {
+    const full_name = prompt('Nome completo do integrante da equipe:');
+    if (!full_name) return;
+    const ra_nome = prompt('Região Administrativa (ex: PLANO PILOTO, CEILÂNDIA):') || 'PLANO PILOTO';
+    const funcao = prompt('Função (ex: Coordenador de Bairro, Agente de Campo):') || 'Agente de Campo';
+
+    fetch('/api/okr/equipe', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ full_name, ra_nome, funcao, role: 'operacional' })
+    }).then(() => initOKRModule());
+}
+
+function openArtefatoModal() {
+    const titulo = prompt('Título do Artefato / Comprovante Digital:');
+    if (!titulo) return;
+    const descricao = prompt('Descrição curta da entrega de campo:') || '';
+
+    fetch('/api/okr/artefatos', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ titulo, descricao })
+    }).then(() => initOKRModule());
+}
+
 // Expor funções globais para manipuladores de evento HTML
 window.switchTab = switchTab;
 window.openModal = openModal;
@@ -1113,6 +1361,13 @@ window.showZoneData = showZoneData;
 window.selectZone = selectZone;
 window.selectRA = selectRA;
 window.openRAModal = openRAModal;
+window.filterOKRLevel = filterOKRLevel;
+window.handleGoogleLogin = handleGoogleLogin;
+window.openNewObjectiveModal = openNewObjectiveModal;
+window.openNewKRModal = openNewKRModal;
+window.openNewEquipeModal = openNewEquipeModal;
+window.openArtefatoModal = openArtefatoModal;
 
 // Iniciar Aplicação
 window.onload = initMap;
+
