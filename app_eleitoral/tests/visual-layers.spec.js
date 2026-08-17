@@ -203,7 +203,7 @@ test.describe('Painel Eleitoral — Verificação Visual das Novas Camadas', () 
         await page.screenshot({ path: `${SCREENSHOTS}/09-mapa-secoes-desmarcado.png`, fullPage: false });
     });
 
-    test('10 — Aba "OKRs & Equipe" carrega os cards e permite navegação de níveis', async ({ page }) => {
+    test('10 — Aba "OKRs" carrega sem erros (com ou sem Supabase configurado)', async ({ page }) => {
         const okrTabBtn = page.locator('.tab-btn[data-tab="okr"]');
         await expect(okrTabBtn).toBeVisible();
         await okrTabBtn.click();
@@ -216,15 +216,13 @@ test.describe('Painel Eleitoral — Verificação Visual das Novas Camadas', () 
         const okrSidebar = page.locator('#okr-sidebar');
         await expect(okrSidebar).toBeVisible({ timeout: 5000 });
 
-        // Botão do Google OAuth deve estar presente
-        const googleBtn = page.locator('#btn-okr-login-google');
-        await expect(googleBtn).toBeVisible();
-
-        // Deve renderizar os containers de OKR e Equipe
+        // Sem VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY configurados neste ambiente,
+        // o módulo deve degradar de forma graciosa em vez de quebrar a página.
         const okrContainer = page.locator('#okr-list-container');
         await expect(okrContainer).toBeVisible();
+        await expect(okrContainer).toContainText('não configurado');
 
-        await page.screenshot({ path: `${SCREENSHOTS}/10-aba-okrs-equipe.png`, fullPage: false });
+        await page.screenshot({ path: `${SCREENSHOTS}/10-aba-okrs.png`, fullPage: false });
     });
 
 });

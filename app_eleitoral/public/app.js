@@ -1114,35 +1114,102 @@ async function loadDashboardData() {
 }
 
 // ==========================================
-// MÓDULO DE OKRS ELEITORAIS E GESTÃO DE EQUIPES (SUPABASE / VERCEL API)
+// MÓDULO DE OKRS — CAMPANHA DF 2026 (SUPABASE DIRETO, SEM API INTERMEDIÁRIA)
+// Hierarquia: Campanha (única) -> RA -> Coordenação Regional ("product",
+// por Zona Eleitoral) -> Ciclo ("period") -> Objective (estratégico/
+// tático) -> Key Result. Leitura aberta a qualquer usuário autenticado
+// (transparência); escrita restrita por RLS a super admin ou membros
+// da Coordenação Regional responsável (ver supabase/schema.sql).
 // ==========================================
-let okrDataCache = { objectives: [], keyResults: [], equipe: [], artefatos: [] };
+let supabaseClient = null;
+let okrAuthListenerBound = false;
+let okrCurrentUser = null; // linha de public.profiles do usuário logado
+let okrUserProductIds = []; // product_id onde o usuário logado é coordenador/operacional
+let okrDataCache = { periods: [], activePeriodId: null, products: [], productTeam: [], objectives: [], keyResults: [], artefatos: [] };
 let currentOKRFilterLevel = 'all';
 
+function initSupabaseClient() {
+    if (supabaseClient) return supabaseClient;
+    const url = window.SUPABASE_URL;
+    const key = window.SUPABASE_ANON_KEY;
+    if (!window.supabase || !url || !key || url.indexOf('VITE_SUPABASE_URL') !== -1) {
+        return null; // placeholder não substituído: env var não configurada no build
+    }
+    supabaseClient = window.supabase.createClient(url, key);
+    return supabaseClient;
+}
+
 async function initOKRModule() {
+    const sb = initSupabaseClient();
+    if (!sb) {
+        const container = document.getElementById('okr-list-container');
+        if (container) {
+            container.innerHTML = '<div class="instruction">Módulo de OKRs não configurado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (ver README).</div>';
+        }
+        const authBox = document.getElementById('okr-auth-status');
+        if (authBox) {
+            authBox.innerHTML = '<p class="okr-auth-hint">Login indisponível: o painel ainda não está conectado a um projeto Supabase.</p>';
+        }
+        return;
+    }
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
+    await loadOKRData();
+}
+
+async function refreshOKRSession() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const { data: { session } } = await sb.auth.getSession();
+    if (!session) {
+        okrCurrentUser = null;
+        okrUserProductIds = [];
+        renderOKRAuthBox();
+        renderOKRActionButtons();
+        return;
+    }
+    const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
+    okrCurrentUser = profile || { id: session.user.id, email: session.user.email, full_name: session.user.email, is_super_admin: false };
+    const { data: team } = await sb.from('product_team').select('product_id').eq('user_id', session.user.id);
+    okrUserProductIds = (team || []).map(t => t.product_id);
+    renderOKRAuthBox();
+    renderOKRActionButtons();
+}
+
+async function loadOKRData() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
     try {
-        const [objRes, eqRes, artRes] = await Promise.all([
-            fetch('/api/okr/objectives').then(r => r.json()).catch(() => null),
-            fetch('/api/okr/equipe').then(r => r.json()).catch(() => null),
-            fetch('/api/okr/artefatos').then(r => r.json()).catch(() => null)
+        const [periodsRes, productsRes, teamRes, objectivesRes, keyResultsRes, artefatosRes] = await Promise.all([
+            sb.from('periods').select('*').order('data_inicio', { ascending: false }),
+            sb.from('products').select('*').order('nome'),
+            sb.from('product_team').select('papel, product_id, user_id, profiles:user_id(full_name, email)'),
+            sb.from('objectives').select('*').order('created_at', { ascending: false }),
+            sb.from('key_results').select('*'),
+            sb.from('okr_artefatos').select('*').order('created_at', { ascending: false })
         ]);
 
-        if (objRes && objRes.success) {
-            okrDataCache.objectives = objRes.objectives || [];
-            okrDataCache.keyResults = objRes.keyResults || [];
-        }
-        if (eqRes && eqRes.success) {
-            okrDataCache.equipe = eqRes.equipe || [];
-        }
-        if (artRes && artRes.success) {
-            okrDataCache.artefatos = artRes.artefatos || [];
+        okrDataCache.periods = periodsRes.data || [];
+        okrDataCache.products = productsRes.data || [];
+        okrDataCache.productTeam = teamRes.data || [];
+        okrDataCache.objectives = objectivesRes.data || [];
+        okrDataCache.keyResults = keyResultsRes.data || [];
+        okrDataCache.artefatos = artefatosRes.data || [];
+
+        if (!okrDataCache.activePeriodId || !okrDataCache.periods.some(p => p.id === okrDataCache.activePeriodId)) {
+            const ativo = okrDataCache.periods.find(p => p.ativo) || okrDataCache.periods[0];
+            okrDataCache.activePeriodId = ativo ? ativo.id : null;
         }
 
+        renderOKRPeriodSelect();
         renderOKRs();
         renderEquipe();
         renderArtefatos();
     } catch (err) {
-        console.warn('Erro ao inicializar Módulo de OKRs:', err);
+        console.warn('Erro ao carregar dados de OKRs:', err);
     }
 }
 
@@ -1155,129 +1222,224 @@ function filterOKRLevel(level) {
     renderEquipe();
 }
 
-function handleGoogleLogin() {
-    fetch('/api/okr/auth', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ action: 'google_login', email: 'coordenador.df@campanha.com.br' })
-    })
-    .then(r => r.json())
-    .then(res => {
-        if (res.success) {
-            alert(`✅ Conectado com sucesso via Google OAuth!\n\nUsuário: ${res.user.full_name}\nNível: ${res.user.role.toUpperCase()}`);
-            const roleEl = document.getElementById('okr-user-role');
-            const nameEl = document.getElementById('okr-user-name');
-            if (roleEl) roleEl.innerText = `🔑 Nível ${res.user.role === 'estrategico' ? 'Estratégico' : 'Tático'}`;
-            if (nameEl) nameEl.innerText = res.user.full_name;
-        }
-    })
-    .catch(() => alert('Simulação de login via Google OAuth concluída!'));
+function changeOKRPeriod(periodId) {
+    okrDataCache.activePeriodId = periodId;
+    renderOKRs();
+}
+
+// ------------------------------------------
+// Autenticação (Supabase Auth: e-mail/senha + Google OAuth)
+// ------------------------------------------
+function renderOKRAuthBox() {
+    const box = document.getElementById('okr-auth-status');
+    if (!box) return;
+
+    if (okrCurrentUser) {
+        const roleLabel = okrCurrentUser.is_super_admin
+            ? '⭐ Nível Estratégico (Admin)'
+            : (okrUserProductIds.length ? '📌 Coordenação Regional' : '👤 Leitura (Transparência)');
+        box.innerHTML = `
+            <span class="user-badge">${roleLabel}</span>
+            <p id="okr-user-name">${okrCurrentUser.full_name || okrCurrentUser.email}</p>
+            <button class="btn-secondary-sm" onclick="okrSignOut()">🚪 Sair</button>
+        `;
+    } else {
+        box.innerHTML = `
+            <p class="okr-auth-hint">Entre para editar OKRs. A leitura dos objetivos é aberta a todos os usuários autenticados.</p>
+            <input type="email" id="okr-login-email" class="okr-login-input" placeholder="e-mail" autocomplete="email">
+            <input type="password" id="okr-login-password" class="okr-login-input" placeholder="senha" autocomplete="current-password">
+            <div class="okr-login-btn-row">
+                <button class="btn-secondary-sm" onclick="okrSignInEmail()">Entrar</button>
+                <button class="btn-secondary-sm" onclick="okrSignUpEmail()">Cadastrar</button>
+            </div>
+            <button class="btn-secondary-sm" onclick="okrSignInGoogle()">🌐 Entrar com Google</button>
+        `;
+    }
+}
+
+async function okrSignInEmail() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const email = (document.getElementById('okr-login-email') || {}).value || '';
+    const password = (document.getElementById('okr-login-password') || {}).value || '';
+    if (!email || !password) return alert('Informe e-mail e senha.');
+    const { error } = await sb.auth.signInWithPassword({ email, password });
+    if (error) return alert('Erro ao entrar: ' + error.message);
+}
+
+async function okrSignUpEmail() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const email = (document.getElementById('okr-login-email') || {}).value || '';
+    const password = (document.getElementById('okr-login-password') || {}).value || '';
+    if (!email || !password) return alert('Informe e-mail e senha.');
+    if (password.length < 6) return alert('A senha precisa ter ao menos 6 caracteres.');
+    const { error } = await sb.auth.signUp({ email, password });
+    if (error) return alert('Erro ao cadastrar: ' + error.message);
+    alert('Cadastro realizado. Verifique seu e-mail se a confirmação estiver ativada, ou faça login diretamente.');
+}
+
+async function okrSignInGoogle() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const { error } = await sb.auth.signInWithOAuth({ provider: 'google' });
+    if (error) alert('Erro ao entrar com Google: ' + error.message);
+}
+
+async function okrSignOut() {
+    const sb = initSupabaseClient();
+    if (sb) await sb.auth.signOut();
+}
+
+// ------------------------------------------
+// Botões de ação (visibilidade conforme papel do usuário logado —
+// a proteção real contra escrita não autorizada é a RLS no banco)
+// ------------------------------------------
+function renderOKRActionButtons() {
+    const box = document.getElementById('okr-btn-group');
+    if (!box) return;
+    if (!okrCurrentUser) {
+        box.innerHTML = '';
+        return;
+    }
+    const isAdmin = !!okrCurrentUser.is_super_admin;
+    const hasProduct = okrUserProductIds.length > 0;
+    let html = '';
+    if (isAdmin) {
+        html += `<button class="btn-secondary" onclick="openNewPeriodModal()">🗓️ Novo Ciclo</button>`;
+        html += `<button class="btn-secondary" onclick="openNewProductModal()">🏷️ Nova Coordenação Regional</button>`;
+        html += `<button class="btn-primary" onclick="openNewObjectiveModal('estrategico')">➕ Novo Objetivo Estratégico</button>`;
+    }
+    if (isAdmin || hasProduct) {
+        html += `<button class="btn-primary" onclick="openNewObjectiveModal('tatico')">➕ Novo Objetivo Tático</button>`;
+        html += `<button class="btn-secondary" onclick="openNewKRModal()">➕ Novo Key Result</button>`;
+        html += `<button class="btn-secondary" onclick="openNewEquipeModal()">👥 Adicionar à Equipe</button>`;
+        html += `<button class="btn-secondary" onclick="openArtefatoModal()">📄 Upload de Artefato</button>`;
+    }
+    box.innerHTML = html;
+}
+
+// ------------------------------------------
+// Renderização
+// ------------------------------------------
+function renderOKRPeriodSelect() {
+    const sel = document.getElementById('okr-period-select');
+    if (!sel) return;
+    if (!okrDataCache.periods.length) {
+        sel.innerHTML = '<option value="">Nenhum ciclo cadastrado</option>';
+        return;
+    }
+    sel.innerHTML = okrDataCache.periods.map(p =>
+        `<option value="${p.id}" ${p.id === okrDataCache.activePeriodId ? 'selected' : ''}>${p.nome} (${p.tipo_ciclo})</option>`
+    ).join('');
+}
+
+function findProduct(productId) {
+    return okrDataCache.products.find(p => p.id === productId);
 }
 
 function renderOKRs() {
     const container = document.getElementById('okr-list-container');
     if (!container) return;
-    container.innerHTML = '';
 
     const showEstrategico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'estrategico';
-    const showTatico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'tatico';
+    const showTatico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'tatico' || currentOKRFilterLevel === 'operacional';
+
+    const objetivosDoCiclo = okrDataCache.objectives.filter(o => o.period_id === okrDataCache.activePeriodId);
 
     let html = '';
+    objetivosDoCiclo.forEach(obj => {
+        if (obj.nivel === 'estrategico' && !showEstrategico) return;
+        if (obj.nivel === 'tatico' && !showTatico) return;
 
-    if (showEstrategico) {
-        okrDataCache.objectives.forEach(obj => {
-            html += `
-                <div class="okr-card okr-card-estrategico">
-                    <div class="okr-card-header">
-                        <span class="okr-badge badge-estrategico">⭐ Nível Estratégico</span>
-                        <span class="okr-year">${obj.target_year || 2026}</span>
-                    </div>
-                    <h4>${obj.title}</h4>
-                    <p>${obj.description || ''}</p>
-                    <div class="okr-progress-bar-container">
-                        <div class="okr-progress-bar" style="width: ${obj.progress}%;"></div>
-                    </div>
-                    <div class="okr-card-footer">
-                        <span>Progresso Consolidado DF</span>
-                        <strong>${obj.progress}%</strong>
-                    </div>
-                </div>
-            `;
-        });
-    }
+        const krs = okrDataCache.keyResults.filter(kr => kr.objective_id === obj.id);
+        const produto = obj.nivel === 'tatico' ? findProduct(obj.product_id) : null;
+        const badgeLabel = obj.nivel === 'estrategico'
+            ? '⭐ Nível Estratégico — Campanha DF 2026'
+            : `📌 Nível Tático — ${produto ? produto.nome + ' (' + produto.ra_nome + ')' : 'Coordenação Regional'}`;
 
-    if (showTatico) {
-        okrDataCache.keyResults.forEach(kr => {
-            const perc = Math.min(100, Math.round((kr.current_value / kr.target_value) * 100));
-            const coordsText = (kr.coordenadores || []).join(', ') || 'Nenhum coordenador atribuído';
-            html += `
-                <div class="okr-card okr-card-tatico">
-                    <div class="okr-card-header">
-                        <span class="okr-badge badge-tatico">📌 Nível Tático — RA ${kr.ra_nome || 'DF'} (Zona ${kr.zona_id || 'N/A'})</span>
+        const krsHtml = krs.map(kr => {
+            const perc = kr.target_value ? Math.min(100, Math.round((kr.current_value / kr.target_value) * 100)) : 0;
+            return `
+                <div class="okr-kr-row">
+                    <div class="okr-kr-row-header">
+                        <span>${kr.titulo}</span>
+                        <button class="btn-link" onclick="updateKeyResultProgress('${kr.id}')">✏️ Atualizar</button>
                     </div>
-                    <h4>${kr.title}</h4>
-                    <p class="okr-coords-list">👥 <strong>Coordenadores da Região:</strong> ${coordsText}</p>
                     <div class="okr-progress-bar-container">
                         <div class="okr-progress-bar progress-tatico" style="width: ${perc}%;"></div>
                     </div>
                     <div class="okr-card-footer">
-                        <span>Meta: ${kr.current_value} / ${kr.target_value} ${kr.unit}</span>
+                        <span>${kr.current_value} / ${kr.target_value} ${kr.unit || ''}</span>
                         <strong>${perc}%</strong>
                     </div>
                 </div>
             `;
-        });
-    }
+        }).join('');
 
-    container.innerHTML = html || '<div class="instruction">Nenhum OKR encontrado para o nível selecionado.</div>';
+        html += `
+            <div class="okr-card ${obj.nivel === 'estrategico' ? 'okr-card-estrategico' : 'okr-card-tatico'}">
+                <div class="okr-card-header">
+                    <span class="okr-badge ${obj.nivel === 'estrategico' ? 'badge-estrategico' : 'badge-tatico'}">${badgeLabel}</span>
+                </div>
+                <h4>${obj.titulo}</h4>
+                <p>${obj.descricao || ''}</p>
+                <div class="okr-progress-bar-container">
+                    <div class="okr-progress-bar" style="width: ${obj.progresso || 0}%;"></div>
+                </div>
+                <div class="okr-card-footer">
+                    <span>Progresso do Objetivo</span>
+                    <strong>${Math.round(obj.progresso || 0)}%</strong>
+                </div>
+                ${krsHtml}
+            </div>
+        `;
+    });
+
+    container.innerHTML = html || '<div class="instruction">Nenhum objetivo cadastrado para o ciclo/nível selecionado.</div>';
 }
 
 function renderEquipe() {
     const container = document.getElementById('equipe-list-container');
     if (!container) return;
-    container.innerHTML = '';
 
-    const showOperacional = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'operacional';
-    const showTatico = currentOKRFilterLevel === 'all' || currentOKRFilterLevel === 'tatico';
-
-    const filtrada = okrDataCache.equipe.filter(m => {
-        if (currentOKRFilterLevel === 'all') return true;
-        if (currentOKRFilterLevel === 'tatico') return m.role === 'tatico';
-        if (currentOKRFilterLevel === 'operacional') return m.role === 'operacional';
-        return true;
-    });
-
-    if (filtrada.length === 0) {
-        container.innerHTML = '<div class="instruction">Nenhum membro cadastrado para este nível.</div>';
+    if (!okrDataCache.products.length) {
+        container.innerHTML = '<div class="instruction">Nenhuma Coordenação Regional cadastrada.</div>';
         return;
     }
 
     let html = '';
-    filtrada.forEach(m => {
-        const badgeClass = m.role === 'tatico' ? 'badge-tatico' : 'badge-operacional';
-        const roleLabel = m.role === 'tatico' ? '📌 Coordenador Regional (Tático)' : '👥 Agente de Campo (Operacional)';
+    okrDataCache.products.forEach(produto => {
+        const membros = okrDataCache.productTeam.filter(t => t.product_id === produto.id);
+        if (currentOKRFilterLevel === 'operacional' && !membros.some(m => m.papel === 'operacional')) return;
+        if (currentOKRFilterLevel === 'estrategico') return;
+
+        const membrosHtml = membros.length
+            ? membros.map(m => {
+                const badgeClass = m.papel === 'coordenador' ? 'badge-tatico' : 'badge-operacional';
+                const roleLabel = m.papel === 'coordenador' ? '📌 Coordenador(a)' : '👥 Operacional';
+                const nome = (m.profiles && m.profiles.full_name) || (m.profiles && m.profiles.email) || 'Integrante';
+                return `<span class="okr-badge ${badgeClass}">${roleLabel}: ${nome}</span>`;
+            }).join(' ')
+            : '<span class="instruction" style="margin:0;">Nenhum integrante cadastrado</span>';
 
         html += `
             <div class="equipe-card">
                 <div class="okr-card-header">
-                    <span class="okr-badge ${badgeClass}">${roleLabel}</span>
-                    <span class="okr-year">RA: ${m.ra_nome}</span>
+                    <span class="okr-year">RA: ${produto.ra_nome}${produto.zona_eleitoral ? ' · Zona ' + produto.zona_eleitoral : ''}</span>
                 </div>
-                <h4>${m.full_name}</h4>
-                <p>💼 <strong>Função:</strong> ${m.funcao}</p>
-                <p>📍 <strong>Zona:</strong> ${m.zona_id || 'N/A'}</p>
-                <p>📧 ${m.email || 'Sem e-mail'} | 📞 ${m.phone || 'Sem telefone'}</p>
+                <h4>${produto.nome}</h4>
+                <p class="okr-coords-list">${membrosHtml}</p>
             </div>
         `;
     });
 
-    container.innerHTML = html;
+    container.innerHTML = html || '<div class="instruction">Nenhuma coordenação encontrada para este filtro.</div>';
 }
 
 function renderArtefatos() {
     const container = document.getElementById('artefatos-list-container');
     if (!container) return;
-    container.innerHTML = '';
 
     if (okrDataCache.artefatos.length === 0) {
         container.innerHTML = '<div class="instruction">Nenhum artefato digitalizado postado.</div>';
@@ -1290,13 +1452,12 @@ function renderArtefatos() {
         html += `
             <div class="artefato-card">
                 <div class="okr-card-header">
-                    <span class="okr-badge badge-artefato">📄 ${art.tipo_artefato.toUpperCase()}</span>
+                    <span class="okr-badge badge-artefato">📄 ${(art.tipo_artefato || 'outro').toUpperCase()}</span>
                     <span class="status-tag status-${art.status}">${art.status.toUpperCase()}</span>
                 </div>
                 <h4>${art.titulo}</h4>
-                <p>${art.descricao}</p>
-                <p style="font-size:0.8rem; color:#666;">Enviado por: ${art.enviado_por}</p>
-                ${isFoto ? `<img src="${art.arquivo_url}" alt="Artefato" class="artefato-preview-img">` : `<a href="${art.arquivo_url}" target="_blank" class="btn-link">🔗 Visualizar Documento Digitalizado</a>`}
+                <p>${art.descricao || ''}</p>
+                ${isFoto ? `<img src="${art.arquivo_url}" alt="Artefato" class="artefato-preview-img">` : `<a href="${art.arquivo_url}" target="_blank" rel="noopener" class="btn-link">🔗 Visualizar Documento Digitalizado</a>`}
             </div>
         `;
     });
@@ -1304,53 +1465,161 @@ function renderArtefatos() {
     container.innerHTML = html;
 }
 
-function openNewObjectiveModal() {
-    const title = prompt('Digite o título do novo Objetivo Estratégico Global:');
-    if (!title) return;
-    fetch('/api/okr/objectives', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'objective', title })
-    }).then(() => initOKRModule());
+// ------------------------------------------
+// Criação/edição (formulários simples via prompt(), consistente com o
+// resto do painel — a validação de permissão real é feita pela RLS)
+// ------------------------------------------
+async function openNewPeriodModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const nome = prompt('Nome do ciclo (ex: "Semana 18-24/08"):');
+    if (!nome) return;
+    const tipo_ciclo = (prompt('Tipo de ciclo: diario, semanal ou mensal', 'semanal') || 'semanal').toLowerCase();
+    const data_inicio = prompt('Data de início (AAAA-MM-DD):', new Date().toISOString().slice(0, 10));
+    if (!data_inicio) return;
+    const data_fim = prompt('Data de fim (AAAA-MM-DD, opcional):') || null;
+    const { error } = await sb.from('periods').insert({ nome, tipo_ciclo, data_inicio, data_fim, ativo: true });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
 }
 
-function openNewKRModal() {
-    const title = prompt('Digite o título do Key Result (Tático):');
-    if (!title) return;
-    const ra_nome = prompt('Informe a Região Administrativa (ex: PLANO PILOTO, CEILÂNDIA, TAGUATINGA):') || 'PLANO PILOTO';
-    const coordenadoresInput = prompt('Informe os Coordenadores da Região (separados por vírgula):') || 'Coordenador Regional';
-    const coordenadores = coordenadoresInput.split(',').map(s => s.trim());
-
-    fetch('/api/okr/objectives', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ type: 'key_result', title, ra_nome, coordenadores })
-    }).then(() => initOKRModule());
+async function openNewProductModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const nome = prompt('Nome da Coordenação Regional (ex: "Coordenação Ceilândia Norte"):');
+    if (!nome) return;
+    const ra_nome = (prompt('Região Administrativa (ex: CEILÂNDIA):') || '').toUpperCase();
+    if (!ra_nome) return alert('RA é obrigatória.');
+    const zona_eleitoral = prompt('Zona Eleitoral (ex: 8):') || null;
+    const { error } = await sb.from('products').insert({ nome, ra_nome, zona_eleitoral });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
 }
 
-function openNewEquipeModal() {
-    const full_name = prompt('Nome completo do integrante da equipe:');
-    if (!full_name) return;
-    const ra_nome = prompt('Região Administrativa (ex: PLANO PILOTO, CEILÂNDIA):') || 'PLANO PILOTO';
-    const funcao = prompt('Função (ex: Coordenador de Bairro, Agente de Campo):') || 'Agente de Campo';
+async function openNewObjectiveModal(nivel) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    if (!okrDataCache.activePeriodId) return alert('Cadastre e selecione um ciclo antes.');
 
-    fetch('/api/okr/equipe', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ full_name, ra_nome, funcao, role: 'operacional' })
-    }).then(() => initOKRModule());
+    const titulo = prompt(`Título do Objetivo ${nivel === 'estrategico' ? 'Estratégico' : 'Tático'}:`);
+    if (!titulo) return;
+    const descricao = prompt('Descrição (opcional):') || null;
+
+    let product_id = null;
+    if (nivel === 'tatico') {
+        const disponiveis = okrCurrentUser.is_super_admin
+            ? okrDataCache.products
+            : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
+        if (!disponiveis.length) return alert('Nenhuma Coordenação Regional disponível para você.');
+        const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
+        const escolha = prompt(`Escolha a Coordenação Regional:\n${opcoes}`);
+        const idx = parseInt(escolha, 10) - 1;
+        if (isNaN(idx) || !disponiveis[idx]) return alert('Coordenação inválida.');
+        product_id = disponiveis[idx].id;
+    }
+
+    const { error } = await sb.from('objectives').insert({
+        titulo, descricao, nivel, product_id,
+        period_id: okrDataCache.activePeriodId,
+        created_by: okrCurrentUser.id
+    });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
+}
+
+async function openNewKRModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    if (!okrDataCache.objectives.length) return alert('Cadastre um objetivo antes.');
+
+    const opcoes = okrDataCache.objectives.map((o, i) => `${i + 1}. [${o.nivel}] ${o.titulo}`).join('\n');
+    const escolha = prompt(`Vincular a qual Objetivo?\n${opcoes}`);
+    const idx = parseInt(escolha, 10) - 1;
+    const objective = okrDataCache.objectives[idx];
+    if (!objective) return alert('Objetivo inválido.');
+
+    const titulo = prompt('Título do Key Result:');
+    if (!titulo) return;
+    const target_value = parseFloat(prompt('Valor alvo (meta):', '100')) || 100;
+    const unit = prompt('Unidade (ex: %, pessoas, reuniões):', 'unidades') || 'unidades';
+
+    const { error } = await sb.from('key_results').insert({
+        objective_id: objective.id, titulo, target_value, current_value: 0, unit
+    });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
+}
+
+async function updateKeyResultProgress(keyResultId) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const novo = prompt('Novo valor atual:');
+    if (novo === null || novo === '') return;
+    const { error } = await sb.from('key_results').update({ current_value: parseFloat(novo) || 0 }).eq('id', keyResultId);
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
+}
+
+async function openNewEquipeModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const disponiveis = okrCurrentUser.is_super_admin
+        ? okrDataCache.products
+        : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
+    if (!disponiveis.length) return alert('Nenhuma Coordenação Regional disponível para você.');
+
+    const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
+    const escolha = prompt(`Adicionar integrante a qual Coordenação?\n${opcoes}`);
+    const idx = parseInt(escolha, 10) - 1;
+    const produto = disponiveis[idx];
+    if (!produto) return alert('Coordenação inválida.');
+
+    const email = prompt('E-mail do integrante (precisa já ter feito Cadastro no login de OKRs):');
+    if (!email) return;
+    const papel = (prompt('Papel: coordenador ou operacional', 'operacional') || 'operacional').toLowerCase();
+
+    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
+    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.');
+
+    const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
 }
 
 function openArtefatoModal() {
-    const titulo = prompt('Título do Artefato / Comprovante Digital:');
-    if (!titulo) return;
-    const descricao = prompt('Descrição curta da entrega de campo:') || '';
+    if (!okrDataCache.keyResults.length) return alert('Cadastre um Key Result antes.');
+    const opcoes = okrDataCache.keyResults.map((kr, i) => `${i + 1}. ${kr.titulo}`).join('\n');
+    const escolha = prompt(`Vincular artefato a qual Key Result?\n${opcoes}`);
+    const idx = parseInt(escolha, 10) - 1;
+    const kr = okrDataCache.keyResults[idx];
+    if (!kr) return alert('Key Result inválido.');
 
-    fetch('/api/okr/artefatos', {
-        method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ titulo, descricao })
-    }).then(() => initOKRModule());
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = 'image/*,application/pdf';
+    input.onchange = () => uploadArtefato(kr.id, input.files[0]);
+    input.click();
+}
+
+async function uploadArtefato(keyResultId, file) {
+    const sb = initSupabaseClient();
+    if (!sb || !file) return;
+    const titulo = prompt('Título do artefato:', file.name) || file.name;
+    const descricao = prompt('Descrição (opcional):') || null;
+    const path = `${keyResultId}/${Date.now()}_${file.name}`;
+
+    const { error: upErr } = await sb.storage.from('artefatos').upload(path, file);
+    if (upErr) return alert('Erro no upload (verifique se o bucket "artefatos" existe no Supabase Storage): ' + upErr.message);
+
+    const { data: pub } = sb.storage.from('artefatos').getPublicUrl(path);
+    const tipo_artefato = file.type.startsWith('image/') ? 'foto' : 'comprovante';
+
+    const { error } = await sb.from('okr_artefatos').insert({
+        key_result_id: keyResultId, titulo, descricao,
+        arquivo_url: pub.publicUrl, tipo_artefato, enviado_por: okrCurrentUser.id
+    });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
 }
 
 // Expor funções globais para manipuladores de evento HTML
@@ -1362,9 +1631,16 @@ window.selectZone = selectZone;
 window.selectRA = selectRA;
 window.openRAModal = openRAModal;
 window.filterOKRLevel = filterOKRLevel;
-window.handleGoogleLogin = handleGoogleLogin;
+window.changeOKRPeriod = changeOKRPeriod;
+window.okrSignInEmail = okrSignInEmail;
+window.okrSignUpEmail = okrSignUpEmail;
+window.okrSignInGoogle = okrSignInGoogle;
+window.okrSignOut = okrSignOut;
+window.openNewPeriodModal = openNewPeriodModal;
+window.openNewProductModal = openNewProductModal;
 window.openNewObjectiveModal = openNewObjectiveModal;
 window.openNewKRModal = openNewKRModal;
+window.updateKeyResultProgress = updateKeyResultProgress;
 window.openNewEquipeModal = openNewEquipeModal;
 window.openArtefatoModal = openArtefatoModal;
 

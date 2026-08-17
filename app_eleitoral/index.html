@@ -17,6 +17,15 @@
     <!-- Chart.js -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
+    <!-- Supabase JS Client (módulo de OKRs) -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script>
+        // Credenciais injetadas pela interpolação HTML nativa do Vite em build time
+        // (mesmo mecanismo usado para %VITE_GOOGLE_MAPS_API_KEY% logo abaixo).
+        window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
+        window.SUPABASE_ANON_KEY = "%VITE_SUPABASE_ANON_KEY%";
+    </script>
+
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
@@ -135,11 +144,8 @@
                     <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Acompanhamento dos Objetivos Globais, Coordenadores por RA e Ações da Equipe.</p>
                     
                     <div id="okr-auth-status" class="okr-auth-box">
-                        <div id="okr-user-info">
-                            <span class="user-badge" id="okr-user-role">🔑 Nível Estratégico</span>
-                            <p id="okr-user-name">Usuário Conectado</p>
-                        </div>
-                        <button class="btn-secondary-sm" id="btn-okr-login-google" onclick="handleGoogleLogin()">🌐 Entrar com Google</button>
+                        <!-- Preenchido via JS (renderOKRAuthBox): formulário de login/cadastro
+                             quando deslogado, ou dados do usuário + botão Sair quando logado. -->
                     </div>
 
                     <div class="okr-level-filters">
@@ -201,26 +207,30 @@
             <!-- Container do Módulo de OKRs e Equipe -->
             <div id="view-okr" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
                 <div class="okr-header-actions">
-                    <h2>🎯 Gestão de OKRs & Equipes Regionais</h2>
-                    <div class="okr-btn-group">
-                        <button class="btn-primary" onclick="openNewObjectiveModal()">➕ Novo Objetivo (Estratégico)</button>
-                        <button class="btn-primary" onclick="openNewKRModal()">➕ Novo Key Result (Tático)</button>
-                        <button class="btn-secondary" onclick="openNewEquipeModal()">👥 Cadastrar Equipe por RA</button>
-                        <button class="btn-secondary" onclick="openArtefatoModal()">📄 Upload de Artefato</button>
+                    <h2>🎯 Gestão de OKRs & Coordenações Regionais</h2>
+                    <div class="okr-btn-group" id="okr-btn-group">
+                        <!-- Botões de ação gerados via JS (renderOKRActionButtons), conforme
+                             o papel do usuário logado: super admin vê todas as ações; membro
+                             de uma Coordenação Regional vê apenas as ações da sua equipe. -->
                     </div>
                 </div>
 
-                <!-- Painel 1: Objetivos Estratégicos & Key Results Táticos por RA -->
+                <div class="okr-period-bar">
+                    <label for="okr-period-select">Ciclo:</label>
+                    <select id="okr-period-select" onchange="changeOKRPeriod(this.value)"></select>
+                </div>
+
+                <!-- Painel 1: Objetivos Estratégicos & Táticos (com seus Key Results) -->
                 <div class="okr-section">
-                    <h3>⭐ Nível Estratégico & Tático (Resultados-Chave por Zona/RA)</h3>
+                    <h3>⭐ Nível Estratégico & Tático (Objetivos e Resultados-Chave)</h3>
                     <div id="okr-list-container" class="okr-cards-grid">
                         <!-- Cards injetados via JS -->
                     </div>
                 </div>
 
-                <!-- Painel 2: Equipe Regional Operacional & Múltiplos Coordenadores por RA -->
+                <!-- Painel 2: Coordenações Regionais e suas equipes -->
                 <div class="okr-section" style="margin-top: 30px;">
-                    <h3>👥 Coordenadores & Equipe Operacional por Região Administrativa</h3>
+                    <h3>👥 Coordenações Regionais (Produto) por RA / Zona Eleitoral</h3>
                     <div id="equipe-list-container" class="equipe-cards-grid">
                         <!-- Integrantes injetados via JS -->
                     </div>

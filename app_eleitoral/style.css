@@ -791,6 +791,72 @@ tr:hover { background-color: #e8f4fd; }
     font-weight: 600;
     text-decoration: none;
     font-size: 0.82rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 0;
 }
 .btn-link:hover { text-decoration: underline; }
+
+/* Login/cadastro do módulo de OKRs (Supabase Auth) */
+.okr-auth-hint {
+    font-size: 0.78rem;
+    opacity: 0.85;
+    margin-bottom: 8px;
+}
+
+.okr-login-input {
+    width: 100%;
+    padding: 7px 8px;
+    margin-bottom: 6px;
+    border-radius: 4px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    font-size: 0.82rem;
+}
+.okr-login-input::placeholder { color: rgba(255, 255, 255, 0.6); }
+
+.okr-login-btn-row {
+    display: flex;
+    gap: 6px;
+    margin-bottom: 6px;
+}
+.okr-login-btn-row .btn-secondary-sm { margin-top: 0; }
+
+/* Seletor de Ciclo (period) na aba OKRs */
+.okr-period-bar {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 20px;
+    font-size: 0.88rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+}
+
+.okr-period-bar select {
+    padding: 6px 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    font-size: 0.85rem;
+}
+
+/* Linha de Key Result dentro do card de Objective */
+.okr-kr-row {
+    background: #f8f9fa;
+    border-radius: 6px;
+    padding: 8px 10px;
+    margin-top: 8px;
+}
+
+.okr-kr-row-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.83rem;
+    font-weight: 600;
+    color: #333;
+    margin-bottom: 4px;
+}
 
