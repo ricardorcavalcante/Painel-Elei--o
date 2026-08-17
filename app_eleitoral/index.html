@@ -31,8 +31,9 @@
                 <h2>Zonas Eleitorais DF</h2>
                 <p>Eleições 2026</p>
                 <div class="nav-tabs">
-                    <button class="tab-btn active" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
-                    <button class="tab-btn" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
+                    <button class="tab-btn active" data-tab="map" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
+                    <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
+                    <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                 </div>
             </div>
 
@@ -45,6 +46,15 @@
                 <div id="sidebar-content" class="sidebar-content">
                     <div class="instruction">
                         Selecione uma Zona Eleitoral na coluna ao lado para visualizar os detalhes.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Sidebar: Conteúdo do Detalhamento por RA -->
+            <div id="ra-sidebar" style="display: none;">
+                <div id="ra-sidebar-content" class="sidebar-content">
+                    <div class="instruction">
+                        Selecione uma Região Administrativa na coluna ao lado para visualizar os detalhes.
                     </div>
                 </div>
             </div>
@@ -84,6 +94,14 @@
                         <h3>Zonas Eleitorais</h3>
                         <p class="zonas-column-subtitle">Clique em uma zona para filtrar</p>
                         <div id="zonas-legend-list" class="zonas-legend-list">
+                            <!-- Lista gerada via JS -->
+                        </div>
+                    </div>
+                    <!-- Coluna Direita: Regiões Administrativas -->
+                    <div class="zonas-column" id="ras-legend" style="display: none;">
+                        <h3>Regiões Administrativas</h3>
+                        <p class="zonas-column-subtitle">Clique em uma RA para ver apenas seus locais e contorno</p>
+                        <div id="ras-legend-list" class="zonas-legend-list">
                             <!-- Lista gerada via JS -->
                         </div>
                     </div>

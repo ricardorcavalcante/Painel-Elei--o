@@ -3,8 +3,22 @@ let map;
 let markers = [];
 let sharedInfoWindow;
 let locaisData = {};
+let pontosData = []; // Todos os locais de votação (public/locais_pontos.json), fonte única para o detalhamento por RA
 let activeZone = null;
+let activeRA = null;
 let markerMap = {}; // Mapeamento zoneId -> lista de marcadores Google Maps
+let markerMapByRA = {}; // Mapeamento ra -> lista de marcadores Google Maps
+let raLayer = null; // Camada google.maps.Data com o contorno de cada RA individualmente
+let raListItems = {}; // Mapeamento ra -> elemento DOM na coluna "RAs" (evita seletor CSS com nomes acentuados/barras)
+
+// O campo "ra" salvo em cada ponto (public/locais_pontos.json) nem sempre bate
+// literalmente com o nome da RA no shapefile (public/regioes_administrativas.geojson)
+// — mesma nomenclatura, grafia diferente. Mapeamento só para achar o polígono certo;
+// o filtro dos locais continua usando o campo "ra" original do dado.
+const RA_NAME_TO_SHAPEFILE = {
+    'SOL NASCENTE/PÔR DO SOL': 'SOL NASCENTE E POR DO SOL',
+    'SCIA/ESTRUTURAL': 'SCIA'
+};
 
 // Estilo leve/minimalista do mapa (aproxima o visual anterior em CartoDB Light)
 const LIGHT_MAP_STYLE = [
@@ -34,19 +48,33 @@ const zoneColors = {
 // TABS E NAVEGAÇÃO (FUSÃO: MAPA & DASHBOARD)
 // ==========================================
 function switchTab(tab) {
-    const btns = document.querySelectorAll('.tab-btn');
-    btns[0].classList.toggle('active', tab === 'map');
-    btns[1].classList.toggle('active', tab === 'dashboard');
+    document.querySelectorAll('.tab-btn').forEach(btn => {
+        btn.classList.toggle('active', btn.dataset.tab === tab);
+    });
 
     // Sidebars
     document.getElementById('map-sidebar').style.display = tab === 'map' ? 'block' : 'none';
+    document.getElementById('ra-sidebar').style.display = tab === 'ra' ? 'block' : 'none';
     document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
 
-    // Main Views
-    document.getElementById('view-map').style.display = tab === 'map' ? 'block' : 'none';
+    // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
+    const showMapView = tab === 'map' || tab === 'ra';
+    document.getElementById('view-map').style.display = showMapView ? 'block' : 'none';
     document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
 
-    if (tab === 'map' && map) {
+    // Coluna direita: Zonas x Regiões Administrativas
+    document.getElementById('zonas-legend').style.display = tab === 'map' ? 'flex' : 'none';
+    document.getElementById('ras-legend').style.display = tab === 'ra' ? 'flex' : 'none';
+
+    // Cada aba começa "limpa": desfaz seleção/realce anterior de zona ou RA
+    if (tab !== 'map' && activeZone) clearZoneSelection();
+    if (tab !== 'ra' && activeRA) clearRASelection();
+
+    // Alterna qual camada de contorno fica visível no mapa
+    if (map && map.data) map.data.setMap(tab === 'map' ? map : null);
+    if (raLayer) raLayer.setMap(tab === 'ra' ? map : null);
+
+    if (showMapView && map) {
         const currentCenter = map.getCenter();
         setTimeout(() => {
             google.maps.event.trigger(map, 'resize');
@@ -87,10 +115,15 @@ async function loadData() {
         // via Google Geocoding API — ver scripts/geocode-google.mjs)
         const pontosResponse = await fetch('locais_pontos.json');
         const pontos = await pontosResponse.json();
+        pontosData = pontos;
         plotMarkers(pontos);
 
         // 3. Carregar e Plotar a camada gráfica de Polígonos de Shapefile (.shp / GeoJSON)
         await loadShapefileLayer();
+
+        // 4. Carregar o contorno individual de cada RA e montar a coluna "RAs"
+        await loadRABoundaries();
+        buildRAsColumn();
 
     } catch (error) {
         console.error("Erro ao carregar dados georreferenciados:", error);
@@ -133,6 +166,7 @@ function plotMarkers(pontos) {
     markers.forEach(m => m.setMap(null));
     markers = [];
     markerMap = {};
+    markerMapByRA = {};
 
     // Vários locais podem cair na mesma coordenada (mesmo endereço/quadra).
     // Para não empilhar marcadores exatamente um sobre o outro, aplicamos um
@@ -188,6 +222,12 @@ function plotMarkers(pontos) {
         if (sec.zona && sec.zona !== 'N/A') {
             if (!markerMap[sec.zona]) markerMap[sec.zona] = [];
             markerMap[sec.zona].push(marker);
+        }
+
+        // Guardar referência do marcador por Região Administrativa (campo "ra" do dado)
+        if (sec.ra && sec.ra !== 'N/A') {
+            if (!markerMapByRA[sec.ra]) markerMapByRA[sec.ra] = [];
+            markerMapByRA[sec.ra].push(marker);
         }
     });
 }
@@ -276,6 +316,236 @@ function updateMapDataStyle() {
             strokeOpacity: isSelected ? 1.0 : 0.7
         };
     });
+}
+
+// ==========================================
+// CAMADA DE CONTORNO POR REGIÃO ADMINISTRATIVA (ABA "RAs")
+// ==========================================
+async function loadRABoundaries() {
+    try {
+        const response = await fetch('regioes_administrativas.geojson');
+        if (!response.ok) return;
+        const geojson = await response.json();
+
+        raLayer = new google.maps.Data({ map: null });
+        raLayer.addGeoJson(geojson);
+        updateRALayerStyle();
+
+        raLayer.addListener('mouseover', (event) => {
+            raLayer.overrideStyle(event.feature, { strokeWeight: 3, strokeOpacity: 1.0 });
+            const raNome = event.feature.getProperty('ra_nome');
+            sharedInfoWindow.setContent(`<div class="kml-hover-tooltip"><strong>🏛️ ${raNome}</strong></div>`);
+            sharedInfoWindow.setPosition(event.latLng);
+            sharedInfoWindow.open(map);
+        });
+        raLayer.addListener('mouseout', () => {
+            raLayer.revertStyle();
+            sharedInfoWindow.close();
+        });
+        raLayer.addListener('click', (event) => {
+            const raNome = event.feature.getProperty('ra_nome');
+            // O nome no shapefile pode diferir do campo "ra" salvo nos locais (ver RA_NAME_TO_SHAPEFILE)
+            const dataRaName = Object.keys(RA_NAME_TO_SHAPEFILE).find(k => RA_NAME_TO_SHAPEFILE[k] === raNome) || raNome;
+            if (markerMapByRA[dataRaName]) selectRA(dataRaName);
+        });
+
+        console.log('✅ Camada de contorno por RA carregada no mapa.');
+    } catch (err) {
+        console.warn('Erro ao carregar a camada de contorno das RAs:', err);
+    }
+}
+
+function updateRALayerStyle() {
+    if (!raLayer) return;
+    raLayer.setStyle((feature) => {
+        const raNome = feature.getProperty('ra_nome');
+        const targetShapefileName = activeRA ? (RA_NAME_TO_SHAPEFILE[activeRA] || activeRA) : null;
+        const isSelected = targetShapefileName === raNome;
+
+        if (activeRA) {
+            // Uma RA selecionada: evidencia só o contorno dela, o resto fica invisível
+            return {
+                fillColor: '#1F4E78',
+                fillOpacity: isSelected ? 0.28 : 0,
+                strokeColor: '#1F4E78',
+                strokeWeight: isSelected ? 3 : 0,
+                strokeOpacity: isSelected ? 1.0 : 0,
+                clickable: isSelected
+            };
+        }
+
+        // Nenhuma RA selecionada: visão geral neutra de todos os contornos
+        return {
+            fillColor: '#1F4E78',
+            fillOpacity: 0.05,
+            strokeColor: '#1F4E78',
+            strokeWeight: 1,
+            strokeOpacity: 0.5
+        };
+    });
+}
+
+function buildRAsColumn() {
+    const container = document.getElementById('ras-legend-list');
+    if (!container) return;
+    container.innerHTML = '';
+    raListItems = {};
+
+    const counts = {};
+    pontosData.forEach(p => {
+        if (!p.ra || p.ra === 'N/A') return;
+        counts[p.ra] = (counts[p.ra] || 0) + 1;
+    });
+
+    Object.keys(counts).sort((a, b) => a.localeCompare(b, 'pt-BR')).forEach(raName => {
+        const item = document.createElement('div');
+        item.className = 'legend-item';
+        item.innerHTML = `
+            <div class="legend-color" style="background-color: #1F4E78;"></div>
+            <div class="legend-text">
+                <span class="legend-zona-name">${raName}</span>
+                <span class="legend-zona-ras">${counts[raName]} local(is) de votação</span>
+            </div>
+        `;
+        item.addEventListener('click', () => selectRA(raName));
+        container.appendChild(item);
+        raListItems[raName] = item;
+    });
+}
+
+function resetMarkers() {
+    markers.forEach(m => {
+        m.setIcon(makeCircleIcon(m._baseColor, 6, 0.9));
+        m.setZIndex(1);
+    });
+}
+
+function clearZoneSelection() {
+    if (activeZone) {
+        const prevItem = document.querySelector(`.legend-item[data-zone="${activeZone}"]`);
+        if (prevItem) prevItem.classList.remove('active');
+    }
+    activeZone = null;
+    resetMarkers();
+    updateMapDataStyle();
+    document.getElementById('sidebar-content').innerHTML =
+        `<div class="instruction">Selecione uma Zona Eleitoral na coluna ao lado para visualizar os detalhes.</div>`;
+}
+
+function clearRASelection() {
+    if (activeRA && raListItems[activeRA]) raListItems[activeRA].classList.remove('active');
+    activeRA = null;
+    resetMarkers();
+    updateRALayerStyle();
+    document.getElementById('ra-sidebar-content').innerHTML =
+        `<div class="instruction">Selecione uma Região Administrativa na coluna ao lado para visualizar os detalhes.</div>`;
+}
+
+// Selecionar RA: filtra os marcadores (pelo campo "ra" do dado), foca o mapa e
+// evidencia apenas o contorno daquela RA
+function selectRA(raName) {
+    if (activeRA && raListItems[activeRA]) raListItems[activeRA].classList.remove('active');
+    activeRA = raName;
+    if (raListItems[raName]) {
+        raListItems[raName].classList.add('active');
+        raListItems[raName].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+    }
+
+    const raBounds = new google.maps.LatLngBounds();
+    let hasBounds = false;
+    Object.entries(markerMapByRA).forEach(([ra, raMarkers]) => {
+        const isTarget = ra === raName;
+        raMarkers.forEach(m => {
+            if (isTarget) {
+                m.setIcon(makeCircleIcon(m._baseColor, 8, 1.0));
+                m.setZIndex(999);
+                raBounds.extend(m.getPosition());
+                hasBounds = true;
+            } else {
+                m.setIcon(makeCircleIcon(m._baseColor, 4, 0.15));
+                m.setZIndex(1);
+            }
+        });
+    });
+
+    if (hasBounds) {
+        map.fitBounds(raBounds, 40);
+        google.maps.event.addListenerOnce(map, 'bounds_changed', () => {
+            if (map.getZoom() > 14) map.setZoom(14);
+        });
+    }
+
+    updateRALayerStyle();
+    showRAData(raName);
+}
+
+function showRAData(raName) {
+    const sidebar = document.getElementById('ra-sidebar-content');
+    const locais = pontosData.filter(p => p.ra === raName);
+
+    if (locais.length === 0) {
+        sidebar.innerHTML = `<div class="instruction">Nenhum dado encontrado para ${raName}.</div>`;
+        return;
+    }
+
+    let totalEleitores = 0; let totalSecoes = 0;
+    const zonasEnvolvidas = new Set();
+    locais.forEach(l => {
+        totalEleitores += l.eleitorado || 0;
+        totalSecoes += l.secoes || 0;
+        if (l.zona && l.zona !== 'N/A') zonasEnvolvidas.add(l.zona);
+    });
+    const zonasTexto = [...zonasEnvolvidas].sort((a, b) => Number(a) - Number(b)).join(', ');
+
+    let html = `
+        <div class="zone-info">
+            <h3>🏛️ ${raName}</h3>
+            ${zonasTexto ? `<p style="font-size:0.85rem; color:#666; margin-top:-8px; margin-bottom:12px;">Zona(s) Eleitoral(is): ${zonasTexto}</p>` : ''}
+            <div class="summary-stats">
+                <div class="stat-box"><span>Locais</span><strong>${locais.length}</strong></div>
+                <div class="stat-box"><span>Seções</span><strong>${totalSecoes}</strong></div>
+                <div class="stat-box"><span>Eleitorado</span><strong>${totalEleitores.toLocaleString('pt-BR')}</strong></div>
+            </div>
+            <button class="btn-open-table" onclick="openRAModal('${raName.replace(/'/g, "\\'")}')">📋 Ver Tabela Completa</button>
+            <h4>Locais de Votação (Amostra):</h4>
+            <div style="margin-top: 10px;">
+    `;
+
+    locais.slice(0, 5).forEach(l => {
+        html += `
+            <div class="local-list-item">
+                <h4>${l.local}</h4>
+                <p><strong>Bairro:</strong> ${l.bairro && l.bairro !== 'N/A' ? l.bairro : l.ra}</p>
+                <p><strong>Eleitores:</strong> ${(l.eleitorado || 0).toLocaleString('pt-BR')}</p>
+            </div>`;
+    });
+
+    if (locais.length > 5) html += `<p style="text-align:center; font-size: 0.8rem; color:#666; margin-top:10px;">+ ${locais.length - 5} locais...</p>`;
+    html += `</div></div>`;
+    sidebar.innerHTML = html;
+}
+
+function openRAModal(raName) {
+    const locais = pontosData.filter(p => p.ra === raName);
+    if (!locais.length) return;
+
+    document.getElementById("modal-title").innerText = `Tabela de Locais - ${raName}`;
+    const tbody = document.getElementById("table-body");
+    tbody.innerHTML = '';
+
+    locais.forEach(l => {
+        let tr = document.createElement('tr');
+        tr.innerHTML = `
+            <td><strong>${l.local}</strong></td>
+            <td>${l.endereco || ''}</td>
+            <td>${l.ra || ''}</td>
+            <td>${l.bairro || ''}</td>
+            <td>${l.secoes || 0}</td>
+            <td>${(l.eleitorado || 0).toLocaleString('pt-BR')}</td>
+        `;
+        tbody.appendChild(tr);
+    });
+    modal.style.display = "block";
 }
 
 // ==========================================
@@ -544,6 +814,8 @@ window.openModal = openModal;
 window.performSearch = performSearch;
 window.showZoneData = showZoneData;
 window.selectZone = selectZone;
+window.selectRA = selectRA;
+window.openRAModal = openRAModal;
 
 // Iniciar Aplicação
 window.onload = initMap;
