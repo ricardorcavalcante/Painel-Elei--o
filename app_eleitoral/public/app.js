@@ -2812,8 +2812,11 @@ let coordDataCache = {
 let coordRequestSeq = 0; // descarta respostas de uma seleção de Coordenação já trocada
 let coordMap = null; // instância própria do Google Maps, escopada à aba coordenador
 let coordMapRectangles = {}; // areaId -> google.maps.Rectangle
-let coordMapMode = 'atribuir'; // 'atribuir' (clique abre painel de equipe) | 'agrupar' (clique multi-seleciona pra nomear)
-let coordSelectedAreaIds = new Set(); // seleção ativa no modo 'agrupar'
+let coordMapMode = 'atribuir'; // 'atribuir' (ação em lote abre painel de equipe) | 'agrupar' (ação em lote nomeia perímetro)
+let coordSelectedAreaIds = new Set(); // seleção ativa no mapa — clique ou arrasto acumulam, nos dois modos
+let coordMapFiltro = { tipo: null, valor: null }; // tipo: null | 'perimetro' | 'voluntario' — filtra quais quadrantes o mapa desenha
+let coordMapOverlayHelper = null; // OverlayView "vazio" só pra expor getProjection() (conversão pixel <-> LatLng)
+let coordDragSelect = { active: false, startPixel: null, boxEl: null }; // estado da seleção por arrasto (Shift+drag)
 
 async function initPainelCoordenadorModule() {
     const sb = initSupabaseClient();
@@ -2906,6 +2909,7 @@ function renderCoordSkeleton() {
 
 async function loadCoordenadorData() {
     renderCoordSkeleton();
+    coordMapFiltro = { tipo: null, valor: null }; // evita apontar pra um perímetro/voluntário de outra Coordenação
     const requestId = ++coordRequestSeq;
     await Promise.allSettled([
         fetchCoordEquipeEAreas(),
@@ -2954,6 +2958,17 @@ async function fetchCoordEquipeEAreas() {
     }
 }
 
+// Divide um array em lotes de até `tamanho` itens — usado antes de
+// qualquer .in(coluna, [...]) que possa ter centenas/milhares de ids
+// (uma Coordenação Regional real pode ter 700+ quadrantes; um .in()
+// com todos eles de uma vez excede o limite de tamanho de URL do
+// PostgREST e falha em silêncio se o erro não for checado).
+function chunkArray(arr, tamanho) {
+    const lotes = [];
+    for (let i = 0; i < arr.length; i += tamanho) lotes.push(arr.slice(i, i + tamanho));
+    return lotes;
+}
+
 function renderCoordEquipeCobertura() {
     const equipeContainer = document.getElementById('coord-equipe-container');
     const quadContainer = document.getElementById('coord-quadrantes-container');
@@ -2979,31 +2994,92 @@ function renderCoordEquipeCobertura() {
     const total = coordDataCache.areas.length;
     const pct = Math.round((cobertos / total) * 100);
 
-    const resumoHtml = `
+    // Com centenas de quadrantes, uma linha por quadrante é ilegível — em vez
+    // disso, dois seletores (perímetro nomeado / voluntário) filtram o que o
+    // MAPA desenha, e um resumo compacto substitui a lista.
+    const grupos = [...new Set(coordDataCache.areas.map(a => a.grupo_nome).filter(Boolean))].sort();
+    const filtroAtualPerimetro = coordMapFiltro.tipo === 'perimetro' ? coordMapFiltro.valor : '';
+    const filtroAtualVoluntario = coordMapFiltro.tipo === 'voluntario' ? coordMapFiltro.valor : '';
+
+    quadContainer.innerHTML = `
         <div class="comando-item-row">
             <div class="comando-item-header"><span>Cobertura</span><strong>${pct}%</strong></div>
             <div class="okr-progress-bar-container"><div class="okr-progress-bar" style="width:${pct}%;"></div></div>
             <div class="okr-card-footer"><span>${cobertos} de ${total} quadrantes com voluntário</span></div>
         </div>
+        <div class="okr-period-bar" style="margin-top: 12px; flex-wrap: wrap;">
+            <label for="coord-filtro-perimetro">🏷️ Perímetro:</label>
+            <select id="coord-filtro-perimetro" onchange="changeCoordMapFiltro('perimetro', this.value)">
+                <option value="">Todos os quadrantes</option>
+                ${grupos.map(g => `<option value="${(g || '').replace(/"/g, '&quot;')}" ${filtroAtualPerimetro === g ? 'selected' : ''}>${g}</option>`).join('')}
+                <option value="__sem_grupo__" ${filtroAtualPerimetro === '__sem_grupo__' ? 'selected' : ''}>Sem perímetro definido</option>
+            </select>
+        </div>
+        <div class="okr-period-bar" style="margin-top: 8px; flex-wrap: wrap;">
+            <label for="coord-filtro-voluntario">👤 Voluntário:</label>
+            <select id="coord-filtro-voluntario" onchange="changeCoordMapFiltro('voluntario', this.value)">
+                <option value="">Todos os quadrantes</option>
+                ${coordDataCache.equipe.map(m => {
+                    const nome = (m.profiles && m.profiles.full_name) || (m.profiles && m.profiles.email) || 'Integrante';
+                    return `<option value="${m.user_id}" ${filtroAtualVoluntario === m.user_id ? 'selected' : ''}>${nome}</option>`;
+                }).join('')}
+            </select>
+        </div>
+        <div id="coord-filtro-detalhe" class="instruction" style="margin-top: 8px;"></div>
     `;
-    const linhasHtml = coordDataCache.areas.map(a => {
-        const qtd = qtdPorArea[a.id] || 0;
-        return `
-            <div class="comando-item-row">
-                <div class="comando-item-header">
-                    <span>🔲 ${a.codigo} — ${a.nome}${a.grupo_nome ? ` <span class="okr-badge badge-artefato">🏷️ ${a.grupo_nome}</span>` : ''}</span>
-                    <span class="status-tag ${qtd > 0 ? 'status-confirmado' : 'status-pendente'}">${qtd > 0 ? qtd + ' voluntário(s)' : 'sem voluntário'}</span>
-                </div>
-            </div>
-        `;
-    }).join('');
-    quadContainer.innerHTML = resumoHtml + linhasHtml;
+    renderCoordFiltroDetalhe();
 }
 
-// Mapa clicável de quadrantes — dois modos:
-// 'atribuir': clique num quadrante abre o painel de checkboxes da equipe.
-// 'agrupar': clique multi-seleciona quadrantes pra nomear um perímetro
-// comum (planejamento do coordenador junto com o candidato).
+// Aplica o filtro ativo (perímetro OU voluntário, nunca os dois ao mesmo
+// tempo) sobre coordDataCache.areas — usado tanto pro mapa quanto pro
+// resumo textual em #coord-filtro-detalhe.
+function getCoordAreasFiltradas() {
+    if (!coordMapFiltro.tipo) return coordDataCache.areas;
+    if (coordMapFiltro.tipo === 'perimetro') {
+        if (coordMapFiltro.valor === '__sem_grupo__') return coordDataCache.areas.filter(a => !a.grupo_nome);
+        return coordDataCache.areas.filter(a => a.grupo_nome === coordMapFiltro.valor);
+    }
+    const idsComVoluntario = new Set(coordDataCache.areaVolunteers.filter(v => v.user_id === coordMapFiltro.valor).map(v => v.area_id));
+    return coordDataCache.areas.filter(a => idsComVoluntario.has(a.id));
+}
+
+function changeCoordMapFiltro(tipo, valor) {
+    coordMapFiltro = valor ? { tipo, valor } : { tipo: null, valor: null };
+    // Só um filtro ativo por vez — limpa visualmente o outro seletor.
+    const outroId = tipo === 'perimetro' ? 'coord-filtro-voluntario' : 'coord-filtro-perimetro';
+    const outroEl = document.getElementById(outroId);
+    if (outroEl && valor) outroEl.value = '';
+    renderCoordFiltroDetalhe();
+    renderCoordMapRectangles();
+}
+
+function renderCoordFiltroDetalhe() {
+    const detalhe = document.getElementById('coord-filtro-detalhe');
+    if (!detalhe) return;
+    if (!coordMapFiltro.tipo) { detalhe.textContent = ''; return; }
+    const areasFiltradas = getCoordAreasFiltradas();
+    if (coordMapFiltro.tipo === 'perimetro') {
+        const nomeGrupo = coordMapFiltro.valor === '__sem_grupo__' ? 'sem perímetro definido' : coordMapFiltro.valor;
+        detalhe.textContent = `Mostrando ${areasFiltradas.length} quadrante(s) do perímetro "${nomeGrupo}" no mapa.`;
+        return;
+    }
+    const membro = coordDataCache.equipe.find(m => m.user_id === coordMapFiltro.valor);
+    const nome = membro ? ((membro.profiles && membro.profiles.full_name) || (membro.profiles && membro.profiles.email)) : 'Integrante';
+    if (!areasFiltradas.length) {
+        detalhe.textContent = `${nome} ainda não está atribuído a nenhum quadrante.`;
+        return;
+    }
+    const codigos = areasFiltradas.map(a => a.codigo);
+    const resumo = codigos.length > 20 ? codigos.slice(0, 20).join(', ') + ` e mais ${codigos.length - 20}` : codigos.join(', ');
+    detalhe.textContent = `${nome} está atribuído a ${areasFiltradas.length} quadrante(s): ${resumo}`;
+}
+
+// Mapa clicável de quadrantes — clique ou arrasto (Shift+arrasto) sempre
+// ACUMULA na seleção (nunca a substitui), nos dois modos. O que muda por
+// modo é a ação em lote disponível pra seleção atual:
+// 'atribuir': abre o painel de checkboxes da equipe pros quadrantes selecionados.
+// 'agrupar': nomeia um perímetro comum pros quadrantes selecionados
+// (planejamento do coordenador junto com o candidato).
 function setCoordMapMode(mode) {
     coordMapMode = mode;
     coordSelectedAreaIds.clear();
@@ -3012,14 +3088,20 @@ function setCoordMapMode(mode) {
     const hint = document.getElementById('coord-map-hint');
     const selectionBar = document.getElementById('coord-map-selection-bar');
     const selectionCount = document.getElementById('coord-map-selection-count');
+    const selectionAction = document.getElementById('coord-map-selection-action');
     const assignPanel = document.getElementById('coord-assign-panel');
     if (btnAtribuir) btnAtribuir.classList.toggle('active', mode === 'atribuir');
     if (btnAgrupar) btnAgrupar.classList.toggle('active', mode === 'agrupar');
     if (hint) hint.textContent = mode === 'atribuir'
-        ? 'Clique num quadrante para atribuir ou remover integrantes da equipe.'
-        : 'Clique em vários quadrantes para selecioná-los e dar um nome ao perímetro (planejamento junto com o candidato — a atribuição de voluntários continua separada, no outro modo).';
-    if (selectionBar) selectionBar.style.display = mode === 'agrupar' ? 'flex' : 'none';
-    if (selectionCount) selectionCount.textContent = '';
+        ? 'Clique num quadrante (ou segure Shift e arraste pra selecionar vários de uma vez) e depois atribua a equipe aos selecionados.'
+        : 'Clique em vários quadrantes (ou segure Shift e arraste) e dê um nome ao perímetro selecionado — planejamento junto com o candidato; a atribuição de voluntários continua separada, no outro modo.';
+    if (selectionBar) selectionBar.style.display = 'flex';
+    if (selectionCount) selectionCount.textContent = '0 quadrante(s) selecionado(s)';
+    if (selectionAction) {
+        selectionAction.innerHTML = mode === 'atribuir'
+            ? '<button class="btn-primary" onclick="abrirAtribuicaoEmLote()">👤 Atribuir equipe aos selecionados</button>'
+            : '<button class="btn-primary" onclick="nomearGrupoSelecionado()">🏷️ Nomear grupo selecionado</button>';
+    }
     if (assignPanel) assignPanel.innerHTML = '';
     renderCoordMapRectangles();
 }
@@ -3035,33 +3117,157 @@ function initCoordMap() {
         zoom: 12,
         styles: LIGHT_MAP_STYLE,
         streetViewControl: false,
+        // Controle nativo de tipo de mapa do Google não renderiza nesta
+        // página — o reset global "* { margin:0; padding:0 }" (style.css)
+        // quebra o dimensionamento dos botões dele. Usamos botões próprios
+        // (🗺️ Mapa / 🛰️ Satélite, ver setCoordMapTipo) em vez de depurar
+        // esse conflito de CSS numa regra que afeta a página inteira.
         mapTypeControl: false,
         fullscreenControl: false
     });
+    ensureCoordMapOverlayHelper();
+    setupCoordMapDragSelect();
+}
+
+function setCoordMapTipo(tipo) {
+    if (!coordMap) return;
+    coordMap.setMapTypeId(tipo);
+    const btnRoadmap = document.getElementById('coord-map-tipo-roadmap');
+    const btnSatellite = document.getElementById('coord-map-tipo-satellite');
+    if (btnRoadmap) btnRoadmap.classList.toggle('active', tipo === 'roadmap');
+    if (btnSatellite) btnSatellite.classList.toggle('active', tipo === 'satellite');
+}
+
+// OverlayView "vazio" (não desenha nada) só pra ter acesso a
+// getProjection() — é o jeito documentado de converter pixel da tela
+// em LatLng fora dos eventos de clique nativos do Maps.
+function ensureCoordMapOverlayHelper() {
+    if (coordMapOverlayHelper || !coordMap) return;
+    function Helper() {}
+    Helper.prototype = new google.maps.OverlayView();
+    Helper.prototype.onAdd = function () {};
+    Helper.prototype.draw = function () {};
+    Helper.prototype.onRemove = function () {};
+    coordMapOverlayHelper = new Helper();
+    coordMapOverlayHelper.setMap(coordMap);
+}
+
+// Seleção por arrasto: Shift + arrastar no mapa desenha uma caixa e
+// seleciona todos os quadrantes cujo retângulo cruza a área arrastada.
+// Sem Shift, o arrasto continua sendo o pan normal do mapa.
+function setupCoordMapDragSelect() {
+    if (!coordMap || coordMap.__dragSelectBound) return;
+    coordMap.__dragSelectBound = true;
+    const mapDiv = coordMap.getDiv();
+
+    const atualizarCaixa = (curX, curY) => {
+        const box = coordDragSelect.boxEl;
+        if (!box || !coordDragSelect.startPixel) return;
+        const x = Math.min(coordDragSelect.startPixel.x, curX);
+        const y = Math.min(coordDragSelect.startPixel.y, curY);
+        box.style.left = x + 'px';
+        box.style.top = y + 'px';
+        box.style.width = Math.abs(curX - coordDragSelect.startPixel.x) + 'px';
+        box.style.height = Math.abs(curY - coordDragSelect.startPixel.y) + 'px';
+    };
+
+    google.maps.event.addDomListener(mapDiv, 'mousedown', (e) => {
+        if (!e.shiftKey) return;
+        e.preventDefault();
+        e.stopPropagation();
+        const rectDiv = mapDiv.getBoundingClientRect();
+        const startX = e.clientX - rectDiv.left;
+        const startY = e.clientY - rectDiv.top;
+        coordDragSelect.active = true;
+        coordDragSelect.startPixel = { x: startX, y: startY };
+        coordMap.setOptions({ draggable: false });
+
+        const boxEl = document.createElement('div');
+        boxEl.style.position = 'absolute';
+        boxEl.style.border = '2px dashed #1f4e78';
+        boxEl.style.background = 'rgba(31, 78, 120, 0.15)';
+        boxEl.style.zIndex = '1000';
+        boxEl.style.pointerEvents = 'none';
+        mapDiv.appendChild(boxEl);
+        coordDragSelect.boxEl = boxEl;
+        atualizarCaixa(startX, startY);
+
+        const onMouseMove = (moveEvt) => atualizarCaixa(moveEvt.clientX - rectDiv.left, moveEvt.clientY - rectDiv.top);
+        const onMouseUp = (upEvt) => {
+            document.removeEventListener('mousemove', onMouseMove);
+            document.removeEventListener('mouseup', onMouseUp);
+            finishCoordDragSelect(startX, startY, upEvt.clientX - rectDiv.left, upEvt.clientY - rectDiv.top);
+        };
+        document.addEventListener('mousemove', onMouseMove);
+        document.addEventListener('mouseup', onMouseUp);
+    });
+}
+
+function finishCoordDragSelect(x1, y1, x2, y2) {
+    coordMap.setOptions({ draggable: true });
+    if (coordDragSelect.boxEl) {
+        coordDragSelect.boxEl.remove();
+        coordDragSelect.boxEl = null;
+    }
+    coordDragSelect.active = false;
+
+    const pxMinX = Math.min(x1, x2), pxMaxX = Math.max(x1, x2);
+    const pxMinY = Math.min(y1, y2), pxMaxY = Math.max(y1, y2);
+    if (pxMaxX - pxMinX < 4 && pxMaxY - pxMinY < 4) return; // arrasto minúsculo — provável clique acidental
+
+    const projection = coordMapOverlayHelper && coordMapOverlayHelper.getProjection();
+    if (!projection) return;
+    const swLatLng = projection.fromContainerPixelToLatLng(new google.maps.Point(pxMinX, pxMaxY));
+    const neLatLng = projection.fromContainerPixelToLatLng(new google.maps.Point(pxMaxX, pxMinY));
+    if (!swLatLng || !neLatLng) return;
+    const dragBounds = new google.maps.LatLngBounds(swLatLng, neLatLng);
+
+    let mudou = false;
+    getCoordAreasFiltradas().forEach(area => {
+        const areaBounds = new google.maps.LatLngBounds(
+            { lat: area.lat_min, lng: area.lng_min },
+            { lat: area.lat_max, lng: area.lng_max }
+        );
+        if (dragBounds.intersects(areaBounds) && !coordSelectedAreaIds.has(area.id)) {
+            coordSelectedAreaIds.add(area.id);
+            mudou = true;
+        }
+    });
+    if (mudou) {
+        const selectionCount = document.getElementById('coord-map-selection-count');
+        if (selectionCount) selectionCount.textContent = `${coordSelectedAreaIds.size} quadrante(s) selecionado(s)`;
+        renderCoordMapRectangles();
+    }
 }
 
 function renderCoordMapRectangles() {
     if (!coordMap) return;
     Object.values(coordMapRectangles).forEach(rect => rect.setMap(null));
     coordMapRectangles = {};
-    if (!coordDataCache.areas.length) return;
+    const areasParaExibir = getCoordAreasFiltradas();
+    if (!areasParaExibir.length) return;
 
     const qtdPorArea = {};
     coordDataCache.areaVolunteers.forEach(v => { qtdPorArea[v.area_id] = (qtdPorArea[v.area_id] || 0) + 1; });
 
     const bounds = new google.maps.LatLngBounds();
-    coordDataCache.areas.forEach(area => {
+    areasParaExibir.forEach(area => {
         bounds.extend({ lat: area.lat_max, lng: area.lng_max });
         bounds.extend({ lat: area.lat_min, lng: area.lng_min });
-        const coberto = (qtdPorArea[area.id] || 0) > 0;
+        // Conta atribuições do quadrante: cada voluntário conta 1, e pertencer
+        // a um perímetro nomeado também conta 1. 0 = sem nenhuma (vermelho),
+        // 1 = uma só, pessoa OU perímetro (verde), 2+ = sobreposição — mais de
+        // um voluntário, ou voluntário(s) + perímetro (azul).
+        const numAtribuicoes = (qtdPorArea[area.id] || 0) + (area.grupo_nome ? 1 : 0);
+        const cor = numAtribuicoes === 0 ? '#c62828' : (numAtribuicoes === 1 ? '#28a745' : '#1565c0');
         const selecionado = coordSelectedAreaIds.has(area.id);
         const rect = new google.maps.Rectangle({
             bounds: { north: area.lat_max, south: area.lat_min, east: area.lng_max, west: area.lng_min },
             map: coordMap,
-            strokeColor: selecionado ? '#1f4e78' : (coberto ? '#28a745' : '#c62828'),
-            strokeWeight: selecionado ? 3 : 1.5,
-            fillColor: selecionado ? '#1f4e78' : (coberto ? '#28a745' : '#c62828'),
-            fillOpacity: selecionado ? 0.35 : 0.18
+            strokeColor: selecionado ? '#f5a623' : cor,
+            strokeWeight: selecionado ? 4 : 1.5,
+            fillColor: cor,
+            fillOpacity: selecionado ? 0.5 : 0.25
         });
         rect.addListener('click', () => onCoordMapAreaClick(area.id));
         rect.addListener('mouseover', () => {
@@ -3075,57 +3281,83 @@ function renderCoordMapRectangles() {
     if (!bounds.isEmpty()) coordMap.fitBounds(bounds);
 }
 
+// Clique sempre acumula na seleção (nunca abre painel direto) — é a
+// ação em lote (botão na barra de seleção) que decide o que fazer com
+// os quadrantes selecionados, conforme o modo ativo.
 function onCoordMapAreaClick(areaId) {
-    if (coordMapMode === 'agrupar') {
-        if (coordSelectedAreaIds.has(areaId)) coordSelectedAreaIds.delete(areaId);
-        else coordSelectedAreaIds.add(areaId);
-        const selectionCount = document.getElementById('coord-map-selection-count');
-        if (selectionCount) selectionCount.textContent = `${coordSelectedAreaIds.size} quadrante(s) selecionado(s)`;
-        renderCoordMapRectangles();
-    } else {
-        openCoordAssignPanel(areaId);
-    }
+    if (coordSelectedAreaIds.has(areaId)) coordSelectedAreaIds.delete(areaId);
+    else coordSelectedAreaIds.add(areaId);
+    const selectionCount = document.getElementById('coord-map-selection-count');
+    if (selectionCount) selectionCount.textContent = `${coordSelectedAreaIds.size} quadrante(s) selecionado(s)`;
+    renderCoordMapRectangles();
 }
 
 function limparSelecaoCoordMap() {
     coordSelectedAreaIds.clear();
     const selectionCount = document.getElementById('coord-map-selection-count');
-    if (selectionCount) selectionCount.textContent = '';
+    if (selectionCount) selectionCount.textContent = '0 quadrante(s) selecionado(s)';
     renderCoordMapRectangles();
 }
 
 async function nomearGrupoSelecionado() {
-    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa.');
+    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).');
     const nome = prompt(`Nome do perímetro para os ${coordSelectedAreaIds.size} quadrantes selecionados:`);
     if (!nome) return;
     const sb = initSupabaseClient();
-    const { error } = await sb.from('areas').update({ grupo_nome: nome }).in('id', [...coordSelectedAreaIds]);
-    if (error) return alert('Erro: ' + error.message);
+    const ids = [...coordSelectedAreaIds];
+    try {
+        for (const lote of chunkArray(ids, 100)) {
+            const { error } = await sb.from('areas').update({ grupo_nome: nome }).in('id', lote);
+            if (error) throw error;
+        }
+    } catch (err) {
+        return alert('Erro: ' + err.message);
+    }
     coordSelectedAreaIds.clear();
     await fetchCoordEquipeEAreas();
     renderCoordEquipeCobertura();
     renderCoordMapRectangles();
     const selectionCount = document.getElementById('coord-map-selection-count');
-    if (selectionCount) selectionCount.textContent = '';
+    if (selectionCount) selectionCount.textContent = '0 quadrante(s) selecionado(s)';
 }
 
-// Painel de checkboxes da equipe pra um quadrante — reaproveita
-// coordDataCache.equipe (já escopado à Coordenação selecionada).
-function openCoordAssignPanel(areaId) {
-    const area = coordDataCache.areas.find(a => a.id === areaId);
+function abrirAtribuicaoEmLote() {
+    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).');
+    openCoordAssignPanel([...coordSelectedAreaIds]);
+}
+
+// Painel de checkboxes da equipe pros quadrantes selecionados (1 ou
+// vários). Um integrante só aparece marcado se já estiver atribuído a
+// TODOS os quadrantes do lote; se estiver em só parte deles, mostra
+// "(em X de Y)" — marcar o checkbox nesse estado completa a atribuição
+// pros que faltam, sem remover dos que já tinha.
+function openCoordAssignPanel(areaIds) {
+    const ids = Array.isArray(areaIds) ? areaIds : [areaIds];
     const panel = document.getElementById('coord-assign-panel');
-    if (!area || !panel) return;
-    const atribuidos = new Set(coordDataCache.areaVolunteers.filter(v => v.area_id === areaId).map(v => v.user_id));
+    if (!ids.length || !panel) return;
+    const areasSelecionadas = coordDataCache.areas.filter(a => ids.includes(a.id));
+    if (!areasSelecionadas.length) return;
+
+    const contagem = {};
+    coordDataCache.areaVolunteers.forEach(v => {
+        if (ids.includes(v.area_id)) contagem[v.user_id] = (contagem[v.user_id] || 0) + 1;
+    });
+    const titulo = areasSelecionadas.length === 1
+        ? `${areasSelecionadas[0].codigo}${areasSelecionadas[0].grupo_nome ? ' · 🏷️ ' + areasSelecionadas[0].grupo_nome : ''}`
+        : `${areasSelecionadas.length} quadrantes selecionados`;
+
     panel.innerHTML = `
         <div class="comando-panel" style="margin-top: 10px;">
-            <h3>👤 Atribuir equipe — ${area.codigo}${area.grupo_nome ? ' · 🏷️ ' + area.grupo_nome : ''}</h3>
+            <h3>👤 Atribuir equipe — ${titulo}</h3>
             ${coordDataCache.equipe.length ? coordDataCache.equipe.map(m => {
                 const nome = (m.profiles && m.profiles.full_name) || (m.profiles && m.profiles.email) || 'Integrante';
-                const marcado = atribuidos.has(m.user_id);
+                const qtd = contagem[m.user_id] || 0;
+                const marcado = qtd === ids.length;
+                const parcial = qtd > 0 && qtd < ids.length;
                 return `
                     <label style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:0.9rem;">
-                        <input type="checkbox" ${marcado ? 'checked' : ''} onchange="toggleCoordAreaVolunteer('${areaId}', '${m.user_id}', this.checked)">
-                        ${nome} ${m.papel === 'coordenador' ? '📌' : '👥'}
+                        <input type="checkbox" ${marcado ? 'checked' : ''} data-area-ids='${JSON.stringify(ids)}' onchange="toggleCoordAreaVolunteer('${m.user_id}', this.checked, this)">
+                        ${nome} ${m.papel === 'coordenador' ? '📌' : '👥'}${parcial ? ` <span class="instruction" style="margin:0;">(em ${qtd} de ${ids.length})</span>` : ''}
                     </label>
                 `;
             }).join('') : '<div class="instruction">Nenhum integrante nesta Coordenação ainda — adicione pela aba OKR.</div>'}
@@ -3133,19 +3365,29 @@ function openCoordAssignPanel(areaId) {
     `;
 }
 
-async function toggleCoordAreaVolunteer(areaId, userId, atribuir) {
+async function toggleCoordAreaVolunteer(userId, atribuir, checkboxEl) {
     const sb = initSupabaseClient();
-    if (atribuir) {
-        const { error } = await sb.from('area_volunteers').insert({ area_id: areaId, user_id: userId, atribuido_por: okrCurrentUser.id });
-        if (error) return alert('Erro: ' + error.message);
-    } else {
-        const { error } = await sb.from('area_volunteers').delete().eq('area_id', areaId).eq('user_id', userId);
-        if (error) return alert('Erro: ' + error.message);
+    const areaIds = JSON.parse(checkboxEl.dataset.areaIds);
+    try {
+        if (atribuir) {
+            for (const lote of chunkArray(areaIds, 100)) {
+                const rows = lote.map(area_id => ({ area_id, user_id: userId, atribuido_por: okrCurrentUser.id }));
+                const { error } = await sb.from('area_volunteers').upsert(rows, { onConflict: 'area_id,user_id', ignoreDuplicates: true });
+                if (error) throw error;
+            }
+        } else {
+            for (const lote of chunkArray(areaIds, 100)) {
+                const { error } = await sb.from('area_volunteers').delete().eq('user_id', userId).in('area_id', lote);
+                if (error) throw error;
+            }
+        }
+    } catch (err) {
+        return alert('Erro: ' + err.message);
     }
     await fetchCoordEquipeEAreas();
     renderCoordEquipeCobertura();
     renderCoordMapRectangles();
-    openCoordAssignPanel(areaId);
+    openCoordAssignPanel(areaIds);
 }
 
 // Bloco KRs sob Responsabilidade (todos os ciclos ativos, com seletor)
@@ -3477,6 +3719,9 @@ window.setCoordMapMode = setCoordMapMode;
 window.limparSelecaoCoordMap = limparSelecaoCoordMap;
 window.nomearGrupoSelecionado = nomearGrupoSelecionado;
 window.toggleCoordAreaVolunteer = toggleCoordAreaVolunteer;
+window.changeCoordMapFiltro = changeCoordMapFiltro;
+window.abrirAtribuicaoEmLote = abrirAtribuicaoEmLote;
+window.setCoordMapTipo = setCoordMapTipo;
 window.responderCheckinCoord = responderCheckinCoord;
 
 // Iniciar Aplicação

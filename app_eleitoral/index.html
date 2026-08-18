@@ -297,16 +297,24 @@
                     <div class="okr-section" style="margin-top: 10px;">
                         <div class="okr-header-actions">
                             <h3>🗺️ Mapa de Quadrantes</h3>
-                            <div class="okr-period-bar">
+                            <div class="okr-period-bar" style="flex-wrap: wrap;">
                                 <button class="btn-secondary active" id="coord-map-mode-atribuir" onclick="setCoordMapMode('atribuir')">👤 Atribuir voluntário</button>
                                 <button class="btn-secondary" id="coord-map-mode-agrupar" onclick="setCoordMapMode('agrupar')">🏷️ Nomear perímetro</button>
+                                <button class="btn-secondary active" id="coord-map-tipo-roadmap" onclick="setCoordMapTipo('roadmap')">🗺️ Mapa</button>
+                                <button class="btn-secondary" id="coord-map-tipo-satellite" onclick="setCoordMapTipo('satellite')">🛰️ Satélite</button>
                             </div>
                         </div>
                         <p class="instruction" id="coord-map-hint" style="font-size: 0.85rem;"></p>
+                        <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
+                            <span><span style="display:inline-block; width:10px; height:10px; background:#c62828; border-radius:2px; margin-right:4px;"></span>Sem atribuição</span>
+                            <span><span style="display:inline-block; width:10px; height:10px; background:#28a745; border-radius:2px; margin-right:4px;"></span>1 voluntário ou perímetro</span>
+                            <span><span style="display:inline-block; width:10px; height:10px; background:#1565c0; border-radius:2px; margin-right:4px;"></span>Mais de 1 (sobreposição)</span>
+                            <span><span style="display:inline-block; width:10px; height:10px; border:2px solid #f5a623; border-radius:2px; margin-right:4px;"></span>Selecionado</span>
+                        </div>
                         <div id="coord-map" style="height: 380px; border-radius: 10px; overflow: hidden;"></div>
-                        <div id="coord-map-selection-bar" class="okr-period-bar" style="display: none; margin-top: 10px;">
+                        <div id="coord-map-selection-bar" class="okr-period-bar" style="display: none; margin-top: 10px; flex-wrap: wrap;">
                             <span id="coord-map-selection-count"></span>
-                            <button class="btn-primary" onclick="nomearGrupoSelecionado()">🏷️ Nomear grupo selecionado</button>
+                            <span id="coord-map-selection-action"></span>
                             <button class="btn-secondary" onclick="limparSelecaoCoordMap()">Limpar seleção</button>
                         </div>
                         <div id="coord-assign-panel"></div>
