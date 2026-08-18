@@ -115,13 +115,16 @@ console.log(`\nTotal: ${resultados.length} RAs, ${totalQuadrantes} quadrantes.`)
 // Geração do SQL — um bloco DO $$ ... $$ por RA: obtém (ou cria) a
 // Coordenação Regional pelo ra_nome, apaga check-ins/atribuições/
 // quadrantes antigos dela (se houver) e insere a grade recém-calculada.
-// Idempotente: pode rodar mais de uma vez sem duplicar nada.
+// Idempotente: pode rodar mais de uma vez sem duplicar nada. Escreve como
+// "PARTE 7" dentro de SQL_CONSOLIDADO_FALTANTE.sql (não num arquivo
+// separado) pra continuar sendo um único arquivo pra colar no SQL Editor
+// do Supabase — se já existir uma Parte 7 de uma geração anterior, ela é
+// substituída por inteiro.
 // ------------------------------------------------------------------
 let sql = `-- ============================================================
--- ROLLOUT_QUADRANTES_37_RAS.sql — gera/regenera os quadrantes de
--- voluntários (grade fixa 500m, recortada por RA ∩ mancha urbana ∖
--- área rural) para as 37 RAs oficiais do DF, uma Coordenação Regional
--- por RA. Gerado por scripts/gerar-rollout-quadrantes.mjs a partir de:
+-- PARTE 7 — Quadrantes de voluntários recortados por mancha urbana e
+-- área rural (37 RAs oficiais do DF). Gerado por
+-- scripts/gerar-rollout-quadrantes.mjs a partir de:
 --   public/regioes_administrativas.geojson (limites oficiais das 37 RAs)
 --   public/perimetro_urbano.geojson (mancha urbana, união de "Evolução
 --     das Ocupações", GeoPortal/SEDUH)
@@ -131,10 +134,9 @@ let sql = `-- ============================================================
 --   public/locais_pontos.json (zona eleitoral de cada RA, por junção
 --     espacial com os pontos de votação reais)
 --
--- Idempotente: get-or-create por ra_nome + apaga e regenera os
--- quadrantes de cada RA (inclusive Ceilândia, cujos quadrantes de teste
--- também são regenerados com a nova máscara). Só precisa estar logado
--- no dashboard do Supabase e colar isto no SQL Editor.
+-- Idempotente: get-or-create de Coordenação Regional por ra_nome +
+-- apaga e regenera os quadrantes de cada RA (inclusive os de teste da
+-- Ceilândia gerados manualmente antes desta Parte 7 existir).
 -- ============================================================
 
 `;
@@ -167,6 +169,9 @@ for (const r of resultados) {
     sql += `END $$;\n\n`;
 }
 
-const OUT = new URL('../ROLLOUT_QUADRANTES_37_RAS.sql', import.meta.url);
-writeFileSync(OUT, sql);
-console.log(`\nGravado ${OUT.pathname} (${(sql.length / 1024).toFixed(0)} KB).`);
+const CONSOLIDADO = new URL('../SQL_CONSOLIDADO_FALTANTE.sql', import.meta.url);
+const atual = readFileSync(CONSOLIDADO, 'utf-8');
+const marcador = '-- ============================================================\n-- PARTE 7';
+const semParte7Antiga = atual.includes(marcador) ? atual.slice(0, atual.indexOf(marcador)) : atual;
+writeFileSync(CONSOLIDADO, semParte7Antiga.replace(/\n*$/, '\n\n') + sql);
+console.log(`\nGravado ${CONSOLIDADO.pathname} (Parte 7 atualizada, ${(sql.length / 1024).toFixed(0)} KB).`);
