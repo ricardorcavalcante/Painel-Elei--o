@@ -1,8 +1,11 @@
 -- ============================================================
--- SQL CONSOLIDADO — roda as TRÊS migrations que faltam no projeto
+-- SQL CONSOLIDADO — roda as QUATRO migrations que faltam no projeto
 -- jigvtywmlauhryvuysxj de uma vez só: Agenda Pública + Calendário
--- TSE; Quadrantes de Voluntários + Check-in Geolocalizado; e a flag
--- de configuração usada pelo Painel do Coordenador.
+-- TSE; Quadrantes de Voluntários + Check-in Geolocalizado; a flag
+-- de configuração usada pelo Painel do Coordenador; e a aprovação
+-- de check-in fora de área. Ao final, também remove o dado de teste
+-- (1 Coordenação + 1 quadrante "CEI-TESTE") antes da geração real
+-- dos quadrantes por perímetro de RA.
 --
 -- NÃO precisa da senha do banco — só precisa estar logado no
 -- dashboard do Supabase (supabase.com/dashboard/project/jigvtywmlauhryvuysxj)
@@ -313,3 +316,73 @@ CREATE POLICY "app_settings_select_auth" ON public.app_settings FOR SELECT TO au
 DROP POLICY IF EXISTS "app_settings_write_admin" ON public.app_settings;
 CREATE POLICY "app_settings_write_admin" ON public.app_settings FOR UPDATE TO authenticated
     USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+
+-- ============================================================
+-- PARTE 4 — Aprovação de Check-in fora de área
+-- ============================================================
+
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS status TEXT NOT NULL DEFAULT 'pendente';
+DO $$
+BEGIN
+    IF NOT EXISTS (SELECT 1 FROM pg_constraint WHERE conname = 'checkins_status_chk') THEN
+        ALTER TABLE public.checkins ADD CONSTRAINT checkins_status_chk CHECK (status IN ('pendente', 'aprovado', 'rejeitado'));
+    END IF;
+END $$;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS resposta_aprovacao TEXT;
+
+-- Check-ins já existentes (de antes desta coluna existir) não devem
+-- ficar represados numa fila de aprovação que não existia quando
+-- foram feitos: aplica retroativamente a mesma regra de nascença
+-- (dentro_area = true → aprovado; fora → pendente, revisável dali pra frente).
+UPDATE public.checkins SET status = CASE WHEN dentro_area THEN 'aprovado' ELSE 'pendente' END;
+
+DROP POLICY IF EXISTS "checkins_update_coordenador" ON public.checkins;
+CREATE POLICY "checkins_update_coordenador" ON public.checkins FOR UPDATE TO authenticated
+    USING (
+        EXISTS (
+            SELECT 1 FROM public.areas a
+            WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id)
+        )
+    )
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM public.areas a
+            WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id)
+        )
+    );
+
+-- ============================================================
+-- PARTE 5 — Limpeza do dado de teste (1 Coordenação + 1 quadrante
+-- "CEI-TESTE"), antes da geração real dos quadrantes por perímetro
+-- de RA. Idempotente: se já não existir, os DELETE não fazem nada.
+-- ============================================================
+
+DELETE FROM public.checkins
+    WHERE area_id IN (SELECT id FROM public.areas WHERE codigo = 'CEI-TESTE');
+DELETE FROM public.area_volunteers
+    WHERE area_id IN (SELECT id FROM public.areas WHERE codigo = 'CEI-TESTE');
+DELETE FROM public.areas WHERE codigo = 'CEI-TESTE';
+DELETE FROM public.product_team
+    WHERE product_id IN (SELECT id FROM public.products WHERE nome = 'Coordenação de Teste — Ceilândia');
+DELETE FROM public.products WHERE nome = 'Coordenação de Teste — Ceilândia';
+
+-- ============================================================
+-- PARTE 6 — Grupos nomeados de quadrantes (planejamento coordenador + candidato)
+-- ============================================================
+
+ALTER TABLE public.areas ADD COLUMN IF NOT EXISTS grupo_nome TEXT;
+
+CREATE OR REPLACE FUNCTION public.is_coordenador_of_product(p_product_id UUID)
+RETURNS BOOLEAN
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
+AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM public.product_team
+        WHERE product_id = p_product_id AND user_id = auth.uid() AND papel = 'coordenador'
+    );
+$$;
+
+DROP POLICY IF EXISTS "areas_update_coordenador" ON public.areas;
+CREATE POLICY "areas_update_coordenador" ON public.areas FOR UPDATE TO authenticated
+    USING (public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_coordenador_of_product(product_id));

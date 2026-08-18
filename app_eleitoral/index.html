@@ -296,6 +296,24 @@
 
                     <div class="okr-section" style="margin-top: 10px;">
                         <div class="okr-header-actions">
+                            <h3>🗺️ Mapa de Quadrantes</h3>
+                            <div class="okr-period-bar">
+                                <button class="btn-secondary active" id="coord-map-mode-atribuir" onclick="setCoordMapMode('atribuir')">👤 Atribuir voluntário</button>
+                                <button class="btn-secondary" id="coord-map-mode-agrupar" onclick="setCoordMapMode('agrupar')">🏷️ Nomear perímetro</button>
+                            </div>
+                        </div>
+                        <p class="instruction" id="coord-map-hint" style="font-size: 0.85rem;"></p>
+                        <div id="coord-map" style="height: 380px; border-radius: 10px; overflow: hidden;"></div>
+                        <div id="coord-map-selection-bar" class="okr-period-bar" style="display: none; margin-top: 10px;">
+                            <span id="coord-map-selection-count"></span>
+                            <button class="btn-primary" onclick="nomearGrupoSelecionado()">🏷️ Nomear grupo selecionado</button>
+                            <button class="btn-secondary" onclick="limparSelecaoCoordMap()">Limpar seleção</button>
+                        </div>
+                        <div id="coord-assign-panel"></div>
+                    </div>
+
+                    <div class="okr-section" style="margin-top: 10px;">
+                        <div class="okr-header-actions">
                             <h3>📌 KRs sob Responsabilidade</h3>
                             <div id="coord-period-bar" class="okr-period-bar">
                                 <label for="coord-period-select">Ciclo:</label>
@@ -309,6 +327,12 @@
                         <h3>🗓️ Status de Agenda da Região</h3>
                         <p class="instruction" style="font-size: 0.85rem;">Somente leitura — a aprovação das solicitações continua exclusiva do nível estratégico, na aba Agenda.</p>
                         <div id="coord-agenda-container" class="okr-cards-grid"></div>
+                    </div>
+
+                    <div class="okr-section" style="margin-top: 30px;">
+                        <h3>✅ Check-ins Pendentes de Aprovação</h3>
+                        <p class="instruction" style="font-size: 0.85rem;">Check-in feito fora dos limites do quadrante atribuído fica pendente até você aprovar ou rejeitar.</p>
+                        <div id="coord-checkins-pendentes-container" class="okr-cards-grid"></div>
                     </div>
 
                     <div class="okr-section" style="margin-top: 30px;">
@@ -494,8 +518,10 @@
         </div>
     </div>
 
-    <!-- Google Maps JavaScript API (chave injetada via .env pelo Vite em build time) -->
-    <script src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%"></script>
+    <!-- Google Maps JavaScript API (chave injetada via .env pelo Vite em build time).
+         libraries=geometry: usado por gerarQuadrantesDaRA() para testar se o centro
+         de cada célula da grade cai dentro do polígono real da RA (google.maps.geometry.poly.containsLocation). -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%&libraries=geometry"></script>
 
     <!-- Zonas Data -->
     <script src="zonas_data.js"></script>

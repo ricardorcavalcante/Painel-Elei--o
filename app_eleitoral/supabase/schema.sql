@@ -156,6 +156,11 @@ CREATE TABLE IF NOT EXISTS public.areas (
     lat_max NUMERIC(9, 6) NOT NULL,
     lng_min NUMERIC(9, 6) NOT NULL,
     lng_max NUMERIC(9, 6) NOT NULL,
+    -- Etiqueta de planejamento: um conjunto de quadrantes selecionados no
+    -- mapa pelo coordenador (junto com o candidato) ganha um nome comum
+    -- (ex: "Setor Feira"), pra facilitar referência — não é uma geometria
+    -- nova, só um rótulo compartilhado por várias linhas de areas.
+    grupo_nome TEXT,
     created_by UUID REFERENCES public.profiles(id),
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
@@ -173,7 +178,10 @@ CREATE TABLE IF NOT EXISTS public.area_volunteers (
 -- 12. Check-in geolocalizado de ação de campo do voluntário.
 --     "dentro_area" é calculado no client (comparação numérica
 --     simples contra a bounding box do quadrante) no momento do
---     check-in.
+--     check-in, e decide o "status" de nascença: dentro da área já
+--     nasce 'aprovado'; fora da área nasce 'pendente' e depende de
+--     aprovação do coordenador da Coordenação dona do quadrante (ou
+--     do nível estratégico) — ver policy checkins_update_coordenador.
 CREATE TABLE IF NOT EXISTS public.checkins (
     id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
     area_id UUID NOT NULL REFERENCES public.areas(id) ON DELETE CASCADE,
@@ -182,6 +190,8 @@ CREATE TABLE IF NOT EXISTS public.checkins (
     lat NUMERIC(9, 6) NOT NULL,
     lng NUMERIC(9, 6) NOT NULL,
     dentro_area BOOLEAN NOT NULL DEFAULT FALSE,
+    status TEXT NOT NULL DEFAULT 'pendente' CHECK (status IN ('pendente', 'aprovado', 'rejeitado')),
+    resposta_aprovacao TEXT,
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
@@ -286,6 +296,19 @@ AS $$
     SELECT EXISTS (
         SELECT 1 FROM public.area_volunteers
         WHERE area_id = p_area_id AND user_id = auth.uid()
+    );
+$$;
+
+-- Diferente de is_member_of_product (qualquer papel): usada onde a ação
+-- é reservada especificamente ao coordenador da Coordenação, não a
+-- qualquer integrante operacional (ex: nomear perímetro de quadrantes).
+CREATE OR REPLACE FUNCTION public.is_coordenador_of_product(p_product_id UUID)
+RETURNS BOOLEAN
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
+AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM public.product_team
+        WHERE product_id = p_product_id AND user_id = auth.uid() AND papel = 'coordenador'
     );
 $$;
 
@@ -459,6 +482,14 @@ CREATE POLICY "prazos_eleitorais_write_admin" ON public.prazos_eleitorais FOR AL
 CREATE POLICY "areas_select_auth" ON public.areas FOR SELECT TO authenticated USING (true);
 CREATE POLICY "areas_write_admin" ON public.areas FOR ALL TO authenticated
     USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+-- Só a geração da grade (INSERT/DELETE) continua exclusiva do admin,
+-- via areas_write_admin acima. Esta policy adicional só cobre UPDATE,
+-- e é o que permite ao coordenador nomear o grupo/perímetro dos
+-- quadrantes da própria Coordenação (grupo_nome) pelo Painel do
+-- Coordenador — client só envia { grupo_nome } nesse fluxo.
+CREATE POLICY "areas_update_coordenador" ON public.areas FOR UPDATE TO authenticated
+    USING (public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_coordenador_of_product(product_id));
 
 -- area_volunteers: leitura aberta; escrita por admin ou qualquer
 -- membro do product_team dono do quadrante (coordenador ou operacional).
@@ -487,6 +518,21 @@ CREATE POLICY "checkins_insert_own_area" ON public.checkins FOR INSERT TO authen
     WITH CHECK (user_id = auth.uid() AND public.is_member_of_area(area_id));
 CREATE POLICY "checkins_write_admin" ON public.checkins FOR UPDATE TO authenticated
     USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+-- Aprovar/rejeitar check-in fora de área: além do admin (policy acima),
+-- o coordenador da Coordenação dona do quadrante também pode.
+CREATE POLICY "checkins_update_coordenador" ON public.checkins FOR UPDATE TO authenticated
+    USING (
+        EXISTS (
+            SELECT 1 FROM public.areas a
+            WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id)
+        )
+    )
+    WITH CHECK (
+        EXISTS (
+            SELECT 1 FROM public.areas a
+            WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id)
+        )
+    );
 CREATE POLICY "checkins_delete_admin" ON public.checkins FOR DELETE TO authenticated
     USING (public.is_super_admin());
 

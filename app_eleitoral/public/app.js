@@ -1807,6 +1807,35 @@ function findRAFeatureBounds(raNomeApp) {
     return bounds;
 }
 
+// Extrai todos os anéis (contorno externo + buracos, e cada parte
+// separada se a RA for um MultiPolygon) da geometria de uma feature do
+// raLayer, para montar um único google.maps.Polygon multi-caminho.
+// containsLocation() usa a regra par-ímpar, que já resolve buracos e
+// partes disjuntas corretamente quando todos os anéis viram "paths".
+function collectRAPolygonRings(geometry, out) {
+    const tipo = geometry.getType();
+    if (tipo === 'Polygon') {
+        geometry.getArray().forEach(anel => out.push(anel.getArray()));
+    } else if (tipo === 'MultiPolygon' || tipo === 'GeometryCollection') {
+        geometry.getArray().forEach(g => collectRAPolygonRings(g, out));
+    }
+}
+
+// Monta um google.maps.Polygon com o contorno real (todas as partes e
+// buracos) de uma RA, para testar se um ponto cai dentro dela — usado
+// por gerarQuadrantesDaRA() pra recortar a grade pela área inteira da
+// RA, não só pela caixa delimitadora.
+function findRAFeaturePolygon(raNomeApp) {
+    if (!raLayer) return null;
+    const targetShapefileName = RA_NAME_TO_SHAPEFILE[raNomeApp] || raNomeApp;
+    const aneis = [];
+    raLayer.forEach(feature => {
+        if (feature.getProperty('ra_nome') !== targetShapefileName) return;
+        collectRAPolygonRings(feature.getGeometry(), aneis);
+    });
+    return aneis.length ? new google.maps.Polygon({ paths: aneis }) : null;
+}
+
 async function gerarQuadrantesDaRA(productId) {
     const sb = initSupabaseClient();
     if (!sb) return;
@@ -1815,6 +1844,8 @@ async function gerarQuadrantesDaRA(productId) {
 
     const bounds = findRAFeatureBounds(produto.ra_nome);
     if (!bounds) return alert(`Não encontrei o contorno da RA "${produto.ra_nome}" no mapa. Abra a aba Mapa antes para carregar os contornos e tente de novo.`);
+    const poligono = findRAFeaturePolygon(produto.ra_nome);
+    if (!poligono) return alert(`Não consegui montar o contorno de "${produto.ra_nome}" para recortar a grade. Tente novamente após recarregar a aba Mapa.`);
 
     const ne = bounds.getNorthEast(), sw = bounds.getSouthWest();
     const latRef = (ne.lat() + sw.lat()) / 2;
@@ -1822,9 +1853,26 @@ async function gerarQuadrantesDaRA(productId) {
     const cellLng = metrosParaGrausLng(QUADRANTE_TAMANHO_METROS, latRef);
     const rows = Math.max(1, Math.ceil((ne.lat() - sw.lat()) / cellLat));
     const cols = Math.max(1, Math.ceil((ne.lng() - sw.lng()) / cellLng));
-    const total = rows * cols;
 
-    if (!confirm(`Gerar ${total} quadrantes (grade ${rows}x${cols}, ~${QUADRANTE_TAMANHO_METROS}m cada) para ${produto.ra_nome}?`)) return;
+    // Percorre TODA a grade da caixa delimitadora (não só as bordas) e
+    // mantém só as células cujo centro cai dentro do polígono real da
+    // RA — cobre a área inteira, descartando o que sobra fora da forma.
+    const celulas = [];
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const latMin = sw.lat() + r * cellLat;
+            const lngMin = sw.lng() + c * cellLng;
+            const latMax = Math.min(latMin + cellLat, ne.lat());
+            const lngMax = Math.min(lngMin + cellLng, ne.lng());
+            const centro = new google.maps.LatLng((latMin + latMax) / 2, (lngMin + lngMax) / 2);
+            if (!google.maps.geometry.poly.containsLocation(centro, poligono)) continue;
+            celulas.push({ latMin, latMax, lngMin, lngMax });
+        }
+    }
+
+    if (!celulas.length) return alert(`Nenhuma célula da grade caiu dentro do contorno de "${produto.ra_nome}" — confira se o contorno da RA carregou corretamente na aba Mapa.`);
+
+    if (!confirm(`Gerar ${celulas.length} quadrantes (~${QUADRANTE_TAMANHO_METROS}m cada, recortados pela área real de ${produto.ra_nome}, de uma grade de até ${rows * cols} células) para ${produto.ra_nome}?`)) return;
 
     const sigla = raSigla(produto.ra_nome);
     const existentes = okrDataCache.areas.filter(a => a.ra_nome === produto.ra_nome);
@@ -1833,26 +1881,22 @@ async function gerarQuadrantesDaRA(productId) {
         return m ? Math.max(max, parseInt(m[1], 10)) : max;
     }, 0) + 1;
 
-    const novasAreas = [];
-    for (let r = 0; r < rows; r++) {
-        for (let c = 0; c < cols; c++) {
-            const latMin = sw.lat() + r * cellLat;
-            const lngMin = sw.lng() + c * cellLng;
-            novasAreas.push({
-                codigo: `${sigla}-${String(proximoNumero).padStart(2, '0')}`,
-                nome: `Quadrante ${proximoNumero}`,
-                product_id: produto.id,
-                ra_nome: produto.ra_nome,
-                zona_eleitoral: produto.zona_eleitoral || null,
-                lat_min: latMin,
-                lat_max: Math.min(latMin + cellLat, ne.lat()),
-                lng_min: lngMin,
-                lng_max: Math.min(lngMin + cellLng, ne.lng()),
-                created_by: okrCurrentUser.id
-            });
-            proximoNumero++;
-        }
-    }
+    const novasAreas = celulas.map(cel => {
+        const area = {
+            codigo: `${sigla}-${String(proximoNumero).padStart(2, '0')}`,
+            nome: `Quadrante ${proximoNumero}`,
+            product_id: produto.id,
+            ra_nome: produto.ra_nome,
+            zona_eleitoral: produto.zona_eleitoral || null,
+            lat_min: cel.latMin,
+            lat_max: cel.latMax,
+            lng_min: cel.lngMin,
+            lng_max: cel.lngMax,
+            created_by: okrCurrentUser.id
+        };
+        proximoNumero++;
+        return area;
+    });
 
     const { error } = await sb.from('areas').insert(novasAreas);
     if (error) return alert('Erro: ' + error.message);
@@ -2363,14 +2407,17 @@ function renderMeusCheckins() {
     container.innerHTML = checkinDataCache.meusCheckins.map(c => {
         const area = checkinDataCache.minhasAreas.find(a => a.id === c.area_id);
         const artefato = Array.isArray(c.okr_artefatos) ? c.okr_artefatos[0] : c.okr_artefatos;
+        const statusLabel = c.status === 'pendente' ? 'PENDENTE DE APROVAÇÃO' : (c.status === 'rejeitado' ? 'REJEITADO' : null);
         return `
             <div class="okr-card">
                 <div class="okr-card-header">
                     <span class="okr-badge badge-tatico">🔲 ${area ? area.codigo : ''}</span>
                     <span class="status-tag ${c.dentro_area ? 'status-dentro' : 'status-fora'}">${c.dentro_area ? 'DENTRO DA ÁREA' : 'FORA DA ÁREA'}</span>
                 </div>
+                ${statusLabel ? `<span class="status-tag status-${c.status}">${statusLabel}</span>` : ''}
                 <p>${c.descricao}</p>
                 <div class="okr-card-footer"><span>${formatAgendaDateTime(c.created_at)}</span></div>
+                ${c.resposta_aprovacao ? `<p><strong>Resposta do coordenador:</strong> ${c.resposta_aprovacao}</p>` : ''}
                 ${artefato ? `<a href="${artefato.arquivo_url}" target="_blank" rel="noopener" class="btn-link">🔗 Ver comprovante</a>` : ''}
             </div>
         `;
@@ -2392,14 +2439,15 @@ async function fazerCheckin(areaId) {
         const descricao = prompt(`Descreva a ação realizada no quadrante ${area.codigo}:`);
         if (!descricao) return;
 
+        const status = dentro_area ? 'aprovado' : 'pendente';
         const { data: checkin, error } = await sb.from('checkins')
-            .insert({ area_id: area.id, user_id: okrCurrentUser.id, descricao, lat, lng, dentro_area })
+            .insert({ area_id: area.id, user_id: okrCurrentUser.id, descricao, lat, lng, dentro_area, status })
             .select().single();
         if (error) return alert('Erro: ' + error.message);
 
         alert(dentro_area
             ? 'Check-in registrado dentro do quadrante!'
-            : 'Check-in registrado, mas fora dos limites do quadrante — essa marcação fica visível pro coordenador.');
+            : 'Check-in registrado fora dos limites do quadrante — fica pendente até o coordenador aprovar.');
 
         if (confirm('Deseja anexar um arquivo como comprovante (foto, documento)?')) {
             const input = document.createElement('input');
@@ -2758,9 +2806,14 @@ let coordDataCache = {
     objectives: [],
     keyResults: [],
     agenda: [],
+    checkinsPendentes: [],
     comparativoLiberado: false
 };
 let coordRequestSeq = 0; // descarta respostas de uma seleção de Coordenação já trocada
+let coordMap = null; // instância própria do Google Maps, escopada à aba coordenador
+let coordMapRectangles = {}; // areaId -> google.maps.Rectangle
+let coordMapMode = 'atribuir'; // 'atribuir' (clique abre painel de equipe) | 'agrupar' (clique multi-seleciona pra nomear)
+let coordSelectedAreaIds = new Set(); // seleção ativa no modo 'agrupar'
 
 async function initPainelCoordenadorModule() {
     const sb = initSupabaseClient();
@@ -2845,7 +2898,7 @@ async function changeCoordProduct(productId) {
 }
 
 function renderCoordSkeleton() {
-    ['coord-equipe-container', 'coord-quadrantes-container', 'coord-kr-container', 'coord-agenda-container', 'coord-comparativo-container'].forEach(id => {
+    ['coord-equipe-container', 'coord-quadrantes-container', 'coord-kr-container', 'coord-agenda-container', 'coord-checkins-pendentes-container', 'coord-comparativo-container'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="instruction">Carregando…</div>';
     });
@@ -2858,12 +2911,16 @@ async function loadCoordenadorData() {
         fetchCoordEquipeEAreas(),
         fetchCoordPeriodsEObjetivos(),
         fetchCoordAgenda(),
+        fetchCoordCheckinsPendentes(),
         fetchCoordSettings()
     ]);
     if (requestId !== coordRequestSeq) return; // seleção trocou de novo antes de terminar
     renderCoordEquipeCobertura();
     renderCoordKRs();
     renderCoordAgenda();
+    renderCoordCheckinsPendentes();
+    initCoordMap();
+    setCoordMapMode(coordMapMode); // sincroniza dica/botões, limpa seleção antiga e redesenha os quadrantes
     await loadCoordComparativo(requestId);
 }
 
@@ -2873,16 +2930,21 @@ async function fetchCoordEquipeEAreas() {
     try {
         const [teamRes, areasRes] = await Promise.all([
             sb.from('product_team').select('papel, user_id, profiles:user_id(full_name, email)').eq('product_id', coordDataCache.productId),
-            sb.from('areas').select('id, codigo, nome').eq('product_id', coordDataCache.productId)
+            sb.from('areas').select('id, codigo, nome, grupo_nome, lat_min, lat_max, lng_min, lng_max').eq('product_id', coordDataCache.productId).order('codigo')
         ]);
         coordDataCache.equipe = teamRes.data || [];
         coordDataCache.areas = areasRes.data || [];
-        const areaIds = coordDataCache.areas.map(a => a.id);
-        if (!areaIds.length) {
+        if (!coordDataCache.areas.length) {
             coordDataCache.areaVolunteers = [];
             return;
         }
-        const { data: vols } = await sb.from('area_volunteers').select('area_id, user_id').in('area_id', areaIds);
+        // Filtra por product_id via join em vez de .in('area_id', [...centenas de ids])
+        // — uma Coordenação pode ter centenas/milhares de quadrantes, e um .in() com
+        // essa quantidade de UUIDs excede o limite de tamanho de URL do PostgREST.
+        const { data: vols, error: volsErr } = await sb.from('area_volunteers')
+            .select('area_id, user_id, areas!inner(product_id)')
+            .eq('areas.product_id', coordDataCache.productId);
+        if (volsErr) throw volsErr;
         coordDataCache.areaVolunteers = vols || [];
     } catch (err) {
         console.warn('Erro ao carregar equipe/quadrantes da Coordenação:', err);
@@ -2929,13 +2991,161 @@ function renderCoordEquipeCobertura() {
         return `
             <div class="comando-item-row">
                 <div class="comando-item-header">
-                    <span>🔲 ${a.codigo} — ${a.nome}</span>
+                    <span>🔲 ${a.codigo} — ${a.nome}${a.grupo_nome ? ` <span class="okr-badge badge-artefato">🏷️ ${a.grupo_nome}</span>` : ''}</span>
                     <span class="status-tag ${qtd > 0 ? 'status-confirmado' : 'status-pendente'}">${qtd > 0 ? qtd + ' voluntário(s)' : 'sem voluntário'}</span>
                 </div>
             </div>
         `;
     }).join('');
     quadContainer.innerHTML = resumoHtml + linhasHtml;
+}
+
+// Mapa clicável de quadrantes — dois modos:
+// 'atribuir': clique num quadrante abre o painel de checkboxes da equipe.
+// 'agrupar': clique multi-seleciona quadrantes pra nomear um perímetro
+// comum (planejamento do coordenador junto com o candidato).
+function setCoordMapMode(mode) {
+    coordMapMode = mode;
+    coordSelectedAreaIds.clear();
+    const btnAtribuir = document.getElementById('coord-map-mode-atribuir');
+    const btnAgrupar = document.getElementById('coord-map-mode-agrupar');
+    const hint = document.getElementById('coord-map-hint');
+    const selectionBar = document.getElementById('coord-map-selection-bar');
+    const selectionCount = document.getElementById('coord-map-selection-count');
+    const assignPanel = document.getElementById('coord-assign-panel');
+    if (btnAtribuir) btnAtribuir.classList.toggle('active', mode === 'atribuir');
+    if (btnAgrupar) btnAgrupar.classList.toggle('active', mode === 'agrupar');
+    if (hint) hint.textContent = mode === 'atribuir'
+        ? 'Clique num quadrante para atribuir ou remover integrantes da equipe.'
+        : 'Clique em vários quadrantes para selecioná-los e dar um nome ao perímetro (planejamento junto com o candidato — a atribuição de voluntários continua separada, no outro modo).';
+    if (selectionBar) selectionBar.style.display = mode === 'agrupar' ? 'flex' : 'none';
+    if (selectionCount) selectionCount.textContent = '';
+    if (assignPanel) assignPanel.innerHTML = '';
+    renderCoordMapRectangles();
+}
+
+function initCoordMap() {
+    const container = document.getElementById('coord-map');
+    if (!container || coordMap) {
+        if (coordMap) setTimeout(() => google.maps.event.trigger(coordMap, 'resize'), 50);
+        return;
+    }
+    coordMap = new google.maps.Map(container, {
+        center: { lat: -15.793889, lng: -47.882778 },
+        zoom: 12,
+        styles: LIGHT_MAP_STYLE,
+        streetViewControl: false,
+        mapTypeControl: false,
+        fullscreenControl: false
+    });
+}
+
+function renderCoordMapRectangles() {
+    if (!coordMap) return;
+    Object.values(coordMapRectangles).forEach(rect => rect.setMap(null));
+    coordMapRectangles = {};
+    if (!coordDataCache.areas.length) return;
+
+    const qtdPorArea = {};
+    coordDataCache.areaVolunteers.forEach(v => { qtdPorArea[v.area_id] = (qtdPorArea[v.area_id] || 0) + 1; });
+
+    const bounds = new google.maps.LatLngBounds();
+    coordDataCache.areas.forEach(area => {
+        bounds.extend({ lat: area.lat_max, lng: area.lng_max });
+        bounds.extend({ lat: area.lat_min, lng: area.lng_min });
+        const coberto = (qtdPorArea[area.id] || 0) > 0;
+        const selecionado = coordSelectedAreaIds.has(area.id);
+        const rect = new google.maps.Rectangle({
+            bounds: { north: area.lat_max, south: area.lat_min, east: area.lng_max, west: area.lng_min },
+            map: coordMap,
+            strokeColor: selecionado ? '#1f4e78' : (coberto ? '#28a745' : '#c62828'),
+            strokeWeight: selecionado ? 3 : 1.5,
+            fillColor: selecionado ? '#1f4e78' : (coberto ? '#28a745' : '#c62828'),
+            fillOpacity: selecionado ? 0.35 : 0.18
+        });
+        rect.addListener('click', () => onCoordMapAreaClick(area.id));
+        rect.addListener('mouseover', () => {
+            sharedInfoWindow.setContent(`<div class="kml-hover-tooltip"><strong>🔲 ${area.codigo}</strong>${area.grupo_nome ? `<div>🏷️ ${area.grupo_nome}</div>` : ''}</div>`);
+            sharedInfoWindow.setPosition({ lat: area.lat_max, lng: (area.lng_min + area.lng_max) / 2 });
+            sharedInfoWindow.open(coordMap);
+        });
+        rect.addListener('mouseout', () => sharedInfoWindow.close());
+        coordMapRectangles[area.id] = rect;
+    });
+    if (!bounds.isEmpty()) coordMap.fitBounds(bounds);
+}
+
+function onCoordMapAreaClick(areaId) {
+    if (coordMapMode === 'agrupar') {
+        if (coordSelectedAreaIds.has(areaId)) coordSelectedAreaIds.delete(areaId);
+        else coordSelectedAreaIds.add(areaId);
+        const selectionCount = document.getElementById('coord-map-selection-count');
+        if (selectionCount) selectionCount.textContent = `${coordSelectedAreaIds.size} quadrante(s) selecionado(s)`;
+        renderCoordMapRectangles();
+    } else {
+        openCoordAssignPanel(areaId);
+    }
+}
+
+function limparSelecaoCoordMap() {
+    coordSelectedAreaIds.clear();
+    const selectionCount = document.getElementById('coord-map-selection-count');
+    if (selectionCount) selectionCount.textContent = '';
+    renderCoordMapRectangles();
+}
+
+async function nomearGrupoSelecionado() {
+    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa.');
+    const nome = prompt(`Nome do perímetro para os ${coordSelectedAreaIds.size} quadrantes selecionados:`);
+    if (!nome) return;
+    const sb = initSupabaseClient();
+    const { error } = await sb.from('areas').update({ grupo_nome: nome }).in('id', [...coordSelectedAreaIds]);
+    if (error) return alert('Erro: ' + error.message);
+    coordSelectedAreaIds.clear();
+    await fetchCoordEquipeEAreas();
+    renderCoordEquipeCobertura();
+    renderCoordMapRectangles();
+    const selectionCount = document.getElementById('coord-map-selection-count');
+    if (selectionCount) selectionCount.textContent = '';
+}
+
+// Painel de checkboxes da equipe pra um quadrante — reaproveita
+// coordDataCache.equipe (já escopado à Coordenação selecionada).
+function openCoordAssignPanel(areaId) {
+    const area = coordDataCache.areas.find(a => a.id === areaId);
+    const panel = document.getElementById('coord-assign-panel');
+    if (!area || !panel) return;
+    const atribuidos = new Set(coordDataCache.areaVolunteers.filter(v => v.area_id === areaId).map(v => v.user_id));
+    panel.innerHTML = `
+        <div class="comando-panel" style="margin-top: 10px;">
+            <h3>👤 Atribuir equipe — ${area.codigo}${area.grupo_nome ? ' · 🏷️ ' + area.grupo_nome : ''}</h3>
+            ${coordDataCache.equipe.length ? coordDataCache.equipe.map(m => {
+                const nome = (m.profiles && m.profiles.full_name) || (m.profiles && m.profiles.email) || 'Integrante';
+                const marcado = atribuidos.has(m.user_id);
+                return `
+                    <label style="display:flex; align-items:center; gap:8px; padding:6px 0; font-size:0.9rem;">
+                        <input type="checkbox" ${marcado ? 'checked' : ''} onchange="toggleCoordAreaVolunteer('${areaId}', '${m.user_id}', this.checked)">
+                        ${nome} ${m.papel === 'coordenador' ? '📌' : '👥'}
+                    </label>
+                `;
+            }).join('') : '<div class="instruction">Nenhum integrante nesta Coordenação ainda — adicione pela aba OKR.</div>'}
+        </div>
+    `;
+}
+
+async function toggleCoordAreaVolunteer(areaId, userId, atribuir) {
+    const sb = initSupabaseClient();
+    if (atribuir) {
+        const { error } = await sb.from('area_volunteers').insert({ area_id: areaId, user_id: userId, atribuido_por: okrCurrentUser.id });
+        if (error) return alert('Erro: ' + error.message);
+    } else {
+        const { error } = await sb.from('area_volunteers').delete().eq('area_id', areaId).eq('user_id', userId);
+        if (error) return alert('Erro: ' + error.message);
+    }
+    await fetchCoordEquipeEAreas();
+    renderCoordEquipeCobertura();
+    renderCoordMapRectangles();
+    openCoordAssignPanel(areaId);
 }
 
 // Bloco KRs sob Responsabilidade (todos os ciclos ativos, com seletor)
@@ -3075,6 +3285,64 @@ function renderCoordAgenda() {
     `).join('');
 }
 
+// Bloco Check-ins Pendentes de Aprovação (check-in fora dos limites do
+// quadrante atribuído nasce 'pendente' — ver fazerCheckin()). Aprovar ou
+// rejeitar é permitido ao coordenador da própria Coordenação ou ao admin
+// (RLS: checkins_update_coordenador / checkins_write_admin).
+async function fetchCoordCheckinsPendentes() {
+    const sb = initSupabaseClient();
+    try {
+        const { data, error } = await sb.from('checkins')
+            .select('*, profiles:user_id(full_name, email), areas!inner(codigo, nome, product_id)')
+            .eq('status', 'pendente')
+            .eq('areas.product_id', coordDataCache.productId)
+            .order('created_at', { ascending: false });
+        if (error) throw error;
+        coordDataCache.checkinsPendentes = data || [];
+    } catch (err) {
+        console.warn('Erro ao carregar check-ins pendentes:', err);
+        coordDataCache.checkinsPendentes = [];
+    }
+}
+
+function renderCoordCheckinsPendentes() {
+    const container = document.getElementById('coord-checkins-pendentes-container');
+    if (!container) return;
+    if (!coordDataCache.checkinsPendentes.length) {
+        container.innerHTML = '<div class="instruction">Nenhum check-in pendente de aprovação.</div>';
+        return;
+    }
+    container.innerHTML = coordDataCache.checkinsPendentes.map(c => {
+        const nome = (c.profiles && c.profiles.full_name) || (c.profiles && c.profiles.email) || 'Voluntário(a)';
+        return `
+        <div class="okr-card">
+            <div class="okr-card-header">
+                <span class="okr-badge badge-operacional">👤 ${nome}</span>
+                <span class="status-tag status-fora">🔲 ${c.areas ? c.areas.codigo : ''} · FORA DA ÁREA</span>
+            </div>
+            <p>${c.descricao}</p>
+            <div class="okr-card-footer"><span>${formatAgendaDateTime(c.created_at)}</span></div>
+            <div class="okr-btn-group" style="margin-top: 10px;">
+                <button class="btn-primary" onclick="responderCheckinCoord('${c.id}', true)">✅ Aprovar</button>
+                <button class="btn-secondary" onclick="responderCheckinCoord('${c.id}', false)">❌ Rejeitar</button>
+            </div>
+        </div>
+        `;
+    }).join('');
+}
+
+async function responderCheckinCoord(id, aprovar) {
+    const sb = initSupabaseClient();
+    const resposta_aprovacao = prompt(aprovar ? 'Observação para o voluntário (opcional):' : 'Motivo da rejeição (opcional):') || null;
+    const { error } = await sb.from('checkins').update({
+        status: aprovar ? 'aprovado' : 'rejeitado',
+        resposta_aprovacao
+    }).eq('id', id);
+    if (error) return alert('Erro: ' + error.message);
+    await fetchCoordCheckinsPendentes();
+    renderCoordCheckinsPendentes();
+}
+
 // Bloco Comparativo entre Regiões (condicional à flag
 // app_settings.comparativo_regioes_liberado) + toggle exclusivo do admin
 async function fetchCoordSettings() {
@@ -3205,6 +3473,11 @@ window.fazerCheckin = fazerCheckin;
 window.changeCoordProduct = changeCoordProduct;
 window.changeCoordPeriod = changeCoordPeriod;
 window.toggleComparativoRegioes = toggleComparativoRegioes;
+window.setCoordMapMode = setCoordMapMode;
+window.limparSelecaoCoordMap = limparSelecaoCoordMap;
+window.nomearGrupoSelecionado = nomearGrupoSelecionado;
+window.toggleCoordAreaVolunteer = toggleCoordAreaVolunteer;
+window.responderCheckinCoord = responderCheckinCoord;
 
 // Iniciar Aplicação
 window.onload = initMap;
