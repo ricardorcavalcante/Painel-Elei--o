@@ -42,6 +42,8 @@
                 <div class="nav-tabs">
                     <button class="tab-btn active" data-tab="map" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
+                    <button class="tab-btn" data-tab="comando" onclick="switchTab('comando')" aria-label="Central de Comando" id="nav-btn-comando" style="display: none;">🧭 Comando</button>
+                    <button class="tab-btn" data-tab="coordenador" onclick="switchTab('coordenador')" aria-label="Painel do Coordenador" id="nav-btn-coordenador" style="display: none;">🧑‍💼 Coordenador</button>
                     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                     <button class="tab-btn" data-tab="okr" onclick="switchTab('okr')" aria-label="OKRs e Equipe">🎯 OKRs</button>
                     <button class="tab-btn" data-tab="agenda" onclick="switchTab('agenda')" aria-label="Agenda do Candidato">🗓️ Agenda</button>
@@ -118,6 +120,22 @@
                     <div class="instruction">
                         Selecione uma Região Administrativa na coluna ao lado para visualizar os detalhes.
                     </div>
+                </div>
+            </div>
+
+            <!-- Sidebar: Conteúdo da Central de Comando -->
+            <div id="comando-sidebar" style="display: none;">
+                <div class="sidebar-content" style="padding-top: 20px;">
+                    <h3>🧭 Central de Comando</h3>
+                    <p class="instruction" style="font-size: 0.85rem;">Leitura consolidada da saúde da campanha: OKRs estratégicos, cobertura territorial, ranking de Coordenações Regionais e prazos do TSE. Visível ao nível estratégico e às Coordenações Regionais.</p>
+                </div>
+            </div>
+
+            <!-- Sidebar: Conteúdo do Painel do Coordenador -->
+            <div id="coordenador-sidebar" style="display: none;">
+                <div class="sidebar-content" style="padding-top: 20px;">
+                    <h3>🧑‍💼 Painel do Coordenador</h3>
+                    <p class="instruction" style="font-size: 0.85rem;">Equipe, cobertura de quadrantes, KRs táticos e status de agenda da sua Coordenação Regional. Visível a coordenadores e ao nível estratégico.</p>
                 </div>
             </div>
 
@@ -208,6 +226,102 @@
                         <div id="ras-legend-list" class="zonas-legend-list">
                             <!-- Lista gerada via JS -->
                         </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container da Central de Comando -->
+            <div id="view-comando" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
+                <h2 style="margin-bottom: 20px; color: #1F4E78;">🧭 Central de Comando</h2>
+
+                <div id="comando-permission" style="display: none;"></div>
+
+                <div id="comando-app" style="display: none;">
+                    <div class="comando-kpis">
+                        <div class="comando-kpi-card" id="comando-kpi-semaforo"></div>
+                        <div class="comando-kpi-card" id="comando-kpi-cobertura"></div>
+                        <div class="comando-kpi-card" id="comando-kpi-lider"></div>
+                        <div class="comando-kpi-card" id="comando-kpi-prazo"></div>
+                    </div>
+
+                    <div class="comando-grid">
+                        <div class="comando-panel">
+                            <h3>📊 OKRs Estratégicos</h3>
+                            <div id="comando-semaforo-container"></div>
+                        </div>
+                        <div class="comando-panel">
+                            <h3>🗺️ Cobertura Territorial</h3>
+                            <div id="comando-cobertura-container"></div>
+                        </div>
+                        <div class="comando-panel">
+                            <h3>🏆 Ranking de Coordenações</h3>
+                            <div id="comando-ranking-container"></div>
+                        </div>
+                    </div>
+
+                    <div class="comando-panel comando-radar">
+                        <div>
+                            <h3>⏳ Próximo Prazo do TSE</h3>
+                            <div id="comando-radar-prazo"></div>
+                        </div>
+                        <div>
+                            <h3>🗓️ Agenda dos Próximos 3 Dias</h3>
+                            <div id="comando-radar-agenda"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container do Painel do Coordenador -->
+            <div id="view-coordenador" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
+                <div class="okr-header-actions">
+                    <h2>🧑‍💼 Painel do Coordenador</h2>
+                    <div id="coord-selector-box" class="okr-period-bar" style="display: none;"></div>
+                </div>
+
+                <div id="coord-permission" style="display: none;"></div>
+                <div id="coord-empty" class="instruction" style="display: none;">Você ainda não foi associado a nenhuma Coordenação Regional.</div>
+
+                <div id="coord-app" style="display: none;">
+                    <div class="comando-grid" style="grid-template-columns: repeat(2, 1fr);">
+                        <div class="comando-panel">
+                            <h3>👥 Equipe</h3>
+                            <div id="coord-equipe-container"></div>
+                        </div>
+                        <div class="comando-panel">
+                            <h3>🗺️ Quadrantes Cobertos</h3>
+                            <div id="coord-quadrantes-container"></div>
+                        </div>
+                    </div>
+
+                    <div class="okr-section" style="margin-top: 10px;">
+                        <div class="okr-header-actions">
+                            <h3>📌 KRs sob Responsabilidade</h3>
+                            <div id="coord-period-bar" class="okr-period-bar">
+                                <label for="coord-period-select">Ciclo:</label>
+                                <select id="coord-period-select" onchange="changeCoordPeriod(this.value)"></select>
+                            </div>
+                        </div>
+                        <div id="coord-kr-container" class="okr-cards-grid"></div>
+                    </div>
+
+                    <div class="okr-section" style="margin-top: 30px;">
+                        <h3>🗓️ Status de Agenda da Região</h3>
+                        <p class="instruction" style="font-size: 0.85rem;">Somente leitura — a aprovação das solicitações continua exclusiva do nível estratégico, na aba Agenda.</p>
+                        <div id="coord-agenda-container" class="okr-cards-grid"></div>
+                    </div>
+
+                    <div class="okr-section" style="margin-top: 30px;">
+                        <div class="okr-header-actions">
+                            <h3>📊 Comparativo entre Regiões</h3>
+                            <div id="coord-comparativo-toggle-box" class="okr-period-bar" style="display: none;">
+                                <label for="coord-comparativo-toggle">
+                                    <input type="checkbox" id="coord-comparativo-toggle" onchange="toggleComparativoRegioes(this.checked)">
+                                    Liberar comparativo entre Coordenações
+                                </label>
+                            </div>
+                        </div>
+                        <div id="coord-comparativo-container"></div>
                     </div>
                 </div>
             </div>

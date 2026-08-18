@@ -191,6 +191,18 @@ CREATE TABLE IF NOT EXISTS public.checkins (
 ALTER TABLE public.okr_artefatos ADD COLUMN IF NOT EXISTS checkin_id UUID REFERENCES public.checkins(id) ON DELETE CASCADE;
 ALTER TABLE public.okr_artefatos ADD CONSTRAINT okr_artefatos_vinculo_chk CHECK (key_result_id IS NOT NULL OR checkin_id IS NOT NULL);
 
+-- 13. Configuração global da campanha (linha única — CHECK (id = TRUE)
+--     garante que nunca existe mais de uma linha). Hoje só guarda a
+--     flag que libera o comparativo entre Coordenações Regionais no
+--     Painel do Coordenador; pensada para crescer com outras chaves
+--     de configuração do nível estratégico no futuro.
+CREATE TABLE IF NOT EXISTS public.app_settings (
+    id BOOLEAN PRIMARY KEY DEFAULT TRUE CHECK (id = TRUE),
+    comparativo_regioes_liberado BOOLEAN NOT NULL DEFAULT FALSE,
+    updated_at TIMESTAMPTZ DEFAULT NOW()
+);
+INSERT INTO public.app_settings (id) VALUES (TRUE) ON CONFLICT (id) DO NOTHING;
+
 -- ============================================================
 -- TRIGGER: criar profile automaticamente no primeiro login
 -- ============================================================
@@ -296,6 +308,7 @@ ALTER TABLE public.prazos_eleitorais ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.areas ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.area_volunteers ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.checkins ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.app_settings ENABLE ROW LEVEL SECURITY;
 
 -- profiles
 CREATE POLICY "profiles_select_auth" ON public.profiles FOR SELECT TO authenticated USING (true);
@@ -476,6 +489,13 @@ CREATE POLICY "checkins_write_admin" ON public.checkins FOR UPDATE TO authentica
     USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
 CREATE POLICY "checkins_delete_admin" ON public.checkins FOR DELETE TO authenticated
     USING (public.is_super_admin());
+
+-- app_settings: leitura aberta (qualquer coordenador precisa ler a flag
+-- para saber se o comparativo entre regiões aparece no Painel do
+-- Coordenador); só o nível estratégico liga/desliga.
+CREATE POLICY "app_settings_select_auth" ON public.app_settings FOR SELECT TO authenticated USING (true);
+CREATE POLICY "app_settings_write_admin" ON public.app_settings FOR UPDATE TO authenticated
+    USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
 
 -- ============================================================
 -- STORAGE: bucket "artefatos" — comprovantes de campo, público

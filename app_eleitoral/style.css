@@ -881,3 +881,149 @@ tr:hover { background-color: #e8f4fd; }
     margin-bottom: 4px;
 }
 
+/* ============================================================
+   Central de Comando (painel executivo, aba "comando")
+   ============================================================ */
+.comando-kpis {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.comando-kpi-card {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 16px 18px;
+    box-shadow: var(--shadow-sm);
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    min-height: 84px;
+    justify-content: center;
+}
+
+.comando-kpi-label {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+    font-weight: 600;
+}
+
+.comando-kpi-value {
+    font-size: 1.7rem;
+    font-weight: 700;
+    color: var(--primary);
+    line-height: 1.2;
+}
+
+.comando-kpi-sub {
+    font-size: 0.76rem;
+    color: var(--text-secondary);
+}
+
+.comando-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 20px;
+    margin-bottom: 24px;
+    align-items: start;
+}
+
+.comando-panel {
+    background: var(--bg-card);
+    border-radius: 10px;
+    padding: 18px 20px;
+    box-shadow: var(--shadow-sm);
+}
+
+.comando-panel h3 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--primary);
+}
+
+.comando-item-row {
+    padding: 10px 0;
+    border-bottom: 1px solid var(--border-light);
+}
+.comando-item-row:last-child { border-bottom: none; }
+
+.comando-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.86rem;
+    font-weight: 600;
+    margin-bottom: 6px;
+    color: #333;
+}
+
+.comando-item-sub {
+    font-size: 0.75rem;
+    color: var(--text-secondary);
+    font-weight: 400;
+}
+
+.comando-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    margin-right: 6px;
+}
+.comando-dot.dot-verde { background: #2e7d32; }
+.comando-dot.dot-amarelo { background: #e65100; }
+.comando-dot.dot-vermelho { background: #c62828; }
+
+.txt-verde { color: #2e7d32; }
+.txt-amarelo { color: #e65100; }
+.txt-vermelho { color: #c62828; }
+
+.comando-selo { font-size: 1rem; }
+.comando-selo-indisponivel { opacity: 0.4; font-size: 0.85rem; }
+
+.comando-radar {
+    display: grid;
+    grid-template-columns: 1fr 1.4fr;
+    gap: 24px;
+}
+
+.comando-destaque-prazo {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.comando-destaque-dias {
+    font-size: 2rem;
+    color: var(--primary);
+    line-height: 1.1;
+}
+
+@media (max-width: 900px) {
+    .comando-kpis { grid-template-columns: repeat(2, 1fr); }
+    .comando-grid { grid-template-columns: 1fr; }
+    .comando-radar { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 480px) {
+    .comando-kpis { grid-template-columns: 1fr; }
+}
+
+/* ============================================================
+   Painel do Coordenador (aba "coordenador") — reaproveita
+   .comando-*, .okr-* e .table-container já definidos acima.
+   ============================================================ */
+#coord-comparativo-toggle-box label {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--text-secondary);
+    cursor: pointer;
+}
+
+.coord-comparativo-linha-atual { background-color: var(--accent-soft, #dbe7f0) !important; font-weight: 700; }
+

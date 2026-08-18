@@ -1,4 +1,5 @@
 // Estado da Aplicação
+let currentTab = 'map';
 let map;
 let markers = [];
 let sharedInfoWindow;
@@ -70,6 +71,7 @@ const zoneColors = {
 // TABS E NAVEGAÇÃO (FUSÃO: MAPA & DASHBOARD)
 // ==========================================
 function switchTab(tab) {
+    currentTab = tab;
     document.querySelectorAll('.tab-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.tab === tab);
     });
@@ -84,6 +86,10 @@ function switchTab(tab) {
     if (agendaSidebar) agendaSidebar.style.display = tab === 'agenda' ? 'block' : 'none';
     const checkinSidebar = document.getElementById('checkin-sidebar');
     if (checkinSidebar) checkinSidebar.style.display = tab === 'checkin' ? 'block' : 'none';
+    const comandoSidebar = document.getElementById('comando-sidebar');
+    if (comandoSidebar) comandoSidebar.style.display = tab === 'comando' ? 'block' : 'none';
+    const coordenadorSidebar = document.getElementById('coordenador-sidebar');
+    if (coordenadorSidebar) coordenadorSidebar.style.display = tab === 'coordenador' ? 'block' : 'none';
 
     // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
     const showMapView = tab === 'map' || tab === 'ra';
@@ -95,6 +101,10 @@ function switchTab(tab) {
     if (viewAgenda) viewAgenda.style.display = tab === 'agenda' ? 'block' : 'none';
     const viewCheckin = document.getElementById('view-checkin');
     if (viewCheckin) viewCheckin.style.display = tab === 'checkin' ? 'block' : 'none';
+    const viewComando = document.getElementById('view-comando');
+    if (viewComando) viewComando.style.display = tab === 'comando' ? 'block' : 'none';
+    const viewCoordenador = document.getElementById('view-coordenador');
+    if (viewCoordenador) viewCoordenador.style.display = tab === 'coordenador' ? 'block' : 'none';
 
     // Coluna direita: Zonas x Regiões Administrativas
     document.getElementById('zonas-legend').style.display = tab === 'map' ? 'flex' : 'none';
@@ -108,6 +118,12 @@ function switchTab(tab) {
     }
     if (tab === 'checkin') {
         initCheckinModule();
+    }
+    if (tab === 'comando') {
+        initComandoModule();
+    }
+    if (tab === 'coordenador') {
+        initPainelCoordenadorModule();
     }
 
     // Cada aba começa "limpa": desfaz seleção/realce anterior de zona ou RA
@@ -152,6 +168,21 @@ function initMap() {
 
     loadData();
     loadDashboardData();
+    bootstrapComandoSession();
+}
+
+// Verifica cedo se já existe uma sessão logada (ex: usuário voltando com
+// sessão persistida pelo Supabase Auth), sem depender de o usuário clicar
+// antes em OKRs/Agenda/Check-in — é o que permite o botão "🧭 Comando" e o
+// auto-redirect em refreshOKRSession() funcionarem já no primeiro load.
+async function bootstrapComandoSession() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
 }
 
 async function loadData() {
@@ -1182,6 +1213,7 @@ let supabaseClient = null;
 let okrAuthListenerBound = false;
 let okrCurrentUser = null; // linha de public.profiles do usuário logado
 let okrUserProductIds = []; // product_id onde o usuário logado é coordenador/operacional
+let okrUserCoordProductIds = []; // subconjunto de okrUserProductIds onde o papel é 'coordenador'
 let okrDataCache = { periods: [], activePeriodId: null, products: [], productTeam: [], objectives: [], keyResults: [], artefatos: [], areas: [], areaVolunteers: [] };
 let currentOKRFilterLevel = 'all';
 
@@ -1220,20 +1252,68 @@ async function initOKRModule() {
 async function refreshOKRSession() {
     const sb = initSupabaseClient();
     if (!sb) return;
+    const jaEstavaLogado = !!okrCurrentUser;
     const { data: { session } } = await sb.auth.getSession();
     if (!session) {
         okrCurrentUser = null;
         okrUserProductIds = [];
+        okrUserCoordProductIds = [];
         renderOKRAuthBox();
         renderOKRActionButtons();
+        updateComandoTabVisibility();
+        updateCoordenadorTabVisibility();
         return;
     }
     const { data: profile } = await sb.from('profiles').select('*').eq('id', session.user.id).maybeSingle();
     okrCurrentUser = profile || { id: session.user.id, email: session.user.email, full_name: session.user.email, is_super_admin: false };
-    const { data: team } = await sb.from('product_team').select('product_id').eq('user_id', session.user.id);
+    const { data: team } = await sb.from('product_team').select('product_id, papel').eq('user_id', session.user.id);
     okrUserProductIds = (team || []).map(t => t.product_id);
+    okrUserCoordProductIds = (team || []).filter(t => t.papel === 'coordenador').map(t => t.product_id);
     renderOKRAuthBox();
     renderOKRActionButtons();
+    updateComandoTabVisibility();
+    updateCoordenadorTabVisibility();
+
+    // Coordenadores (papel='coordenador') caem direto no Painel do Coordenador;
+    // nível estratégico e demais membros de product_team (só operacional) caem
+    // na Central de Comando — só na primeira vez que a sessão logada é
+    // detectada, em vez de ficar na aba Mapa.
+    if (!jaEstavaLogado && currentTab !== 'comando' && currentTab !== 'coordenador') {
+        if (okrUserCoordProductIds.length > 0) {
+            switchTab('coordenador');
+        } else if (okrCurrentUser.is_super_admin || okrUserProductIds.length > 0) {
+            switchTab('comando');
+        }
+    }
+}
+
+// Mostra/esconde o botão da aba Central de Comando conforme o papel do
+// usuário logado (candidato/admin ou coordenador de alguma Coordenação
+// Regional). A proteção real de leitura já é a RLS existente — isto é
+// só a apresentação do menu; ver também o guard em initComandoModule().
+function updateComandoTabVisibility() {
+    const btn = document.getElementById('nav-btn-comando');
+    if (!btn) return;
+    const temAcesso = !!(okrCurrentUser && (okrCurrentUser.is_super_admin || okrUserProductIds.length > 0));
+    btn.style.display = temAcesso ? '' : 'none';
+    if (!temAcesso && currentTab === 'comando') {
+        switchTab('map');
+    }
+}
+
+// Mostra/esconde o botão da aba Painel do Coordenador — visível a quem
+// tem papel='coordenador' em algum product_team, e a is_super_admin
+// (que pode inspecionar qualquer Coordenação Regional). Proteção real
+// de leitura é a RLS; isto é só apresentação do menu — ver o guard em
+// initPainelCoordenadorModule().
+function updateCoordenadorTabVisibility() {
+    const btn = document.getElementById('nav-btn-coordenador');
+    if (!btn) return;
+    const temAcesso = !!(okrCurrentUser && (okrCurrentUser.is_super_admin || okrUserCoordProductIds.length > 0));
+    btn.style.display = temAcesso ? '' : 'none';
+    if (!temAcesso && currentTab === 'coordenador') {
+        switchTab('map');
+    }
 }
 
 async function loadOKRData() {
@@ -2354,6 +2434,746 @@ async function uploadCheckinArtefato(checkinId, file) {
     await loadCheckinData();
 }
 
+// ==========================================
+// CENTRAL DE COMANDO (painel executivo, só leitura — nenhuma tabela nova,
+// nenhuma escrita. Reaproveita okrDataCache/prazosTSECache/agendaDataCache
+// já carregados pelos módulos de OKR/Agenda; só os check-ins agregados dos
+// últimos 7 dias têm uma busca própria, ver fetchComandoCheckins.)
+// Visível a nível estratégico (is_super_admin) e a coordenadores (membro de
+// algum product_team) — voluntários operacionais não veem esta aba.
+// ==========================================
+let comandoCheckins = [];
+let comandoCheckinsError = false;
+
+async function initComandoModule() {
+    const sb = initSupabaseClient();
+    const permBox = document.getElementById('comando-permission');
+    const appBox = document.getElementById('comando-app');
+    if (!sb) {
+        if (permBox) {
+            permBox.style.display = 'block';
+            permBox.innerHTML = '<div class="instruction">Central de Comando não configurada: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (ver README).</div>';
+        }
+        if (appBox) appBox.style.display = 'none';
+        return;
+    }
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
+
+    const temAcesso = !!(okrCurrentUser && (okrCurrentUser.is_super_admin || okrUserProductIds.length > 0));
+    if (!temAcesso) {
+        if (permBox) {
+            permBox.style.display = 'block';
+            permBox.innerHTML = okrCurrentUser
+                ? '<div class="instruction">A Central de Comando é reservada ao nível estratégico e às Coordenações Regionais.</div>'
+                : '<div class="instruction">Entre pela aba OKRs, Agenda ou Check-in para acessar a Central de Comando.</div>';
+        }
+        if (appBox) appBox.style.display = 'none';
+        return;
+    }
+    if (permBox) permBox.style.display = 'none';
+    if (appBox) appBox.style.display = 'block';
+
+    renderComandoSkeleton();
+    await Promise.allSettled([loadOKRData(), loadPrazosTSE(), loadAgendaData(), fetchComandoCheckins()]);
+    renderComando();
+}
+
+function renderComandoSkeleton() {
+    [
+        'comando-kpi-semaforo', 'comando-kpi-cobertura', 'comando-kpi-lider', 'comando-kpi-prazo',
+        'comando-semaforo-container', 'comando-cobertura-container', 'comando-ranking-container',
+        'comando-radar-prazo', 'comando-radar-agenda'
+    ].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<div class="instruction">Carregando…</div>';
+    });
+}
+
+// Ciclo semanal ativo prevalece para o semáforo e o ranking desta tela
+// quando há mais de um period ativo ao mesmo tempo (decisão de produto).
+function getComandoPeriodId() {
+    const semanaisAtivos = okrDataCache.periods
+        .filter(p => p.tipo_ciclo === 'semanal' && p.ativo)
+        .sort((a, b) => (b.data_inicio || '').localeCompare(a.data_inicio || ''));
+    return semanaisAtivos.length ? semanaisAtivos[0].id : null;
+}
+
+async function fetchComandoCheckins() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        const seteDiasAtras = new Date(Date.now() - 7 * 24 * 60 * 60 * 1000).toISOString();
+        const { data, error } = await sb.from('checkins').select('area_id, created_at').gte('created_at', seteDiasAtras);
+        if (error) throw error;
+        comandoCheckins = data || [];
+        comandoCheckinsError = false;
+    } catch (err) {
+        console.warn('Erro ao carregar atividade recente (check-ins):', err);
+        comandoCheckins = [];
+        comandoCheckinsError = true;
+    }
+}
+
+function comandoFaixaCor(progresso) {
+    if (progresso >= 70) return { cor: 'verde', label: 'No caminho' };
+    if (progresso >= 40) return { cor: 'amarelo', label: 'Atenção' };
+    return { cor: 'vermelho', label: 'Crítico' };
+}
+
+function renderComando() {
+    renderComandoSemaforo();
+    renderComandoCobertura();
+    renderComandoRanking();
+    renderComandoRadar();
+}
+
+// Bloco 01 — Semáforo de OKRs Estratégicos
+function renderComandoSemaforo() {
+    const listContainer = document.getElementById('comando-semaforo-container');
+    const kpiContainer = document.getElementById('comando-kpi-semaforo');
+    if (!listContainer || !kpiContainer) return;
+
+    const periodId = getComandoPeriodId();
+    if (!periodId) {
+        listContainer.innerHTML = '<div class="instruction">Nenhum ciclo semanal ativo no momento.</div>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">📊 Semáforo</span><strong class="comando-kpi-value">—</strong>';
+        return;
+    }
+
+    const objetivos = okrDataCache.objectives.filter(o => o.nivel === 'estrategico' && o.period_id === periodId);
+    if (!objetivos.length) {
+        listContainer.innerHTML = '<div class="instruction">Nenhum OKR estratégico definido para este ciclo.</div>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">📊 Semáforo</span><strong class="comando-kpi-value">—</strong>';
+        return;
+    }
+
+    const media = objetivos.reduce((soma, o) => soma + (o.progresso || 0), 0) / objetivos.length;
+    const faixaMedia = comandoFaixaCor(media);
+    kpiContainer.innerHTML = `
+        <span class="comando-kpi-label">📊 Semáforo</span>
+        <strong class="comando-kpi-value txt-${faixaMedia.cor}">${Math.round(media)}%</strong>
+        <span class="comando-kpi-sub">${faixaMedia.label}</span>
+    `;
+
+    listContainer.innerHTML = objetivos.map(o => {
+        const faixa = comandoFaixaCor(o.progresso || 0);
+        return `
+            <div class="comando-item-row">
+                <div class="comando-item-header">
+                    <span><span class="comando-dot dot-${faixa.cor}"></span>${o.titulo}</span>
+                    <strong class="txt-${faixa.cor}">${Math.round(o.progresso || 0)}%</strong>
+                </div>
+                <div class="okr-progress-bar-container">
+                    <div class="okr-progress-bar" style="width:${Math.round(o.progresso || 0)}%;"></div>
+                </div>
+                <div class="okr-card-footer"><span>${faixa.label}</span></div>
+            </div>
+        `;
+    }).join('');
+}
+
+// Bloco 02 — Cobertura Territorial
+function renderComandoCobertura() {
+    const listContainer = document.getElementById('comando-cobertura-container');
+    const kpiContainer = document.getElementById('comando-kpi-cobertura');
+    if (!listContainer || !kpiContainer) return;
+
+    if (!okrDataCache.areas.length) {
+        listContainer.innerHTML = '<div class="instruction">Nenhum quadrante gerado ainda — gere pela aba <strong>🎯 OKRs</strong>.</div>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">🗺️ Cobertura</span><strong class="comando-kpi-value">—</strong>';
+        return;
+    }
+
+    const areasComVoluntario = new Set(okrDataCache.areaVolunteers.map(v => v.area_id));
+    const porRA = {};
+    okrDataCache.areas.forEach(area => {
+        if (!porRA[area.ra_nome]) porRA[area.ra_nome] = { total: 0, cobertos: 0 };
+        porRA[area.ra_nome].total += 1;
+        if (areasComVoluntario.has(area.id)) porRA[area.ra_nome].cobertos += 1;
+    });
+
+    const linhas = Object.entries(porRA)
+        .map(([ra, v]) => ({ ra, pct: Math.round((v.cobertos / v.total) * 100), cobertos: v.cobertos, total: v.total }))
+        .sort((a, b) => a.pct - b.pct);
+
+    const mediaGeral = Math.round(linhas.reduce((s, l) => s + l.pct, 0) / linhas.length);
+    kpiContainer.innerHTML = `
+        <span class="comando-kpi-label">🗺️ Cobertura</span>
+        <strong class="comando-kpi-value">${mediaGeral}%</strong>
+        <span class="comando-kpi-sub">${linhas.length} RA${linhas.length !== 1 ? 's' : ''} com quadrante</span>
+    `;
+
+    listContainer.innerHTML = linhas.map(l => `
+        <div class="comando-item-row">
+            <div class="comando-item-header"><span>${l.ra}</span><strong>${l.pct}%</strong></div>
+            <div class="okr-progress-bar-container">
+                <div class="okr-progress-bar" style="width:${l.pct}%;"></div>
+            </div>
+            <div class="okr-card-footer"><span>${l.cobertos} de ${l.total} quadrantes com voluntário</span></div>
+        </div>
+    `).join('');
+}
+
+// Bloco 03 — Ranking de Coordenações Regionais
+function renderComandoRanking() {
+    const listContainer = document.getElementById('comando-ranking-container');
+    const kpiContainer = document.getElementById('comando-kpi-lider');
+    if (!listContainer || !kpiContainer) return;
+
+    if (!okrDataCache.products.length) {
+        listContainer.innerHTML = '<div class="instruction">Nenhuma Coordenação Regional cadastrada ainda.</div>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">—</strong>';
+        return;
+    }
+
+    const periodId = getComandoPeriodId();
+    const areaParaProduto = {};
+    okrDataCache.areas.forEach(a => { areaParaProduto[a.id] = a.product_id; });
+
+    const checkinsPorProduto = {};
+    comandoCheckins.forEach(c => {
+        const productId = areaParaProduto[c.area_id];
+        if (!productId) return;
+        checkinsPorProduto[productId] = (checkinsPorProduto[productId] || 0) + 1;
+    });
+
+    const isAdmin = !!(okrCurrentUser && okrCurrentUser.is_super_admin);
+
+    const ranking = okrDataCache.products.map(produto => {
+        const objetivos = okrDataCache.objectives.filter(o => o.nivel === 'tatico' && o.product_id === produto.id && o.period_id === periodId);
+        const progresso = objetivos.length
+            ? objetivos.reduce((s, o) => s + (o.progresso || 0), 0) / objetivos.length
+            : 0;
+        // Só admin, ou coordenador da própria Coordenação, enxerga check-ins
+        // reais dela (RLS restringe checkins a quem é membro do product_team
+        // do quadrante) — pra qualquer outra coordenação, o selo de atividade
+        // não é confiável e é mostrado como indisponível, não como "inativo".
+        const podeVerAtividade = isAdmin || okrUserProductIds.includes(produto.id);
+        const teveCheckin = (checkinsPorProduto[produto.id] || 0) > 0;
+        return { produto, progresso, podeVerAtividade, teveCheckin };
+    }).sort((a, b) => {
+        if (b.progresso !== a.progresso) return b.progresso - a.progresso;
+        return (b.podeVerAtividade && b.teveCheckin ? 1 : 0) - (a.podeVerAtividade && a.teveCheckin ? 1 : 0);
+    });
+
+    const TOP_N = 5;
+    const lider = ranking[0];
+    kpiContainer.innerHTML = lider
+        ? `<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">${Math.round(lider.progresso)}%</strong><span class="comando-kpi-sub">${lider.produto.nome}</span>`
+        : '<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">—</strong>';
+
+    const linhasHtml = ranking.map((r, i) => {
+        const posicao = i + 1;
+        const selo = !r.podeVerAtividade
+            ? '<span class="comando-selo comando-selo-indisponivel" title="Atividade de outras Coordenações não é visível para o seu papel">—</span>'
+            : (r.teveCheckin
+                ? '<span class="comando-selo" title="Check-in nos últimos 7 dias">🔥</span>'
+                : '<span class="comando-selo" title="Sem check-in nos últimos 7 dias">💤</span>');
+        const nome = posicao <= TOP_N ? `${posicao}º — ${r.produto.nome} (${r.produto.ra_nome})` : `${posicao}º colocação`;
+        return `
+            <div class="comando-item-row">
+                <div class="comando-item-header"><span>${nome}</span>${selo}</div>
+                <div class="okr-progress-bar-container">
+                    <div class="okr-progress-bar" style="width:${Math.round(r.progresso)}%;"></div>
+                </div>
+                <div class="okr-card-footer"><span>Progresso tático médio</span><strong>${Math.round(r.progresso)}%</strong></div>
+            </div>
+        `;
+    }).join('');
+
+    listContainer.innerHTML = linhasHtml + (comandoCheckinsError
+        ? '<div class="instruction">Não foi possível carregar a atividade recente agora — os selos 🔥/💤 podem estar incompletos.</div>'
+        : '');
+}
+
+// Bloco 04 — Radar de Prazos & Agenda
+function renderComandoRadar() {
+    const prazoContainer = document.getElementById('comando-radar-prazo');
+    const agendaContainer = document.getElementById('comando-radar-agenda');
+    const kpiContainer = document.getElementById('comando-kpi-prazo');
+    if (!prazoContainer || !agendaContainer || !kpiContainer) return;
+
+    const agora = new Date();
+    const hojeISO = agora.toISOString().slice(0, 10);
+    const futuros = prazosTSECache
+        .filter(p => p.data >= hojeISO)
+        .sort((a, b) => a.data.localeCompare(b.data))
+        .slice(0, 5);
+    const destaque = futuros.find(p => p.destaque) || futuros[0] || null;
+
+    if (!destaque) {
+        prazoContainer.innerHTML = '<div class="instruction">Nenhum prazo futuro no calendário do TSE.</div>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">⏳ Próximo prazo</span><strong class="comando-kpi-value">—</strong>';
+    } else {
+        const dias = Math.max(0, Math.round((new Date(destaque.data + 'T00:00:00') - new Date(hojeISO + 'T00:00:00')) / (24 * 60 * 60 * 1000)));
+        kpiContainer.innerHTML = `
+            <span class="comando-kpi-label">⏳ Próximo prazo</span>
+            <strong class="comando-kpi-value">${dias}d</strong>
+            <span class="comando-kpi-sub">${destaque.titulo}</span>
+        `;
+        prazoContainer.innerHTML = `
+            <div class="comando-destaque-prazo">
+                <strong class="comando-destaque-dias">${dias} dia${dias !== 1 ? 's' : ''}</strong>
+                <span>${destaque.titulo}</span>
+                <span class="comando-item-sub">${formatPrazoDate(destaque.data)} · ${PRAZO_CATEGORIA_LABEL[destaque.categoria] || destaque.categoria}</span>
+            </div>
+        `;
+    }
+
+    const limite3Dias = new Date(agora.getTime() + 3 * 24 * 60 * 60 * 1000).toISOString();
+    const agoraISO = agora.toISOString();
+    const proximos = agendaDataCache.eventos
+        .filter(ev => ev.status === 'confirmado' && ev.data_hora >= agoraISO && ev.data_hora <= limite3Dias)
+        .sort((a, b) => a.data_hora.localeCompare(b.data_hora));
+
+    agendaContainer.innerHTML = proximos.length
+        ? proximos.map(ev => `
+            <div class="comando-item-row">
+                <div class="comando-item-header"><span>${ev.titulo}</span><span class="comando-item-sub">${formatAgendaDateTime(ev.data_hora)}</span></div>
+                <div class="okr-card-footer"><span>${[ev.local, ev.ra_nome].filter(Boolean).join(' · ')}</span></div>
+            </div>
+        `).join('')
+        : '<div class="instruction">Nenhum compromisso confirmado nos próximos dias.</div>';
+}
+
+// ==========================================
+// PAINEL DO COORDENADOR (consolida Equipe + Cobertura de Quadrantes +
+// KRs táticos + status de agenda da própria Coordenação Regional, com
+// comparativo opcional entre regiões controlado pela flag
+// app_settings.comparativo_regioes_liberado). Visível a coordenadores
+// (papel='coordenador' em product_team) e a is_super_admin, que pode
+// escolher qualquer Coordenação Regional para inspecionar.
+// ==========================================
+let coordDataCache = {
+    productId: null,
+    periodId: null,
+    periods: [],
+    equipe: [],
+    areas: [],
+    areaVolunteers: [],
+    objectives: [],
+    keyResults: [],
+    agenda: [],
+    comparativoLiberado: false
+};
+let coordRequestSeq = 0; // descarta respostas de uma seleção de Coordenação já trocada
+
+async function initPainelCoordenadorModule() {
+    const sb = initSupabaseClient();
+    const permBox = document.getElementById('coord-permission');
+    const emptyBox = document.getElementById('coord-empty');
+    const appBox = document.getElementById('coord-app');
+    if (!sb) {
+        if (permBox) {
+            permBox.style.display = 'block';
+            permBox.innerHTML = '<div class="instruction">Painel do Coordenador não configurado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY (ver README).</div>';
+        }
+        if (appBox) appBox.style.display = 'none';
+        return;
+    }
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
+
+    const temAcesso = !!(okrCurrentUser && (okrCurrentUser.is_super_admin || okrUserCoordProductIds.length > 0));
+    if (!temAcesso) {
+        if (permBox) {
+            permBox.style.display = 'block';
+            permBox.innerHTML = okrCurrentUser
+                ? '<div class="instruction">O Painel do Coordenador é reservado às Coordenações Regionais e ao nível estratégico.</div>'
+                : '<div class="instruction">Entre pela aba OKRs, Agenda ou Check-in para acessar o Painel do Coordenador.</div>';
+        }
+        if (emptyBox) emptyBox.style.display = 'none';
+        if (appBox) appBox.style.display = 'none';
+        return;
+    }
+    if (permBox) permBox.style.display = 'none';
+
+    if (!okrDataCache.products.length) {
+        await loadOKRData();
+    }
+
+    const opcoes = getCoordProductOptions();
+    if (!opcoes.length) {
+        if (emptyBox) emptyBox.style.display = 'block';
+        if (appBox) appBox.style.display = 'none';
+        return;
+    }
+    if (emptyBox) emptyBox.style.display = 'none';
+    if (appBox) appBox.style.display = 'block';
+
+    if (!coordDataCache.productId || !opcoes.some(p => p.id === coordDataCache.productId)) {
+        coordDataCache.productId = opcoes[0].id;
+    }
+    renderCoordSelector();
+    await loadCoordenadorData();
+}
+
+// Admin escolhe entre todas as Coordenações Regionais; coordenador só
+// entre as que ele mesmo coordena (papel='coordenador').
+function getCoordProductOptions() {
+    if (okrCurrentUser && okrCurrentUser.is_super_admin) return okrDataCache.products;
+    return okrDataCache.products.filter(p => okrUserCoordProductIds.includes(p.id));
+}
+
+function renderCoordSelector() {
+    const box = document.getElementById('coord-selector-box');
+    if (!box) return;
+    const opcoes = getCoordProductOptions();
+    if (opcoes.length <= 1) {
+        box.style.display = 'none';
+        return;
+    }
+    box.style.display = 'flex';
+    box.innerHTML = `
+        <label for="coord-product-select">Coordenação Regional:</label>
+        <select id="coord-product-select" onchange="changeCoordProduct(this.value)">
+            ${opcoes.map(p => `<option value="${p.id}" ${p.id === coordDataCache.productId ? 'selected' : ''}>${p.nome} (${p.ra_nome})</option>`).join('')}
+        </select>
+    `;
+}
+
+async function changeCoordProduct(productId) {
+    coordDataCache.productId = productId;
+    await loadCoordenadorData();
+}
+
+function renderCoordSkeleton() {
+    ['coord-equipe-container', 'coord-quadrantes-container', 'coord-kr-container', 'coord-agenda-container', 'coord-comparativo-container'].forEach(id => {
+        const el = document.getElementById(id);
+        if (el) el.innerHTML = '<div class="instruction">Carregando…</div>';
+    });
+}
+
+async function loadCoordenadorData() {
+    renderCoordSkeleton();
+    const requestId = ++coordRequestSeq;
+    await Promise.allSettled([
+        fetchCoordEquipeEAreas(),
+        fetchCoordPeriodsEObjetivos(),
+        fetchCoordAgenda(),
+        fetchCoordSettings()
+    ]);
+    if (requestId !== coordRequestSeq) return; // seleção trocou de novo antes de terminar
+    renderCoordEquipeCobertura();
+    renderCoordKRs();
+    renderCoordAgenda();
+    await loadCoordComparativo(requestId);
+}
+
+// Bloco Equipe & Cobertura de Quadrantes
+async function fetchCoordEquipeEAreas() {
+    const sb = initSupabaseClient();
+    try {
+        const [teamRes, areasRes] = await Promise.all([
+            sb.from('product_team').select('papel, user_id, profiles:user_id(full_name, email)').eq('product_id', coordDataCache.productId),
+            sb.from('areas').select('id, codigo, nome').eq('product_id', coordDataCache.productId)
+        ]);
+        coordDataCache.equipe = teamRes.data || [];
+        coordDataCache.areas = areasRes.data || [];
+        const areaIds = coordDataCache.areas.map(a => a.id);
+        if (!areaIds.length) {
+            coordDataCache.areaVolunteers = [];
+            return;
+        }
+        const { data: vols } = await sb.from('area_volunteers').select('area_id, user_id').in('area_id', areaIds);
+        coordDataCache.areaVolunteers = vols || [];
+    } catch (err) {
+        console.warn('Erro ao carregar equipe/quadrantes da Coordenação:', err);
+        coordDataCache.equipe = [];
+        coordDataCache.areas = [];
+        coordDataCache.areaVolunteers = [];
+    }
+}
+
+function renderCoordEquipeCobertura() {
+    const equipeContainer = document.getElementById('coord-equipe-container');
+    const quadContainer = document.getElementById('coord-quadrantes-container');
+    if (!equipeContainer || !quadContainer) return;
+
+    equipeContainer.innerHTML = coordDataCache.equipe.length
+        ? coordDataCache.equipe.map(m => {
+            const badgeClass = m.papel === 'coordenador' ? 'badge-tatico' : 'badge-operacional';
+            const roleLabel = m.papel === 'coordenador' ? '📌 Coordenador(a)' : '👥 Operacional';
+            const nome = (m.profiles && m.profiles.full_name) || (m.profiles && m.profiles.email) || 'Integrante';
+            return `<span class="okr-badge ${badgeClass}" style="margin: 3px 4px 3px 0; display: inline-block;">${roleLabel}: ${nome}</span>`;
+        }).join('')
+        : '<div class="instruction">Nenhum integrante nesta Coordenação ainda.</div>';
+
+    if (!coordDataCache.areas.length) {
+        quadContainer.innerHTML = '<div class="instruction">Nenhum quadrante gerado para esta Coordenação — gere pela aba <strong>🎯 OKRs</strong>.</div>';
+        return;
+    }
+
+    const qtdPorArea = {};
+    coordDataCache.areaVolunteers.forEach(v => { qtdPorArea[v.area_id] = (qtdPorArea[v.area_id] || 0) + 1; });
+    const cobertos = coordDataCache.areas.filter(a => qtdPorArea[a.id] > 0).length;
+    const total = coordDataCache.areas.length;
+    const pct = Math.round((cobertos / total) * 100);
+
+    const resumoHtml = `
+        <div class="comando-item-row">
+            <div class="comando-item-header"><span>Cobertura</span><strong>${pct}%</strong></div>
+            <div class="okr-progress-bar-container"><div class="okr-progress-bar" style="width:${pct}%;"></div></div>
+            <div class="okr-card-footer"><span>${cobertos} de ${total} quadrantes com voluntário</span></div>
+        </div>
+    `;
+    const linhasHtml = coordDataCache.areas.map(a => {
+        const qtd = qtdPorArea[a.id] || 0;
+        return `
+            <div class="comando-item-row">
+                <div class="comando-item-header">
+                    <span>🔲 ${a.codigo} — ${a.nome}</span>
+                    <span class="status-tag ${qtd > 0 ? 'status-confirmado' : 'status-pendente'}">${qtd > 0 ? qtd + ' voluntário(s)' : 'sem voluntário'}</span>
+                </div>
+            </div>
+        `;
+    }).join('');
+    quadContainer.innerHTML = resumoHtml + linhasHtml;
+}
+
+// Bloco KRs sob Responsabilidade (todos os ciclos ativos, com seletor)
+async function fetchCoordPeriodsEObjetivos() {
+    const sb = initSupabaseClient();
+    try {
+        const { data, error } = await sb.from('periods').select('*').eq('ativo', true).order('data_inicio', { ascending: false });
+        if (error) throw error;
+        coordDataCache.periods = data || [];
+        if (!coordDataCache.periodId || !coordDataCache.periods.some(p => p.id === coordDataCache.periodId)) {
+            const preferido = okrDataCache.activePeriodId && coordDataCache.periods.some(p => p.id === okrDataCache.activePeriodId)
+                ? okrDataCache.activePeriodId
+                : (coordDataCache.periods[0] ? coordDataCache.periods[0].id : null);
+            coordDataCache.periodId = preferido;
+        }
+        await fetchCoordObjectives();
+    } catch (err) {
+        console.warn('Erro ao carregar ciclos ativos:', err);
+        coordDataCache.periods = [];
+        coordDataCache.periodId = null;
+        coordDataCache.objectives = [];
+        coordDataCache.keyResults = [];
+    }
+}
+
+async function fetchCoordObjectives() {
+    const sb = initSupabaseClient();
+    if (!coordDataCache.periodId) {
+        coordDataCache.objectives = [];
+        coordDataCache.keyResults = [];
+        return;
+    }
+    try {
+        const { data: objs, error } = await sb.from('objectives').select('*')
+            .eq('nivel', 'tatico').eq('product_id', coordDataCache.productId).eq('period_id', coordDataCache.periodId);
+        if (error) throw error;
+        coordDataCache.objectives = objs || [];
+        const objIds = coordDataCache.objectives.map(o => o.id);
+        if (!objIds.length) {
+            coordDataCache.keyResults = [];
+            return;
+        }
+        const { data: krs } = await sb.from('key_results').select('*').in('objective_id', objIds);
+        coordDataCache.keyResults = krs || [];
+    } catch (err) {
+        console.warn('Erro ao carregar KRs sob responsabilidade:', err);
+        coordDataCache.objectives = [];
+        coordDataCache.keyResults = [];
+    }
+}
+
+async function changeCoordPeriod(periodId) {
+    coordDataCache.periodId = periodId;
+    const container = document.getElementById('coord-kr-container');
+    if (container) container.innerHTML = '<div class="instruction">Carregando…</div>';
+    await fetchCoordObjectives();
+    renderCoordKRs();
+}
+
+function renderCoordKRs() {
+    const periodBar = document.getElementById('coord-period-bar');
+    const selectBox = document.getElementById('coord-period-select');
+    const container = document.getElementById('coord-kr-container');
+    if (!periodBar || !selectBox || !container) return;
+
+    if (!coordDataCache.periods.length) {
+        periodBar.style.display = 'none';
+        container.innerHTML = '<div class="instruction">Nenhum ciclo ativo no momento.</div>';
+        return;
+    }
+    periodBar.style.display = 'flex';
+    selectBox.innerHTML = coordDataCache.periods.map(p =>
+        `<option value="${p.id}" ${p.id === coordDataCache.periodId ? 'selected' : ''}>${p.nome} (${p.tipo_ciclo})</option>`
+    ).join('');
+
+    if (!coordDataCache.objectives.length) {
+        container.innerHTML = '<div class="instruction">Nenhum objetivo tático definido para este ciclo.</div>';
+        return;
+    }
+
+    container.innerHTML = coordDataCache.objectives.map(obj => {
+        const krs = coordDataCache.keyResults.filter(kr => kr.objective_id === obj.id);
+        const krsHtml = krs.map(kr => {
+            const perc = kr.target_value ? Math.min(100, Math.round((kr.current_value / kr.target_value) * 100)) : 0;
+            return `
+                <div class="okr-kr-row">
+                    <div class="okr-kr-row-header"><span>${kr.titulo}</span></div>
+                    <div class="okr-progress-bar-container"><div class="okr-progress-bar progress-tatico" style="width: ${perc}%;"></div></div>
+                    <div class="okr-card-footer"><span>${kr.current_value} / ${kr.target_value} ${kr.unit || ''}</span><strong>${perc}%</strong></div>
+                </div>
+            `;
+        }).join('');
+        return `
+            <div class="okr-card okr-card-tatico">
+                <h4>${obj.titulo}</h4>
+                <p>${obj.descricao || ''}</p>
+                <div class="okr-progress-bar-container"><div class="okr-progress-bar" style="width: ${obj.progresso || 0}%;"></div></div>
+                <div class="okr-card-footer"><span>Progresso do Objetivo</span><strong>${Math.round(obj.progresso || 0)}%</strong></div>
+                ${krsHtml}
+            </div>
+        `;
+    }).join('');
+}
+
+// Bloco Status de Agenda da Região (somente leitura — aprovação continua
+// exclusiva do nível estratégico, na aba Agenda)
+async function fetchCoordAgenda() {
+    const sb = initSupabaseClient();
+    try {
+        const { data, error } = await sb.from('agenda_eventos').select('*').eq('product_id', coordDataCache.productId).order('data_hora', { ascending: false });
+        if (error) throw error;
+        coordDataCache.agenda = data || [];
+    } catch (err) {
+        console.warn('Erro ao carregar agenda da região:', err);
+        coordDataCache.agenda = [];
+    }
+}
+
+function renderCoordAgenda() {
+    const container = document.getElementById('coord-agenda-container');
+    if (!container) return;
+    if (!coordDataCache.agenda.length) {
+        container.innerHTML = '<div class="instruction">Nenhuma solicitação de agenda registrada para esta região.</div>';
+        return;
+    }
+    container.innerHTML = coordDataCache.agenda.map(ev => `
+        <div class="okr-card">
+            <div class="okr-card-header">
+                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
+                <span class="status-tag status-${ev.status}">${ev.status.toUpperCase()}</span>
+            </div>
+            <h4>${ev.titulo}</h4>
+            <p>${ev.descricao || ''}</p>
+            <div class="okr-card-footer"><span>${formatAgendaDateTime(ev.data_hora)}${ev.local ? ' · ' + ev.local : ''}</span></div>
+            ${ev.resposta_admin ? `<p><strong>Resposta:</strong> ${ev.resposta_admin}</p>` : ''}
+        </div>
+    `).join('');
+}
+
+// Bloco Comparativo entre Regiões (condicional à flag
+// app_settings.comparativo_regioes_liberado) + toggle exclusivo do admin
+async function fetchCoordSettings() {
+    const sb = initSupabaseClient();
+    try {
+        const { data, error } = await sb.from('app_settings').select('comparativo_regioes_liberado').eq('id', true).maybeSingle();
+        if (error) throw error;
+        coordDataCache.comparativoLiberado = !!(data && data.comparativo_regioes_liberado);
+    } catch (err) {
+        console.warn('Erro ao carregar configuração de comparativo entre regiões:', err);
+        coordDataCache.comparativoLiberado = false; // fail-closed
+    }
+}
+
+async function loadCoordComparativo(requestId) {
+    const toggleBox = document.getElementById('coord-comparativo-toggle-box');
+    const toggleInput = document.getElementById('coord-comparativo-toggle');
+    const isAdmin = !!(okrCurrentUser && okrCurrentUser.is_super_admin);
+    if (toggleBox) toggleBox.style.display = isAdmin ? 'flex' : 'none';
+    if (toggleInput) toggleInput.checked = coordDataCache.comparativoLiberado;
+
+    const container = document.getElementById('coord-comparativo-container');
+    if (!container) return;
+
+    if (!coordDataCache.comparativoLiberado) {
+        container.innerHTML = '<div class="instruction">Comparativo desativado pelo nível estratégico.</div>';
+        return;
+    }
+
+    try {
+        const sb = initSupabaseClient();
+        const periodIds = coordDataCache.periods.map(p => p.id);
+        const [productsRes, objectivesRes, areasRes, volsRes] = await Promise.all([
+            sb.from('products').select('id, nome, ra_nome'),
+            periodIds.length
+                ? sb.from('objectives').select('product_id, progresso').eq('nivel', 'tatico').in('period_id', periodIds)
+                : Promise.resolve({ data: [] }),
+            sb.from('areas').select('id, product_id'),
+            sb.from('area_volunteers').select('area_id')
+        ]);
+        if (requestId !== coordRequestSeq) return; // seleção trocou durante o fetch
+
+        const produtos = productsRes.data || [];
+        const objetivos = objectivesRes.data || [];
+        const areas = areasRes.data || [];
+        const idsComVoluntario = new Set((volsRes.data || []).map(v => v.area_id));
+
+        if (!produtos.length) {
+            container.innerHTML = '<div class="instruction">Nenhuma Coordenação Regional cadastrada ainda.</div>';
+            return;
+        }
+
+        const linhas = produtos.map(p => {
+            const objs = objetivos.filter(o => o.product_id === p.id);
+            const progresso = objs.length ? objs.reduce((s, o) => s + (o.progresso || 0), 0) / objs.length : 0;
+            const areasDoProduto = areas.filter(a => a.product_id === p.id);
+            const cobertos = areasDoProduto.filter(a => idsComVoluntario.has(a.id)).length;
+            const pctCobertura = areasDoProduto.length ? Math.round((cobertos / areasDoProduto.length) * 100) : null;
+            return { produto: p, progresso, pctCobertura };
+        }).sort((a, b) => b.progresso - a.progresso);
+
+        container.innerHTML = `
+            <div class="table-container">
+                <table>
+                    <thead><tr><th>Coordenação</th><th>Progresso tático</th><th>Cobertura de quadrantes</th></tr></thead>
+                    <tbody>
+                        ${linhas.map(l => `
+                            <tr class="${l.produto.id === coordDataCache.productId ? 'coord-comparativo-linha-atual' : ''}">
+                                <td>${l.produto.nome} (${l.produto.ra_nome})</td>
+                                <td>${Math.round(l.progresso)}%</td>
+                                <td>${l.pctCobertura === null ? '—' : l.pctCobertura + '%'}</td>
+                            </tr>
+                        `).join('')}
+                    </tbody>
+                </table>
+            </div>
+        `;
+    } catch (err) {
+        console.warn('Erro ao carregar comparativo entre regiões:', err);
+        container.innerHTML = '<div class="instruction">Não foi possível carregar o comparativo agora.</div>';
+    }
+}
+
+async function toggleComparativoRegioes(checked) {
+    const sb = initSupabaseClient();
+    const checkboxEl = document.getElementById('coord-comparativo-toggle');
+    const valorAnterior = coordDataCache.comparativoLiberado;
+    const { error } = await sb.from('app_settings')
+        .update({ comparativo_regioes_liberado: checked, updated_at: new Date().toISOString() })
+        .eq('id', true);
+    if (error) {
+        alert('Erro ao atualizar o comparativo: ' + error.message);
+        if (checkboxEl) checkboxEl.checked = valorAnterior;
+        return;
+    }
+    coordDataCache.comparativoLiberado = checked;
+    await loadCoordComparativo(coordRequestSeq);
+}
+
 // Expor funções globais para manipuladores de evento HTML
 window.switchTab = switchTab;
 window.openModal = openModal;
@@ -2382,6 +3202,9 @@ window.cancelarSolicitacao = cancelarSolicitacao;
 window.gerarQuadrantesDaRA = gerarQuadrantesDaRA;
 window.openAtribuirVoluntarioModal = openAtribuirVoluntarioModal;
 window.fazerCheckin = fazerCheckin;
+window.changeCoordProduct = changeCoordProduct;
+window.changeCoordPeriod = changeCoordPeriod;
+window.toggleComparativoRegioes = toggleComparativoRegioes;
 
 // Iniciar Aplicação
 window.onload = initMap;

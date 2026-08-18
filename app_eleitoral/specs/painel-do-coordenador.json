@@ -1,0 +1,139 @@
+{
+  "sprints": [
+    {
+      "id": 1,
+      "nome": "Painel do Coordenador",
+      "descricao": "Consolida o que hoje está espalhado entre as abas OKR e Check-in — equipe, cobertura de quadrantes, KRs táticos e status de agenda — com escopo na própria Coordenação Regional do coordenador logado, mais um comparativo opcional entre regiões controlado pelo nível estratégico.",
+      "entregavel": "Nova aba 'coordenador' funcional (index.html + public/app.js + style.css) + tabela nova app_settings (única alteração de schema desta spec, para a flag de comparativo entre regiões)",
+      "risco": "baixo-médio",
+      "pre_requisito": null,
+      "origem": "Recomendação P0 do documento 'Raio-X do Painel Eleitoral' (18/ago/2026), seção 'Novas páginas'",
+      "decisoes_de_negocio": [
+        { "pergunta": "Quem vê a aba", "resposta": "Coordenadores (papel='coordenador' em product_team) veem a própria Coordenação; is_super_admin também vê a aba e pode escolher qualquer Coordenação para inspecionar. Operacionais não veem." },
+        { "pergunta": "Coordenador vinculado a mais de uma Coordenação", "resposta": "Seletor dropdown no topo da aba — os dados mostrados são sempre de UMA Coordenação por vez, nunca agregados." },
+        { "pergunta": "Fila de agenda da região", "resposta": "Somente leitura de status (pendente/confirmado/recusado/cancelado) de todas as solicitações da região, não só as do usuário logado. A aprovação continua exclusiva do nível estratégico (responderSolicitacao, aba Agenda) — nenhum botão de aprovar/recusar neste painel." },
+        { "pergunta": "Auto-redirect pós-login", "resposta": "Coordenador (papel='coordenador' em qualquer product_id) passa a cair direto na aba 'coordenador'. is_super_admin continua caindo em 'comando', como hoje." },
+        { "pergunta": "Ciclo/period para KRs sob responsabilidade", "resposta": "Todos os ciclos ativos (diário/semanal/mensal) da Coordenação selecionada, com um seletor de ciclo — não só o semanal ativo usado na Central de Comando." },
+        { "pergunta": "Comparativo com outras regiões", "resposta": "Controlado por uma flag nova (app_settings.comparativo_regioes_liberado), ligada/desligada pelo nível estratégico. Desvio deliberado da premissa 'zero schema novo' do documento original — decisão confirmada com o candidato." },
+        { "pergunta": "Métrica do comparativo", "resposta": "Progresso tático médio (mesmo cálculo do Bloco 03 da Central de Comando) e % de cobertura de quadrantes (mesmo cálculo do Bloco 02), lado a lado." },
+        { "pergunta": "Navegação", "resposta": "Nova aba própria (coordenador), seguindo o mesmo padrão já usado pela Central de Comando — não uma seção dentro da aba OKR existente." }
+      ],
+      "features": [
+        {
+          "categoria": "frontend",
+          "descricao": "Esqueleto da aba, menu, seletor de Coordenação e navegação (incluindo auto-redirect condicional pós-login)",
+          "steps": [
+            "Adicionar botão <button data-tab=\"coordenador\" onclick=\"switchTab('coordenador')\"> no .nav-tabs, ao lado do botão da Central de Comando",
+            "Criar <div id=\"view-coordenador\" class=\"view-container\"> seguindo o padrão de view-comando e registrar em switchTab()",
+            "Criar initPainelCoordenadorModule(), chamado ao entrar na aba",
+            "Exibir o botão só se existir linha em product_team com papel='coordenador' para o usuário logado, OU okrCurrentUser.is_super_admin",
+            "Se o usuário tem mais de uma Coordenação com papel='coordenador', ou é is_super_admin (todas as Coordenações), renderizar um dropdown de seleção no topo da aba; se só houver uma opção, esconder o dropdown e fixar essa Coordenação",
+            "Trocar a seleção no dropdown re-renderiza todos os blocos (1.2 a 1.5) com o novo product_id",
+            "Após login bem-sucedido, se o usuário tem papel='coordenador' em algum product_team, chamar switchTab('coordenador') em vez de switchTab('comando'); is_super_admin continua indo para 'comando'"
+          ],
+          "edge_cases": [
+            "is_super_admin sem nenhuma Coordenação Regional cadastrada ainda (products vazio): dropdown mostra estado vazio 'Nenhuma Coordenação Regional cadastrada'",
+            "Usuário sem product_team e sem is_super_admin tenta acessar a aba manipulando o DOM: bloquear no client com estado 'sem permissão' (a leitura em si já é aberta por RLS — isso é UI, não segurança)",
+            "Troca de seleção no dropdown dispara novo fetch; se o usuário trocar de novo antes do primeiro terminar, descartar a resposta antiga (evitar flash com dado da Coordenação errada)",
+            "Redirecionamento pós-login dispara só uma vez, no evento de login, não a cada re-render da tela"
+          ]
+        },
+        {
+          "categoria": "frontend",
+          "descricao": "Bloco Equipe & Cobertura de Quadrantes",
+          "steps": [
+            "sb.from('product_team').select('papel, user_id, profiles:user_id(full_name, email)').eq('product_id', productIdSelecionado)",
+            "sb.from('areas').select('id, codigo, nome').eq('product_id', productIdSelecionado)",
+            "sb.from('area_volunteers').select('area_id, user_id').in('area_id', areaIds)",
+            "Calcular quadrantes cobertos (>=1 voluntário atribuído) vs. não cobertos",
+            "Renderizar lista de equipe reaproveitando o badge de papel já usado em renderEquipe() (coordenador/operacional), e lista de quadrantes com status coberto/não coberto"
+          ],
+          "edge_cases": [
+            "Coordenação sem nenhum quadrante gerado ainda: estado vazio 'Nenhum quadrante gerado para esta Coordenação — gere pela aba OKR', com link direto",
+            "Quadrante coberto por mais de um voluntário: contar como coberto, mostrando a quantidade",
+            "Equipe vazia (nenhuma linha em product_team para essa Coordenação): estado vazio 'Nenhum integrante nesta Coordenação ainda'"
+          ]
+        },
+        {
+          "categoria": "frontend",
+          "descricao": "Bloco KRs sob responsabilidade",
+          "steps": [
+            "sb.from('periods').select('*').eq('ativo', true).order('data_inicio', { ascending: false }) para popular o seletor de ciclo",
+            "Ciclo padrão pré-selecionado: o mesmo okrDataCache.activePeriodId da aba OKR, se ainda estiver ativo; senão, o primeiro ciclo ativo da lista",
+            "sb.from('objectives').select('*').eq('nivel', 'tatico').eq('product_id', productIdSelecionado).eq('period_id', cicloSelecionado)",
+            "sb.from('key_results').select('*').in('objective_id', objectiveIds)",
+            "Renderizar reaproveitando o card okr-card-tatico já usado em renderCheckinProgresso()"
+          ],
+          "edge_cases": [
+            "Nenhum ciclo ativo no momento: estado vazio 'Nenhum ciclo ativo no momento', sem quebrar os outros blocos",
+            "Nenhum objetivo tático no ciclo selecionado: estado vazio 'Nenhum objetivo tático definido para este ciclo'",
+            "Troca de ciclo no seletor atualiza só este bloco, sem re-buscar os outros"
+          ]
+        },
+        {
+          "categoria": "frontend",
+          "descricao": "Bloco Status de Agenda da Região (somente leitura)",
+          "steps": [
+            "sb.from('agenda_eventos').select('*').eq('product_id', productIdSelecionado).order('data_hora', { ascending: false })",
+            "Renderizar reaproveitando o status-tag já usado em renderMinhasSolicitacoes() (pendente/confirmado/recusado/cancelado)",
+            "Nenhum botão de aprovar/recusar/cancelar neste bloco — cancelamento da própria solicitação continua exclusivo da aba Agenda ('Minhas Solicitações'); aprovação continua exclusiva do nível estratégico"
+          ],
+          "edge_cases": [
+            "Nenhuma solicitação registrada para a Coordenação: estado vazio 'Nenhuma solicitação de agenda registrada para esta região'",
+            "Solicitação recusada exibe resposta_admin quando preenchida, igual ao padrão já usado em 'Minhas Solicitações'"
+          ]
+        },
+        {
+          "categoria": "frontend",
+          "descricao": "Bloco Comparativo entre Regiões (condicional à flag app_settings.comparativo_regioes_liberado)",
+          "steps": [
+            "sb.from('app_settings').select('comparativo_regioes_liberado').single(); se false ou ausente, esconder o bloco inteiro com 'Comparativo desativado pelo nível estratégico'",
+            "Se true: sb.from('products').select('id, nome, ra_nome'); sb.from('objectives').select('product_id, progresso').eq('nivel', 'tatico').in('period_id', ciclosAtivosIds); sb.from('areas').select('id, product_id'); sb.from('area_volunteers').select('area_id')",
+            "Calcular progresso tático médio por product_id (mesma lógica do Bloco 03 da Central de Comando) e % de cobertura de quadrantes por product_id (mesma lógica do Bloco 02)",
+            "Renderizar tabela com as duas métricas lado a lado, ordenada por progresso tático decrescente, destacando a linha da Coordenação atualmente selecionada"
+          ],
+          "edge_cases": [
+            "app_settings ainda sem nenhuma linha (edge de deploy/seed não rodado): tratar como false (comparativo desativado) por padrão — fail-closed",
+            "Falha na query de app_settings: esconder o bloco silenciosamente, sem quebrar os outros blocos"
+          ]
+        },
+        {
+          "categoria": "frontend",
+          "descricao": "Toggle da flag de comparativo (admin)",
+          "steps": [
+            "Exibir um switch no cabeçalho da aba, visível só quando okrCurrentUser.is_super_admin",
+            "Ao alternar: sb.from('app_settings').update({ comparativo_regioes_liberado: novoValor, updated_at: new Date().toISOString() }).eq('id', true)",
+            "Re-renderizar o Bloco Comparativo imediatamente para quem está com a aba aberta na mesma sessão que fez o toggle (sem realtime entre sessões diferentes nesta fase)"
+          ],
+          "edge_cases": [
+            "Update falha (rede/RLS): reverter o switch visualmente e mostrar mensagem de erro, sem persistir estado otimista incorreto"
+          ]
+        },
+        {
+          "categoria": "database",
+          "descricao": "Schema — tabela app_settings + RLS (única alteração de schema desta spec)",
+          "steps": [
+            "CREATE TABLE public.app_settings (id BOOLEAN PRIMARY KEY DEFAULT TRUE CHECK (id = TRUE), comparativo_regioes_liberado BOOLEAN NOT NULL DEFAULT FALSE, updated_at TIMESTAMPTZ DEFAULT NOW())",
+            "Seed da linha singleton (id = true) na migration — se a tabela nascer vazia, o client trata a ausência de linha como 'desativado' (ver edge case do Bloco Comparativo)",
+            "RLS: SELECT liberado para authenticated (qualquer coordenador precisa ler a flag para saber se o Bloco Comparativo aparece); UPDATE restrito a is_super_admin via policy usando profiles.is_super_admin"
+          ],
+          "edge_cases": [
+            "Tentativa de INSERT de uma segunda linha: bloqueada pelo CHECK (id = TRUE) — a tabela é sempre singleton",
+            "Coordenador tentando UPDATE diretamente via client, contornando a UI: bloqueado pela RLS, não só pela ausência do botão"
+          ]
+        },
+        {
+          "categoria": "database",
+          "descricao": "Leitura das demais tabelas respeita a RLS existente — nenhuma escrita nova além do toggle, nenhuma tabela/coluna nova além de app_settings",
+          "steps": [
+            "Confirmar que product_team, areas, area_volunteers, objectives, key_results e agenda_eventos já têm policy de SELECT para authenticated (reaproveitada da Central de Comando)",
+            "Não criar nenhuma policy de escrita nova em agenda_eventos, checkins ou objectives nesta spec — o Bloco de Agenda é somente leitura (decisão confirmada)"
+          ],
+          "edge_cases": [
+            "Coordenador logado ainda sem nenhuma linha em product_team (perfil recém-criado): dropdown de seleção de Coordenação fica vazio, tela mostra 'Você ainda não foi associado a nenhuma Coordenação Regional'"
+          ]
+        }
+      ]
+    }
+  ]
+}
