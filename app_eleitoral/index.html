@@ -45,6 +45,7 @@
                     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                     <button class="tab-btn" data-tab="okr" onclick="switchTab('okr')" aria-label="OKRs e Equipe">🎯 OKRs</button>
                     <button class="tab-btn" data-tab="agenda" onclick="switchTab('agenda')" aria-label="Agenda do Candidato">🗓️ Agenda</button>
+                    <button class="tab-btn" data-tab="checkin" onclick="switchTab('checkin')" aria-label="Check-in de Voluntários">📍 Check-in</button>
                 </div>
             </div>
 
@@ -63,6 +64,10 @@
                     <label class="poi-layer-toggle">
                         <input type="checkbox" id="map-toggle-zonas" checked>
                         <span class="poi-swatch poi-swatch-zonas"></span> Contornos das Zonas
+                    </label>
+                    <label class="poi-layer-toggle">
+                        <input type="checkbox" id="map-toggle-quadrantes">
+                        <span class="poi-swatch" style="background:#e07b39;"></span> Quadrantes de Voluntários
                     </label>
                     <label class="poi-layer-toggle">
                         <input type="checkbox" id="map-toggle-escolas">
@@ -168,6 +173,15 @@
                         <!-- Botões de ação gerados via JS (renderAgendaActionButtons), conforme
                              o papel do usuário logado: admin publica direto, coordenador solicita. -->
                     </div>
+                </div>
+            </div>
+
+            <!-- Sidebar: Conteúdo do Check-in de Voluntários -->
+            <div id="checkin-sidebar" style="display: none;">
+                <div class="sidebar-content" style="padding-top: 20px;">
+                    <h3>📍 Check-in de Voluntários</h3>
+                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Registre uma ação de campo com geolocalização no seu quadrante e, se quiser, anexe um comprovante.</p>
+                    <div id="checkin-auth-hint"></div>
                 </div>
             </div>
 
@@ -302,6 +316,39 @@
                 <div class="okr-section" id="agenda-pendentes-section" style="margin-top: 30px; display: none;">
                     <h3>⏳ Solicitações Pendentes de Aprovação</h3>
                     <div id="agenda-pendentes-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Container do Check-in de Voluntários -->
+            <div id="view-checkin" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
+                <h2 style="margin-bottom: 20px; color: #1F4E78;">📍 Check-in de Voluntários</h2>
+
+                <div id="checkin-login-instruction" class="instruction" style="display: none;">
+                    Entre pela aba OKRs para acessar seu(s) quadrante(s) e fazer check-in.
+                </div>
+
+                <!-- Painel 1: progresso da Coordenação do voluntário -->
+                <div class="okr-section" id="checkin-progresso-section" style="display: none;">
+                    <h3>📊 Progresso da sua Coordenação</h3>
+                    <div id="checkin-progresso-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 2: quadrantes atribuídos ao voluntário logado -->
+                <div class="okr-section" id="checkin-quadrantes-section" style="margin-top: 30px; display: none;">
+                    <h3>🗺️ Meu(s) Quadrante(s)</h3>
+                    <div id="checkin-quadrantes-container" class="okr-cards-grid">
+                        <!-- Cards injetados via JS -->
+                    </div>
+                </div>
+
+                <!-- Painel 3: histórico pessoal de check-ins -->
+                <div class="okr-section" id="checkin-historico-section" style="margin-top: 30px; display: none;">
+                    <h3>📋 Meus Check-ins</h3>
+                    <div id="checkin-historico-container" class="okr-cards-grid">
                         <!-- Cards injetados via JS -->
                     </div>
                 </div>

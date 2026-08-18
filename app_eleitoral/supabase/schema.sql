@@ -140,6 +140,57 @@ CREATE TABLE IF NOT EXISTS public.prazos_eleitorais (
     created_at TIMESTAMPTZ DEFAULT NOW()
 );
 
+-- 10. Quadrante (célula de grade de tamanho fixo) dentro de uma
+--     Coordenação Regional, gerado automaticamente sobre a caixa
+--     delimitadora da RA — evita depender de desenho manual de
+--     polígono. "codigo" é estável (ex: CEI-01) para medir/comparar
+--     cobertura de campo ao longo do tempo.
+CREATE TABLE IF NOT EXISTS public.areas (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    codigo TEXT NOT NULL UNIQUE,
+    nome TEXT NOT NULL,
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    ra_nome TEXT NOT NULL,
+    zona_eleitoral TEXT,
+    lat_min NUMERIC(9, 6) NOT NULL,
+    lat_max NUMERIC(9, 6) NOT NULL,
+    lng_min NUMERIC(9, 6) NOT NULL,
+    lng_max NUMERIC(9, 6) NOT NULL,
+    created_by UUID REFERENCES public.profiles(id),
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- 11. Atribuição de voluntários a quadrantes (N:M — um voluntário
+--     pode cobrir mais de um quadrante).
+CREATE TABLE IF NOT EXISTS public.area_volunteers (
+    area_id UUID NOT NULL REFERENCES public.areas(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+    atribuido_por UUID REFERENCES public.profiles(id),
+    atribuido_em TIMESTAMPTZ DEFAULT NOW(),
+    PRIMARY KEY (area_id, user_id)
+);
+
+-- 12. Check-in geolocalizado de ação de campo do voluntário.
+--     "dentro_area" é calculado no client (comparação numérica
+--     simples contra a bounding box do quadrante) no momento do
+--     check-in.
+CREATE TABLE IF NOT EXISTS public.checkins (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    area_id UUID NOT NULL REFERENCES public.areas(id) ON DELETE CASCADE,
+    user_id UUID NOT NULL REFERENCES public.profiles(id),
+    descricao TEXT NOT NULL,
+    lat NUMERIC(9, 6) NOT NULL,
+    lng NUMERIC(9, 6) NOT NULL,
+    dentro_area BOOLEAN NOT NULL DEFAULT FALSE,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+-- Reaproveita okr_artefatos (já tem status pendente/aprovado/rejeitado
+-- e key_result_id nullable) em vez de criar uma tabela paralela de
+-- anexos só para comprovantes de check-in.
+ALTER TABLE public.okr_artefatos ADD COLUMN IF NOT EXISTS checkin_id UUID REFERENCES public.checkins(id) ON DELETE CASCADE;
+ALTER TABLE public.okr_artefatos ADD CONSTRAINT okr_artefatos_vinculo_chk CHECK (key_result_id IS NOT NULL OR checkin_id IS NOT NULL);
+
 -- ============================================================
 -- TRIGGER: criar profile automaticamente no primeiro login
 -- ============================================================
@@ -216,6 +267,16 @@ AS $$
     );
 $$;
 
+CREATE OR REPLACE FUNCTION public.is_member_of_area(p_area_id UUID)
+RETURNS BOOLEAN
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
+AS $$
+    SELECT EXISTS (
+        SELECT 1 FROM public.area_volunteers
+        WHERE area_id = p_area_id AND user_id = auth.uid()
+    );
+$$;
+
 -- ============================================================
 -- ROW LEVEL SECURITY (RLS)
 -- Leitura: aberta a qualquer usuário autenticado (transparência dos
@@ -232,6 +293,9 @@ ALTER TABLE public.key_results ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.okr_artefatos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.agenda_eventos ENABLE ROW LEVEL SECURITY;
 ALTER TABLE public.prazos_eleitorais ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.areas ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.area_volunteers ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.checkins ENABLE ROW LEVEL SECURITY;
 
 -- profiles
 CREATE POLICY "profiles_select_auth" ON public.profiles FOR SELECT TO authenticated USING (true);
@@ -281,8 +345,22 @@ CREATE POLICY "key_results_write_admin_or_product_member" ON public.key_results 
     );
 
 -- okr_artefatos (qualquer membro do time do produto responsável pelo
--- key_result pode anexar evidência de campo; leitura é transparente)
-CREATE POLICY "artefatos_select_auth" ON public.okr_artefatos FOR SELECT TO authenticated USING (true);
+-- key_result pode anexar evidência de campo; leitura é transparente
+-- para artefatos de KR — os de check-in (checkin_id) seguem a mesma
+-- privacidade do check-in pai, ver policy abaixo)
+DROP POLICY IF EXISTS "artefatos_select_auth" ON public.okr_artefatos;
+CREATE POLICY "artefatos_select_auth" ON public.okr_artefatos FOR SELECT TO authenticated
+    USING (
+        key_result_id IS NOT NULL
+        OR public.is_super_admin()
+        OR enviado_por = auth.uid()
+        OR EXISTS (
+            SELECT 1 FROM public.checkins c
+            WHERE c.id = okr_artefatos.checkin_id
+              AND EXISTS (SELECT 1 FROM public.areas a WHERE a.id = c.area_id AND public.is_member_of_product(a.product_id))
+        )
+    );
+
 CREATE POLICY "artefatos_write_admin_or_product_member" ON public.okr_artefatos FOR ALL TO authenticated
     USING (
         public.is_super_admin() OR EXISTS (
@@ -300,6 +378,19 @@ CREATE POLICY "artefatos_write_admin_or_product_member" ON public.okr_artefatos 
             WHERE kr.id = okr_artefatos.key_result_id
               AND o.product_id IS NOT NULL
               AND public.is_member_of_product(o.product_id)
+        )
+    );
+
+-- voluntário pode anexar/gerenciar artefato do próprio check-in
+CREATE POLICY "artefatos_write_own_checkin" ON public.okr_artefatos FOR ALL TO authenticated
+    USING (
+        checkin_id IS NOT NULL AND EXISTS (
+            SELECT 1 FROM public.checkins c WHERE c.id = okr_artefatos.checkin_id AND c.user_id = auth.uid()
+        )
+    )
+    WITH CHECK (
+        enviado_por = auth.uid() AND checkin_id IS NOT NULL AND EXISTS (
+            SELECT 1 FROM public.checkins c WHERE c.id = okr_artefatos.checkin_id AND c.user_id = auth.uid()
         )
     );
 
@@ -349,6 +440,42 @@ CREATE POLICY "agenda_delete_admin" ON public.agenda_eventos FOR DELETE TO authe
 CREATE POLICY "prazos_eleitorais_public_read" ON public.prazos_eleitorais FOR SELECT TO anon, authenticated USING (true);
 CREATE POLICY "prazos_eleitorais_write_admin" ON public.prazos_eleitorais FOR ALL TO authenticated
     USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+
+-- areas (quadrantes): leitura aberta (mesma transparência do resto do
+-- OKR); só o nível estratégico gera/edita/apaga a grade.
+CREATE POLICY "areas_select_auth" ON public.areas FOR SELECT TO authenticated USING (true);
+CREATE POLICY "areas_write_admin" ON public.areas FOR ALL TO authenticated
+    USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+
+-- area_volunteers: leitura aberta; escrita por admin ou qualquer
+-- membro do product_team dono do quadrante (coordenador ou operacional).
+CREATE POLICY "area_volunteers_select_auth" ON public.area_volunteers FOR SELECT TO authenticated USING (true);
+CREATE POLICY "area_volunteers_write_admin_or_product_member" ON public.area_volunteers FOR ALL TO authenticated
+    USING (
+        public.is_super_admin() OR EXISTS (
+            SELECT 1 FROM public.areas a WHERE a.id = area_volunteers.area_id AND public.is_member_of_product(a.product_id)
+        )
+    )
+    WITH CHECK (
+        public.is_super_admin() OR EXISTS (
+            SELECT 1 FROM public.areas a WHERE a.id = area_volunteers.area_id AND public.is_member_of_product(a.product_id)
+        )
+    );
+
+-- checkins: só o próprio voluntário, o product_team do quadrante, ou
+-- admin leem; só o voluntário atribuído àquela área pode inserir.
+CREATE POLICY "checkins_select_own_or_product_member" ON public.checkins FOR SELECT TO authenticated
+    USING (
+        public.is_super_admin()
+        OR user_id = auth.uid()
+        OR EXISTS (SELECT 1 FROM public.areas a WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id))
+    );
+CREATE POLICY "checkins_insert_own_area" ON public.checkins FOR INSERT TO authenticated
+    WITH CHECK (user_id = auth.uid() AND public.is_member_of_area(area_id));
+CREATE POLICY "checkins_write_admin" ON public.checkins FOR UPDATE TO authenticated
+    USING (public.is_super_admin()) WITH CHECK (public.is_super_admin());
+CREATE POLICY "checkins_delete_admin" ON public.checkins FOR DELETE TO authenticated
+    USING (public.is_super_admin());
 
 -- ============================================================
 -- STORAGE: bucket "artefatos" — comprovantes de campo, público

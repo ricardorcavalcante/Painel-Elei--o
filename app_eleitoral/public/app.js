@@ -10,6 +10,7 @@ let markerMap = {}; // Mapeamento zoneId -> lista de marcadores Google Maps
 let markerMapByRA = {}; // Mapeamento ra -> lista de marcadores Google Maps
 let raLayer = null; // Camada google.maps.Data com o contorno de cada RA individualmente
 let raListItems = {}; // Mapeamento ra -> elemento DOM na coluna "RAs" (evita seletor CSS com nomes acentuados/barras)
+let areaRectangles = []; // google.maps.Rectangle por quadrante de voluntário (public.areas)
 
 // Chave especial de activeRA para a opção "TODOS" (mostra todas as RAs de uma vez, sem filtrar)
 const ALL_RA_KEY = '__TODOS__';
@@ -24,6 +25,7 @@ let activePoiLayers = { escolas: false, saude: false, seguranca: false, religiao
 let activeMapTabLayers = {
     secoes: true,
     zonas: true,
+    quadrantes: false,
     escolas: false,
     saude: false,
     seguranca: false,
@@ -80,6 +82,8 @@ function switchTab(tab) {
     if (okrSidebar) okrSidebar.style.display = tab === 'okr' ? 'block' : 'none';
     const agendaSidebar = document.getElementById('agenda-sidebar');
     if (agendaSidebar) agendaSidebar.style.display = tab === 'agenda' ? 'block' : 'none';
+    const checkinSidebar = document.getElementById('checkin-sidebar');
+    if (checkinSidebar) checkinSidebar.style.display = tab === 'checkin' ? 'block' : 'none';
 
     // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
     const showMapView = tab === 'map' || tab === 'ra';
@@ -89,6 +93,8 @@ function switchTab(tab) {
     if (viewOkr) viewOkr.style.display = tab === 'okr' ? 'block' : 'none';
     const viewAgenda = document.getElementById('view-agenda');
     if (viewAgenda) viewAgenda.style.display = tab === 'agenda' ? 'block' : 'none';
+    const viewCheckin = document.getElementById('view-checkin');
+    if (viewCheckin) viewCheckin.style.display = tab === 'checkin' ? 'block' : 'none';
 
     // Coluna direita: Zonas x Regiões Administrativas
     document.getElementById('zonas-legend').style.display = tab === 'map' ? 'flex' : 'none';
@@ -99,6 +105,9 @@ function switchTab(tab) {
     }
     if (tab === 'agenda') {
         initAgendaModule();
+    }
+    if (tab === 'checkin') {
+        initCheckinModule();
     }
 
     // Cada aba começa "limpa": desfaz seleção/realce anterior de zona ou RA
@@ -377,6 +386,35 @@ function updateMapZonasVisibility() {
     }
 }
 
+function updateMapQuadrantesVisibility() {
+    areaRectangles.forEach(rect => rect.setMap(activeMapTabLayers.quadrantes ? map : null));
+}
+
+// Redesenha os retângulos dos quadrantes a partir de okrDataCache.areas
+// (chamada depois de carregar/gerar quadrantes). Visualização somente
+// leitura — o desenho em si vem da grade fixa gerada no servidor.
+function renderAreaRectangles() {
+    if (!map) return;
+    areaRectangles.forEach(rect => rect.setMap(null));
+    areaRectangles = (okrDataCache.areas || []).map(area => {
+        const rect = new google.maps.Rectangle({
+            bounds: { north: area.lat_max, south: area.lat_min, east: area.lng_max, west: area.lng_min },
+            strokeColor: '#e07b39',
+            strokeWeight: 1.5,
+            fillColor: '#e07b39',
+            fillOpacity: 0.12,
+            map: activeMapTabLayers.quadrantes ? map : null
+        });
+        rect.addListener('mouseover', () => {
+            sharedInfoWindow.setContent(`<div class="kml-hover-tooltip"><strong>🔲 ${area.codigo}</strong><div>${area.nome}</div><div>🏘️ ${area.ra_nome}</div></div>`);
+            sharedInfoWindow.setPosition({ lat: area.lat_max, lng: (area.lng_min + area.lng_max) / 2 });
+            sharedInfoWindow.open(map);
+        });
+        rect.addListener('mouseout', () => sharedInfoWindow.close());
+        return rect;
+    });
+}
+
 function updateMapTabPoiMarkers() {
     POI_CATEGORIES.forEach(cat => {
         (mapTabPoiMarkers[cat] || []).forEach(m => m.setMap(null));
@@ -424,6 +462,18 @@ function initMapTabLayerToggles() {
         zonasCheckbox.addEventListener('change', () => {
             activeMapTabLayers.zonas = zonasCheckbox.checked;
             updateMapZonasVisibility();
+        });
+    }
+
+    const quadrantesCheckbox = document.getElementById('map-toggle-quadrantes');
+    if (quadrantesCheckbox) {
+        quadrantesCheckbox.addEventListener('change', async () => {
+            activeMapTabLayers.quadrantes = quadrantesCheckbox.checked;
+            if (activeMapTabLayers.quadrantes && !areaRectangles.length) {
+                await ensureAreasLoaded();
+                renderAreaRectangles();
+            }
+            updateMapQuadrantesVisibility();
         });
     }
 
@@ -1132,7 +1182,7 @@ let supabaseClient = null;
 let okrAuthListenerBound = false;
 let okrCurrentUser = null; // linha de public.profiles do usuário logado
 let okrUserProductIds = []; // product_id onde o usuário logado é coordenador/operacional
-let okrDataCache = { periods: [], activePeriodId: null, products: [], productTeam: [], objectives: [], keyResults: [], artefatos: [] };
+let okrDataCache = { periods: [], activePeriodId: null, products: [], productTeam: [], objectives: [], keyResults: [], artefatos: [], areas: [], areaVolunteers: [] };
 let currentOKRFilterLevel = 'all';
 
 function initSupabaseClient() {
@@ -1190,13 +1240,15 @@ async function loadOKRData() {
     const sb = initSupabaseClient();
     if (!sb) return;
     try {
-        const [periodsRes, productsRes, teamRes, objectivesRes, keyResultsRes, artefatosRes] = await Promise.all([
+        const [periodsRes, productsRes, teamRes, objectivesRes, keyResultsRes, artefatosRes, areasRes, areaVolunteersRes] = await Promise.all([
             sb.from('periods').select('*').order('data_inicio', { ascending: false }),
             sb.from('products').select('*').order('nome'),
             sb.from('product_team').select('papel, product_id, user_id, profiles:user_id(full_name, email)'),
             sb.from('objectives').select('*').order('created_at', { ascending: false }),
             sb.from('key_results').select('*'),
-            sb.from('okr_artefatos').select('*').order('created_at', { ascending: false })
+            sb.from('okr_artefatos').select('*').order('created_at', { ascending: false }),
+            sb.from('areas').select('*').order('codigo'),
+            sb.from('area_volunteers').select('area_id, user_id, profiles:user_id(full_name, email)')
         ]);
 
         okrDataCache.periods = periodsRes.data || [];
@@ -1205,6 +1257,8 @@ async function loadOKRData() {
         okrDataCache.objectives = objectivesRes.data || [];
         okrDataCache.keyResults = keyResultsRes.data || [];
         okrDataCache.artefatos = artefatosRes.data || [];
+        okrDataCache.areas = areasRes.data || [];
+        okrDataCache.areaVolunteers = areaVolunteersRes.data || [];
 
         if (!okrDataCache.activePeriodId || !okrDataCache.periods.some(p => p.id === okrDataCache.activePeriodId)) {
             const ativo = okrDataCache.periods.find(p => p.ativo) || okrDataCache.periods[0];
@@ -1215,9 +1269,21 @@ async function loadOKRData() {
         renderOKRs();
         renderEquipe();
         renderArtefatos();
+        renderAreaRectangles();
+        updateMapQuadrantesVisibility();
     } catch (err) {
         console.warn('Erro ao carregar dados de OKRs:', err);
     }
+}
+
+// Usado pela aba Mapa quando o usuário liga o toggle "Quadrantes" antes
+// de ter visitado a aba OKRs (que é quem normalmente popula okrDataCache).
+async function ensureAreasLoaded() {
+    if (okrDataCache.areas.length) return;
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const { data } = await sb.from('areas').select('*').order('codigo');
+    okrDataCache.areas = data || [];
 }
 
 function filterOKRLevel(level) {
@@ -1415,6 +1481,8 @@ function renderEquipe() {
         return;
     }
 
+    const isAdmin = !!(okrCurrentUser && okrCurrentUser.is_super_admin);
+
     let html = '';
     okrDataCache.products.forEach(produto => {
         const membros = okrDataCache.productTeam.filter(t => t.product_id === produto.id);
@@ -1430,6 +1498,29 @@ function renderEquipe() {
             }).join(' ')
             : '<span class="instruction" style="margin:0;">Nenhum integrante cadastrado</span>';
 
+        const podeGerenciarQuadrantes = isAdmin || okrUserProductIds.includes(produto.id);
+        const quadrantesDoProduto = okrDataCache.areas.filter(a => a.product_id === produto.id);
+        const quadrantesHtml = quadrantesDoProduto.length
+            ? quadrantesDoProduto.map(area => {
+                const voluntarios = okrDataCache.areaVolunteers.filter(v => v.area_id === area.id);
+                const voluntariosHtml = voluntarios.length
+                    ? voluntarios.map(v => {
+                        const nome = (v.profiles && v.profiles.full_name) || (v.profiles && v.profiles.email) || 'Voluntário(a)';
+                        return `<span class="okr-badge badge-operacional">👤 ${nome}</span>`;
+                    }).join(' ')
+                    : '<span class="instruction" style="margin:0;">Sem voluntário atribuído</span>';
+                return `
+                    <div class="quadrante-row">
+                        <div class="quadrante-row-header">
+                            <strong>${area.codigo}</strong> — ${area.nome}
+                            ${podeGerenciarQuadrantes ? `<button class="btn-link" onclick="openAtribuirVoluntarioModal('${area.id}')">👤 Atribuir</button>` : ''}
+                        </div>
+                        <p class="okr-coords-list" style="margin:0;">${voluntariosHtml}</p>
+                    </div>
+                `;
+            }).join('')
+            : '<span class="instruction" style="margin:0;">Nenhum quadrante gerado ainda</span>';
+
         html += `
             <div class="equipe-card">
                 <div class="okr-card-header">
@@ -1437,6 +1528,13 @@ function renderEquipe() {
                 </div>
                 <h4>${produto.nome}</h4>
                 <p class="okr-coords-list">${membrosHtml}</p>
+                <div class="quadrantes-section">
+                    <div class="quadrante-row-header">
+                        <span>🔲 Quadrantes de Voluntários</span>
+                        ${isAdmin ? `<button class="btn-link" onclick="gerarQuadrantesDaRA('${produto.id}')">➕ Gerar</button>` : ''}
+                    </div>
+                    ${quadrantesHtml}
+                </div>
             </div>
         `;
     });
@@ -1589,6 +1687,112 @@ async function openNewEquipeModal() {
     if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.');
 
     const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
+}
+
+// ------------------------------------------
+// Quadrantes de voluntários (grade fixa) — em vez de o admin desenhar
+// um polígono livre no mapa, cada quadrante é uma célula retangular
+// de tamanho fixo (~500m), gerada automaticamente sobre a caixa
+// delimitadora da RA da Coordenação. Ver contexto completo no plano.
+// ------------------------------------------
+const QUADRANTE_TAMANHO_METROS = 500;
+const METROS_POR_GRAU_LAT = 111320;
+
+function metrosParaGrausLat(metros) {
+    return metros / METROS_POR_GRAU_LAT;
+}
+function metrosParaGrausLng(metros, latRef) {
+    return metros / (METROS_POR_GRAU_LAT * Math.cos(latRef * Math.PI / 180));
+}
+
+function raSigla(raNome) {
+    const limpo = (raNome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z]/g, '');
+    return (limpo.slice(0, 3) || 'RA').toUpperCase();
+}
+
+// Calcula a caixa delimitadora (bounding box) do polígono de uma RA a
+// partir da camada raLayer já carregada em loadRABoundaries() — evita
+// buscar regioes_administrativas.geojson de novo.
+function findRAFeatureBounds(raNomeApp) {
+    if (!raLayer) return null;
+    const targetShapefileName = RA_NAME_TO_SHAPEFILE[raNomeApp] || raNomeApp;
+    let bounds = null;
+    raLayer.forEach(feature => {
+        if (feature.getProperty('ra_nome') !== targetShapefileName) return;
+        if (!bounds) bounds = new google.maps.LatLngBounds();
+        feature.getGeometry().forEachLatLng(latLng => bounds.extend(latLng));
+    });
+    return bounds;
+}
+
+async function gerarQuadrantesDaRA(productId) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const produto = findProduct(productId);
+    if (!produto) return alert('Coordenação não encontrada.');
+
+    const bounds = findRAFeatureBounds(produto.ra_nome);
+    if (!bounds) return alert(`Não encontrei o contorno da RA "${produto.ra_nome}" no mapa. Abra a aba Mapa antes para carregar os contornos e tente de novo.`);
+
+    const ne = bounds.getNorthEast(), sw = bounds.getSouthWest();
+    const latRef = (ne.lat() + sw.lat()) / 2;
+    const cellLat = metrosParaGrausLat(QUADRANTE_TAMANHO_METROS);
+    const cellLng = metrosParaGrausLng(QUADRANTE_TAMANHO_METROS, latRef);
+    const rows = Math.max(1, Math.ceil((ne.lat() - sw.lat()) / cellLat));
+    const cols = Math.max(1, Math.ceil((ne.lng() - sw.lng()) / cellLng));
+    const total = rows * cols;
+
+    if (!confirm(`Gerar ${total} quadrantes (grade ${rows}x${cols}, ~${QUADRANTE_TAMANHO_METROS}m cada) para ${produto.ra_nome}?`)) return;
+
+    const sigla = raSigla(produto.ra_nome);
+    const existentes = okrDataCache.areas.filter(a => a.ra_nome === produto.ra_nome);
+    let proximoNumero = existentes.reduce((max, a) => {
+        const m = /-(\d+)$/.exec(a.codigo);
+        return m ? Math.max(max, parseInt(m[1], 10)) : max;
+    }, 0) + 1;
+
+    const novasAreas = [];
+    for (let r = 0; r < rows; r++) {
+        for (let c = 0; c < cols; c++) {
+            const latMin = sw.lat() + r * cellLat;
+            const lngMin = sw.lng() + c * cellLng;
+            novasAreas.push({
+                codigo: `${sigla}-${String(proximoNumero).padStart(2, '0')}`,
+                nome: `Quadrante ${proximoNumero}`,
+                product_id: produto.id,
+                ra_nome: produto.ra_nome,
+                zona_eleitoral: produto.zona_eleitoral || null,
+                lat_min: latMin,
+                lat_max: Math.min(latMin + cellLat, ne.lat()),
+                lng_min: lngMin,
+                lng_max: Math.min(lngMin + cellLng, ne.lng()),
+                created_by: okrCurrentUser.id
+            });
+            proximoNumero++;
+        }
+    }
+
+    const { error } = await sb.from('areas').insert(novasAreas);
+    if (error) return alert('Erro: ' + error.message);
+    alert(`${novasAreas.length} quadrantes gerados para ${produto.ra_nome}.`);
+    await loadOKRData();
+}
+
+async function openAtribuirVoluntarioModal(areaId) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const area = okrDataCache.areas.find(a => a.id === areaId);
+    if (!area) return alert('Quadrante não encontrado.');
+
+    const email = prompt(`Atribuir voluntário ao quadrante ${area.codigo} — e-mail (precisa já ter feito Cadastro no login de OKRs):`);
+    if (!email) return;
+
+    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
+    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser atribuído.');
+
+    const { error } = await sb.from('area_volunteers').insert({ area_id: area.id, user_id: perfil.id, atribuido_por: okrCurrentUser.id });
     if (error) return alert('Erro: ' + error.message);
     await loadOKRData();
 }
@@ -1942,6 +2146,214 @@ async function cancelarSolicitacao(id) {
     await loadAgendaData();
 }
 
+// ==========================================
+// MÓDULO DE CHECK-IN DE VOLUNTÁRIOS
+// "Voluntário" é qualquer usuário com linha em area_volunteers — pode
+// não ter nenhuma linha em product_team. Reaproveita a sessão global
+// já mantida pelo módulo de OKRs (okrCurrentUser, refreshOKRSession).
+// ==========================================
+let checkinDataCache = { minhasAreas: [], meusCheckins: [] };
+
+async function initCheckinModule() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    if (!okrAuthListenerBound) {
+        sb.auth.onAuthStateChange(() => refreshOKRSession());
+        okrAuthListenerBound = true;
+    }
+    await refreshOKRSession();
+    await loadCheckinData();
+}
+
+async function loadCheckinData() {
+    const instrucao = document.getElementById('checkin-login-instruction');
+    if (!okrCurrentUser) {
+        if (instrucao) instrucao.style.display = 'block';
+        ['checkin-progresso-section', 'checkin-quadrantes-section', 'checkin-historico-section'].forEach(id => {
+            const el = document.getElementById(id);
+            if (el) el.style.display = 'none';
+        });
+        return;
+    }
+    if (instrucao) instrucao.style.display = 'none';
+
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        if (!okrDataCache.products.length) {
+            await loadOKRData(); // garante objectives/key_results/products/areas carregados
+        }
+
+        const [areaVolunteersRes, checkinsRes] = await Promise.all([
+            sb.from('area_volunteers').select('area_id, areas(*)').eq('user_id', okrCurrentUser.id),
+            sb.from('checkins').select('*, okr_artefatos(id, arquivo_url, tipo_artefato)').eq('user_id', okrCurrentUser.id).order('created_at', { ascending: false })
+        ]);
+        checkinDataCache.minhasAreas = (areaVolunteersRes.data || []).map(v => v.areas).filter(Boolean);
+        checkinDataCache.meusCheckins = checkinsRes.data || [];
+
+        renderCheckinProgresso();
+        renderMeusQuadrantes();
+        renderMeusCheckins();
+    } catch (err) {
+        console.warn('Erro ao carregar dados de check-in:', err);
+    }
+}
+
+function renderCheckinProgresso() {
+    const section = document.getElementById('checkin-progresso-section');
+    const container = document.getElementById('checkin-progresso-container');
+    if (!section || !container) return;
+
+    const productIds = [...new Set(checkinDataCache.minhasAreas.map(a => a.product_id))];
+    const objetivosTaticos = okrDataCache.objectives.filter(o => o.nivel === 'tatico' && productIds.includes(o.product_id));
+
+    if (!objetivosTaticos.length) {
+        section.style.display = 'block';
+        container.innerHTML = '<div class="instruction">Nenhum objetivo tático cadastrado para sua Coordenação ainda.</div>';
+        return;
+    }
+    section.style.display = 'block';
+
+    container.innerHTML = objetivosTaticos.map(obj => {
+        const produto = findProduct(obj.product_id);
+        const krs = okrDataCache.keyResults.filter(kr => kr.objective_id === obj.id);
+        const krsHtml = krs.map(kr => {
+            const perc = kr.target_value ? Math.min(100, Math.round((kr.current_value / kr.target_value) * 100)) : 0;
+            return `
+                <div class="okr-kr-row">
+                    <div class="okr-kr-row-header"><span>${kr.titulo}</span></div>
+                    <div class="okr-progress-bar-container"><div class="okr-progress-bar progress-tatico" style="width: ${perc}%;"></div></div>
+                    <div class="okr-card-footer"><span>${kr.current_value} / ${kr.target_value} ${kr.unit || ''}</span><strong>${perc}%</strong></div>
+                </div>
+            `;
+        }).join('');
+        return `
+            <div class="okr-card okr-card-tatico">
+                <div class="okr-card-header">
+                    <span class="okr-badge badge-tatico">📌 ${produto ? produto.nome : 'Coordenação Regional'}</span>
+                </div>
+                <h4>${obj.titulo}</h4>
+                <p>${obj.descricao || ''}</p>
+                <div class="okr-progress-bar-container"><div class="okr-progress-bar" style="width: ${obj.progresso || 0}%;"></div></div>
+                <div class="okr-card-footer"><span>Progresso do Objetivo</span><strong>${Math.round(obj.progresso || 0)}%</strong></div>
+                ${krsHtml}
+            </div>
+        `;
+    }).join('');
+}
+
+function renderMeusQuadrantes() {
+    const section = document.getElementById('checkin-quadrantes-section');
+    const container = document.getElementById('checkin-quadrantes-container');
+    if (!section || !container) return;
+    section.style.display = 'block';
+
+    if (!checkinDataCache.minhasAreas.length) {
+        container.innerHTML = '<div class="instruction">Você ainda não foi atribuído a nenhum quadrante. Fale com o coordenador da sua região.</div>';
+        return;
+    }
+
+    container.innerHTML = checkinDataCache.minhasAreas.map(area => {
+        const qtd = checkinDataCache.meusCheckins.filter(c => c.area_id === area.id).length;
+        return `
+            <div class="okr-card">
+                <div class="okr-card-header">
+                    <span class="okr-badge badge-tatico">🔲 ${area.codigo}</span>
+                    <span class="okr-year">${qtd} check-in(s)</span>
+                </div>
+                <h4>${area.nome}</h4>
+                <p>${area.ra_nome}</p>
+                <button class="btn-primary" onclick="fazerCheckin('${area.id}')">📍 Fazer Check-in</button>
+            </div>
+        `;
+    }).join('');
+}
+
+function renderMeusCheckins() {
+    const section = document.getElementById('checkin-historico-section');
+    const container = document.getElementById('checkin-historico-container');
+    if (!section || !container) return;
+    section.style.display = 'block';
+
+    if (!checkinDataCache.meusCheckins.length) {
+        container.innerHTML = '<div class="instruction">Nenhum check-in registrado ainda.</div>';
+        return;
+    }
+
+    container.innerHTML = checkinDataCache.meusCheckins.map(c => {
+        const area = checkinDataCache.minhasAreas.find(a => a.id === c.area_id);
+        const artefato = Array.isArray(c.okr_artefatos) ? c.okr_artefatos[0] : c.okr_artefatos;
+        return `
+            <div class="okr-card">
+                <div class="okr-card-header">
+                    <span class="okr-badge badge-tatico">🔲 ${area ? area.codigo : ''}</span>
+                    <span class="status-tag ${c.dentro_area ? 'status-dentro' : 'status-fora'}">${c.dentro_area ? 'DENTRO DA ÁREA' : 'FORA DA ÁREA'}</span>
+                </div>
+                <p>${c.descricao}</p>
+                <div class="okr-card-footer"><span>${formatAgendaDateTime(c.created_at)}</span></div>
+                ${artefato ? `<a href="${artefato.arquivo_url}" target="_blank" rel="noopener" class="btn-link">🔗 Ver comprovante</a>` : ''}
+            </div>
+        `;
+    }).join('');
+}
+
+async function fazerCheckin(areaId) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const area = checkinDataCache.minhasAreas.find(a => a.id === areaId);
+    if (!area) return alert('Quadrante não encontrado.');
+    if (!navigator.geolocation) return alert('Seu navegador não suporta geolocalização.');
+
+    navigator.geolocation.getCurrentPosition(async (position) => {
+        const lat = position.coords.latitude;
+        const lng = position.coords.longitude;
+        const dentro_area = lat >= area.lat_min && lat <= area.lat_max && lng >= area.lng_min && lng <= area.lng_max;
+
+        const descricao = prompt(`Descreva a ação realizada no quadrante ${area.codigo}:`);
+        if (!descricao) return;
+
+        const { data: checkin, error } = await sb.from('checkins')
+            .insert({ area_id: area.id, user_id: okrCurrentUser.id, descricao, lat, lng, dentro_area })
+            .select().single();
+        if (error) return alert('Erro: ' + error.message);
+
+        alert(dentro_area
+            ? 'Check-in registrado dentro do quadrante!'
+            : 'Check-in registrado, mas fora dos limites do quadrante — essa marcação fica visível pro coordenador.');
+
+        if (confirm('Deseja anexar um arquivo como comprovante (foto, documento)?')) {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = 'image/*,application/pdf';
+            input.onchange = () => uploadCheckinArtefato(checkin.id, input.files[0]);
+            input.click();
+        }
+
+        await loadCheckinData();
+    }, (err) => {
+        alert('Não foi possível obter sua localização: ' + err.message);
+    }, { enableHighAccuracy: true, timeout: 10000 });
+}
+
+async function uploadCheckinArtefato(checkinId, file) {
+    const sb = initSupabaseClient();
+    if (!sb || !file) return;
+    const titulo = prompt('Título do comprovante:', file.name) || file.name;
+    const path = `checkins/${checkinId}/${Date.now()}_${file.name}`;
+
+    const { error: upErr } = await sb.storage.from('artefatos').upload(path, file);
+    if (upErr) return alert('Erro no upload (verifique se o bucket "artefatos" existe no Supabase Storage): ' + upErr.message);
+
+    const { data: pub } = sb.storage.from('artefatos').getPublicUrl(path);
+    const tipo_artefato = file.type.startsWith('image/') ? 'foto' : 'comprovante';
+
+    const { error } = await sb.from('okr_artefatos').insert({
+        checkin_id: checkinId, titulo, arquivo_url: pub.publicUrl, tipo_artefato, enviado_por: okrCurrentUser.id
+    });
+    if (error) return alert('Erro: ' + error.message);
+    await loadCheckinData();
+}
+
 // Expor funções globais para manipuladores de evento HTML
 window.switchTab = switchTab;
 window.openModal = openModal;
@@ -1967,6 +2379,9 @@ window.openSolicitarAgendaModal = openSolicitarAgendaModal;
 window.openNovoCompromissoOficialModal = openNovoCompromissoOficialModal;
 window.responderSolicitacao = responderSolicitacao;
 window.cancelarSolicitacao = cancelarSolicitacao;
+window.gerarQuadrantesDaRA = gerarQuadrantesDaRA;
+window.openAtribuirVoluntarioModal = openAtribuirVoluntarioModal;
+window.fazerCheckin = fazerCheckin;
 
 // Iniciar Aplicação
 window.onload = initMap;
