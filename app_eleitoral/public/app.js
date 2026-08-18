@@ -13,6 +13,18 @@ let raLayer = null; // Camada google.maps.Data com o contorno de cada RA individ
 let raListItems = {}; // Mapeamento ra -> elemento DOM na coluna "RAs" (evita seletor CSS com nomes acentuados/barras)
 let areaRectangles = []; // google.maps.Rectangle por quadrante de voluntário (public.areas)
 
+// Mancha urbana (public/perimetro_urbano.geojson) e área rural a excluir
+// (public/area_rural_assentamentos.geojson, proxy de "Assentamentos
+// Rurais" — a camada oficial de Concessão ETR exige token e não é
+// acessível via script) — usadas por gerarQuadrantesDaRA() pra recortar a
+// grade só sobre área urbana e fora de assentamentos rurais, além do
+// contorno da RA. urbanPolygon/ruralPolygon são construídos uma vez a
+// partir dessas camadas (ver getUrbanPolygon()/getRuralPolygon()).
+let urbanLayer = null;
+let ruralAreaLayer = null;
+let urbanPolygon; // undefined = ainda não construído; null = camada carregou mas sem geometria válida
+let ruralPolygon;
+
 // Chave especial de activeRA para a opção "TODOS" (mostra todas as RAs de uma vez, sem filtrar)
 const ALL_RA_KEY = '__TODOS__';
 
@@ -206,6 +218,9 @@ async function loadData() {
         // 4. Carregar o contorno individual de cada RA e montar a coluna "RAs"
         await loadRABoundaries();
         buildRAsColumn();
+
+        // 4b. Mancha urbana + área rural (recorte de gerarQuadrantesDaRA())
+        await loadUrbanRuralLayers();
 
         // 5. Carregar as camadas de POI (Escolas / Saúde / Segurança / Instituições Religiosas) da aba "RAs"
         await loadPoiData();
@@ -709,6 +724,40 @@ async function loadRABoundaries() {
         console.log('✅ Camada de contorno por RA carregada no mapa.');
     } catch (err) {
         console.warn('Erro ao carregar a camada de contorno das RAs:', err);
+    }
+}
+
+// Carrega as camadas de mancha urbana e área rural (ver comentário acima de
+// urbanLayer) — usadas tanto pra desenhar um contexto visual leve no mapa
+// quanto, via getUrbanPolygon()/getRuralPolygon(), pra recortar a grade de
+// quadrantes em gerarQuadrantesDaRA().
+async function loadUrbanRuralLayers() {
+    try {
+        const [urbanRes, ruralRes] = await Promise.all([
+            fetch('perimetro_urbano.geojson'),
+            fetch('area_rural_assentamentos.geojson')
+        ]);
+        if (urbanRes.ok) {
+            urbanLayer = new google.maps.Data({ map: null });
+            urbanLayer.addGeoJson(await urbanRes.json());
+            urbanLayer.setStyle({
+                fillColor: '#2e7d32', fillOpacity: 0.10,
+                strokeColor: '#2e7d32', strokeWeight: 1, strokeOpacity: 0.5,
+                clickable: false
+            });
+        }
+        if (ruralRes.ok) {
+            ruralAreaLayer = new google.maps.Data({ map: null });
+            ruralAreaLayer.addGeoJson(await ruralRes.json());
+            ruralAreaLayer.setStyle({
+                fillColor: '#c62828', fillOpacity: 0.18,
+                strokeColor: '#c62828', strokeWeight: 1, strokeOpacity: 0.6,
+                clickable: false
+            });
+        }
+        console.log('✅ Camadas de mancha urbana + área rural carregadas.');
+    } catch (err) {
+        console.warn('Erro ao carregar camadas de mancha urbana/área rural:', err);
     }
 }
 
@@ -1787,9 +1836,20 @@ function metrosParaGrausLng(metros, latRef) {
     return metros / (METROS_POR_GRAU_LAT * Math.cos(latRef * Math.PI / 180));
 }
 
+// Gera uma sigla curta e (na prática, testado contra as 37 RAs oficiais)
+// única por RA: nomes de uma palavra só usam as 3 primeiras letras (ex.:
+// Ceilândia -> CEI); nomes com 2+ palavras usam a inicial de cada palavra
+// (ex.: Riacho Fundo -> RF, Riacho Fundo II -> RFI) — evita colisões entre
+// RAs com o mesmo início (Sobradinho/Sobradinho II, Planaltina/Plano
+// Piloto, Paranoá/Park Way etc.) que o esquema antigo (3 primeiras letras
+// sempre) causava.
 function raSigla(raNome) {
-    const limpo = (raNome || '').normalize('NFD').replace(/[̀-ͯ]/g, '').replace(/[^A-Za-z]/g, '');
-    return (limpo.slice(0, 3) || 'RA').toUpperCase();
+    const limpo = (raNome || '').normalize('NFD').replace(/[̀-ͯ]/g, '');
+    const palavras = limpo.split(/[^A-Za-z]+/).filter(Boolean);
+    if (palavras.length >= 2) {
+        return palavras.map(p => p[0]).join('').toUpperCase().slice(0, 4);
+    }
+    return ((palavras[0] || '').slice(0, 3) || 'RA').toUpperCase();
 }
 
 // Calcula a caixa delimitadora (bounding box) do polígono de uma RA a
@@ -1808,32 +1868,52 @@ function findRAFeatureBounds(raNomeApp) {
 }
 
 // Extrai todos os anéis (contorno externo + buracos, e cada parte
-// separada se a RA for um MultiPolygon) da geometria de uma feature do
-// raLayer, para montar um único google.maps.Polygon multi-caminho.
-// containsLocation() usa a regra par-ímpar, que já resolve buracos e
-// partes disjuntas corretamente quando todos os anéis viram "paths".
-function collectRAPolygonRings(geometry, out) {
+// separada se a geometria for um MultiPolygon) de uma feature de qualquer
+// camada google.maps.Data, para montar um único google.maps.Polygon
+// multi-caminho. containsLocation() usa a regra par-ímpar, que já resolve
+// buracos e partes disjuntas corretamente quando todos os anéis viram
+// "paths" — por isso serve tanto pra uma RA quanto pra uma camada
+// DF-inteira com várias feições soltas (mancha urbana, assentamentos).
+function collectPolygonRings(geometry, out) {
     const tipo = geometry.getType();
     if (tipo === 'Polygon') {
         geometry.getArray().forEach(anel => out.push(anel.getArray()));
     } else if (tipo === 'MultiPolygon' || tipo === 'GeometryCollection') {
-        geometry.getArray().forEach(g => collectRAPolygonRings(g, out));
+        geometry.getArray().forEach(g => collectPolygonRings(g, out));
     }
 }
 
-// Monta um google.maps.Polygon com o contorno real (todas as partes e
-// buracos) de uma RA, para testar se um ponto cai dentro dela — usado
-// por gerarQuadrantesDaRA() pra recortar a grade pela área inteira da
-// RA, não só pela caixa delimitadora.
-function findRAFeaturePolygon(raNomeApp) {
-    if (!raLayer) return null;
-    const targetShapefileName = RA_NAME_TO_SHAPEFILE[raNomeApp] || raNomeApp;
+// Monta um único google.maps.Polygon multi-caminho a partir de todas as
+// feições de "layer" que passarem em filterFn (ou todas, sem filtro) —
+// generaliza findRAFeaturePolygon() pra qualquer camada google.maps.Data.
+function buildPolygonFromLayer(layer, filterFn) {
+    if (!layer) return null;
     const aneis = [];
-    raLayer.forEach(feature => {
-        if (feature.getProperty('ra_nome') !== targetShapefileName) return;
-        collectRAPolygonRings(feature.getGeometry(), aneis);
+    layer.forEach(feature => {
+        if (filterFn && !filterFn(feature)) return;
+        collectPolygonRings(feature.getGeometry(), aneis);
     });
     return aneis.length ? new google.maps.Polygon({ paths: aneis }) : null;
+}
+
+// Monta o contorno real (todas as partes e buracos) de uma RA, para testar
+// se um ponto cai dentro dela — usado por gerarQuadrantesDaRA() pra
+// recortar a grade pela área inteira da RA, não só pela caixa delimitadora.
+function findRAFeaturePolygon(raNomeApp) {
+    const targetShapefileName = RA_NAME_TO_SHAPEFILE[raNomeApp] || raNomeApp;
+    return buildPolygonFromLayer(raLayer, feature => feature.getProperty('ra_nome') === targetShapefileName);
+}
+
+// Polígono único (DF inteiro) da mancha urbana e da área rural a excluir —
+// construídos uma vez a partir de urbanLayer/ruralAreaLayer (carregadas em
+// loadUrbanRuralLayers()) e reaproveitados pra todas as RAs na mesma sessão.
+function getUrbanPolygon() {
+    if (urbanPolygon === undefined) urbanPolygon = buildPolygonFromLayer(urbanLayer);
+    return urbanPolygon;
+}
+function getRuralPolygon() {
+    if (ruralPolygon === undefined) ruralPolygon = buildPolygonFromLayer(ruralAreaLayer);
+    return ruralPolygon;
 }
 
 async function gerarQuadrantesDaRA(productId) {
@@ -1846,6 +1926,9 @@ async function gerarQuadrantesDaRA(productId) {
     if (!bounds) return alert(`Não encontrei o contorno da RA "${produto.ra_nome}" no mapa. Abra a aba Mapa antes para carregar os contornos e tente de novo.`);
     const poligono = findRAFeaturePolygon(produto.ra_nome);
     if (!poligono) return alert(`Não consegui montar o contorno de "${produto.ra_nome}" para recortar a grade. Tente novamente após recarregar a aba Mapa.`);
+    const poligonoUrbano = getUrbanPolygon();
+    if (!poligonoUrbano) return alert('Não consegui carregar a mancha urbana (perimetro_urbano.geojson) para recortar a grade. Tente novamente após recarregar a aba Mapa.');
+    const poligonoRural = getRuralPolygon(); // opcional: se não carregar, só não filtra por área rural
 
     const ne = bounds.getNorthEast(), sw = bounds.getSouthWest();
     const latRef = (ne.lat() + sw.lat()) / 2;
@@ -1855,8 +1938,10 @@ async function gerarQuadrantesDaRA(productId) {
     const cols = Math.max(1, Math.ceil((ne.lng() - sw.lng()) / cellLng));
 
     // Percorre TODA a grade da caixa delimitadora (não só as bordas) e
-    // mantém só as células cujo centro cai dentro do polígono real da
-    // RA — cobre a área inteira, descartando o que sobra fora da forma.
+    // mantém só as células cujo centro cai dentro do polígono real da RA
+    // E dentro da mancha urbana E fora de qualquer assentamento rural —
+    // cobre a área inteira, descartando tanto o que sobra fora da forma
+    // da RA quanto o que é rural/fora da mancha urbana dela.
     const celulas = [];
     for (let r = 0; r < rows; r++) {
         for (let c = 0; c < cols; c++) {
@@ -1866,13 +1951,15 @@ async function gerarQuadrantesDaRA(productId) {
             const lngMax = Math.min(lngMin + cellLng, ne.lng());
             const centro = new google.maps.LatLng((latMin + latMax) / 2, (lngMin + lngMax) / 2);
             if (!google.maps.geometry.poly.containsLocation(centro, poligono)) continue;
+            if (!google.maps.geometry.poly.containsLocation(centro, poligonoUrbano)) continue;
+            if (poligonoRural && google.maps.geometry.poly.containsLocation(centro, poligonoRural)) continue;
             celulas.push({ latMin, latMax, lngMin, lngMax });
         }
     }
 
-    if (!celulas.length) return alert(`Nenhuma célula da grade caiu dentro do contorno de "${produto.ra_nome}" — confira se o contorno da RA carregou corretamente na aba Mapa.`);
+    if (!celulas.length) return alert(`Nenhuma célula da grade caiu dentro da área urbana de "${produto.ra_nome}" — pode ser uma RA sem mancha urbana registrada (ex.: só área rural), ou o contorno pode não ter carregado corretamente na aba Mapa.`);
 
-    if (!confirm(`Gerar ${celulas.length} quadrantes (~${QUADRANTE_TAMANHO_METROS}m cada, recortados pela área real de ${produto.ra_nome}, de uma grade de até ${rows * cols} células) para ${produto.ra_nome}?`)) return;
+    if (!confirm(`Gerar ${celulas.length} quadrantes (~${QUADRANTE_TAMANHO_METROS}m cada, recortados pela área real de ${produto.ra_nome} ∩ mancha urbana ∖ área rural, de uma grade de até ${rows * cols} células) para ${produto.ra_nome}?`)) return;
 
     const sigla = raSigla(produto.ra_nome);
     const existentes = okrDataCache.areas.filter(a => a.ra_nome === produto.ra_nome);

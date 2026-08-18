@@ -9,6 +9,11 @@
   },
   "devDependencies": {
     "@playwright/test": "^1.62.1",
+    "@turf/bbox": "^7.4.0",
+    "@turf/boolean-point-in-polygon": "^7.4.0",
+    "@turf/helpers": "^7.4.0",
+    "@turf/simplify": "^7.4.0",
+    "@turf/union": "^7.4.0",
     "vite": "^5.0.0"
   }
 }
