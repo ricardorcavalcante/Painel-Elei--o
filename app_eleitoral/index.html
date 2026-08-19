@@ -33,6 +33,12 @@
 
     <h1 class="sr-only">Mapa Eleitoral DF 2026</h1>
 
+    <!-- Off-canvas mobile (Fase 4) — visíveis só <=860px (ver style.css).
+         mobile-nav.js alterna .mobile-open em .sidebar/.zonas-column. -->
+    <button type="button" class="mobile-menu-toggle" onclick="toggleMobileSidebar()" aria-label="Abrir menu">☰</button>
+    <button type="button" class="mobile-zonas-toggle" onclick="toggleMobileZonas()" aria-label="Abrir lista de zonas">📍</button>
+    <div class="mobile-backdrop" onclick="closeAllMobilePanels()"></div>
+
     <div class="app-container">
         <!-- Sidebar / Menu Principal (Esquerda) -->
         <aside class="sidebar">
@@ -244,5 +250,6 @@
          das "7 páginas novas", mantém a identidade azul de sempre. -->
     <script src="agenda-component.js"></script>
     <script src="proximos-compromissos.js"></script>
+    <script src="mobile-nav.js"></script>
 </body>
 </html>

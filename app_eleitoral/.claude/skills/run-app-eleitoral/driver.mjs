@@ -18,12 +18,36 @@ const COMMANDS = {
   async launch() {
     if (browser) return console.log('already launched');
     browser = await chromium.launch({ args: ['--no-sandbox'] });
-    page = await browser.newPage({ viewport: { width: 1400, height: 900 } });
+    // Contexto com permissão de geolocalização já concedida (fixada no
+    // Plano Piloto/DF) — sem isso, navigator.geolocation.getCurrentPosition
+    // trava esperando um prompt que o headless nunca mostra, e fluxos
+    // como fazerCheckin() (voluntario.js) nunca chamam seu callback.
+    const context = await browser.newContext({
+      viewport: { width: 1400, height: 900 },
+      geolocation: { latitude: -15.7801, longitude: -47.9292 },
+      permissions: ['geolocation'],
+    });
+    page = await context.newPage();
     page.on('console', msg => consoleLog.push(`[${msg.type()}] ${msg.text()}`));
     page.on('pageerror', e => consoleLog.push(`[pageerror] ${e.message}`));
     await page.goto(APP_URL, { waitUntil: 'domcontentloaded', timeout: 30_000 });
     await page.waitForSelector('.tab-btn[data-tab="map"]', { timeout: 15_000 });
     console.log('launched.', APP_URL);
+  },
+
+  async viewport(args) {
+    if (!page) return console.log('ERROR: launch first');
+    const [w, h] = args.split(' ').map(Number);
+    if (!w || !h) return console.log('ERROR: usage — viewport <width> <height>');
+    await page.setViewportSize({ width: w, height: h });
+    console.log('viewport →', w + 'x' + h);
+  },
+
+  async 'click-xy'(args) {
+    if (!page) return console.log('ERROR: launch first');
+    const [x, y] = args.split(' ').map(Number);
+    try { await page.mouse.click(x, y); console.log('click-xy', x, y, '→ OK'); }
+    catch (e) { console.log('click-xy', x, y, '→ ERROR:', e.message.split('\n')[0]); }
   },
 
   async ss(name) {

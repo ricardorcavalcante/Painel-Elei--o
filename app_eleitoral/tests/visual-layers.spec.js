@@ -203,26 +203,49 @@ test.describe('Painel Eleitoral — Verificação Visual das Novas Camadas', () 
         await page.screenshot({ path: `${SCREENSHOTS}/09-mapa-secoes-desmarcado.png`, fullPage: false });
     });
 
-    test('10 — Aba "OKRs" carrega sem erros (com ou sem Supabase configurado)', async ({ page }) => {
-        const okrTabBtn = page.locator('.tab-btn[data-tab="okr"]');
-        await expect(okrTabBtn).toBeVisible();
-        await okrTabBtn.click();
+    test('11 — Sidebar e coluna de Zonas viram off-canvas em viewport mobile (Fase 4)', async ({ page }) => {
+        await page.setViewportSize({ width: 375, height: 667 });
+        // O resize precisa de um instante pra o compositor repintar antes do
+        // screenshot — sem isso a captura fica com o layout do viewport antigo.
+        await page.waitForTimeout(300);
 
-        // Visão do OKR deve estar visível
-        const okrView = page.locator('#view-okr');
-        await expect(okrView).toBeVisible({ timeout: 5000 });
+        const menuToggle = page.locator('.mobile-menu-toggle');
+        const zonasToggle = page.locator('.mobile-zonas-toggle');
+        await expect(menuToggle).toBeVisible();
+        await expect(zonasToggle).toBeVisible();
 
-        // Sidebar do OKR deve estar visível
-        const okrSidebar = page.locator('#okr-sidebar');
-        await expect(okrSidebar).toBeVisible({ timeout: 5000 });
+        // Fechado por padrão: sidebar não deve estar na viewport.
+        const sidebar = page.locator('.sidebar');
+        await expect(sidebar).not.toHaveClass(/mobile-open/);
 
-        // Sem VITE_SUPABASE_URL/VITE_SUPABASE_ANON_KEY configurados neste ambiente,
-        // o módulo deve degradar de forma graciosa em vez de quebrar a página.
-        const okrContainer = page.locator('#okr-list-container');
-        await expect(okrContainer).toBeVisible();
-        await expect(okrContainer).toContainText('não configurado');
+        await menuToggle.click();
+        await expect(sidebar).toHaveClass(/mobile-open/);
+        await expect(page.locator('.mobile-backdrop')).toHaveClass(/active/);
+        await page.screenshot({ path: `${SCREENSHOTS}/11-mobile-sidebar-open.png`, fullPage: false });
 
-        await page.screenshot({ path: `${SCREENSHOTS}/10-aba-okrs.png`, fullPage: false });
+        // Backdrop fecha o painel.
+        await page.locator('.mobile-backdrop').click({ position: { x: 350, y: 300 } });
+        await expect(sidebar).not.toHaveClass(/mobile-open/);
+
+        await zonasToggle.click();
+        const zonasColumn = page.locator('#zonas-legend');
+        await expect(zonasColumn).toHaveClass(/mobile-open/);
+        await page.screenshot({ path: `${SCREENSHOTS}/11-mobile-zonas-open.png`, fullPage: false });
+    });
+
+    test('10 — Botão "Entrar" e card "Próximos Compromissos" substituem a antiga aba OKR', async ({ page }) => {
+        // Fase 2 removeu a aba OKR de index.html (migrou pra okrs.html/admin.html
+        // etc. — Fase 1-4 do plano de reestruturação por papel); o teste original
+        // (que clicava .tab-btn[data-tab="okr"]) ficou obsoleto porque esse botão
+        // não existe mais. Cobre o que ficou no lugar dele em index.html.
+        const entrarBtn = page.locator('a.tab-btn[href="login.html"]');
+        await expect(entrarBtn).toBeVisible();
+
+        const proximosCard = page.locator('#proximos-compromissos-card');
+        await expect(proximosCard).toBeVisible();
+        await expect(page.locator('#proximos-compromissos-container')).toBeVisible();
+
+        await page.screenshot({ path: `${SCREENSHOTS}/10-entrar-proximos-compromissos.png`, fullPage: false });
     });
 
 });

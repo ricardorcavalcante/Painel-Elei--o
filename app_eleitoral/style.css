@@ -455,6 +455,7 @@ body {
 
 .table-container {
     overflow-y: auto;
+    overflow-x: auto;
     margin-top: 15px;
 }
 
@@ -934,6 +935,8 @@ tr:hover { background-color: #e8f4fd; }
     align-items: start;
 }
 
+.comando-grid-2col { grid-template-columns: repeat(2, 1fr); }
+
 .comando-panel {
     background: var(--bg-card);
     border-radius: 10px;
@@ -1008,7 +1011,7 @@ tr:hover { background-color: #e8f4fd; }
 
 @media (max-width: 900px) {
     .comando-kpis { grid-template-columns: repeat(2, 1fr); }
-    .comando-grid { grid-template-columns: 1fr; }
+    .comando-grid, .comando-grid-2col { grid-template-columns: 1fr; }
     .comando-radar { grid-template-columns: 1fr; }
 }
 
@@ -1068,6 +1071,78 @@ tr:hover { background-color: #e8f4fd; }
     body.printing-grade #coord-grade-section .okr-header-actions button,
     body.printing-grade #coord-grade-section p.instruction {
         display: none;
+    }
+}
+
+/* ============================================================
+   Off-canvas mobile (Fase 4, responsividade) — .sidebar (380px)
+   e .zonas-column (300px) são flex children fixos hoje; abaixo de
+   860px viram painéis sobrepostos (drawer), abertos por
+   .mobile-menu-toggle/.mobile-zonas-toggle (mobile-nav.js) e
+   fechados tocando o backdrop. Acima de 860px, sem efeito nenhum
+   (os botões ficam display:none).
+   ============================================================ */
+.mobile-menu-toggle,
+.mobile-zonas-toggle {
+    display: none;
+}
+
+.mobile-backdrop {
+    display: none;
+}
+
+@media (max-width: 860px) {
+    .mobile-menu-toggle,
+    .mobile-zonas-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: fixed;
+        top: 14px;
+        z-index: 2100;
+        width: 42px;
+        height: 42px;
+        border-radius: 50%;
+        border: none;
+        background: var(--primary);
+        color: #fff;
+        font-size: 1.2rem;
+        box-shadow: var(--shadow-md);
+        cursor: pointer;
+    }
+    .mobile-menu-toggle { left: 14px; }
+    .mobile-zonas-toggle { right: 14px; }
+
+    .sidebar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 100vh;
+        width: min(380px, 86vw);
+        z-index: 2050;
+        transform: translateX(-100%);
+        transition: transform 0.25s ease;
+    }
+    .sidebar.mobile-open { transform: translateX(0); }
+
+    .zonas-column {
+        position: fixed;
+        top: 0;
+        right: 0;
+        height: 100vh;
+        width: min(300px, 86vw);
+        z-index: 2050;
+        transform: translateX(100%);
+        transition: transform 0.25s ease;
+    }
+    .zonas-column.mobile-open { transform: translateX(0); }
+
+    .mobile-backdrop.active {
+        display: block;
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.45);
+        z-index: 1999;
     }
 }
 
