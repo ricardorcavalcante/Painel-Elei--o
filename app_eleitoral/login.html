@@ -77,9 +77,13 @@
             const ctx = await loadSessionContext(sb);
             const dest = resolveRoleDestination(ctx);
             if (dest === 'pendente') {
-                setMsg('🕓 Acesso pendente: sua conta ainda não tem papel atribuído. Fale com o administrador da campanha.', 'info');
+                // Não desabilita o formulário: a pessoa pode simplesmente
+                // tentar de novo com outro e-mail (signInWithPassword troca
+                // a sessão sozinho, não precisa de "Sair" explícito antes) —
+                // travar os campos aqui já deixou gente presa na tela sem
+                // conseguir nem digitar, com sessão "pendente" persistida.
+                setMsg('🕓 Acesso pendente: sua conta ainda não tem papel atribuído. Fale com o administrador da campanha, ou entre com outra conta abaixo.', 'info');
                 showForm();
-                formEl.querySelectorAll('input, button').forEach(el => el.disabled = true);
                 return true;
             }
             if (dest) {
