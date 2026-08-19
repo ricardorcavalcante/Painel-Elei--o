@@ -1327,10 +1327,16 @@ async function refreshOKRSession() {
     // nível estratégico e demais membros de product_team (só operacional) caem
     // na Central de Comando — só na primeira vez que a sessão logada é
     // detectada, em vez de ficar na aba Mapa.
+    // Guards extras (document.getElementById(...)) a partir da Fase 2 da
+    // reestruturação por papel: view-coordenador/view-comando saíram do
+    // index.html (migraram para coordenador.html/admin.html) — sem isso,
+    // um coordenador/admin com sessão persistida que caísse aqui trocaria
+    // pra uma aba sem view nenhuma, e a checagem `showMapView` de
+    // switchTab() apagaria o mapa também, deixando a tela em branco.
     if (!jaEstavaLogado && currentTab !== 'comando' && currentTab !== 'coordenador') {
-        if (okrUserCoordProductIds.length > 0) {
+        if (okrUserCoordProductIds.length > 0 && document.getElementById('view-coordenador')) {
             switchTab('coordenador');
-        } else if (okrCurrentUser.is_super_admin || okrUserProductIds.length > 0) {
+        } else if ((okrCurrentUser.is_super_admin || okrUserProductIds.length > 0) && document.getElementById('view-comando')) {
             switchTab('comando');
         }
     }

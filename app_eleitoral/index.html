@@ -42,13 +42,20 @@
                 <div class="nav-tabs">
                     <button class="tab-btn active" data-tab="map" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
-                    <button class="tab-btn" data-tab="comando" onclick="switchTab('comando')" aria-label="Central de Comando" id="nav-btn-comando" style="display: none;">🧭 Comando</button>
-                    <button class="tab-btn" data-tab="coordenador" onclick="switchTab('coordenador')" aria-label="Painel do Coordenador" id="nav-btn-coordenador" style="display: none;">🧑‍💼 Coordenador</button>
                     <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
-                    <button class="tab-btn" data-tab="okr" onclick="switchTab('okr')" aria-label="OKRs e Equipe">🎯 OKRs</button>
-                    <button class="tab-btn" data-tab="agenda" onclick="switchTab('agenda')" aria-label="Agenda do Candidato">🗓️ Agenda</button>
-                    <button class="tab-btn" data-tab="checkin" onclick="switchTab('checkin')" aria-label="Check-in de Voluntários">📍 Check-in</button>
+                    <a class="tab-btn" href="login.html" aria-label="Entrar" style="text-decoration:none; display:inline-flex; align-items:center;">🔑 Entrar</a>
                 </div>
+            </div>
+
+            <!-- Próximos compromissos (semana) — resumo público, sem login;
+                 ver agenda.html para a agenda completa. Script próprio
+                 (proximos-compromissos.js), independente de app.js. -->
+            <div id="proximos-compromissos-card" class="sidebar-content" style="padding: 16px 20px 4px;">
+                <h3 style="font-size: 0.95rem; margin-bottom: 8px;">🗓️ Próximos Compromissos</h3>
+                <div id="proximos-compromissos-container">
+                    <div class="instruction" style="font-size: 0.85rem;">Carregando…</div>
+                </div>
+                <a href="agenda.html" class="btn-link" style="font-size: 0.82rem;">Ver agenda completa →</a>
             </div>
 
             <!-- Sidebar: Conteúdo do Mapa -->
@@ -123,22 +130,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar: Conteúdo da Central de Comando -->
-            <div id="comando-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>🧭 Central de Comando</h3>
-                    <p class="instruction" style="font-size: 0.85rem;">Leitura consolidada da saúde da campanha: OKRs estratégicos, cobertura territorial, ranking de Coordenações Regionais e prazos do TSE. Visível ao nível estratégico e às Coordenações Regionais.</p>
-                </div>
-            </div>
-
-            <!-- Sidebar: Conteúdo do Painel do Coordenador -->
-            <div id="coordenador-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>🧑‍💼 Painel do Coordenador</h3>
-                    <p class="instruction" style="font-size: 0.85rem;">Equipe, cobertura de quadrantes, KRs táticos e status de agenda da sua Coordenação Regional. Visível a coordenadores e ao nível estratégico.</p>
-                </div>
-            </div>
-
             <!-- Sidebar: Conteúdo do Dashboard -->
             <div id="dash-sidebar" style="display: none;">
                 <div class="sidebar-content" style="padding-top: 20px;">
@@ -158,48 +149,6 @@
                         </div>
                     </div>
                     <p class="instruction" style="font-size: 0.85rem;">Utilize o painel principal ao lado para visualizar os gráficos extraídos das Tabelas Dinâmicas.</p>
-                </div>
-            </div>
-
-            <!-- Sidebar: Conteúdo de OKRs -->
-            <div id="okr-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>🎯 Gestão de OKRs</h3>
-                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Acompanhamento dos Objetivos Globais, Coordenadores por RA e Ações da Equipe.</p>
-                    
-                    <div id="okr-auth-status" class="okr-auth-box">
-                        <!-- Preenchido via JS (renderOKRAuthBox): formulário de login/cadastro
-                             quando deslogado, ou dados do usuário + botão Sair quando logado. -->
-                    </div>
-
-                    <div class="okr-level-filters">
-                        <p class="poi-layers-title">Filtrar por Nível</p>
-                        <button class="btn-filter-level active" data-level="all" onclick="filterOKRLevel('all')">Todos</button>
-                        <button class="btn-filter-level" data-level="estrategico" onclick="filterOKRLevel('estrategico')">⭐ Estratégico</button>
-                        <button class="btn-filter-level" data-level="tatico" onclick="filterOKRLevel('tatico')">📌 Tático</button>
-                        <button class="btn-filter-level" data-level="operacional" onclick="filterOKRLevel('operacional')">👥 Operacional</button>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar: Conteúdo da Agenda do Candidato -->
-            <div id="agenda-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>🗓️ Agenda do Candidato</h3>
-                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Compromissos públicos confirmados. Coordenadores Regionais podem solicitar visitas ou participações do candidato.</p>
-                    <div id="agenda-btn-group" class="okr-btn-group">
-                        <!-- Botões de ação gerados via JS (renderAgendaActionButtons), conforme
-                             o papel do usuário logado: admin publica direto, coordenador solicita. -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Sidebar: Conteúdo do Check-in de Voluntários -->
-            <div id="checkin-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>📍 Check-in de Voluntários</h3>
-                    <p class="instruction" style="font-size: 0.85rem; margin-bottom: 15px;">Registre uma ação de campo com geolocalização no seu quadrante e, se quiser, anexe um comprovante.</p>
-                    <div id="checkin-auth-hint"></div>
                 </div>
             </div>
 
@@ -230,152 +179,6 @@
                 </div>
             </div>
 
-            <!-- Container da Central de Comando -->
-            <div id="view-comando" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <h2 style="margin-bottom: 20px; color: #1F4E78;">🧭 Central de Comando</h2>
-
-                <div id="comando-permission" style="display: none;"></div>
-
-                <div id="comando-app" style="display: none;">
-                    <div class="comando-kpis">
-                        <div class="comando-kpi-card" id="comando-kpi-semaforo"></div>
-                        <div class="comando-kpi-card" id="comando-kpi-cobertura"></div>
-                        <div class="comando-kpi-card" id="comando-kpi-lider"></div>
-                        <div class="comando-kpi-card" id="comando-kpi-prazo"></div>
-                    </div>
-
-                    <div class="comando-grid">
-                        <div class="comando-panel">
-                            <h3>📊 OKRs Estratégicos</h3>
-                            <div id="comando-semaforo-container"></div>
-                        </div>
-                        <div class="comando-panel">
-                            <h3>🗺️ Cobertura Territorial</h3>
-                            <div id="comando-cobertura-container"></div>
-                        </div>
-                        <div class="comando-panel">
-                            <h3>🏆 Ranking de Coordenações</h3>
-                            <div id="comando-ranking-container"></div>
-                        </div>
-                    </div>
-
-                    <div class="comando-panel comando-radar">
-                        <div>
-                            <h3>⏳ Próximo Prazo do TSE</h3>
-                            <div id="comando-radar-prazo"></div>
-                        </div>
-                        <div>
-                            <h3>🗓️ Agenda dos Próximos 3 Dias</h3>
-                            <div id="comando-radar-agenda"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container do Painel do Coordenador -->
-            <div id="view-coordenador" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <div class="okr-header-actions">
-                    <h2>🧑‍💼 Painel do Coordenador</h2>
-                    <div id="coord-selector-box" class="okr-period-bar" style="display: none;"></div>
-                </div>
-
-                <div id="coord-permission" style="display: none;"></div>
-                <div id="coord-empty" class="instruction" style="display: none;">Você ainda não foi associado a nenhuma Coordenação Regional.</div>
-
-                <div id="coord-app" style="display: none;">
-                    <div class="comando-grid" style="grid-template-columns: repeat(2, 1fr);">
-                        <div class="comando-panel">
-                            <h3>👥 Equipe</h3>
-                            <div id="coord-equipe-container"></div>
-                        </div>
-                        <div class="comando-panel">
-                            <h3>🗺️ Quadrantes Cobertos</h3>
-                            <div id="coord-quadrantes-container"></div>
-                        </div>
-                    </div>
-
-                    <div class="okr-section" style="margin-top: 10px;">
-                        <div class="okr-header-actions">
-                            <h3>🗺️ Mapa de Quadrantes</h3>
-                            <div class="okr-period-bar" style="flex-wrap: wrap;">
-                                <button class="btn-secondary active" id="coord-map-mode-atribuir" onclick="setCoordMapMode('atribuir')">👤 Atribuir voluntário</button>
-                                <button class="btn-secondary" id="coord-map-mode-agrupar" onclick="setCoordMapMode('agrupar')">🏷️ Nomear perímetro</button>
-                                <button class="btn-secondary active" id="coord-map-tipo-roadmap" onclick="setCoordMapTipo('roadmap')">🗺️ Mapa</button>
-                                <button class="btn-secondary" id="coord-map-tipo-satellite" onclick="setCoordMapTipo('satellite')">🛰️ Satélite</button>
-                            </div>
-                        </div>
-                        <p class="instruction" id="coord-map-hint" style="font-size: 0.85rem;"></p>
-                        <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
-                            <span><span style="display:inline-block; width:10px; height:10px; background:#c62828; border-radius:2px; margin-right:4px;"></span>Sem atribuição</span>
-                            <span><span style="display:inline-block; width:10px; height:10px; background:#28a745; border-radius:2px; margin-right:4px;"></span>1 voluntário ou perímetro</span>
-                            <span><span style="display:inline-block; width:10px; height:10px; background:#1565c0; border-radius:2px; margin-right:4px;"></span>Mais de 1 (sobreposição)</span>
-                            <span><span style="display:inline-block; width:10px; height:10px; border:2px solid #f5a623; border-radius:2px; margin-right:4px;"></span>Selecionado</span>
-                        </div>
-                        <div id="coord-map" style="height: 380px; border-radius: 10px; overflow: hidden;"></div>
-                        <div id="coord-map-selection-bar" class="okr-period-bar" style="display: none; margin-top: 10px; flex-wrap: wrap;">
-                            <span id="coord-map-selection-count"></span>
-                            <span id="coord-map-selection-action"></span>
-                            <button class="btn-secondary" onclick="limparSelecaoCoordMap()">Limpar seleção</button>
-                        </div>
-                        <div id="coord-assign-panel"></div>
-                    </div>
-
-                    <div class="okr-section" id="coord-grade-section" style="margin-top: 10px;">
-                        <div class="okr-header-actions">
-                            <h3>🗂️ Grade Operacional</h3>
-                            <div class="okr-period-bar" style="flex-wrap: wrap;">
-                                <button class="btn-secondary" onclick="exportarGradeOperacional()">🖨️ Exportar/Imprimir</button>
-                                <button class="btn-secondary" onclick="gerarLinkCompartilhamentoGrade()">🔗 Link de compartilhamento</button>
-                            </div>
-                        </div>
-                        <p class="instruction" style="font-size: 0.85rem;">Uma linha por perímetro nomeado no mapa acima. Para adicionar um novo (ex: "AR 26"), use "🏷️ Nomear perímetro" no mapa — clicar no círculo aqui só muda o status.</p>
-                        <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
-                            <span><span class="status-circle status-nao_iniciado"></span>Não iniciado</span>
-                            <span><span class="status-circle status-em_andamento"></span>Em andamento</span>
-                            <span><span class="status-circle status-concluido"></span>Concluído</span>
-                        </div>
-                        <div id="coord-grade-container" class="comando-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
-                        <div id="coord-grade-share-box" class="instruction" style="display: none; margin-top: 10px;"></div>
-                    </div>
-
-                    <div class="okr-section" style="margin-top: 10px;">
-                        <div class="okr-header-actions">
-                            <h3>📌 KRs sob Responsabilidade</h3>
-                            <div id="coord-period-bar" class="okr-period-bar">
-                                <label for="coord-period-select">Ciclo:</label>
-                                <select id="coord-period-select" onchange="changeCoordPeriod(this.value)"></select>
-                            </div>
-                        </div>
-                        <div id="coord-kr-container" class="okr-cards-grid"></div>
-                    </div>
-
-                    <div class="okr-section" style="margin-top: 30px;">
-                        <h3>🗓️ Status de Agenda da Região</h3>
-                        <p class="instruction" style="font-size: 0.85rem;">Somente leitura — a aprovação das solicitações continua exclusiva do nível estratégico, na aba Agenda.</p>
-                        <div id="coord-agenda-container" class="okr-cards-grid"></div>
-                    </div>
-
-                    <div class="okr-section" style="margin-top: 30px;">
-                        <h3>✅ Check-ins Pendentes de Aprovação</h3>
-                        <p class="instruction" style="font-size: 0.85rem;">Check-in feito fora dos limites do quadrante atribuído fica pendente até você aprovar ou rejeitar.</p>
-                        <div id="coord-checkins-pendentes-container" class="okr-cards-grid"></div>
-                    </div>
-
-                    <div class="okr-section" style="margin-top: 30px;">
-                        <div class="okr-header-actions">
-                            <h3>📊 Comparativo entre Regiões</h3>
-                            <div id="coord-comparativo-toggle-box" class="okr-period-bar" style="display: none;">
-                                <label for="coord-comparativo-toggle">
-                                    <input type="checkbox" id="coord-comparativo-toggle" onchange="toggleComparativoRegioes(this.checked)">
-                                    Liberar comparativo entre Coordenações
-                                </label>
-                            </div>
-                        </div>
-                        <div id="coord-comparativo-container"></div>
-                    </div>
-                </div>
-            </div>
-
             <!-- Container do Dashboard -->
             <div id="view-dashboard" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
                 <h2 style="margin-bottom: 20px; color: #1F4E78;">Painel de Indicadores (Estatísticas 2026)</h2>
@@ -395,128 +198,6 @@
                 </div>
             </div>
 
-            <!-- Container do Módulo de OKRs e Equipe -->
-            <div id="view-okr" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <div class="okr-header-actions">
-                    <h2>🎯 Gestão de OKRs & Coordenações Regionais</h2>
-                    <div class="okr-btn-group" id="okr-btn-group">
-                        <!-- Botões de ação gerados via JS (renderOKRActionButtons), conforme
-                             o papel do usuário logado: super admin vê todas as ações; membro
-                             de uma Coordenação Regional vê apenas as ações da sua equipe. -->
-                    </div>
-                </div>
-
-                <div class="okr-period-bar">
-                    <label for="okr-period-select">Ciclo:</label>
-                    <select id="okr-period-select" onchange="changeOKRPeriod(this.value)"></select>
-                </div>
-
-                <!-- Painel 1: Objetivos Estratégicos & Táticos (com seus Key Results) -->
-                <div class="okr-section">
-                    <h3>⭐ Nível Estratégico & Tático (Objetivos e Resultados-Chave)</h3>
-                    <div id="okr-list-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 2: Coordenações Regionais e suas equipes -->
-                <div class="okr-section" style="margin-top: 30px;">
-                    <h3>👥 Coordenações Regionais (Produto) por RA / Zona Eleitoral</h3>
-                    <div id="equipe-list-container" class="equipe-cards-grid">
-                        <!-- Integrantes injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 3: Artefatos & Entregáveis Digitalizados -->
-                <div class="okr-section" style="margin-top: 30px;">
-                    <h3>📄 Artefatos & Comprovantes Digitalizados de Campo</h3>
-                    <div id="artefatos-list-container" class="artefatos-cards-grid">
-                        <!-- Artefatos injetados via JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container da Agenda Pública do Candidato -->
-            <div id="view-agenda" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <h2 style="margin-bottom: 20px; color: #1F4E78;">🗓️ Agenda do Candidato</h2>
-
-                <!-- Painel 1: Agenda pública (visível sem login) -->
-                <div class="okr-section">
-                    <h3>📢 Compromissos Confirmados</h3>
-                    <div id="agenda-publica-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 2: Calendário oficial do TSE (referência pública, mesma leitura aberta a todos) -->
-                <div class="okr-section" style="margin-top: 30px;">
-                    <h3>⚖️ Calendário Oficial do TSE — Prazos até a Eleição</h3>
-                    <p class="instruction" style="font-size: 0.85rem;">Fonte: Resolução TSE nº 23.760/2026. Passe o mouse sobre uma linha para ver a descrição completa do prazo.</p>
-                    <div class="table-container">
-                        <table id="prazos-tse-table">
-                            <thead>
-                                <tr>
-                                    <th>Data</th>
-                                    <th>Prazo</th>
-                                    <th>Categoria</th>
-                                </tr>
-                            </thead>
-                            <tbody id="prazos-tse-tbody">
-                                <!-- Linhas injetadas via JS -->
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <!-- Painel 3: Solicitações do próprio coordenador (só quando logado) -->
-                <div class="okr-section" id="agenda-minhas-solicitacoes-section" style="margin-top: 30px; display: none;">
-                    <h3>📋 Minhas Solicitações</h3>
-                    <div id="agenda-minhas-solicitacoes-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 4: Fila de aprovação (só para o nível estratégico) -->
-                <div class="okr-section" id="agenda-pendentes-section" style="margin-top: 30px; display: none;">
-                    <h3>⏳ Solicitações Pendentes de Aprovação</h3>
-                    <div id="agenda-pendentes-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container do Check-in de Voluntários -->
-            <div id="view-checkin" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <h2 style="margin-bottom: 20px; color: #1F4E78;">📍 Check-in de Voluntários</h2>
-
-                <div id="checkin-login-instruction" class="instruction" style="display: none;">
-                    Entre pela aba OKRs para acessar seu(s) quadrante(s) e fazer check-in.
-                </div>
-
-                <!-- Painel 1: progresso da Coordenação do voluntário -->
-                <div class="okr-section" id="checkin-progresso-section" style="display: none;">
-                    <h3>📊 Progresso da sua Coordenação</h3>
-                    <div id="checkin-progresso-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 2: quadrantes atribuídos ao voluntário logado -->
-                <div class="okr-section" id="checkin-quadrantes-section" style="margin-top: 30px; display: none;">
-                    <h3>🗺️ Meu(s) Quadrante(s)</h3>
-                    <div id="checkin-quadrantes-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-
-                <!-- Painel 3: histórico pessoal de check-ins -->
-                <div class="okr-section" id="checkin-historico-section" style="margin-top: 30px; display: none;">
-                    <h3>📋 Meus Check-ins</h3>
-                    <div id="checkin-historico-container" class="okr-cards-grid">
-                        <!-- Cards injetados via JS -->
-                    </div>
-                </div>
-            </div>
         </main>
     </div>
 
@@ -554,5 +235,9 @@
 
     <!-- App Logic -->
     <script src="app.js"></script>
+
+    <!-- Card "Próximos Compromissos" (Fase 2) — independente de app.js,
+         só lê agenda_eventos confirmados dos próximos 7 dias. -->
+    <script src="proximos-compromissos.js"></script>
 </body>
 </html>
