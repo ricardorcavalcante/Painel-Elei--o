@@ -77,6 +77,22 @@ const COMMANDS = {
     console.log('click-text', JSON.stringify(text), '→', r);
   },
 
+  async 'set-offline'(args) {
+    if (!page) return console.log('ERROR: launch first');
+    const offline = args.trim() !== 'false';
+    try { await page.context().setOffline(offline); console.log('set-offline →', offline); }
+    catch (e) { console.log('set-offline → ERROR:', e.message.split('\n')[0]); }
+  },
+
+  async 'set-files'(args) {
+    if (!page) return console.log('ERROR: launch first');
+    const sp = args.indexOf(' ');
+    const sel = sp === -1 ? args : args.slice(0, sp);
+    const paths = sp === -1 ? [] : args.slice(sp + 1).split('|');
+    try { await page.setInputFiles(sel, paths); console.log('set-files', sel, '→ OK', paths); }
+    catch (e) { console.log('set-files', sel, '→ ERROR:', e.message.split('\n')[0]); }
+  },
+
   async fill(args) {
     if (!page) return console.log('ERROR: launch first');
     const sp = args.indexOf(' ');

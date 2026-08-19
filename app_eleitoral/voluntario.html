@@ -23,6 +23,8 @@
         .page-user { font-size: 0.8rem; color: var(--text-secondary, #5B6360); text-align: right; }
         .page-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid var(--border-light, #ddd); border-radius: 6px; background: var(--bg-card, #fff); cursor: pointer; }
         .okr-card .btn-primary { width: 100%; margin-top: 10px; padding: 12px; font-size: 1rem; }
+        #checkin-map { height: 260px; border-radius: 10px; overflow: hidden; margin-top: 10px; }
+        #checkin-fila-offline { display: none; background: var(--warning-soft, #FBE9D8); color: var(--warning, #B15C00); border-radius: 8px; padding: 10px 12px; font-size: 0.85rem; margin-bottom: 14px; }
     </style>
 </head>
 <body>
@@ -37,13 +39,24 @@
             </div>
         </div>
 
+        <div id="checkin-fila-offline"></div>
+
         <div class="okr-section" id="checkin-progresso-section" style="display: none;">
             <h3 style="font-size:1rem;">📊 Progresso da sua Coordenação</h3>
             <div id="checkin-progresso-container" class="okr-cards-grid"></div>
         </div>
 
+        <div class="okr-section" id="checkin-mapa-section" style="margin-top: 24px; display: none;">
+            <h3 style="font-size:1rem;">🗺️ Onde eu estou atuando?</h3>
+            <div class="app-form-field" style="margin-top: 8px;">
+                <label class="app-form-field-label" for="checkin-quadrante-select">Meu quadrante</label>
+                <select id="checkin-quadrante-select" class="app-form-select" onchange="selecionarQuadranteNoMapa(this.value)"></select>
+            </div>
+            <div id="checkin-map"></div>
+        </div>
+
         <div class="okr-section" id="checkin-quadrantes-section" style="margin-top: 24px; display: none;">
-            <h3 style="font-size:1rem;">🗺️ Meu(s) Quadrante(s)</h3>
+            <h3 style="font-size:1rem;">🔲 Meu(s) Quadrante(s)</h3>
             <div id="checkin-quadrantes-container" class="okr-cards-grid"></div>
         </div>
 
@@ -53,6 +66,10 @@
         </div>
     </div>
 
+    <!-- Maps JS API sem libraries=geometry: só desenha o(s) próprio(s)
+         quadrante(s) do voluntário como Rectangle, somente leitura —
+         sem seleção/drag como em coordenador.html. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%"></script>
     <script src="modal.js"></script>
     <script src="toast.js"></script>
     <script src="okr-shared.js"></script>

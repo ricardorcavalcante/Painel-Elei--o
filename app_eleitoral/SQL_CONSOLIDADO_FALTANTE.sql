@@ -4239,12 +4239,14 @@ ALTER TABLE public.team_join_requests ENABLE ROW LEVEL SECURITY;
 -- Leitura: quem pediu vê o próprio pedido; candidata/admin veem todos
 -- (é quem aprova). Nenhum coordenador de produto vê pedido de outros —
 -- aprovação é sempre nível estratégico, não da própria Coordenação.
+DROP POLICY IF EXISTS "team_join_requests_select" ON public.team_join_requests;
 CREATE POLICY "team_join_requests_select" ON public.team_join_requests FOR SELECT TO authenticated
     USING (public.is_super_admin() OR public.is_candidata() OR user_id = auth.uid());
 
 -- Inserção: só o próprio usuário recém-cadastrado, e só como pendente —
 -- convite.html chama isto logo depois do signUp(), já autenticado como
 -- a pessoa que está pedindo.
+DROP POLICY IF EXISTS "team_join_requests_insert_own" ON public.team_join_requests;
 CREATE POLICY "team_join_requests_insert_own" ON public.team_join_requests FOR INSERT TO authenticated
     WITH CHECK (user_id = auth.uid() AND status = 'pendente');
 
@@ -4252,6 +4254,34 @@ CREATE POLICY "team_join_requests_insert_own" ON public.team_join_requests FOR I
 -- linha real em product_team) é uma segunda escrita separada, feita
 -- pelo client de quem aprova, e já coberta por
 -- product_team_write_admin_or_coordenador (Parte 10).
+DROP POLICY IF EXISTS "team_join_requests_update_admin" ON public.team_join_requests;
 CREATE POLICY "team_join_requests_update_admin" ON public.team_join_requests FOR UPDATE TO authenticated
     USING (public.is_super_admin() OR public.is_candidata())
     WITH CHECK (public.is_super_admin() OR public.is_candidata());
+
+
+-- ============================================================
+-- PARTE 12 — Formulário de Ação de Campo (check-in do voluntário):
+-- checkins ganha os campos do "Formulário de Ação de Campo / Visita do
+-- Voluntário" pedido pelo usuário — tipo de ação, métricas de volume,
+-- captação de contato/liderança pro CRM, percepção da rua (pautas +
+-- receptividade) e depoimento livre. Nenhuma policy nova precisa mudar:
+-- checkins_insert_own_area (INSERT) e checkins_select_own_or_product_member
+-- (SELECT) não checam colunas específicas, só que a linha é do próprio
+-- voluntário/quadrante — colunas novas passam por elas automaticamente.
+-- ============================================================
+
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS tipo_acao TEXT
+    CHECK (tipo_acao IN ('visita_domiciliar', 'panfletagem', 'bandeiraco', 'reuniao_quadra', 'abordagem_pesquisa'));
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS local_exato TEXT;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS pessoas_impactadas INTEGER;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS panfletos_distribuidos INTEGER;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS apoiadores_cadastrados INTEGER NOT NULL DEFAULT 0;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS contato_nome TEXT;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS contato_whatsapp TEXT;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS contato_nivel_interesse TEXT
+    CHECK (contato_nivel_interesse IN ('simpatizante', 'indeciso', 'resistente', 'lideranca'));
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS pautas_locais TEXT[];
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS pauta_outro TEXT;
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS receptividade SMALLINT CHECK (receptividade BETWEEN 1 AND 5);
+ALTER TABLE public.checkins ADD COLUMN IF NOT EXISTS depoimento TEXT;
