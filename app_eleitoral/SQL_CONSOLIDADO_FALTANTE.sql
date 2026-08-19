@@ -3,10 +3,12 @@
 -- jigvtywmlauhryvuysxj: Agenda Pública + Calendário TSE; Quadrantes
 -- de Voluntários + Check-in Geolocalizado; a flag de configuração
 -- usada pelo Painel do Coordenador; a aprovação de check-in fora de
--- área; grupos nomeados de quadrantes; e, por fim (Parte 7), a
--- geração real dos quadrantes das 37 RAs oficiais do DF, recortados
--- por mancha urbana e área rural — inclusive regenerando os de teste
--- da Ceilândia com a máscara nova.
+-- área; grupos nomeados de quadrantes; a geração real dos quadrantes
+-- das 37 RAs oficiais do DF, recortados por mancha urbana e área
+-- rural (Parte 7) — inclusive regenerando os de teste da Ceilândia
+-- com a máscara nova; e, por fim (Parte 8), status por perímetro
+-- (grade operacional do Painel do Coordenador) com histórico
+-- auditável e link de compartilhamento somente-leitura sem login.
 --
 -- NÃO precisa da senha do banco — só precisa estar logado no
 -- dashboard do Supabase (supabase.com/dashboard/project/jigvtywmlauhryvuysxj)
@@ -3914,3 +3916,137 @@ BEGIN
         ('DS-29', 'Quadrante 29', v_product_id, '26 DE SETEMBRO', NULL, -15.760463, -15.755972, -48.014949, -48.010282);
 END $$;
 
+
+-- ============================================================
+-- PARTE 8 — Grade Operacional do Painel do Coordenador: status por
+-- perímetro (areas.grupo_nome), histórico auditável de mudanças, e
+-- link de compartilhamento somente-leitura sem login.
+--
+-- Reaproveita grupo_nome (já existente, rótulo livre atribuído pelo
+-- coordenador via "🏷️ Nomear perímetro") como a unidade "Quadrante"
+-- da grade impressa original (ex: "AR 01"), chaveando o status por
+-- (product_id, grupo_nome) em vez de criar uma tabela de perímetro
+-- com FK própria em areas — evita migrar o dado de grupo_nome já em
+-- produção e não toca nos pontos de leitura existentes (filtro de
+-- perímetro, tooltip do mapa, painel de atribuição). Trade-off aceito:
+-- por não ter FK, renomear um perímetro no mapa não migra automaticamente
+-- o status/histórico associado ao nome antigo (a UI avisa disso).
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS public.perimetro_status (
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    grupo_nome TEXT NOT NULL,
+    status TEXT NOT NULL DEFAULT 'nao_iniciado' CHECK (status IN ('nao_iniciado', 'em_andamento', 'concluido')),
+    updated_by UUID REFERENCES public.profiles(id),
+    updated_at TIMESTAMPTZ DEFAULT NOW(),
+    PRIMARY KEY (product_id, grupo_nome)
+);
+
+-- Histórico append-only — base para os relatórios futuros de
+-- desempenho por integrante e planejado x executado (cruzar depois com
+-- checkins via areas.grupo_nome, sem duplicar dado de check-in aqui).
+-- Client nunca escreve aqui diretamente: só o trigger abaixo grava.
+CREATE TABLE IF NOT EXISTS public.perimetro_status_historico (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    grupo_nome TEXT NOT NULL,
+    status_anterior TEXT CHECK (status_anterior IN ('nao_iniciado', 'em_andamento', 'concluido')),
+    status_novo TEXT NOT NULL CHECK (status_novo IN ('nao_iniciado', 'em_andamento', 'concluido')),
+    alterado_por UUID REFERENCES public.profiles(id),
+    alterado_em TIMESTAMPTZ DEFAULT NOW()
+);
+CREATE INDEX IF NOT EXISTS idx_perimetro_status_historico_lookup
+    ON public.perimetro_status_historico (product_id, grupo_nome, alterado_em DESC);
+
+CREATE OR REPLACE FUNCTION public.log_perimetro_status_change()
+RETURNS TRIGGER
+LANGUAGE plpgsql
+SECURITY DEFINER SET search_path = public
+AS $$
+BEGIN
+    IF TG_OP = 'INSERT' OR NEW.status IS DISTINCT FROM OLD.status THEN
+        INSERT INTO public.perimetro_status_historico (product_id, grupo_nome, status_anterior, status_novo, alterado_por)
+        VALUES (NEW.product_id, NEW.grupo_nome, CASE WHEN TG_OP = 'INSERT' THEN NULL ELSE OLD.status END, NEW.status, NEW.updated_by);
+    END IF;
+    RETURN NEW;
+END;
+$$;
+
+DROP TRIGGER IF EXISTS on_perimetro_status_change ON public.perimetro_status;
+CREATE TRIGGER on_perimetro_status_change
+    AFTER INSERT OR UPDATE ON public.perimetro_status
+    FOR EACH ROW EXECUTE FUNCTION public.log_perimetro_status_change();
+
+-- Link somente-leitura, sem login, do resumo público da grade
+-- operacional de uma Coordenação. Token opaco: a tabela não tem
+-- nenhuma policy de leitura para anon, só a RPC get_grade_publica
+-- (abaixo) resolve o token, então ele nunca é listável via query normal.
+CREATE TABLE IF NOT EXISTS public.grade_share_links (
+    token UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    criado_por UUID REFERENCES public.profiles(id),
+    criado_em TIMESTAMPTZ DEFAULT NOW(),
+    revogado BOOLEAN NOT NULL DEFAULT FALSE
+);
+
+-- Retorna o resumo público (sem login) da grade operacional via token
+-- opaco — nunca lat/lng, voluntário ou check-in. Deriva a lista de
+-- perímetros de areas.grupo_nome (não só de perimetro_status) pra
+-- incluir também os que ainda não tiveram status alterado (default
+-- "não iniciado", sem linha física ainda). RAISE EXCEPTION em token
+-- inválido/revogado, pro client distinguir "link ruim" de "região sem
+-- perímetros ainda" (retorno vazio).
+CREATE OR REPLACE FUNCTION public.get_grade_publica(p_token UUID)
+RETURNS TABLE (product_nome TEXT, ra_nome TEXT, grupo_nome TEXT, status TEXT, updated_at TIMESTAMPTZ)
+LANGUAGE plpgsql STABLE SECURITY DEFINER SET search_path = public
+AS $$
+DECLARE
+    v_product_id UUID;
+BEGIN
+    SELECT gsl.product_id INTO v_product_id
+    FROM public.grade_share_links gsl
+    WHERE gsl.token = p_token AND gsl.revogado = FALSE;
+
+    IF v_product_id IS NULL THEN
+        RAISE EXCEPTION 'Link inválido ou revogado';
+    END IF;
+
+    RETURN QUERY
+    SELECT p.nome, p.ra_nome, g.grupo_nome, COALESCE(ps.status, 'nao_iniciado'), ps.updated_at
+    FROM public.products p
+    CROSS JOIN LATERAL (
+        SELECT DISTINCT a.grupo_nome FROM public.areas a
+        WHERE a.product_id = p.id AND a.grupo_nome IS NOT NULL
+    ) g
+    LEFT JOIN public.perimetro_status ps ON ps.product_id = p.id AND ps.grupo_nome = g.grupo_nome
+    WHERE p.id = v_product_id
+    ORDER BY g.grupo_nome;
+END;
+$$;
+
+GRANT EXECUTE ON FUNCTION public.get_grade_publica(UUID) TO anon, authenticated;
+
+ALTER TABLE public.perimetro_status ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.perimetro_status_historico ENABLE ROW LEVEL SECURITY;
+ALTER TABLE public.grade_share_links ENABLE ROW LEVEL SECURITY;
+
+DROP POLICY IF EXISTS "perimetro_status_select_auth" ON public.perimetro_status;
+CREATE POLICY "perimetro_status_select_auth" ON public.perimetro_status FOR SELECT TO authenticated USING (true);
+DROP POLICY IF EXISTS "perimetro_status_write_admin_or_coordenador" ON public.perimetro_status;
+CREATE POLICY "perimetro_status_write_admin_or_coordenador" ON public.perimetro_status FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_super_admin() OR public.is_coordenador_of_product(product_id));
+
+-- Histórico é só-leitura pro client — a única via de escrita é o
+-- trigger acima (SECURITY DEFINER), então de propósito não existe
+-- policy de INSERT/UPDATE/DELETE aqui.
+DROP POLICY IF EXISTS "perimetro_status_historico_select_auth" ON public.perimetro_status_historico;
+CREATE POLICY "perimetro_status_historico_select_auth" ON public.perimetro_status_historico FOR SELECT TO authenticated USING (true);
+
+DROP POLICY IF EXISTS "grade_share_links_select_admin_or_coordenador" ON public.grade_share_links;
+CREATE POLICY "grade_share_links_select_admin_or_coordenador" ON public.grade_share_links FOR SELECT TO authenticated
+    USING (public.is_super_admin() OR public.is_coordenador_of_product(product_id));
+DROP POLICY IF EXISTS "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links;
+CREATE POLICY "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_super_admin() OR public.is_coordenador_of_product(product_id));

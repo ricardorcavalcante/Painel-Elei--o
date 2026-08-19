@@ -320,6 +320,24 @@
                         <div id="coord-assign-panel"></div>
                     </div>
 
+                    <div class="okr-section" id="coord-grade-section" style="margin-top: 10px;">
+                        <div class="okr-header-actions">
+                            <h3>🗂️ Grade Operacional</h3>
+                            <div class="okr-period-bar" style="flex-wrap: wrap;">
+                                <button class="btn-secondary" onclick="exportarGradeOperacional()">🖨️ Exportar/Imprimir</button>
+                                <button class="btn-secondary" onclick="gerarLinkCompartilhamentoGrade()">🔗 Link de compartilhamento</button>
+                            </div>
+                        </div>
+                        <p class="instruction" style="font-size: 0.85rem;">Uma linha por perímetro nomeado no mapa acima. Para adicionar um novo (ex: "AR 26"), use "🏷️ Nomear perímetro" no mapa — clicar no círculo aqui só muda o status.</p>
+                        <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
+                            <span><span class="status-circle status-nao_iniciado"></span>Não iniciado</span>
+                            <span><span class="status-circle status-em_andamento"></span>Em andamento</span>
+                            <span><span class="status-circle status-concluido"></span>Concluído</span>
+                        </div>
+                        <div id="coord-grade-container" class="comando-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
+                        <div id="coord-grade-share-box" class="instruction" style="display: none; margin-top: 10px;"></div>
+                    </div>
+
                     <div class="okr-section" style="margin-top: 10px;">
                         <div class="okr-header-actions">
                             <h3>📌 KRs sob Responsabilidade</h3>

@@ -1032,3 +1032,39 @@ tr:hover { background-color: #e8f4fd; }
 
 .coord-comparativo-linha-atual { background-color: var(--accent-soft, #dbe7f0) !important; font-weight: 700; }
 
+/* Grade Operacional — status por perímetro, paleta do Painel
+   Operacional impresso original (roxo Onda Roxa / laranja / verde). */
+#coord-grade-section h3 { color: #5C2D91; }
+
+.status-circle {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    border-radius: 50%;
+    border: 2px solid #5C2D91;
+    background: transparent;
+    vertical-align: middle;
+}
+.status-circle.status-em_andamento { background: #F5A623; border-color: #F5A623; }
+.status-circle.status-concluido { background: #3CB043; border-color: #3CB043; }
+
+@media print {
+    body.printing-grade .sidebar,
+    body.printing-grade #view-coordenador > .okr-header-actions,
+    body.printing-grade #coord-permission,
+    body.printing-grade #coord-empty,
+    body.printing-grade #coord-app > *:not(#coord-grade-section) {
+        display: none !important;
+    }
+    body.printing-grade #coord-grade-section,
+    body.printing-grade #coord-grade-section * {
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+    }
+    body.printing-grade #coord-grade-section .okr-header-actions button,
+    body.printing-grade #coord-grade-section p.instruction {
+        display: none;
+    }
+}
+

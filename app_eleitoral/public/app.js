@@ -2910,6 +2910,7 @@ let coordDataCache = {
     equipe: [],
     areas: [],
     areaVolunteers: [],
+    perimetroStatus: [],
     objectives: [],
     keyResults: [],
     agenda: [],
@@ -3008,7 +3009,7 @@ async function changeCoordProduct(productId) {
 }
 
 function renderCoordSkeleton() {
-    ['coord-equipe-container', 'coord-quadrantes-container', 'coord-kr-container', 'coord-agenda-container', 'coord-checkins-pendentes-container', 'coord-comparativo-container'].forEach(id => {
+    ['coord-equipe-container', 'coord-quadrantes-container', 'coord-grade-container', 'coord-kr-container', 'coord-agenda-container', 'coord-checkins-pendentes-container', 'coord-comparativo-container'].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="instruction">Carregando…</div>';
     });
@@ -3020,6 +3021,7 @@ async function loadCoordenadorData() {
     const requestId = ++coordRequestSeq;
     await Promise.allSettled([
         fetchCoordEquipeEAreas(),
+        fetchCoordPerimetroStatus(),
         fetchCoordPeriodsEObjetivos(),
         fetchCoordAgenda(),
         fetchCoordCheckinsPendentes(),
@@ -3027,12 +3029,15 @@ async function loadCoordenadorData() {
     ]);
     if (requestId !== coordRequestSeq) return; // seleção trocou de novo antes de terminar
     renderCoordEquipeCobertura();
+    renderCoordGradeOperacional();
     renderCoordKRs();
     renderCoordAgenda();
     renderCoordCheckinsPendentes();
     initCoordMap();
     setCoordMapMode(coordMapMode); // sincroniza dica/botões, limpa seleção antiga e redesenha os quadrantes
     await loadCoordComparativo(requestId);
+    const shareBox = document.getElementById('coord-grade-share-box');
+    if (shareBox) shareBox.style.display = 'none'; // link antigo era de outra Coordenação
 }
 
 // Bloco Equipe & Cobertura de Quadrantes
@@ -3076,6 +3081,100 @@ function chunkArray(arr, tamanho) {
     return lotes;
 }
 
+// Lista de perímetros nomeados (areas.grupo_nome) da Coordenação atual —
+// compartilhada pelo filtro "🏷️ Perímetro:" e pela Grade Operacional,
+// pra não haver duas fontes divergentes da mesma lista.
+function getCoordPerimetros() {
+    return [...new Set(coordDataCache.areas.map(a => a.grupo_nome).filter(Boolean))].sort();
+}
+
+// Bloco Grade Operacional (status por perímetro)
+async function fetchCoordPerimetroStatus() {
+    const sb = initSupabaseClient();
+    try {
+        const { data, error } = await sb.from('perimetro_status')
+            .select('grupo_nome, status, updated_at, updated_by, profiles:updated_by(full_name, email)')
+            .eq('product_id', coordDataCache.productId);
+        if (error) throw error;
+        coordDataCache.perimetroStatus = data || [];
+    } catch (err) {
+        console.warn('Erro ao carregar status dos perímetros:', err);
+        coordDataCache.perimetroStatus = [];
+    }
+}
+
+const PROXIMO_STATUS_PERIMETRO = { nao_iniciado: 'em_andamento', em_andamento: 'concluido', concluido: 'nao_iniciado' };
+const LABEL_STATUS_PERIMETRO = { nao_iniciado: 'Não iniciado', em_andamento: 'Em andamento', concluido: 'Concluído' };
+
+function renderCoordGradeOperacional() {
+    const container = document.getElementById('coord-grade-container');
+    if (!container) return;
+    const perimetros = getCoordPerimetros();
+    if (!perimetros.length) {
+        container.innerHTML = '<div class="instruction">Nenhum perímetro nomeado ainda — use "🏷️ Nomear perímetro" no mapa acima pra criar o primeiro (ex: "AR 01").</div>';
+        return;
+    }
+    container.innerHTML = perimetros.map(nome => {
+        const linha = coordDataCache.perimetroStatus.find(p => p.grupo_nome === nome);
+        const status = linha ? linha.status : 'nao_iniciado';
+        return `
+            <div class="comando-panel" style="padding: 12px 14px;">
+                <div class="comando-item-header" style="margin-bottom: 0;">
+                    <span title="Clique no círculo pra avançar o status">${nome}</span>
+                    <span class="status-circle status-${status}" style="cursor: pointer;" onclick="ciclarStatusPerimetro('${nome.replace(/'/g, "\\'")}')" title="${LABEL_STATUS_PERIMETRO[status]} — clique para avançar"></span>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+async function ciclarStatusPerimetro(grupoNome) {
+    const sb = initSupabaseClient();
+    const atual = coordDataCache.perimetroStatus.find(p => p.grupo_nome === grupoNome);
+    const statusAtual = atual ? atual.status : 'nao_iniciado';
+    const novoStatus = PROXIMO_STATUS_PERIMETRO[statusAtual];
+    try {
+        const { error } = await sb.from('perimetro_status')
+            .upsert({ product_id: coordDataCache.productId, grupo_nome: grupoNome, status: novoStatus, updated_by: okrCurrentUser.id }, { onConflict: 'product_id,grupo_nome' });
+        if (error) throw error;
+    } catch (err) {
+        return alert('Erro: ' + err.message);
+    }
+    if (atual) atual.status = novoStatus;
+    else coordDataCache.perimetroStatus.push({ grupo_nome: grupoNome, status: novoStatus, updated_by: okrCurrentUser.id, updated_at: new Date().toISOString() });
+    renderCoordGradeOperacional();
+}
+
+function exportarGradeOperacional() {
+    document.body.classList.add('printing-grade');
+    window.print();
+}
+window.onafterprint = () => document.body.classList.remove('printing-grade');
+
+async function gerarLinkCompartilhamentoGrade() {
+    const sb = initSupabaseClient();
+    const box = document.getElementById('coord-grade-share-box');
+    try {
+        const { data: existente } = await sb.from('grade_share_links')
+            .select('token').eq('product_id', coordDataCache.productId).eq('revogado', false).limit(1).maybeSingle();
+        let token = existente && existente.token;
+        if (!token) {
+            const { data, error } = await sb.from('grade_share_links')
+                .insert({ product_id: coordDataCache.productId, criado_por: okrCurrentUser.id })
+                .select('token').single();
+            if (error) throw error;
+            token = data.token;
+        }
+        const url = `${window.location.origin}/grade-publica.html?token=${token}`;
+        if (box) {
+            box.style.display = 'block';
+            box.innerHTML = `🔗 Link somente-leitura (sem login): <a href="${url}" target="_blank" rel="noopener">${url}</a>`;
+        }
+    } catch (err) {
+        alert('Erro ao gerar link: ' + err.message);
+    }
+}
+
 function renderCoordEquipeCobertura() {
     const equipeContainer = document.getElementById('coord-equipe-container');
     const quadContainer = document.getElementById('coord-quadrantes-container');
@@ -3104,7 +3203,7 @@ function renderCoordEquipeCobertura() {
     // Com centenas de quadrantes, uma linha por quadrante é ilegível — em vez
     // disso, dois seletores (perímetro nomeado / voluntário) filtram o que o
     // MAPA desenha, e um resumo compacto substitui a lista.
-    const grupos = [...new Set(coordDataCache.areas.map(a => a.grupo_nome).filter(Boolean))].sort();
+    const grupos = getCoordPerimetros();
     const filtroAtualPerimetro = coordMapFiltro.tipo === 'perimetro' ? coordMapFiltro.valor : '';
     const filtroAtualVoluntario = coordMapFiltro.tipo === 'voluntario' ? coordMapFiltro.valor : '';
 
@@ -3410,6 +3509,22 @@ async function nomearGrupoSelecionado() {
     if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).');
     const nome = prompt(`Nome do perímetro para os ${coordSelectedAreaIds.size} quadrantes selecionados:`);
     if (!nome) return;
+
+    // Se algum quadrante selecionado já pertence a um perímetro diferente que
+    // já tem status registrado, o status/histórico do nome antigo fica órfão
+    // (a chave é o texto grupo_nome, sem FK) — avisa antes de confirmar.
+    const nomesAntigosComStatus = new Set(
+        [...coordSelectedAreaIds]
+            .map(id => coordDataCache.areas.find(a => a.id === id))
+            .filter(a => a && a.grupo_nome && a.grupo_nome !== nome)
+            .map(a => a.grupo_nome)
+            .filter(g => coordDataCache.perimetroStatus.some(p => p.grupo_nome === g))
+    );
+    if (nomesAntigosComStatus.size) {
+        const lista = [...nomesAntigosComStatus].join(', ');
+        if (!confirm(`Alguns quadrantes já pertencem a "${lista}", que já tem status registrado na Grade Operacional. Renomear para "${nome}" NÃO migra esse status/histórico — "${lista}" ficará com o status antigo (órfão) e "${nome}" começa em "não iniciado". Continuar?`)) return;
+    }
+
     const sb = initSupabaseClient();
     const ids = [...coordSelectedAreaIds];
     try {
@@ -3423,6 +3538,7 @@ async function nomearGrupoSelecionado() {
     coordSelectedAreaIds.clear();
     await fetchCoordEquipeEAreas();
     renderCoordEquipeCobertura();
+    renderCoordGradeOperacional();
     renderCoordMapRectangles();
     const selectionCount = document.getElementById('coord-map-selection-count');
     if (selectionCount) selectionCount.textContent = '0 quadrante(s) selecionado(s)';

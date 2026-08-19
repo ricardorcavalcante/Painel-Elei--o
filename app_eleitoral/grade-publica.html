@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Grade Operacional — Onda Roxa</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script>
+        // Mesmo mecanismo de interpolação em build time usado no index.html.
+        window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
+        window.SUPABASE_ANON_KEY = "%VITE_SUPABASE_ANON_KEY%";
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { background: #f5f2fa; padding: 24px 16px; }
+        .grade-publica-container { max-width: 720px; margin: 0 auto; }
+        .grade-publica-header { text-align: center; margin-bottom: 24px; }
+        .grade-publica-header h1 { color: #5C2D91; font-size: 1.4rem; margin-bottom: 4px; }
+        .grade-publica-header p { color: var(--text-secondary, #666); font-size: 0.9rem; }
+        .grade-publica-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(160px, 1fr)); gap: 12px; }
+        .grade-publica-card {
+            background: #fff;
+            border-radius: 10px;
+            padding: 12px 14px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+        }
+        .grade-publica-card .nome { font-weight: 600; font-size: 0.9rem; color: #333; }
+        .grade-publica-card .atualizado { font-size: 0.7rem; color: var(--text-secondary, #666); display: block; margin-top: 2px; }
+        .grade-publica-estado { text-align: center; color: var(--text-secondary, #666); padding: 40px 0; }
+    </style>
+</head>
+<body>
+    <div class="grade-publica-container">
+        <div class="grade-publica-header">
+            <h1 id="grade-publica-titulo">🗂️ Grade Operacional</h1>
+            <p id="grade-publica-subtitulo">Carregando…</p>
+        </div>
+        <div id="grade-publica-grid" class="grade-publica-grid"></div>
+    </div>
+
+    <script>
+        function initSupabaseClientPublico() {
+            const url = window.SUPABASE_URL;
+            const key = window.SUPABASE_ANON_KEY;
+            if (!window.supabase || !url || !key || url.indexOf('VITE_SUPABASE_URL') !== -1) return null;
+            return window.supabase.createClient(url, key);
+        }
+
+        const LABEL_STATUS = { nao_iniciado: 'Não iniciado', em_andamento: 'Em andamento', concluido: 'Concluído' };
+
+        async function carregarGradePublica() {
+            const subtitulo = document.getElementById('grade-publica-subtitulo');
+            const grid = document.getElementById('grade-publica-grid');
+            const token = new URLSearchParams(window.location.search).get('token');
+            const sb = initSupabaseClientPublico();
+
+            if (!sb) {
+                subtitulo.textContent = 'Painel não configurado.';
+                return;
+            }
+            if (!token) {
+                subtitulo.textContent = 'Link inválido: token não informado.';
+                return;
+            }
+
+            const { data, error } = await sb.rpc('get_grade_publica', { p_token: token });
+            if (error) {
+                subtitulo.textContent = 'Link inválido ou revogado.';
+                grid.innerHTML = '<div class="grade-publica-estado">Peça um novo link ao coordenador da região.</div>';
+                return;
+            }
+            if (!data || !data.length) {
+                document.getElementById('grade-publica-titulo').textContent = '🗂️ Grade Operacional';
+                subtitulo.textContent = 'Esta região ainda não tem perímetros nomeados.';
+                return;
+            }
+
+            document.getElementById('grade-publica-titulo').textContent = `🗂️ ${data[0].product_nome}`;
+            subtitulo.textContent = `${data[0].ra_nome} — somente leitura`;
+            grid.innerHTML = data.map(linha => `
+                <div class="grade-publica-card">
+                    <span class="nome">${linha.grupo_nome}<span class="atualizado">${linha.updated_at ? new Date(linha.updated_at).toLocaleDateString('pt-BR') : LABEL_STATUS[linha.status]}</span></span>
+                    <span class="status-circle status-${linha.status}" title="${LABEL_STATUS[linha.status]}"></span>
+                </div>
+            `).join('');
+        }
+
+        carregarGradePublica();
+    </script>
+</body>
+</html>
