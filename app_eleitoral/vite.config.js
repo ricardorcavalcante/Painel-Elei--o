@@ -20,6 +20,7 @@ export default defineConfig({
         main: resolve(__dirname, 'index.html'),
         gradePublica: resolve(__dirname, 'grade-publica.html'),
         login: resolve(__dirname, 'login.html'),
+        convite: resolve(__dirname, 'convite.html'),
         admin: resolve(__dirname, 'admin.html'),
         okrs: resolve(__dirname, 'okrs.html'),
         candidata: resolve(__dirname, 'candidata.html'),

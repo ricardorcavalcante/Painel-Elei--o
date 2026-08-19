@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro de Equipe — Painel Eleitoral DF 2026</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script>
+        window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
+        window.SUPABASE_ANON_KEY = "%VITE_SUPABASE_ANON_KEY%";
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="design-tokens.css">
+    <link rel="stylesheet" href="components.css">
+    <style>
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg-body, #f4f2ec); padding: 24px 16px; }
+        .login-card { width: 100%; max-width: 380px; background: var(--bg-card, #fff); border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .login-card h1 { font-size: 1.25rem; margin: 0 0 6px; color: #1C201F; }
+        .login-card .subtitle { font-size: 0.85rem; color: var(--text-secondary, #5B6360); margin: 0 0 22px; }
+        .login-field { display: block; width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid var(--border-light, #ddd); border-radius: 6px; font-size: 0.95rem; box-sizing: border-box; font-family: inherit; background: #fff; }
+        .login-btn { display: block; width: 100%; padding: 10px 12px; margin-bottom: 10px; border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer; }
+        .login-btn-primary { background: var(--primary, #0F5C5B); color: #fff; }
+        .login-btn-primary:hover { background: var(--primary-dark, #0A3E3D); }
+        .login-msg { font-size: 0.85rem; margin: 10px 0 0; min-height: 1.2em; }
+        .login-msg.error { color: var(--danger, #C62828); }
+        .login-msg.info { color: var(--text-secondary, #5B6360); }
+        .login-msg.success { color: var(--success, #2E7D32); }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div id="step-conta">
+            <h1>📋 Cadastro de Equipe</h1>
+            <p class="subtitle">Crie sua conta pra pedir entrada numa Coordenação Regional da campanha.</p>
+            <input type="text" id="ci-nome" class="login-field" placeholder="Nome completo" autocomplete="name">
+            <input type="email" id="ci-email" class="login-field" placeholder="e-mail" autocomplete="email">
+            <input type="password" id="ci-senha" class="login-field" placeholder="senha (mín. 6 caracteres)" autocomplete="new-password">
+            <button type="button" id="ci-criar-conta" class="login-btn login-btn-primary">Criar conta</button>
+            <p id="ci-msg-conta" class="login-msg"></p>
+        </div>
+
+        <div id="step-solicitacao" style="display:none;">
+            <h1>🗺️ Escolha sua Coordenação</h1>
+            <p class="subtitle">Sua solicitação passa por aprovação da candidata ou do admin antes de virar acesso.</p>
+            <select id="ci-produto" class="login-field"></select>
+            <select id="ci-papel" class="login-field">
+                <option value="operacional" selected>Operacional</option>
+                <option value="coordenador">Coordenador(a)</option>
+            </select>
+            <button type="button" id="ci-enviar-solicitacao" class="login-btn login-btn-primary">Enviar solicitação</button>
+            <p id="ci-msg-solicitacao" class="login-msg"></p>
+        </div>
+
+        <div id="step-sucesso" style="display:none;">
+            <h1>✅ Solicitação enviada</h1>
+            <p class="subtitle">Assim que a candidata ou o admin aprovar, você já entra normalmente com o e-mail e a senha que acabou de criar.</p>
+            <a href="login.html" class="login-btn login-btn-primary" style="text-align:center; text-decoration:none; box-sizing:border-box; display:block;">Ir para o login</a>
+        </div>
+    </div>
+
+    <script type="module">
+        import { initSupabaseClient } from './auth-shared.js';
+
+        const sb = initSupabaseClient();
+        let novoUserId = null;
+
+        function setMsg(id, text, kind) {
+            const el = document.getElementById(id);
+            el.textContent = text || '';
+            el.className = 'login-msg' + (kind ? ' ' + kind : '');
+        }
+
+        function showStep(id) {
+            ['step-conta', 'step-solicitacao', 'step-sucesso'].forEach(s => {
+                document.getElementById(s).style.display = s === id ? '' : 'none';
+            });
+        }
+
+        if (!sb) {
+            document.querySelector('.login-card').innerHTML = '<p>Painel não configurado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.</p>';
+        } else {
+            document.getElementById('ci-criar-conta').addEventListener('click', async () => {
+                setMsg('ci-msg-conta', '');
+                const nome = document.getElementById('ci-nome').value.trim();
+                const email = document.getElementById('ci-email').value.trim();
+                const senha = document.getElementById('ci-senha').value;
+                if (!nome || !email) return setMsg('ci-msg-conta', 'Informe nome e e-mail.', 'error');
+                if (!senha || senha.length < 6) return setMsg('ci-msg-conta', 'A senha precisa ter pelo menos 6 caracteres.', 'error');
+
+                const { data, error } = await sb.auth.signUp({ email, password: senha, options: { data: { full_name: nome } } });
+                if (error) return setMsg('ci-msg-conta', 'Erro ao criar conta: ' + error.message, 'error');
+                if (!data.user) return setMsg('ci-msg-conta', 'Não foi possível criar a conta agora — tente de novo.', 'error');
+
+                novoUserId = data.user.id;
+                const { data: produtos, error: prodErr } = await sb.from('products').select('id, nome, ra_nome').order('nome');
+                if (prodErr) return setMsg('ci-msg-conta', 'Conta criada, mas não deu pra carregar as Coordenações: ' + prodErr.message, 'error');
+
+                const select = document.getElementById('ci-produto');
+                select.innerHTML = produtos.map(p => `<option value="${p.id}">${p.nome} (${p.ra_nome})</option>`).join('');
+                showStep('step-solicitacao');
+            });
+
+            document.getElementById('ci-enviar-solicitacao').addEventListener('click', async () => {
+                setMsg('ci-msg-solicitacao', '');
+                const product_id = document.getElementById('ci-produto').value;
+                const papel = document.getElementById('ci-papel').value;
+                if (!product_id) return setMsg('ci-msg-solicitacao', 'Escolha uma Coordenação Regional.', 'error');
+
+                const { error } = await sb.from('team_join_requests').insert({ user_id: novoUserId, product_id, papel });
+                if (error) return setMsg('ci-msg-solicitacao', 'Erro ao enviar solicitação: ' + error.message, 'error');
+
+                showStep('step-sucesso');
+            });
+        }
+    </script>
+</body>
+</html>

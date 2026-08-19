@@ -4207,3 +4207,51 @@ DROP POLICY IF EXISTS "grade_share_links_write_admin_or_coordenador" ON public.g
 CREATE POLICY "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links FOR ALL TO authenticated
     USING (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id))
     WITH CHECK (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id));
+
+
+-- ============================================================
+-- PARTE 11 — Autocadastro de equipe com aprovação (convite.html):
+-- "Adicionar à Equipe" hoje exige que a pessoa já tenha conta criada
+-- antes (não existe mais nenhum fluxo de cadastro desde que a aba OKR
+-- saiu de index.html na Fase 2) — sem isso, candidata/admin não
+-- conseguem de fato "cadastrar coordenador" nenhum. convite.html é uma
+-- página pública (link fixo, dá pra mandar pelo WhatsApp): a pessoa cria
+-- a própria conta (nome/e-mail/senha) e pede pra entrar numa Coordenação
+-- Regional com um papel — fica pendente até candidata ou admin aprovar
+-- (aprovar insere de fato em product_team, reaproveitando a policy já
+-- ampliada na Parte 10; recusar só marca o pedido como recusado).
+-- ============================================================
+
+CREATE TABLE IF NOT EXISTS public.team_join_requests (
+    id UUID PRIMARY KEY DEFAULT uuid_generate_v4(),
+    user_id UUID NOT NULL REFERENCES public.profiles(id) ON DELETE CASCADE,
+    product_id UUID NOT NULL REFERENCES public.products(id) ON DELETE CASCADE,
+    papel TEXT NOT NULL CHECK (papel IN ('coordenador', 'operacional')),
+    status TEXT NOT NULL DEFAULT 'pendente' CHECK (status IN ('pendente', 'aprovado', 'recusado')),
+    resposta TEXT,
+    respondido_por UUID REFERENCES public.profiles(id),
+    respondido_em TIMESTAMPTZ,
+    created_at TIMESTAMPTZ DEFAULT NOW()
+);
+
+ALTER TABLE public.team_join_requests ENABLE ROW LEVEL SECURITY;
+
+-- Leitura: quem pediu vê o próprio pedido; candidata/admin veem todos
+-- (é quem aprova). Nenhum coordenador de produto vê pedido de outros —
+-- aprovação é sempre nível estratégico, não da própria Coordenação.
+CREATE POLICY "team_join_requests_select" ON public.team_join_requests FOR SELECT TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR user_id = auth.uid());
+
+-- Inserção: só o próprio usuário recém-cadastrado, e só como pendente —
+-- convite.html chama isto logo depois do signUp(), já autenticado como
+-- a pessoa que está pedindo.
+CREATE POLICY "team_join_requests_insert_own" ON public.team_join_requests FOR INSERT TO authenticated
+    WITH CHECK (user_id = auth.uid() AND status = 'pendente');
+
+-- Aprovar/recusar: só candidata/admin — a aprovação em si (inserir a
+-- linha real em product_team) é uma segunda escrita separada, feita
+-- pelo client de quem aprova, e já coberta por
+-- product_team_write_admin_or_coordenador (Parte 10).
+CREATE POLICY "team_join_requests_update_admin" ON public.team_join_requests FOR UPDATE TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata())
+    WITH CHECK (public.is_super_admin() OR public.is_candidata());

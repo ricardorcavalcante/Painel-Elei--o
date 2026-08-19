@@ -345,7 +345,7 @@ async function openNewEquipeModal() {
             <div class="app-form-field">
                 <label class="app-form-field-label" for="ne-email">E-mail do integrante</label>
                 <input type="email" id="ne-email" class="app-form-input" placeholder="nome@exemplo.com">
-                <div class="app-form-hint">Precisa já ter feito Cadastro no login de OKRs.</div>
+                <div class="app-form-hint">Precisa já ter criado conta em convite.html (link de "📲 Convidar pelo WhatsApp") — sem conta, use o próprio convite em vez deste formulário.</div>
             </div>
             <div class="app-form-field">
                 <label class="app-form-field-label" for="ne-papel">Papel</label>
@@ -365,7 +365,7 @@ async function openNewEquipeModal() {
                     const papel = document.getElementById('ne-papel').value;
 
                     const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
-                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.', { type: 'danger' });
+                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Envie o link de convite (📲 Convidar pelo WhatsApp) pra ele criar a conta antes de ser adicionado à equipe.', { type: 'danger' });
 
                     const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
                     if (error) return showToast('Erro: ' + error.message, { type: 'danger' });

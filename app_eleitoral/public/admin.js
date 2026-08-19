@@ -33,7 +33,7 @@ async function openAtribuirVoluntarioModal(areaId) {
             <div class="app-form-field">
                 <label class="app-form-field-label" for="af-email">E-mail do voluntário</label>
                 <input type="email" id="af-email" class="app-form-input" placeholder="nome@exemplo.com">
-                <div class="app-form-hint">Precisa já ter feito Cadastro no login de OKRs.</div>
+                <div class="app-form-hint">Precisa já ter criado conta em convite.html (link de "📲 Convidar pelo WhatsApp" na seção Equipe) — sem conta, use o próprio convite em vez deste formulário.</div>
             </div>
         `,
         buttons: [
@@ -45,7 +45,7 @@ async function openAtribuirVoluntarioModal(areaId) {
                     if (!email) return showToast('Informe o e-mail do voluntário.', { type: 'warning' });
 
                     const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
-                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser atribuído.', { type: 'danger' });
+                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Envie o link de convite (📲 Convidar pelo WhatsApp) pra ele criar a conta antes de ser atribuído.', { type: 'danger' });
 
                     const { error } = await sb.from('area_volunteers').insert({ area_id: area.id, user_id: perfil.id, atribuido_por: okrCurrentUser.id });
                     if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
@@ -218,6 +218,99 @@ async function responderSolicitacao(id, aprovar) {
 }
 
 // ------------------------------------------
+// Solicitações de Equipe — pedidos de autocadastro vindos de
+// convite.html (pessoa cria a própria conta e escolhe Coordenação +
+// papel; fica pendente até candidata/admin aprovar). Aprovar é 2
+// escritas: insere de verdade em product_team, depois marca o pedido
+// como respondido — se a 1ª falhar (RLS, produto apagado etc.), a 2ª
+// nem roda, então o pedido continua pendente em vez de "aprovado" sem
+// efeito nenhum.
+// ------------------------------------------
+let teamJoinRequestsCache = [];
+let teamJoinRequestsError = false;
+
+async function loadTeamJoinRequests() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        const { data, error } = await sb.from('team_join_requests')
+            .select('*, profiles:user_id(full_name, email), products:product_id(nome, ra_nome)')
+            .eq('status', 'pendente')
+            .order('created_at', { ascending: true });
+        if (error) throw error;
+        teamJoinRequestsCache = data || [];
+        teamJoinRequestsError = false;
+    } catch (err) {
+        console.warn('Erro ao carregar solicitações de equipe:', err);
+        teamJoinRequestsCache = [];
+        teamJoinRequestsError = true;
+    }
+    renderTeamJoinRequests();
+}
+
+function renderTeamJoinRequests() {
+    const container = document.getElementById('team-join-requests-container');
+    if (!container) return;
+
+    if (teamJoinRequestsError) {
+        container.innerHTML = '<div class="instruction">Não foi possível carregar as solicitações de equipe agora.</div>';
+        return;
+    }
+    if (!teamJoinRequestsCache.length) {
+        container.innerHTML = '<div class="instruction">Nenhuma solicitação pendente.</div>';
+        return;
+    }
+
+    container.innerHTML = teamJoinRequestsCache.map(r => {
+        const nome = (r.profiles && r.profiles.full_name) || (r.profiles && r.profiles.email) || 'Integrante';
+        const produto = r.products ? `${r.products.nome} (${r.products.ra_nome})` : 'Coordenação removida';
+        const papelLabel = r.papel === 'coordenador' ? '📌 Coordenador(a)' : '👥 Operacional';
+        return `
+            <div class="okr-card">
+                <div class="okr-card-header">
+                    <span class="okr-badge badge-operacional">👤 ${nome}</span>
+                    <span class="status-tag status-pendente">PENDENTE</span>
+                </div>
+                <p>${papelLabel} — ${produto}</p>
+                <div class="okr-btn-group" style="margin-top: 10px;">
+                    <button class="btn-primary" onclick="responderTeamJoinRequest('${r.id}', true)">✅ Aprovar</button>
+                    <button class="btn-secondary" onclick="responderTeamJoinRequest('${r.id}', false)">❌ Recusar</button>
+                </div>
+            </div>
+        `;
+    }).join('');
+}
+
+async function responderTeamJoinRequest(id, aprovar) {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const pedido = teamJoinRequestsCache.find(r => r.id === id);
+    if (!pedido) return;
+
+    if (aprovar) {
+        const { error: teamErr } = await sb.from('product_team').insert({ product_id: pedido.product_id, user_id: pedido.user_id, papel: pedido.papel });
+        if (teamErr) return showToast('Erro ao adicionar à equipe: ' + teamErr.message, { type: 'danger' });
+    }
+
+    const { error } = await sb.from('team_join_requests').update({
+        status: aprovar ? 'aprovado' : 'recusado',
+        respondido_por: okrCurrentUser.id,
+        respondido_em: new Date().toISOString()
+    }).eq('id', id);
+    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+    showToast(aprovar ? 'Solicitação aprovada — integrante adicionado à equipe.' : 'Solicitação recusada.', { type: 'success' });
+    await loadTeamJoinRequests();
+    await loadOKRData();
+}
+
+function compartilharConviteWhatsApp() {
+    const link = `${window.location.origin}${window.location.pathname.replace(/admin\.html$/, '')}convite.html`;
+    const texto = `Cadastro de equipe da campanha — crie sua conta e escolha sua Coordenação Regional: ${link}`;
+    window.open(`https://wa.me/?text=${encodeURIComponent(texto)}`, '_blank', 'noopener');
+}
+
+// ------------------------------------------
 // Bootstrap — chamado por admin.html depois que guardPage()
 // (auth-shared.js) já confirmou papel super_admin.
 // ------------------------------------------
@@ -225,6 +318,6 @@ async function initAdminPage(sb, ctx) {
     seedSupabaseClient(sb);
     setOkrUser(ctx.profile, []);
     renderComandoSkeleton();
-    await Promise.allSettled([loadOKRData(), loadPrazosTSE(), loadAgendaData(), fetchComandoCheckins(), fetchComandoExecucao()]);
+    await Promise.allSettled([loadOKRData(), loadPrazosTSE(), loadAgendaData(), fetchComandoCheckins(), fetchComandoExecucao(), loadTeamJoinRequests()]);
     renderComando();
 }

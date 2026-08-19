@@ -82,10 +82,18 @@
             <div class="okr-header-actions">
                 <h2>👥 Equipe</h2>
                 <div class="okr-btn-group">
+                    <button class="btn-secondary" onclick="compartilharConviteWhatsApp()">📲 Convidar pelo WhatsApp</button>
                     <button class="btn-primary" onclick="openNewEquipeModal()">👥 Adicionar à Equipe</button>
                 </div>
             </div>
+            <p class="instruction" style="font-size: 0.85rem; text-align: left; margin: 0 0 10px;">"Convidar pelo WhatsApp" manda o link de <code>convite.html</code>, onde a pessoa cria a própria conta e escolhe a Coordenação — o pedido cai em "Solicitações de Equipe" abaixo pra você aprovar.</p>
             <div id="equipe-list-container" class="equipe-cards-grid"></div>
+        </div>
+
+        <div class="okr-section" style="margin-top: 30px;">
+            <h2>🙋 Solicitações de Equipe</h2>
+            <p class="instruction" style="font-size: 0.85rem; text-align: left; margin: 0 0 10px;">Pedidos de quem se cadastrou pelo link de convite (WhatsApp) e ainda não tem Coordenação/papel confirmado.</p>
+            <div id="team-join-requests-container" class="okr-cards-grid"></div>
         </div>
 
         <div class="okr-section" style="margin-top: 30px;">
