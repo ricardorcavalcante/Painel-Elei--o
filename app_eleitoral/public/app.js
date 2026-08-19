@@ -1365,18 +1365,39 @@ function updateCoordenadorTabVisibility() {
     }
 }
 
+// O PostgREST do Supabase corta cada resposta em no máximo 1000 linhas por
+// padrão — inofensivo enquanto só a Ceilândia tinha quadrantes (dezenas a
+// poucas centenas), mas com as 37 RAs juntas passamos de 2.700 áreas, então
+// um .select() simples devolve só as primeiras 1000. Usado onde a tabela
+// "areas" é buscada inteira (sem filtrar por RA/produto).
+async function fetchAllRows(sb, table, selectStr, orderCol) {
+    const pageSize = 1000;
+    let all = [];
+    let from = 0;
+    while (true) {
+        let q = sb.from(table).select(selectStr);
+        if (orderCol) q = q.order(orderCol);
+        const { data, error } = await q.range(from, from + pageSize - 1);
+        if (error) throw error;
+        all = all.concat(data || []);
+        if (!data || data.length < pageSize) break;
+        from += pageSize;
+    }
+    return all;
+}
+
 async function loadOKRData() {
     const sb = initSupabaseClient();
     if (!sb) return;
     try {
-        const [periodsRes, productsRes, teamRes, objectivesRes, keyResultsRes, artefatosRes, areasRes, areaVolunteersRes] = await Promise.all([
+        const [periodsRes, productsRes, teamRes, objectivesRes, keyResultsRes, artefatosRes, areas, areaVolunteersRes] = await Promise.all([
             sb.from('periods').select('*').order('data_inicio', { ascending: false }),
             sb.from('products').select('*').order('nome'),
             sb.from('product_team').select('papel, product_id, user_id, profiles:user_id(full_name, email)'),
             sb.from('objectives').select('*').order('created_at', { ascending: false }),
             sb.from('key_results').select('*'),
             sb.from('okr_artefatos').select('*').order('created_at', { ascending: false }),
-            sb.from('areas').select('*').order('codigo'),
+            fetchAllRows(sb, 'areas', '*', 'codigo'),
             sb.from('area_volunteers').select('area_id, user_id, profiles:user_id(full_name, email)')
         ]);
 
@@ -1386,7 +1407,7 @@ async function loadOKRData() {
         okrDataCache.objectives = objectivesRes.data || [];
         okrDataCache.keyResults = keyResultsRes.data || [];
         okrDataCache.artefatos = artefatosRes.data || [];
-        okrDataCache.areas = areasRes.data || [];
+        okrDataCache.areas = areas || [];
         okrDataCache.areaVolunteers = areaVolunteersRes.data || [];
 
         if (!okrDataCache.activePeriodId || !okrDataCache.periods.some(p => p.id === okrDataCache.activePeriodId)) {
@@ -1411,8 +1432,7 @@ async function ensureAreasLoaded() {
     if (okrDataCache.areas.length) return;
     const sb = initSupabaseClient();
     if (!sb) return;
-    const { data } = await sb.from('areas').select('*').order('codigo');
-    okrDataCache.areas = data || [];
+    okrDataCache.areas = await fetchAllRows(sb, 'areas', '*', 'codigo');
 }
 
 function filterOKRLevel(level) {
@@ -3704,19 +3724,18 @@ async function loadCoordComparativo(requestId) {
     try {
         const sb = initSupabaseClient();
         const periodIds = coordDataCache.periods.map(p => p.id);
-        const [productsRes, objectivesRes, areasRes, volsRes] = await Promise.all([
+        const [productsRes, objectivesRes, areas, volsRes] = await Promise.all([
             sb.from('products').select('id, nome, ra_nome'),
             periodIds.length
                 ? sb.from('objectives').select('product_id, progresso').eq('nivel', 'tatico').in('period_id', periodIds)
                 : Promise.resolve({ data: [] }),
-            sb.from('areas').select('id, product_id'),
+            fetchAllRows(sb, 'areas', 'id, product_id'),
             sb.from('area_volunteers').select('area_id')
         ]);
         if (requestId !== coordRequestSeq) return; // seleção trocou durante o fetch
 
         const produtos = productsRes.data || [];
         const objetivos = objectivesRes.data || [];
-        const areas = areasRes.data || [];
         const idsComVoluntario = new Set((volsRes.data || []).map(v => v.area_id));
 
         if (!produtos.length) {
