@@ -14,29 +14,54 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
-        body { padding: 32px 16px; background: #f4f2ec; }
-        .stub-container { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .stub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
-        .stub-header h1 { font-size: 1.3rem; margin: 0; color: #1C201F; }
-        .stub-user { font-size: 0.85rem; color: #5B6360; text-align: right; }
-        .stub-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
-        .stub-body { color: #5B6360; font-size: 0.92rem; margin-top: 18px; }
+        body { background: #f4f2ec; }
+        .page-shell { max-width: 1200px; margin: 0 auto; padding: 24px 24px 64px; }
+        .page-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+        .page-topbar h1 { font-size: 1.4rem; margin: 0; color: var(--primary, #1F4E78); }
+        .page-user { font-size: 0.85rem; color: #5B6360; text-align: right; }
+        .page-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div id="stub-loading" class="stub-container">Verificando acesso…</div>
+    <div id="page-loading" class="page-shell">Verificando acesso…</div>
 
-    <div id="stub-content" class="stub-container" style="display:none">
-        <div class="stub-header">
-            <h1>🎯 OKRs</h1>
-            <div class="stub-user">
-                <div id="stub-user-name"></div>
-                <button id="stub-signout" class="stub-signout">Sair</button>
+    <div id="page-content" class="page-shell" style="display:none">
+        <div class="page-topbar">
+            <h1>🎯 Gestão de OKRs &amp; Coordenações Regionais</h1>
+            <div class="page-user">
+                <div id="page-user-name"></div>
+                <button id="page-signout" class="page-signout">Sair</button>
             </div>
         </div>
-        <p class="stub-body">Página de destino dos papéis <strong>super_admin</strong> e <strong>coordenador</strong>, criada na Fase 1 (fundação de autenticação e roteamento). O conteúdo real — CRUD de Ciclo/Coordenação/Objetivo/KR — chega na Fase 2 (migração de conteúdo).</p>
+
+        <div class="okr-btn-group" id="okr-btn-group"></div>
+
+        <div class="okr-level-filters" style="margin: 14px 0;">
+            <p class="poi-layers-title">Filtrar por Nível</p>
+            <button class="btn-filter-level active" data-level="all" onclick="filterOKRLevel('all')">Todos</button>
+            <button class="btn-filter-level" data-level="estrategico" onclick="filterOKRLevel('estrategico')">⭐ Estratégico</button>
+            <button class="btn-filter-level" data-level="tatico" onclick="filterOKRLevel('tatico')">📌 Tático</button>
+            <button class="btn-filter-level" data-level="operacional" onclick="filterOKRLevel('operacional')">👥 Operacional</button>
+        </div>
+
+        <div class="okr-period-bar">
+            <label for="okr-period-select">Ciclo:</label>
+            <select id="okr-period-select" onchange="changeOKRPeriod(this.value)"></select>
+        </div>
+
+        <div class="okr-section">
+            <h3>⭐ Nível Estratégico &amp; Tático (Objetivos e Resultados-Chave)</h3>
+            <div id="okr-list-container" class="okr-cards-grid"></div>
+        </div>
+
+        <div class="okr-section" style="margin-top: 30px;">
+            <h3>📄 Artefatos &amp; Comprovantes Digitalizados de Campo</h3>
+            <div id="artefatos-list-container" class="artefatos-cards-grid"></div>
+        </div>
     </div>
 
+    <script src="okr-shared.js"></script>
+    <script src="okrs.js"></script>
     <script type="module">
         import { guardPage, signOut } from './auth-shared.js';
 
@@ -44,14 +69,15 @@
             const result = await guardPage({ allowedRoles: ['superAdmin', 'coordenador'] });
             if (!result) return;
 
-            document.getElementById('stub-loading').style.display = 'none';
-            const content = document.getElementById('stub-content');
-            content.style.display = '';
-            document.getElementById('stub-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
-            document.getElementById('stub-signout').addEventListener('click', async () => {
+            document.getElementById('page-loading').style.display = 'none';
+            document.getElementById('page-content').style.display = '';
+            document.getElementById('page-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
+            document.getElementById('page-signout').addEventListener('click', async () => {
                 await signOut(result.sb);
                 window.location.href = 'login.html';
             });
+
+            await window.initOkrsPage(result.sb, result.ctx);
         }
 
         init();

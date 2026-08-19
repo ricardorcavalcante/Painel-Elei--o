@@ -15,34 +15,12 @@
 // nesta página pra filtrar junto).
 
 // ------------------------------------------
-// Equipe — ações de escrita (leitura/render fica em okr-shared.js)
+// Equipe — só o "Atribuir voluntário a quadrante" fica aqui:
+// openNewEquipeModal() mora em okr-shared.js porque tanto admin.html
+// quanto okrs.html mostram o botão "👥 Adicionar à Equipe" (o
+// renderOKRActionButtons original já liberava essa ação pra
+// coordenador, não só pra super_admin).
 // ------------------------------------------
-async function openNewEquipeModal() {
-    const sb = initSupabaseClient();
-    if (!sb) return;
-    const disponiveis = okrCurrentUser.is_super_admin
-        ? okrDataCache.products
-        : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
-    if (!disponiveis.length) return alert('Nenhuma Coordenação Regional disponível para você.');
-
-    const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
-    const escolha = prompt(`Adicionar integrante a qual Coordenação?\n${opcoes}`);
-    const idx = parseInt(escolha, 10) - 1;
-    const produto = disponiveis[idx];
-    if (!produto) return alert('Coordenação inválida.');
-
-    const email = prompt('E-mail do integrante (precisa já ter feito Cadastro no login de OKRs):');
-    if (!email) return;
-    const papel = (prompt('Papel: coordenador ou operacional', 'operacional') || 'operacional').toLowerCase();
-
-    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
-    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.');
-
-    const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
-    if (error) return alert('Erro: ' + error.message);
-    await loadOKRData();
-}
-
 async function openAtribuirVoluntarioModal(areaId) {
     const sb = initSupabaseClient();
     if (!sb) return;

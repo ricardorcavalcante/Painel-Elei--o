@@ -311,6 +311,36 @@ function renderEquipe() {
     container.innerHTML = html || '<div class="instruction">Nenhuma coordenação encontrada para este filtro.</div>';
 }
 
+// Compartilhado entre admin.html e okrs.html: o botão "👥 Adicionar à
+// Equipe" (renderOKRActionButtons, mais abaixo em okrs.js) é liberado
+// tanto pra super_admin quanto pra coordenador (hasProduct), então essa
+// ação não é exclusiva de nenhuma das duas páginas.
+async function openNewEquipeModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    const disponiveis = okrCurrentUser.is_super_admin
+        ? okrDataCache.products
+        : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
+    if (!disponiveis.length) return alert('Nenhuma Coordenação Regional disponível para você.');
+
+    const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
+    const escolha = prompt(`Adicionar integrante a qual Coordenação?\n${opcoes}`);
+    const idx = parseInt(escolha, 10) - 1;
+    const produto = disponiveis[idx];
+    if (!produto) return alert('Coordenação inválida.');
+
+    const email = prompt('E-mail do integrante (precisa já ter feito Cadastro no login de OKRs):');
+    if (!email) return;
+    const papel = (prompt('Papel: coordenador ou operacional', 'operacional') || 'operacional').toLowerCase();
+
+    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
+    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.');
+
+    const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
+    if (error) return alert('Erro: ' + error.message);
+    await loadOKRData();
+}
+
 // ------------------------------------------
 // Calendário do TSE + Agenda (leitura básica — populate agendaDataCache
 // pro painel "Agenda dos Próximos 3 Dias" da Central de Comando; a
