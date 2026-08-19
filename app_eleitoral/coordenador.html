@@ -14,44 +14,147 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
-        body { padding: 32px 16px; background: #f4f2ec; }
-        .stub-container { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .stub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
-        .stub-header h1 { font-size: 1.3rem; margin: 0; color: #1C201F; }
-        .stub-user { font-size: 0.85rem; color: #5B6360; text-align: right; }
-        .stub-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
-        .stub-body { color: #5B6360; font-size: 0.92rem; margin-top: 18px; }
+        body { background: #f4f2ec; }
+        .page-shell { max-width: 1200px; margin: 0 auto; padding: 24px 24px 64px; }
+        .page-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+        .page-topbar h1 { font-size: 1.4rem; margin: 0; color: var(--primary, #1F4E78); }
+        .page-user { font-size: 0.85rem; color: #5B6360; text-align: right; }
+        .page-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
     </style>
 </head>
 <body>
-    <div id="stub-loading" class="stub-container">Verificando acesso…</div>
+    <div id="page-loading" class="page-shell">Verificando acesso…</div>
 
-    <div id="stub-content" class="stub-container" style="display:none">
-        <div class="stub-header">
-            <h1>🧑‍💼 Painel do Coordenador</h1>
-            <div class="stub-user">
-                <div id="stub-user-name"></div>
-                <button id="stub-signout" class="stub-signout">Sair</button>
+    <div id="page-content" class="page-shell" style="display:none">
+        <div class="page-topbar">
+            <div class="okr-header-actions" style="flex:1;">
+                <h1>🧑‍💼 Painel do Coordenador</h1>
+                <div id="coord-selector-box" class="okr-period-bar" style="display: none;"></div>
+            </div>
+            <div class="page-user">
+                <div id="page-user-name"></div>
+                <button id="page-signout" class="page-signout">Sair</button>
             </div>
         </div>
-        <p class="stub-body">Página de destino do papel <strong>coordenador</strong> (product_team.papel='coordenador'), criada na Fase 1 (fundação de autenticação e roteamento). O conteúdo real — Equipe, Quadrantes, Grade Operacional, KRs sob responsabilidade, Agenda e Check-ins pendentes — chega na Fase 2 (migração de conteúdo).</p>
+
+        <div id="coord-empty" class="instruction" style="display: none;">Você ainda não foi associado a nenhuma Coordenação Regional.</div>
+
+        <div id="coord-app" style="display: none;">
+            <div class="comando-grid" style="grid-template-columns: repeat(2, 1fr);">
+                <div class="comando-panel">
+                    <h3>👥 Equipe</h3>
+                    <div id="coord-equipe-container"></div>
+                </div>
+                <div class="comando-panel">
+                    <h3>🗺️ Quadrantes Cobertos</h3>
+                    <div id="coord-quadrantes-container"></div>
+                </div>
+            </div>
+
+            <div class="okr-section" style="margin-top: 10px;">
+                <div class="okr-header-actions">
+                    <h3>🗺️ Mapa de Quadrantes</h3>
+                    <div class="okr-period-bar" style="flex-wrap: wrap;">
+                        <button class="btn-secondary active" id="coord-map-mode-atribuir" onclick="setCoordMapMode('atribuir')">👤 Atribuir voluntário</button>
+                        <button class="btn-secondary" id="coord-map-mode-agrupar" onclick="setCoordMapMode('agrupar')">🏷️ Nomear perímetro</button>
+                        <button class="btn-secondary active" id="coord-map-tipo-roadmap" onclick="setCoordMapTipo('roadmap')">🗺️ Mapa</button>
+                        <button class="btn-secondary" id="coord-map-tipo-satellite" onclick="setCoordMapTipo('satellite')">🛰️ Satélite</button>
+                    </div>
+                </div>
+                <p class="instruction" id="coord-map-hint" style="font-size: 0.85rem;"></p>
+                <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
+                    <span><span style="display:inline-block; width:10px; height:10px; background:#c62828; border-radius:2px; margin-right:4px;"></span>Sem atribuição</span>
+                    <span><span style="display:inline-block; width:10px; height:10px; background:#28a745; border-radius:2px; margin-right:4px;"></span>1 voluntário ou perímetro</span>
+                    <span><span style="display:inline-block; width:10px; height:10px; background:#1565c0; border-radius:2px; margin-right:4px;"></span>Mais de 1 (sobreposição)</span>
+                    <span><span style="display:inline-block; width:10px; height:10px; border:2px solid #f5a623; border-radius:2px; margin-right:4px;"></span>Selecionado</span>
+                </div>
+                <div id="coord-map" style="height: 380px; border-radius: 10px; overflow: hidden;"></div>
+                <div id="coord-map-selection-bar" class="okr-period-bar" style="display: none; margin-top: 10px; flex-wrap: wrap;">
+                    <span id="coord-map-selection-count"></span>
+                    <span id="coord-map-selection-action"></span>
+                    <button class="btn-secondary" onclick="limparSelecaoCoordMap()">Limpar seleção</button>
+                </div>
+                <div id="coord-assign-panel"></div>
+            </div>
+
+            <div class="okr-section" id="coord-grade-section" style="margin-top: 10px;">
+                <div class="okr-header-actions">
+                    <h3>🗂️ Grade Operacional</h3>
+                    <div class="okr-period-bar" style="flex-wrap: wrap;">
+                        <button class="btn-secondary" onclick="exportarGradeOperacional()">🖨️ Exportar/Imprimir</button>
+                        <button class="btn-secondary" onclick="gerarLinkCompartilhamentoGrade()">🔗 Link de compartilhamento</button>
+                    </div>
+                </div>
+                <p class="instruction" style="font-size: 0.85rem;">Uma linha por perímetro nomeado no mapa acima. Para adicionar um novo (ex: "AR 26"), use "🏷️ Nomear perímetro" no mapa — clicar no círculo aqui só muda o status.</p>
+                <div class="okr-period-bar" style="font-size: 0.8rem; gap: 14px; margin-bottom: 6px;">
+                    <span><span class="status-circle status-nao_iniciado"></span>Não iniciado</span>
+                    <span><span class="status-circle status-em_andamento"></span>Em andamento</span>
+                    <span><span class="status-circle status-concluido"></span>Concluído</span>
+                </div>
+                <div id="coord-grade-container" class="comando-grid" style="grid-template-columns: repeat(3, 1fr);"></div>
+                <div id="coord-grade-share-box" class="instruction" style="display: none; margin-top: 10px;"></div>
+            </div>
+
+            <div class="okr-section" style="margin-top: 10px;">
+                <div class="okr-header-actions">
+                    <h3>📌 KRs sob Responsabilidade</h3>
+                    <div id="coord-period-bar" class="okr-period-bar">
+                        <label for="coord-period-select">Ciclo:</label>
+                        <select id="coord-period-select" onchange="changeCoordPeriod(this.value)"></select>
+                    </div>
+                </div>
+                <div id="coord-kr-container" class="okr-cards-grid"></div>
+            </div>
+
+            <div class="okr-section" style="margin-top: 30px;">
+                <h3>🗓️ Status de Agenda da Região</h3>
+                <p class="instruction" style="font-size: 0.85rem;">Somente leitura — a aprovação das solicitações continua exclusiva do nível estratégico, na Central de Comando.</p>
+                <div id="coord-agenda-container" class="okr-cards-grid"></div>
+            </div>
+
+            <div class="okr-section" style="margin-top: 30px;">
+                <h3>✅ Check-ins Pendentes de Aprovação</h3>
+                <p class="instruction" style="font-size: 0.85rem;">Check-in feito fora dos limites do quadrante atribuído fica pendente até você aprovar ou rejeitar.</p>
+                <div id="coord-checkins-pendentes-container" class="okr-cards-grid"></div>
+            </div>
+
+            <div class="okr-section" style="margin-top: 30px;">
+                <div class="okr-header-actions">
+                    <h3>📊 Comparativo entre Regiões</h3>
+                    <div id="coord-comparativo-toggle-box" class="okr-period-bar" style="display: none;">
+                        <label for="coord-comparativo-toggle">
+                            <input type="checkbox" id="coord-comparativo-toggle" onchange="toggleComparativoRegioes(this.checked)">
+                            Liberar comparativo entre Coordenações
+                        </label>
+                    </div>
+                </div>
+                <div id="coord-comparativo-container"></div>
+            </div>
+        </div>
     </div>
 
+    <!-- Maps JS API sem libraries=geometry: este mapa só desenha
+         google.maps.Rectangle e faz interseção de bounds
+         (LatLngBounds.intersects) — geometry.poly não é usado aqui. -->
+    <script src="https://maps.googleapis.com/maps/api/js?key=%VITE_GOOGLE_MAPS_API_KEY%"></script>
+    <script src="okr-shared.js"></script>
+    <script src="coordenador.js"></script>
     <script type="module">
         import { guardPage, signOut } from './auth-shared.js';
 
         async function init() {
-            const result = await guardPage({ allowedRoles: ['coordenador'] });
+            const result = await guardPage({ allowedRoles: ['coordenador', 'superAdmin'] });
             if (!result) return;
 
-            document.getElementById('stub-loading').style.display = 'none';
-            const content = document.getElementById('stub-content');
-            content.style.display = '';
-            document.getElementById('stub-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
-            document.getElementById('stub-signout').addEventListener('click', async () => {
+            document.getElementById('page-loading').style.display = 'none';
+            document.getElementById('page-content').style.display = '';
+            document.getElementById('page-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
+            document.getElementById('page-signout').addEventListener('click', async () => {
                 await signOut(result.sb);
                 window.location.href = 'login.html';
             });
+
+            await window.initCoordenadorPage(result.sb, result.ctx);
         }
 
         init();
