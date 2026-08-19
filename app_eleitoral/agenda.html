@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Agenda Pública — Painel Eleitoral DF 2026</title>
 
+    <meta name="description" content="Agenda pública de compromissos confirmados e calendário oficial do TSE para as Eleições 2026.">
+
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script>
         window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
@@ -13,22 +15,42 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
-        body { padding: 32px 16px; background: #f4f2ec; }
-        .stub-container { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .stub-container h1 { font-size: 1.3rem; margin: 0 0 8px; color: #1C201F; }
-        .stub-body { color: #5B6360; font-size: 0.92rem; margin-top: 18px; }
+        body { background: #f4f2ec; }
+        .page-shell { max-width: 900px; margin: 0 auto; padding: 24px 24px 64px; }
+        .page-shell h1 { font-size: 1.4rem; margin: 0 0 20px; color: var(--primary, #1F4E78); }
     </style>
 </head>
 <body>
-    <!--
-        Página pública — sem login, sem guardPage(). agenda_public_read
-        (schema.sql) já expõe eventos confirmados a anon+authenticated;
-        o conteúdo real (calendário/cartões) chega na Fase 2, reutilizando
-        o componente de Agenda que nasce na Fase 3.
-    -->
-    <div class="stub-container">
-        <h1>🗓️ Agenda Pública</h1>
-        <p class="stub-body">Página pública (sem login), criada na Fase 1 (fundação de autenticação e roteamento). O conteúdo real — a agenda de compromissos confirmados da candidata — chega na Fase 2 (migração de conteúdo), reaproveitando a política RLS <code>agenda_public_read</code> já existente.</p>
+    <div class="page-shell">
+        <h1>🗓️ Agenda do Candidato</h1>
+
+        <div class="okr-section">
+            <h3>📢 Compromissos Confirmados</h3>
+            <div id="agenda-publica-container" class="okr-cards-grid">
+                <div class="instruction">Carregando…</div>
+            </div>
+        </div>
+
+        <div class="okr-section" style="margin-top: 30px;">
+            <h3>⚖️ Calendário Oficial do TSE — Prazos até a Eleição</h3>
+            <p class="instruction" style="font-size: 0.85rem;">Fonte: Resolução TSE nº 23.760/2026. Passe o mouse sobre uma linha para ver a descrição completa do prazo.</p>
+            <div class="table-container">
+                <table id="prazos-tse-table">
+                    <thead>
+                        <tr>
+                            <th>Data</th>
+                            <th>Prazo</th>
+                            <th>Categoria</th>
+                        </tr>
+                    </thead>
+                    <tbody id="prazos-tse-tbody">
+                        <tr><td colspan="3" class="instruction">Carregando…</td></tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div>
+
+    <script src="agenda.js"></script>
 </body>
 </html>
