@@ -30,9 +30,12 @@
     <div id="page-content" class="page-shell" style="display:none">
         <div class="page-topbar">
             <h1>🎯 Gestão de OKRs &amp; Coordenações Regionais</h1>
-            <div class="page-user">
-                <div id="page-user-name"></div>
-                <button id="page-signout" class="page-signout">Sair</button>
+            <div class="page-topbar-right">
+                <div id="page-nav-slot"></div>
+                <div class="page-user">
+                    <div id="page-user-name"></div>
+                    <button id="page-signout" class="page-signout">Sair</button>
+                </div>
             </div>
         </div>
 
@@ -67,7 +70,7 @@
     <script src="okr-shared.js"></script>
     <script src="okrs.js"></script>
     <script type="module">
-        import { guardPage, signOut } from './auth-shared.js';
+        import { guardPage, signOut, renderPageNav } from './auth-shared.js';
 
         async function init() {
             const result = await guardPage({ allowedRoles: ['superAdmin', 'coordenador'] });
@@ -75,6 +78,7 @@
 
             document.getElementById('page-loading').style.display = 'none';
             document.getElementById('page-content').style.display = '';
+            renderPageNav(result.ctx, 'okrs.html');
             document.getElementById('page-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
             document.getElementById('page-signout').addEventListener('click', async () => {
                 await signOut(result.sb);

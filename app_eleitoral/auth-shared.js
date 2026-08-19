@@ -98,6 +98,55 @@ export function resolveRoleDestination(ctx) {
     return 'pendente';
 }
 
+// Navegação entre páginas de papel (dropdown no topbar) — só entra em
+// jogo pra quem realmente tem mais de um destino acessível: super_admin
+// (admin/okrs/coordenador) e coordenador (coordenador/okrs, já que
+// okrs.html aceita os dois — mesmos allowedRoles usados em cada
+// guardPage()). candidata.html/voluntario.html não entram aqui: cada
+// papel ali só tem uma página própria, nenhuma navegação a oferecer.
+const PAGE_NAV_ENTRIES = [
+    { role: 'superAdmin', href: 'admin.html', label: '🧭 Central de Comando' },
+    { role: 'coordenador', href: 'coordenador.html', label: '🧑‍💼 Painel do Coordenador' },
+    { anyOf: ['superAdmin', 'coordenador'], href: 'okrs.html', label: '🎯 OKRs & Coordenações' },
+];
+
+// Renderiza o dropdown de navegação em #page-nav-slot (se a página tiver
+// esse elemento) com os destinos que o papel do usuário permite. Não
+// renderiza nada se sobrar só 1 destino (nada pra navegar). currentHref
+// é o nome do próprio arquivo (ex. 'admin.html'), pra marcar o item
+// ativo e não linkar pra própria página.
+export function renderPageNav(ctx, currentHref) {
+    const container = document.getElementById('page-nav-slot');
+    if (!container) return;
+
+    const roles = activeRoles(ctx);
+    const entries = PAGE_NAV_ENTRIES.filter(e =>
+        e.role ? roles.has(e.role) : e.anyOf.some(r => roles.has(r))
+    );
+    if (entries.length < 2) return;
+
+    container.innerHTML = `
+        <div class="page-nav">
+            <button type="button" class="page-nav-toggle" aria-haspopup="true" aria-expanded="false">☰ Navegar ▾</button>
+            <div class="page-nav-menu">
+                ${entries.map(e => `<a href="${e.href}" class="page-nav-item${e.href === currentHref ? ' active' : ''}">${e.label}</a>`).join('')}
+            </div>
+        </div>
+    `;
+
+    const toggle = container.querySelector('.page-nav-toggle');
+    const menu = container.querySelector('.page-nav-menu');
+    toggle.addEventListener('click', (evt) => {
+        evt.stopPropagation();
+        const open = menu.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', String(open));
+    });
+    document.addEventListener('click', () => {
+        menu.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+    });
+}
+
 let authListenerBound = false;
 
 // Registra o listener de auth uma única vez por carregamento de
