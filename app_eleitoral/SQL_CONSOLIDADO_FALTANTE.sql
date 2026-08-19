@@ -4050,3 +4050,15 @@ DROP POLICY IF EXISTS "grade_share_links_write_admin_or_coordenador" ON public.g
 CREATE POLICY "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links FOR ALL TO authenticated
     USING (public.is_super_admin() OR public.is_coordenador_of_product(product_id))
     WITH CHECK (public.is_super_admin() OR public.is_coordenador_of_product(product_id));
+
+
+-- ============================================================
+-- PARTE 9 — Fundação de autenticação por papel (Fase 1 da
+-- reestruturação por papel). login.html passa a resolver o destino do
+-- redirect pós-login por um papel — is_candidata é o único papel que
+-- ainda não tinha uma coluna própria (coordenador/operacional já vêm
+-- de product_team.papel; voluntário já vem de ter linha em
+-- area_volunteers; is_super_admin já existe em profiles).
+-- ============================================================
+
+ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS is_candidata BOOLEAN NOT NULL DEFAULT FALSE;

@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel da Candidata — Painel Eleitoral DF 2026</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script>
+        window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
+        window.SUPABASE_ANON_KEY = "%VITE_SUPABASE_ANON_KEY%";
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { padding: 32px 16px; background: #f4f2ec; }
+        .stub-container { max-width: 640px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 32px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
+        .stub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
+        .stub-header h1 { font-size: 1.3rem; margin: 0; color: #1C201F; }
+        .stub-user { font-size: 0.85rem; color: #5B6360; text-align: right; }
+        .stub-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
+        .stub-body { color: #5B6360; font-size: 0.92rem; margin-top: 18px; }
+    </style>
+</head>
+<body>
+    <div id="stub-loading" class="stub-container">Verificando acesso…</div>
+
+    <div id="stub-content" class="stub-container" style="display:none">
+        <div class="stub-header">
+            <h1>⭐ Painel da Candidata</h1>
+            <div class="stub-user">
+                <div id="stub-user-name"></div>
+                <button id="stub-signout" class="stub-signout">Sair</button>
+            </div>
+        </div>
+        <p class="stub-body">Página de destino do papel <strong>is_candidata</strong>, criada na Fase 1 (fundação de autenticação e roteamento) — somente leitura por decisão de arquitetura, sem nenhum botão de ação. O conteúdo real chega na Fase 2 (migração de conteúdo).</p>
+    </div>
+
+    <script type="module">
+        import { guardPage, signOut } from './auth-shared.js';
+
+        async function init() {
+            const result = await guardPage({ allowedRoles: ['candidata'] });
+            if (!result) return;
+
+            document.getElementById('stub-loading').style.display = 'none';
+            const content = document.getElementById('stub-content');
+            content.style.display = '';
+            document.getElementById('stub-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
+            document.getElementById('stub-signout').addEventListener('click', async () => {
+                await signOut(result.sb);
+                window.location.href = 'login.html';
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>

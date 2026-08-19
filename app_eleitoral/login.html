@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrar — Painel Eleitoral DF 2026</title>
+    <meta name="robots" content="noindex, nofollow">
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
+    <script>
+        // Mesmo mecanismo de interpolação em build time usado em index.html e grade-publica.html.
+        window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
+        window.SUPABASE_ANON_KEY = "%VITE_SUPABASE_ANON_KEY%";
+    </script>
+
+    <link rel="stylesheet" href="style.css">
+    <style>
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f4f2ec; padding: 24px 16px; }
+        .login-card { width: 100%; max-width: 360px; background: #fff; border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        .login-card h1 { font-size: 1.25rem; margin: 0 0 6px; color: #1C201F; }
+        .login-card .subtitle { font-size: 0.85rem; color: #5B6360; margin: 0 0 22px; }
+        .login-field { display: block; width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; box-sizing: border-box; }
+        .login-btn { display: block; width: 100%; padding: 10px 12px; margin-bottom: 10px; border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer; }
+        .login-btn-primary { background: #0F5C5B; color: #fff; }
+        .login-btn-primary:hover { background: #0A3E3D; }
+        .login-btn-google { background: #fff; color: #333; border: 1px solid #ddd; }
+        .login-btn-google:hover { background: #f7f7f7; }
+        .login-msg { font-size: 0.85rem; margin: 10px 0 0; min-height: 1.2em; }
+        .login-msg.error { color: #C62828; }
+        .login-msg.info { color: #5B6360; }
+        .login-loading { text-align: center; color: #5B6360; font-size: 0.9rem; }
+    </style>
+</head>
+<body>
+    <div class="login-card">
+        <div id="login-checking" class="login-loading">Verificando sessão…</div>
+
+        <form id="login-form" style="display:none" onsubmit="return false;">
+            <h1>Painel Eleitoral DF 2026</h1>
+            <p class="subtitle">Entre com sua conta para acessar seu painel.</p>
+
+            <input type="email" id="login-email" class="login-field" placeholder="e-mail" autocomplete="email">
+            <input type="password" id="login-password" class="login-field" placeholder="senha" autocomplete="current-password">
+            <button type="submit" id="login-submit" class="login-btn login-btn-primary">Entrar</button>
+            <button type="button" id="login-google" class="login-btn login-btn-google">🌐 Entrar com Google</button>
+
+            <p id="login-msg" class="login-msg"></p>
+        </form>
+    </div>
+
+    <script type="module">
+        import { initSupabaseClient, loadSessionContext, resolveRoleDestination, signInEmail, signInGoogle } from './auth-shared.js';
+
+        const checkingEl = document.getElementById('login-checking');
+        const formEl = document.getElementById('login-form');
+        const msgEl = document.getElementById('login-msg');
+
+        function setMsg(text, kind) {
+            msgEl.textContent = text || '';
+            msgEl.className = 'login-msg' + (kind ? ' ' + kind : '');
+        }
+
+        function showForm() {
+            checkingEl.style.display = 'none';
+            formEl.style.display = '';
+        }
+
+        // Se já existe sessão (voluntário voltando com sessão persistida,
+        // ou retorno do redirect do Google OAuth), resolve o destino sem
+        // exigir novo login — mesmo comportamento de bootstrapComandoSession()
+        // em app.js, mas aqui como porta de entrada própria.
+        async function redirectIfLoggedIn(sb) {
+            const ctx = await loadSessionContext(sb);
+            const dest = resolveRoleDestination(ctx);
+            if (dest === 'pendente') {
+                setMsg('🕓 Acesso pendente: sua conta ainda não tem papel atribuído. Fale com o administrador da campanha.', 'info');
+                showForm();
+                formEl.querySelectorAll('input, button').forEach(el => el.disabled = true);
+                return true;
+            }
+            if (dest) {
+                window.location.href = dest;
+                return true;
+            }
+            return false;
+        }
+
+        async function init() {
+            const sb = initSupabaseClient();
+            if (!sb) {
+                checkingEl.textContent = 'Painel não configurado: defina VITE_SUPABASE_URL e VITE_SUPABASE_ANON_KEY.';
+                return;
+            }
+
+            if (await redirectIfLoggedIn(sb)) return;
+            showForm();
+
+            document.getElementById('login-submit').addEventListener('click', async () => {
+                setMsg('');
+                const email = document.getElementById('login-email').value.trim();
+                const password = document.getElementById('login-password').value;
+                if (!email || !password) { setMsg('Informe e-mail e senha.', 'error'); return; }
+
+                const { error } = await signInEmail(sb, email, password);
+                if (error) { setMsg('Erro ao entrar: ' + error.message, 'error'); return; }
+                await redirectIfLoggedIn(sb);
+            });
+
+            document.getElementById('login-google').addEventListener('click', async () => {
+                setMsg('');
+                const { error } = await signInGoogle(sb);
+                if (error) setMsg('Erro ao entrar com Google: ' + error.message, 'error');
+            });
+        }
+
+        init();
+    </script>
+</body>
+</html>
