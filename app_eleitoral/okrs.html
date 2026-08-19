@@ -73,7 +73,7 @@
         import { guardPage, signOut, renderPageNav } from './auth-shared.js';
 
         async function init() {
-            const result = await guardPage({ allowedRoles: ['superAdmin', 'coordenador'] });
+            const result = await guardPage({ allowedRoles: ['superAdmin', 'coordenador', 'candidata'] });
             if (!result) return;
 
             document.getElementById('page-loading').style.display = 'none';

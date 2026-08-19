@@ -100,14 +100,19 @@ export function resolveRoleDestination(ctx) {
 
 // Navegação entre páginas de papel (dropdown no topbar) — só entra em
 // jogo pra quem realmente tem mais de um destino acessível: super_admin
-// (admin/okrs/coordenador) e coordenador (coordenador/okrs, já que
-// okrs.html aceita os dois — mesmos allowedRoles usados em cada
-// guardPage()). candidata.html/voluntario.html não entram aqui: cada
-// papel ali só tem uma página própria, nenhuma navegação a oferecer.
+// e candidata (admin/coordenador/okrs/candidata/mapa — candidata virou
+// o perfil principal, com acesso pleno às páginas de estratégia,
+// aprovação de agenda e mapa de quadrantes) e coordenador
+// (coordenador/okrs, já que okrs.html aceita os três — mesmos
+// allowedRoles usados em cada guardPage()). voluntario.html não entra
+// aqui: esse papel só tem uma página própria, nenhuma navegação a
+// oferecer.
 const PAGE_NAV_ENTRIES = [
-    { role: 'superAdmin', href: 'admin.html', label: '🧭 Central de Comando' },
-    { role: 'coordenador', href: 'coordenador.html', label: '🧑‍💼 Painel do Coordenador' },
-    { anyOf: ['superAdmin', 'coordenador'], href: 'okrs.html', label: '🎯 OKRs & Coordenações' },
+    { anyOf: ['superAdmin', 'candidata'], href: 'admin.html', label: '🧭 Central de Comando' },
+    { anyOf: ['coordenador', 'superAdmin', 'candidata'], href: 'coordenador.html', label: '🧑‍💼 Painel do Coordenador' },
+    { anyOf: ['superAdmin', 'coordenador', 'candidata'], href: 'okrs.html', label: '🎯 OKRs & Coordenações' },
+    { role: 'candidata', href: 'candidata.html', label: '⭐ Painel da Candidata' },
+    { anyOf: ['superAdmin', 'coordenador', 'candidata'], href: 'index.html', label: '🗺️ Mapa & Dashboard' },
 ];
 
 // Renderiza o dropdown de navegação em #page-nav-slot (se a página tiver

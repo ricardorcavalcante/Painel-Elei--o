@@ -73,7 +73,7 @@ let coordDragSelect = { active: false, startPixel: null, boxEl: null };
 // entre as que ele mesmo coordena)
 // ------------------------------------------
 function getCoordProductOptions() {
-    if (okrCurrentUser && okrCurrentUser.is_super_admin) return okrDataCache.products;
+    if (isStrategicUser(okrCurrentUser)) return okrDataCache.products;
     return okrDataCache.products.filter(p => okrUserCoordProductIds.includes(p.id));
 }
 
@@ -864,6 +864,14 @@ function renderCoordAgenda() {
 // Check-ins pendentes de aprovação (check-in fora dos limites do
 // quadrante atribuído)
 // ------------------------------------------
+// Aprovar/rejeitar check-in continua exclusivo de quem é de fato
+// coordenador de alguma Coordenação (ou super_admin) — candidata agora
+// acessa coordenador.html pra ver mapa/Grade Operacional/atribuir
+// voluntário, mas essa ação específica fica de fora (decisão de produto).
+function podeAprovarCheckin() {
+    return !!(okrCurrentUser && okrCurrentUser.is_super_admin) || okrUserCoordProductIds.length > 0;
+}
+
 function renderCoordCheckinsPendentes() {
     const container = document.getElementById('coord-checkins-pendentes-container');
     if (!container) return;
@@ -871,6 +879,7 @@ function renderCoordCheckinsPendentes() {
         container.innerHTML = '<div class="instruction">Nenhum check-in pendente de aprovação.</div>';
         return;
     }
+    const podeAprovar = podeAprovarCheckin();
     container.innerHTML = coordDataCache.checkinsPendentes.map(c => {
         const nome = (c.profiles && c.profiles.full_name) || (c.profiles && c.profiles.email) || 'Voluntário(a)';
         return `
@@ -881,10 +890,12 @@ function renderCoordCheckinsPendentes() {
             </div>
             <p>${c.descricao}</p>
             <div class="okr-card-footer"><span>${formatAgendaDateTime(c.created_at)}</span></div>
+            ${podeAprovar ? `
             <div class="okr-btn-group" style="margin-top: 10px;">
                 <button class="btn-primary" onclick="responderCheckinCoord('${c.id}', true)">✅ Aprovar</button>
                 <button class="btn-secondary" onclick="responderCheckinCoord('${c.id}', false)">❌ Rejeitar</button>
             </div>
+            ` : ''}
         </div>
         `;
     }).join('');

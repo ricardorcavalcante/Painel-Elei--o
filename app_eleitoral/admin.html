@@ -42,6 +42,7 @@
         <div class="comando-kpis">
             <div class="comando-kpi-card" id="comando-kpi-semaforo"></div>
             <div class="comando-kpi-card" id="comando-kpi-cobertura"></div>
+            <div class="comando-kpi-card" id="comando-kpi-execucao"></div>
             <div class="comando-kpi-card" id="comando-kpi-lider"></div>
             <div class="comando-kpi-card" id="comando-kpi-prazo"></div>
         </div>
@@ -70,6 +71,11 @@
                 <h3>🗓️ Agenda dos Próximos 3 Dias</h3>
                 <div id="comando-radar-agenda"></div>
             </div>
+        </div>
+
+        <div class="okr-section" style="margin-top: 30px;">
+            <h3>📋 Todas as Coordenações</h3>
+            <div id="comando-consolidado-container"></div>
         </div>
 
         <div class="okr-section" style="margin-top: 30px;">
@@ -103,7 +109,7 @@
         import { guardPage, signOut, renderPageNav } from './auth-shared.js';
 
         async function init() {
-            const result = await guardPage({ allowedRoles: ['superAdmin'] });
+            const result = await guardPage({ allowedRoles: ['superAdmin', 'candidata'] });
             if (!result) return;
 
             document.getElementById('page-loading').style.display = 'none';

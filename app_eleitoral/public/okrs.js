@@ -18,7 +18,7 @@ function renderOKRActionButtons() {
         box.innerHTML = '';
         return;
     }
-    const isAdmin = !!okrCurrentUser.is_super_admin;
+    const isAdmin = isStrategicUser(okrCurrentUser);
     const hasProduct = okrUserProductIds.length > 0;
     let html = '';
     if (isAdmin) {
@@ -160,7 +160,7 @@ async function openNewObjectiveModal(nivel) {
 
     let product_id = null;
     if (nivel === 'tatico') {
-        const disponiveis = okrCurrentUser.is_super_admin
+        const disponiveis = isStrategicUser(okrCurrentUser)
             ? okrDataCache.products
             : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
         if (!disponiveis.length) return showToast('Nenhuma Coordenação Regional disponível para você.', { type: 'warning' });

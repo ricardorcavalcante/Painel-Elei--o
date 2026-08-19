@@ -225,6 +225,6 @@ async function initAdminPage(sb, ctx) {
     seedSupabaseClient(sb);
     setOkrUser(ctx.profile, []);
     renderComandoSkeleton();
-    await Promise.allSettled([loadOKRData(), loadPrazosTSE(), loadAgendaData(), fetchComandoCheckins()]);
+    await Promise.allSettled([loadOKRData(), loadPrazosTSE(), loadAgendaData(), fetchComandoCheckins(), fetchComandoExecucao()]);
     renderComando();
 }

@@ -23,6 +23,8 @@ let agendaDataCache = { eventos: [] };
 let prazosTSECache = [];
 let comandoCheckins = [];
 let comandoCheckinsError = false;
+let comandoExecucao = [];
+let comandoExecucaoError = false;
 
 // Stubs inertes: funções copiadas de app.js referenciam contexto de mapa
 // que nenhuma destas páginas carrega — os guards (`if (!map) return`) e
@@ -66,6 +68,17 @@ function seedSupabaseClient(sb) {
 function setOkrUser(profile, productIds) {
     okrCurrentUser = profile;
     okrUserProductIds = productIds || [];
+}
+
+// Trata candidata como papel "estratégico" nos mesmos pontos onde hoje
+// só is_super_admin desbloqueia ação/visibilidade — decisão de produto:
+// candidata passa a governar a campanha inteira como super_admin já faz
+// (define OKR, registra coordenador, vê atividade de qualquer região),
+// mas só nestes pontos específicos. NÃO usar em renderEquipe() — o botão
+// "👤 Atribuir" que esse gate libera chama openAtribuirVoluntarioModal(),
+// que só existe em admin.js (candidata.html nunca carrega esse script).
+function isStrategicUser(profile) {
+    return !!(profile && (profile.is_super_admin || profile.is_candidata));
 }
 
 // ------------------------------------------
@@ -318,7 +331,7 @@ function renderEquipe() {
 async function openNewEquipeModal() {
     const sb = initSupabaseClient();
     if (!sb) return;
-    const disponiveis = okrCurrentUser.is_super_admin
+    const disponiveis = isStrategicUser(okrCurrentUser)
         ? okrDataCache.products
         : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
     if (!disponiveis.length) return showToast('Nenhuma Coordenação Regional disponível para você.', { type: 'warning' });
@@ -427,9 +440,9 @@ async function loadAgendaEventosBasico() {
 // ------------------------------------------
 function renderComandoSkeleton() {
     [
-        'comando-kpi-semaforo', 'comando-kpi-cobertura', 'comando-kpi-lider', 'comando-kpi-prazo',
+        'comando-kpi-semaforo', 'comando-kpi-cobertura', 'comando-kpi-execucao', 'comando-kpi-lider', 'comando-kpi-prazo',
         'comando-semaforo-container', 'comando-cobertura-container', 'comando-ranking-container',
-        'comando-radar-prazo', 'comando-radar-agenda'
+        'comando-radar-prazo', 'comando-radar-agenda', 'comando-consolidado-container'
     ].forEach(id => {
         const el = document.getElementById(id);
         if (el) el.innerHTML = '<div class="instruction">Carregando…</div>';
@@ -459,6 +472,28 @@ async function fetchComandoCheckins() {
     }
 }
 
+// "Execução" (Fase seguinte à reestruturação por papel) — distinta de
+// "cobertura" (planejamento: quadrante TEM voluntário atribuído).
+// Execução é quadrante com pelo menos 1 check-in aprovado — visita de
+// campo de fato confirmada. Busca sem filtro de data (evita depender de
+// okrDataCache.periods já estar carregado neste ponto do bootstrap); o
+// recorte pelo ciclo semanal ativo é aplicado em renderComandoCobertura(),
+// na hora de renderizar.
+async function fetchComandoExecucao() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+    try {
+        const { data, error } = await sb.from('checkins').select('area_id, created_at').eq('status', 'aprovado');
+        if (error) throw error;
+        comandoExecucao = data || [];
+        comandoExecucaoError = false;
+    } catch (err) {
+        console.warn('Erro ao carregar execução territorial (check-ins aprovados):', err);
+        comandoExecucao = [];
+        comandoExecucaoError = true;
+    }
+}
+
 function comandoFaixaCor(progresso) {
     if (progresso >= 70) return { cor: 'verde', label: 'No caminho' };
     if (progresso >= 40) return { cor: 'amarelo', label: 'Atenção' };
@@ -469,6 +504,7 @@ function renderComando() {
     renderComandoSemaforo();
     renderComandoCobertura();
     renderComandoRanking();
+    renderComandoConsolidado();
     renderComandoRadar();
 }
 
@@ -519,43 +555,92 @@ function renderComandoSemaforo() {
 function renderComandoCobertura() {
     const listContainer = document.getElementById('comando-cobertura-container');
     const kpiContainer = document.getElementById('comando-kpi-cobertura');
+    const execKpiContainer = document.getElementById('comando-kpi-execucao');
     if (!listContainer || !kpiContainer) return;
 
     if (!okrDataCache.areas.length) {
         listContainer.innerHTML = '<div class="instruction">Nenhum quadrante gerado ainda.</div>';
-        kpiContainer.innerHTML = '<span class="comando-kpi-label">🗺️ Cobertura</span><strong class="comando-kpi-value">—</strong>';
+        kpiContainer.innerHTML = '<span class="comando-kpi-label">📋 Planejamento</span><strong class="comando-kpi-value">—</strong>';
+        if (execKpiContainer) execKpiContainer.innerHTML = '<span class="comando-kpi-label">✅ Execução</span><strong class="comando-kpi-value">—</strong>';
         return;
     }
 
+    // Execução = check-in aprovado dentro do ciclo semanal ativo (mesmo
+    // recorte que o semáforo de OKR já usa) — distinto de cobertura
+    // (planejamento: só precisa ter voluntário atribuído, sem visita
+    // confirmada nenhuma).
+    const periodoAtivo = okrDataCache.periods.find(p => p.id === getComandoPeriodId());
+    const execucaoNoCiclo = periodoAtivo
+        ? comandoExecucao.filter(c => {
+            if (periodoAtivo.data_inicio && c.created_at < periodoAtivo.data_inicio) return false;
+            if (periodoAtivo.data_fim && c.created_at > periodoAtivo.data_fim + 'T23:59:59') return false;
+            return true;
+        })
+        : [];
+
     const areasComVoluntario = new Set(okrDataCache.areaVolunteers.map(v => v.area_id));
+    const areasComExecucao = new Set(execucaoNoCiclo.map(c => c.area_id));
     const porRA = {};
     okrDataCache.areas.forEach(area => {
-        if (!porRA[area.ra_nome]) porRA[area.ra_nome] = { total: 0, cobertos: 0 };
+        if (!porRA[area.ra_nome]) porRA[area.ra_nome] = { total: 0, cobertos: 0, executados: 0 };
         porRA[area.ra_nome].total += 1;
         if (areasComVoluntario.has(area.id)) porRA[area.ra_nome].cobertos += 1;
+        if (areasComExecucao.has(area.id)) porRA[area.ra_nome].executados += 1;
     });
 
     const linhas = Object.entries(porRA)
-        .map(([ra, v]) => ({ ra, pct: Math.round((v.cobertos / v.total) * 100), cobertos: v.cobertos, total: v.total }))
-        .sort((a, b) => a.pct - b.pct);
+        .map(([ra, v]) => ({
+            ra,
+            pctCobertura: Math.round((v.cobertos / v.total) * 100),
+            pctExecucao: Math.round((v.executados / v.total) * 100),
+            ...v
+        }))
+        .sort((a, b) => a.pctExecucao - b.pctExecucao);
 
-    const mediaGeral = Math.round(linhas.reduce((s, l) => s + l.pct, 0) / linhas.length);
+    const mediaCobertura = Math.round(linhas.reduce((s, l) => s + l.pctCobertura, 0) / linhas.length);
+    const mediaExecucao = Math.round(linhas.reduce((s, l) => s + l.pctExecucao, 0) / linhas.length);
+
     kpiContainer.innerHTML = `
-        <span class="comando-kpi-label">🗺️ Cobertura</span>
-        <strong class="comando-kpi-value">${mediaGeral}%</strong>
+        <span class="comando-kpi-label">📋 Planejamento</span>
+        <strong class="comando-kpi-value">${mediaCobertura}%</strong>
         <span class="comando-kpi-sub">${linhas.length} RA${linhas.length !== 1 ? 's' : ''} com quadrante</span>
     `;
+    if (execKpiContainer) {
+        const faixaExec = comandoFaixaCor(mediaExecucao);
+        execKpiContainer.innerHTML = periodoAtivo ? `
+            <span class="comando-kpi-label">✅ Execução</span>
+            <strong class="comando-kpi-value txt-${faixaExec.cor}">${mediaExecucao}%</strong>
+            <span class="comando-kpi-sub">${faixaExec.label} · ciclo atual</span>
+        ` : `
+            <span class="comando-kpi-label">✅ Execução</span>
+            <strong class="comando-kpi-value">—</strong>
+            <span class="comando-kpi-sub">Sem ciclo semanal ativo</span>
+        `;
+    }
 
     listContainer.innerHTML = linhas.map(l => `
         <div class="comando-item-row">
-            <div class="comando-item-header"><span>${l.ra}</span><strong>${l.pct}%</strong></div>
+            <div class="comando-item-header"><span>${l.ra}</span></div>
+            <div class="comando-item-sub">📋 Planejamento</div>
             <div class="okr-progress-bar-container">
-                <div class="okr-progress-bar" style="width:${l.pct}%;"></div>
+                <div class="okr-progress-bar" style="width:${l.pctCobertura}%;"></div>
             </div>
-            <div class="okr-card-footer"><span>${l.cobertos} de ${l.total} quadrantes com voluntário</span></div>
+            <div class="okr-card-footer"><span>${l.cobertos} de ${l.total} quadrantes com voluntário</span><strong>${l.pctCobertura}%</strong></div>
+            <div class="comando-item-sub" style="margin-top:6px;">✅ Execução</div>
+            <div class="okr-progress-bar-container">
+                <div class="okr-progress-bar" style="width:${l.pctExecucao}%;"></div>
+            </div>
+            <div class="okr-card-footer"><span>${l.executados} de ${l.total} quadrantes com check-in aprovado</span><strong>${l.pctExecucao}%</strong></div>
         </div>
-    `).join('');
+    `).join('') + (comandoExecucaoError
+        ? '<div class="instruction">Não foi possível carregar a execução territorial agora — os números de "✅ Execução" podem estar incompletos.</div>'
+        : '');
 }
+
+// Cache do último ranking calculado — reaproveitado por
+// renderComandoConsolidado() (chamada logo em seguida, em renderComando())
+// pra listar TODAS as Coordenações sem recalcular progresso/atividade.
+let comandoRankingCache = [];
 
 function renderComandoRanking() {
     const listContainer = document.getElementById('comando-ranking-container');
@@ -565,6 +650,7 @@ function renderComandoRanking() {
     if (!okrDataCache.products.length) {
         listContainer.innerHTML = '<div class="instruction">Nenhuma Coordenação Regional cadastrada ainda.</div>';
         kpiContainer.innerHTML = '<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">—</strong>';
+        comandoRankingCache = [];
         return;
     }
 
@@ -579,7 +665,7 @@ function renderComandoRanking() {
         checkinsPorProduto[productId] = (checkinsPorProduto[productId] || 0) + 1;
     });
 
-    const isAdmin = !!(okrCurrentUser && okrCurrentUser.is_super_admin);
+    const isAdmin = isStrategicUser(okrCurrentUser);
 
     const ranking = okrDataCache.products.map(produto => {
         const objetivos = okrDataCache.objectives.filter(o => o.nivel === 'tatico' && o.product_id === produto.id && o.period_id === periodId);
@@ -594,23 +680,25 @@ function renderComandoRanking() {
         return (b.podeVerAtividade && b.teveCheckin ? 1 : 0) - (a.podeVerAtividade && a.teveCheckin ? 1 : 0);
     });
 
-    const TOP_N = 5;
+    comandoRankingCache = ranking;
+
     const lider = ranking[0];
     kpiContainer.innerHTML = lider
         ? `<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">${Math.round(lider.progresso)}%</strong><span class="comando-kpi-sub">${lider.produto.nome}</span>`
         : '<span class="comando-kpi-label">🏆 Líder</span><strong class="comando-kpi-value">—</strong>';
 
-    const linhasHtml = ranking.map((r, i) => {
+    // Painel de destaque mostra só o top 3 — visão completa de todas as
+    // Coordenações fica em renderComandoConsolidado() (tabela abaixo).
+    const linhasHtml = ranking.slice(0, 3).map((r, i) => {
         const posicao = i + 1;
         const selo = !r.podeVerAtividade
             ? '<span class="comando-selo comando-selo-indisponivel" title="Atividade de outras Coordenações não é visível para o seu papel">—</span>'
             : (r.teveCheckin
                 ? '<span class="comando-selo" title="Check-in nos últimos 7 dias">🔥</span>'
                 : '<span class="comando-selo" title="Sem check-in nos últimos 7 dias">💤</span>');
-        const nome = posicao <= TOP_N ? `${posicao}º — ${r.produto.nome} (${r.produto.ra_nome})` : `${posicao}º colocação`;
         return `
             <div class="comando-item-row">
-                <div class="comando-item-header"><span>${nome}</span>${selo}</div>
+                <div class="comando-item-header"><span>${posicao}º — ${r.produto.nome} (${r.produto.ra_nome})</span>${selo}</div>
                 <div class="okr-progress-bar-container">
                     <div class="okr-progress-bar" style="width:${Math.round(r.progresso)}%;"></div>
                 </div>
@@ -622,6 +710,66 @@ function renderComandoRanking() {
     listContainer.innerHTML = linhasHtml + (comandoCheckinsError
         ? '<div class="instruction">Não foi possível carregar a atividade recente agora — os selos 🔥/💤 podem estar incompletos.</div>'
         : '');
+}
+
+// Tabela com TODAS as Coordenações Regionais consolidadas — o ranking
+// acima já mostra só o top 3; esta tabela é a visão completa, no mesmo
+// espírito da lista de RAs em renderComandoCobertura(). Reaproveita
+// comandoRankingCache (progresso tático) e os mesmos sets de
+// cobertura/execução computados em renderComandoCobertura() — sem query nova.
+function renderComandoConsolidado() {
+    const container = document.getElementById('comando-consolidado-container');
+    if (!container) return;
+
+    if (!comandoRankingCache.length) {
+        container.innerHTML = '<div class="instruction">Nenhuma Coordenação Regional cadastrada ainda.</div>';
+        return;
+    }
+
+    const areasComVoluntario = new Set(okrDataCache.areaVolunteers.map(v => v.area_id));
+    const periodoAtivo = okrDataCache.periods.find(p => p.id === getComandoPeriodId());
+    const execucaoNoCiclo = periodoAtivo
+        ? comandoExecucao.filter(c => {
+            if (periodoAtivo.data_inicio && c.created_at < periodoAtivo.data_inicio) return false;
+            if (periodoAtivo.data_fim && c.created_at > periodoAtivo.data_fim + 'T23:59:59') return false;
+            return true;
+        })
+        : [];
+    const areasComExecucao = new Set(execucaoNoCiclo.map(c => c.area_id));
+
+    const linhas = comandoRankingCache.map(r => {
+        const quadrantesDoProduto = okrDataCache.areas.filter(a => a.product_id === r.produto.id);
+        const total = quadrantesDoProduto.length;
+        const cobertos = quadrantesDoProduto.filter(a => areasComVoluntario.has(a.id)).length;
+        const executados = quadrantesDoProduto.filter(a => areasComExecucao.has(a.id)).length;
+        return {
+            produto: r.produto,
+            progresso: Math.round(r.progresso),
+            pctCobertura: total ? Math.round((cobertos / total) * 100) : 0,
+            pctExecucao: total ? Math.round((executados / total) * 100) : 0
+        };
+    });
+
+    container.innerHTML = `
+        <div class="table-container">
+            <table>
+                <thead>
+                    <tr><th>Coordenação</th><th>RA</th><th>Progresso tático</th><th>Planejamento</th><th>Execução</th></tr>
+                </thead>
+                <tbody>
+                    ${linhas.map(l => `
+                        <tr>
+                            <td>${l.produto.nome}</td>
+                            <td>${l.produto.ra_nome}</td>
+                            <td>${l.progresso}%</td>
+                            <td>${l.pctCobertura}%</td>
+                            <td>${l.pctExecucao}%</td>
+                        </tr>
+                    `).join('')}
+                </tbody>
+            </table>
+        </div>
+    `;
 }
 
 function renderComandoRadar() {

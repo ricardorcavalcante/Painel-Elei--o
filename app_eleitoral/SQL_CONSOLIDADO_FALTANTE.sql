@@ -4062,3 +4062,148 @@ CREATE POLICY "grade_share_links_write_admin_or_coordenador" ON public.grade_sha
 -- ============================================================
 
 ALTER TABLE public.profiles ADD COLUMN IF NOT EXISTS is_candidata BOOLEAN NOT NULL DEFAULT FALSE;
+
+
+-- ============================================================
+-- PARTE 10 — Candidata como perfil principal: is_candidata() passa a
+-- valer nas mesmas políticas de escrita que hoje só reconhecem
+-- is_super_admin() (ou is_coordenador_of_product()/is_member_of_product()),
+-- nos pontos combinados com o usuário: estratégia de OKR
+-- (products/periods/objectives/key_results), registro de coordenadores
+-- (product_team), aprovação de agenda (agenda_eventos), mapa de
+-- quadrantes/Grade Operacional/link de compartilhamento (areas/
+-- area_volunteers/perimetro_status/grade_share_links) e leitura
+-- campanha-inteira de check-ins e fotos de campo (checkins/
+-- okr_artefatos — só leitura: aprovar/rejeitar check-in continua
+-- exclusivo do coordenador via checkins_update_coordenador, inalterada,
+-- decisão de produto confirmada).
+-- ============================================================
+
+CREATE OR REPLACE FUNCTION public.is_candidata()
+RETURNS BOOLEAN
+LANGUAGE sql STABLE SECURITY DEFINER SET search_path = public
+AS $$
+    SELECT COALESCE((SELECT is_candidata FROM public.profiles WHERE id = auth.uid()), FALSE);
+$$;
+
+-- products (criar/editar Coordenação Regional)
+DROP POLICY IF EXISTS "products_write_admin" ON public.products;
+CREATE POLICY "products_write_admin" ON public.products FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata())
+    WITH CHECK (public.is_super_admin() OR public.is_candidata());
+
+-- periods (criar Ciclo)
+DROP POLICY IF EXISTS "periods_write_admin" ON public.periods;
+CREATE POLICY "periods_write_admin" ON public.periods FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata())
+    WITH CHECK (public.is_super_admin() OR public.is_candidata());
+
+-- objectives (nivel='estrategico' sempre tem product_id NULL por CHECK
+-- constraint — só o ramo is_super_admin()/is_candidata() é alcançável)
+DROP POLICY IF EXISTS "objectives_write_admin_or_product_member" ON public.objectives;
+CREATE POLICY "objectives_write_admin_or_product_member" ON public.objectives FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR (product_id IS NOT NULL AND public.is_member_of_product(product_id)))
+    WITH CHECK (public.is_super_admin() OR public.is_candidata() OR (product_id IS NOT NULL AND public.is_member_of_product(product_id)));
+
+-- key_results (segue o objective pai)
+DROP POLICY IF EXISTS "key_results_write_admin_or_product_member" ON public.key_results;
+CREATE POLICY "key_results_write_admin_or_product_member" ON public.key_results FOR ALL TO authenticated
+    USING (
+        public.is_super_admin() OR public.is_candidata() OR EXISTS (
+            SELECT 1 FROM public.objectives o
+            WHERE o.id = key_results.objective_id
+              AND o.product_id IS NOT NULL
+              AND public.is_member_of_product(o.product_id)
+        )
+    )
+    WITH CHECK (
+        public.is_super_admin() OR public.is_candidata() OR EXISTS (
+            SELECT 1 FROM public.objectives o
+            WHERE o.id = key_results.objective_id
+              AND o.product_id IS NOT NULL
+              AND public.is_member_of_product(o.product_id)
+        )
+    );
+
+-- product_team (registrar/atribuir coordenador)
+DROP POLICY IF EXISTS "product_team_write_admin_or_coordenador" ON public.product_team;
+CREATE POLICY "product_team_write_admin_or_coordenador" ON public.product_team FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR public.is_member_of_product(product_id))
+    WITH CHECK (public.is_super_admin() OR public.is_candidata() OR public.is_member_of_product(product_id));
+
+-- agenda_eventos (publicar compromisso oficial / aprovar / recusar / excluir)
+DROP POLICY IF EXISTS "agenda_insert_admin" ON public.agenda_eventos;
+CREATE POLICY "agenda_insert_admin" ON public.agenda_eventos FOR INSERT TO authenticated
+    WITH CHECK (public.is_super_admin() OR public.is_candidata());
+
+DROP POLICY IF EXISTS "agenda_update_admin" ON public.agenda_eventos;
+CREATE POLICY "agenda_update_admin" ON public.agenda_eventos FOR UPDATE TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata())
+    WITH CHECK (public.is_super_admin() OR public.is_candidata());
+
+DROP POLICY IF EXISTS "agenda_delete_admin" ON public.agenda_eventos;
+CREATE POLICY "agenda_delete_admin" ON public.agenda_eventos FOR DELETE TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata());
+
+-- checkins (leitura campanha-inteira, só SELECT — checkins_write_admin e
+-- checkins_update_coordenador ficam intocadas, aprovação continua do coordenador)
+DROP POLICY IF EXISTS "checkins_select_own_or_product_member" ON public.checkins;
+CREATE POLICY "checkins_select_own_or_product_member" ON public.checkins FOR SELECT TO authenticated
+    USING (
+        public.is_super_admin()
+        OR public.is_candidata()
+        OR user_id = auth.uid()
+        OR EXISTS (SELECT 1 FROM public.areas a WHERE a.id = checkins.area_id AND public.is_member_of_product(a.product_id))
+    );
+
+-- okr_artefatos (leitura das fotos/comprovantes de campo vinculadas a check-in)
+DROP POLICY IF EXISTS "artefatos_select_auth" ON public.okr_artefatos;
+CREATE POLICY "artefatos_select_auth" ON public.okr_artefatos FOR SELECT TO authenticated
+    USING (
+        key_result_id IS NOT NULL
+        OR public.is_super_admin()
+        OR public.is_candidata()
+        OR enviado_por = auth.uid()
+        OR EXISTS (
+            SELECT 1 FROM public.checkins c
+            WHERE c.id = okr_artefatos.checkin_id
+              AND EXISTS (SELECT 1 FROM public.areas a WHERE a.id = c.area_id AND public.is_member_of_product(a.product_id))
+        )
+    );
+
+-- areas (nomear perímetro de quadrantes — só UPDATE; geração da grade
+-- continua exclusiva do super_admin via areas_write_admin, inalterada)
+DROP POLICY IF EXISTS "areas_update_coordenador" ON public.areas;
+CREATE POLICY "areas_update_coordenador" ON public.areas FOR UPDATE TO authenticated
+    USING (public.is_coordenador_of_product(product_id) OR public.is_super_admin() OR public.is_candidata())
+    WITH CHECK (public.is_coordenador_of_product(product_id) OR public.is_super_admin() OR public.is_candidata());
+
+-- area_volunteers (atribuir/remover voluntário de quadrante)
+DROP POLICY IF EXISTS "area_volunteers_write_admin_or_product_member" ON public.area_volunteers;
+CREATE POLICY "area_volunteers_write_admin_or_product_member" ON public.area_volunteers FOR ALL TO authenticated
+    USING (
+        public.is_super_admin() OR public.is_candidata() OR EXISTS (
+            SELECT 1 FROM public.areas a WHERE a.id = area_volunteers.area_id AND public.is_member_of_product(a.product_id)
+        )
+    )
+    WITH CHECK (
+        public.is_super_admin() OR public.is_candidata() OR EXISTS (
+            SELECT 1 FROM public.areas a WHERE a.id = area_volunteers.area_id AND public.is_member_of_product(a.product_id)
+        )
+    );
+
+-- perimetro_status (ciclar status "não iniciado/em andamento/concluído" da Grade Operacional)
+DROP POLICY IF EXISTS "perimetro_status_write_admin_or_coordenador" ON public.perimetro_status;
+CREATE POLICY "perimetro_status_write_admin_or_coordenador" ON public.perimetro_status FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id));
+
+-- grade_share_links (gerar/revogar link de compartilhamento somente-leitura da Grade)
+DROP POLICY IF EXISTS "grade_share_links_select_admin_or_coordenador" ON public.grade_share_links;
+CREATE POLICY "grade_share_links_select_admin_or_coordenador" ON public.grade_share_links FOR SELECT TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id));
+
+DROP POLICY IF EXISTS "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links;
+CREATE POLICY "grade_share_links_write_admin_or_coordenador" ON public.grade_share_links FOR ALL TO authenticated
+    USING (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id))
+    WITH CHECK (public.is_super_admin() OR public.is_candidata() OR public.is_coordenador_of_product(product_id));
