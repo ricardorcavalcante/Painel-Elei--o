@@ -14,29 +14,45 @@
 
     <link rel="stylesheet" href="style.css">
     <style>
-        body { padding: 32px 16px; background: #f4f2ec; }
-        .stub-container { max-width: 480px; margin: 0 auto; background: #fff; border-radius: 12px; padding: 28px 24px; box-shadow: 0 2px 8px rgba(0,0,0,0.06); }
-        .stub-header { display: flex; justify-content: space-between; align-items: flex-start; gap: 16px; margin-bottom: 8px; }
-        .stub-header h1 { font-size: 1.2rem; margin: 0; color: #1C201F; }
-        .stub-user { font-size: 0.82rem; color: #5B6360; text-align: right; }
-        .stub-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
-        .stub-body { color: #5B6360; font-size: 0.9rem; margin-top: 18px; }
+        body { background: #f4f2ec; }
+        .page-shell { max-width: 480px; margin: 0 auto; padding: 18px 16px 64px; }
+        .page-topbar { display: flex; justify-content: space-between; align-items: flex-start; gap: 12px; margin-bottom: 8px; }
+        .page-topbar h1 { font-size: 1.2rem; margin: 0; color: var(--primary, #1F4E78); }
+        .page-user { font-size: 0.8rem; color: #5B6360; text-align: right; }
+        .page-signout { margin-top: 6px; padding: 4px 10px; font-size: 0.78rem; border: 1px solid #ddd; border-radius: 6px; background: #fff; cursor: pointer; }
+        .okr-card .btn-primary { width: 100%; margin-top: 10px; padding: 12px; font-size: 1rem; }
     </style>
 </head>
 <body>
-    <div id="stub-loading" class="stub-container">Verificando acesso…</div>
+    <div id="page-loading" class="page-shell">Verificando acesso…</div>
 
-    <div id="stub-content" class="stub-container" style="display:none">
-        <div class="stub-header">
+    <div id="page-content" class="page-shell" style="display:none">
+        <div class="page-topbar">
             <h1>📍 Check-in</h1>
-            <div class="stub-user">
-                <div id="stub-user-name"></div>
-                <button id="stub-signout" class="stub-signout">Sair</button>
+            <div class="page-user">
+                <div id="page-user-name"></div>
+                <button id="page-signout" class="page-signout">Sair</button>
             </div>
         </div>
-        <p class="stub-body">Página de destino do papel <strong>voluntário</strong> (linha em area_volunteers), criada na Fase 1 (fundação de autenticação e roteamento) — nasce mobile-first. O conteúdo real de check-in geolocalizado chega na Fase 2 (migração de conteúdo).</p>
+
+        <div class="okr-section" id="checkin-progresso-section" style="display: none;">
+            <h3 style="font-size:1rem;">📊 Progresso da sua Coordenação</h3>
+            <div id="checkin-progresso-container" class="okr-cards-grid"></div>
+        </div>
+
+        <div class="okr-section" id="checkin-quadrantes-section" style="margin-top: 24px; display: none;">
+            <h3 style="font-size:1rem;">🗺️ Meu(s) Quadrante(s)</h3>
+            <div id="checkin-quadrantes-container" class="okr-cards-grid"></div>
+        </div>
+
+        <div class="okr-section" id="checkin-historico-section" style="margin-top: 24px; display: none;">
+            <h3 style="font-size:1rem;">📋 Meus Check-ins</h3>
+            <div id="checkin-historico-container" class="okr-cards-grid"></div>
+        </div>
     </div>
 
+    <script src="okr-shared.js"></script>
+    <script src="voluntario.js"></script>
     <script type="module">
         import { guardPage, signOut } from './auth-shared.js';
 
@@ -44,14 +60,15 @@
             const result = await guardPage({ allowedRoles: ['voluntario'] });
             if (!result) return;
 
-            document.getElementById('stub-loading').style.display = 'none';
-            const content = document.getElementById('stub-content');
-            content.style.display = '';
-            document.getElementById('stub-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
-            document.getElementById('stub-signout').addEventListener('click', async () => {
+            document.getElementById('page-loading').style.display = 'none';
+            document.getElementById('page-content').style.display = '';
+            document.getElementById('page-user-name').textContent = result.ctx.profile.full_name || result.ctx.profile.email;
+            document.getElementById('page-signout').addEventListener('click', async () => {
                 await signOut(result.sb);
                 window.location.href = 'login.html';
             });
+
+            await window.initVoluntarioPage(result.sb, result.ctx);
         }
 
         init();
