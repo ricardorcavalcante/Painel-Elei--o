@@ -88,7 +88,7 @@ function renderAgendaActionButtons() {
         box.innerHTML = '';
         return;
     }
-    box.innerHTML = `<button class="btn-primary" onclick="openNovoCompromissoOficialModal()">📌 Publicar Compromisso Oficial</button>`;
+    box.innerHTML = `<button class="btn-primary" onclick="openAgendaFormModal()">📌 Publicar Compromisso Oficial</button>`;
 }
 
 // Renderização via agenda-component.js (Fase 3) — mesma implementação
@@ -114,72 +114,6 @@ function renderSolicitacoesPendentes() {
                 <button class="btn-secondary" onclick="responderSolicitacao('${ev.id}', false)">❌ Recusar</button>
             </div>
         `
-    });
-}
-
-async function openNovoCompromissoOficialModal() {
-    const sb = initSupabaseClient();
-    if (!sb) return;
-
-    openModal({
-        title: 'Publicar Compromisso Oficial',
-        bodyHtml: `
-            <div class="app-form-field">
-                <label class="app-form-field-label" for="nco-titulo">Título</label>
-                <input type="text" id="nco-titulo" class="app-form-input">
-            </div>
-            <div class="app-form-field">
-                <label class="app-form-field-label" for="nco-local">Local</label>
-                <input type="text" id="nco-local" class="app-form-input" placeholder="Endereço ou referência">
-            </div>
-            <div class="app-form-field">
-                <label class="app-form-field-label" for="nco-ra">Região Administrativa</label>
-                <input type="text" id="nco-ra" class="app-form-input" placeholder="Opcional">
-            </div>
-            <div class="app-form-field" style="display:flex; gap:10px;">
-                <div style="flex:1;">
-                    <label class="app-form-field-label" for="nco-data">Data</label>
-                    <input type="date" id="nco-data" class="app-form-input">
-                </div>
-                <div style="flex:1;">
-                    <label class="app-form-field-label" for="nco-hora">Hora</label>
-                    <input type="time" id="nco-hora" class="app-form-input">
-                </div>
-            </div>
-            <div class="app-form-field">
-                <label class="app-form-field-label" for="nco-descricao">Descrição</label>
-                <textarea id="nco-descricao" class="app-form-textarea" placeholder="Opcional"></textarea>
-            </div>
-        `,
-        buttons: [
-            { label: 'Cancelar', variant: 'secondary' },
-            {
-                label: 'Publicar', variant: 'primary', closeOnClick: false,
-                onClick: async () => {
-                    const titulo = document.getElementById('nco-titulo').value.trim();
-                    if (!titulo) return showToast('Título é obrigatório.', { type: 'warning' });
-                    const local = document.getElementById('nco-local').value.trim() || null;
-                    const ra_nome = document.getElementById('nco-ra').value.trim().toUpperCase() || null;
-                    const dataVal = document.getElementById('nco-data').value;
-                    const horaVal = document.getElementById('nco-hora').value;
-                    if (!dataVal || !horaVal) return showToast('Informe data e hora.', { type: 'warning' });
-                    const data_hora = new Date(`${dataVal}T${horaVal}`);
-                    if (isNaN(data_hora.getTime())) return showToast('Data/hora inválida.', { type: 'warning' });
-                    const descricao = document.getElementById('nco-descricao').value.trim() || null;
-
-                    const { error } = await sb.from('agenda_eventos').insert({
-                        titulo, descricao, tipo: 'oficial', local, ra_nome,
-                        data_hora: data_hora.toISOString(),
-                        status: 'confirmado'
-                    });
-                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
-
-                    closeModal();
-                    showToast('Compromisso publicado.', { type: 'success' });
-                    await loadAgendaData();
-                }
-            }
-        ]
     });
 }
 

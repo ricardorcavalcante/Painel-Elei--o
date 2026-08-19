@@ -112,8 +112,13 @@
             </div>
 
             <div class="okr-section" style="margin-top: 30px;">
-                <h3>🗓️ Status de Agenda da Região</h3>
-                <p class="instruction" style="font-size: 0.85rem;">Somente leitura — a aprovação das solicitações continua exclusiva do nível estratégico, na Central de Comando.</p>
+                <div class="okr-header-actions">
+                    <h3>🗓️ Status de Agenda da Região</h3>
+                    <div class="okr-btn-group">
+                        <button class="btn-primary" onclick="openAgendaFormModal()">🗓️ Novo Compromisso</button>
+                    </div>
+                </div>
+                <p class="instruction" style="font-size: 0.85rem;">Solicitações de visita/participação ficam pendentes até admin ou candidata aprovar, na Central de Comando.</p>
                 <div id="coord-agenda-container" class="okr-cards-grid"></div>
             </div>
 

@@ -379,10 +379,125 @@ async function openNewEquipeModal() {
     });
 }
 
+// Compartilhado entre admin.html (super_admin/candidata — publica
+// direto, tipo='oficial'/status='confirmado') e coordenador.html
+// (coordenador — vira solicitação pendente, tipo='visita_solicitada'/
+// 'participacao_solicitada', amarrada à Coordenação que ele está vendo
+// no momento; aprovação continua exclusiva de admin/candidata em
+// admin.js). Mesmo formulário nos dois casos — só muda o que a
+// submissão grava, decidido por isStrategicUser(okrCurrentUser), não
+// por qual página chamou.
+async function openAgendaFormModal() {
+    const sb = initSupabaseClient();
+    if (!sb) return;
+
+    const podePublicarDireto = isStrategicUser(okrCurrentUser);
+    let product_id = null;
+    let produtoSelecionado = null;
+
+    if (!podePublicarDireto) {
+        if (typeof coordDataCache !== 'undefined' && coordDataCache.productId) {
+            product_id = coordDataCache.productId;
+            produtoSelecionado = findProduct(product_id);
+        } else if (okrUserProductIds.length === 1) {
+            product_id = okrUserProductIds[0];
+            produtoSelecionado = findProduct(product_id);
+        } else if (okrUserProductIds.length > 1) {
+            produtoSelecionado = await pickFromList('Solicitar compromisso pra qual Coordenação?', okrDataCache.products.filter(p => okrUserProductIds.includes(p.id)), p => `${p.nome} (${p.ra_nome})`);
+            if (!produtoSelecionado) return;
+            product_id = produtoSelecionado.id;
+        } else {
+            return showToast('Você não está vinculado a nenhuma Coordenação Regional.', { type: 'warning' });
+        }
+    }
+
+    const backdrop = openModal({
+        title: podePublicarDireto ? 'Publicar Compromisso Oficial' : 'Solicitar Compromisso de Agenda',
+        bodyHtml: `
+            ${podePublicarDireto ? '' : `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-tipo">Tipo de solicitação</label>
+                <select id="nco-tipo" class="app-form-select">
+                    <option value="visita_solicitada" selected>Visita da candidata</option>
+                    <option value="participacao_solicitada">Participação em evento</option>
+                </select>
+            </div>
+            `}
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-titulo">Título</label>
+                <input type="text" id="nco-titulo" class="app-form-input">
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-local">Local</label>
+                <input type="text" id="nco-local" class="app-form-input" placeholder="Endereço ou referência">
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-ra">Região Administrativa</label>
+                <input type="text" id="nco-ra" class="app-form-input" placeholder="Opcional">
+            </div>
+            <div class="app-form-field" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label class="app-form-field-label" for="nco-data">Data</label>
+                    <input type="date" id="nco-data" class="app-form-input">
+                </div>
+                <div style="flex:1;">
+                    <label class="app-form-field-label" for="nco-hora">Hora</label>
+                    <input type="time" id="nco-hora" class="app-form-input">
+                </div>
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-descricao">Descrição</label>
+                <textarea id="nco-descricao" class="app-form-textarea" placeholder="Opcional"></textarea>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: podePublicarDireto ? 'Publicar' : 'Solicitar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const titulo = document.getElementById('nco-titulo').value.trim();
+                    if (!titulo) return showToast('Título é obrigatório.', { type: 'warning' });
+                    const local = document.getElementById('nco-local').value.trim() || null;
+                    const ra_nome = document.getElementById('nco-ra').value.trim().toUpperCase() || null;
+                    const dataVal = document.getElementById('nco-data').value;
+                    const horaVal = document.getElementById('nco-hora').value;
+                    if (!dataVal || !horaVal) return showToast('Informe data e hora.', { type: 'warning' });
+                    const data_hora = new Date(`${dataVal}T${horaVal}`);
+                    if (isNaN(data_hora.getTime())) return showToast('Data/hora inválida.', { type: 'warning' });
+                    const descricao = document.getElementById('nco-descricao').value.trim() || null;
+
+                    const payload = { titulo, descricao, local, ra_nome, data_hora: data_hora.toISOString() };
+                    if (podePublicarDireto) {
+                        payload.tipo = 'oficial';
+                        payload.status = 'confirmado';
+                    } else {
+                        payload.tipo = document.getElementById('nco-tipo').value;
+                        payload.status = 'pendente';
+                        payload.product_id = product_id;
+                        payload.solicitado_por = okrCurrentUser.id;
+                    }
+
+                    const { error } = await sb.from('agenda_eventos').insert(payload);
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast(podePublicarDireto ? 'Compromisso publicado.' : 'Solicitação enviada — aguardando aprovação de admin/candidata.', { type: 'success' });
+                    if (typeof loadAgendaData === 'function' && document.getElementById('agenda-pendentes-container')) await loadAgendaData();
+                    if (typeof fetchCoordAgenda === 'function' && document.getElementById('coord-agenda-container')) { await fetchCoordAgenda(); renderCoordAgenda(); }
+                }
+            }
+        ]
+    });
+    if (!podePublicarDireto && produtoSelecionado) {
+        backdrop.querySelector('#nco-ra').value = produtoSelecionado.ra_nome || '';
+    }
+}
+
 // ------------------------------------------
 // Calendário do TSE + Agenda (leitura básica — populate agendaDataCache
 // pro painel "Agenda dos Próximos 3 Dias" da Central de Comando; a
-// fila de aprovação em si é exclusiva de admin.js)
+// aprovação de solicitações em si é exclusiva de admin.js — ver
+// responderSolicitacao)
 // ------------------------------------------
 function formatPrazoDate(dataStr) {
     const [ano, mes, dia] = dataStr.split('-');
