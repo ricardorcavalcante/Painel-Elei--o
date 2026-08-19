@@ -1,13 +1,13 @@
 // agenda.js — agenda.html: leitura pública (sem login) dos compromissos
 // confirmados do candidato + calendário oficial do TSE (Fase 2 da
-// reestruturação por papel).
+// reestruturação por papel; renderização de cartões passou a usar o
+// componente compartilhado agenda-component.js na Fase 3).
 //
 // Deliberadamente independente de okr-shared.js/auth-shared.js: esta
 // página não tem sessão nenhuma (agenda_eventos.status='confirmado' e
 // prazos_eleitorais são de leitura aberta a "anon" via RLS, ver
 // supabase/schema.sql), então não faz sentido carregar o módulo de
-// sessão/OKR inteiro só pra duas leituras públicas. Extração literal
-// de public/app.js — mesmas funções, mesmos nomes.
+// sessão/OKR inteiro só pra duas leituras públicas.
 
 let agendaDataCache = { eventos: [] };
 let prazosTSECache = [];
@@ -33,19 +33,6 @@ function formatPrazoDate(dataStr) {
     return `${dia}/${mes}/${ano}`;
 }
 
-function formatAgendaDateTime(iso) {
-    const d = new Date(iso);
-    if (isNaN(d.getTime())) return iso;
-    return d.toLocaleString('pt-BR', { dateStyle: 'short', timeStyle: 'short' });
-}
-
-function agendaTipoLabel(tipo) {
-    if (tipo === 'oficial') return '📌 Compromisso Oficial';
-    if (tipo === 'visita_solicitada') return '📅 Visita Solicitada';
-    if (tipo === 'participacao_solicitada') return '🎤 Participação Solicitada';
-    return tipo;
-}
-
 async function loadAgendaPublica() {
     const sb = initSupabaseClient();
     if (!sb) {
@@ -64,28 +51,10 @@ async function loadAgendaPublica() {
 }
 
 function renderAgendaPublica() {
-    const container = document.getElementById('agenda-publica-container');
-    if (!container) return;
-
-    const confirmados = agendaDataCache.eventos.filter(ev => ev.status === 'confirmado');
-    if (!confirmados.length) {
-        container.innerHTML = '<div class="instruction">Nenhum compromisso confirmado no momento.</div>';
-        return;
-    }
-
-    container.innerHTML = confirmados.map(ev => `
-        <div class="okr-card">
-            <div class="okr-card-header">
-                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
-                <span class="okr-year">${formatAgendaDateTime(ev.data_hora)}</span>
-            </div>
-            <h4>${ev.titulo}</h4>
-            <p>${ev.descricao || ''}</p>
-            <div class="okr-card-footer">
-                <span>${[ev.local, ev.ra_nome].filter(Boolean).join(' · ')}</span>
-            </div>
-        </div>
-    `).join('');
+    renderAgendaCards(document.getElementById('agenda-publica-container'), agendaDataCache.eventos, {
+        emptyMessage: '<div class="instruction">Nenhum compromisso confirmado no momento.</div>',
+        footer: ev => [ev.local, ev.ra_nome].filter(Boolean).join(' · ')
+    });
 }
 
 async function loadPrazosTSE() {

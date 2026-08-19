@@ -1,0 +1,49 @@
+/* design-tokens.css — Fase 3 (Sistema de design) da reestruturação por
+   papel. Identidade visual própria das 7 páginas novas (login.html,
+   admin.html, okrs.html, candidata.html, coordenador.html,
+   voluntario.html, agenda.html) — nem o azul institucional antigo do
+   index.html (style.css:5, --primary #1F4E78), nem o roxo "Onda Roxa"
+   do cartaz impresso (style.css tinha #5C2D91 hardcoded em 3 lugares,
+   ver mais abaixo).
+
+   Carregado DEPOIS de style.css em cada uma dessas 7 páginas (nunca em
+   index.html) — como as variáveis usam o mesmo nome (--primary etc.),
+   a ordem de carregamento é o que basta pra sobrescrever só ali, sem
+   duplicar nenhuma regra de style.css nem tocar no :root original.
+   index.html continua com o azul de sempre, intacto. */
+
+:root {
+    /* Paleta verde-petróleo — substitui --primary/--primary-light azuis
+       de style.css:5-6 nas 7 páginas novas. */
+    --primary: #0F5C5B;
+    --primary-light: #1a7a78;
+    --primary-dark: #0A3E3D;
+    --primary-soft: #E3F0EF;
+
+    /* Semânticas — usadas por status-tag/badge/comando-dot/status-circle
+       etc. (style.css), hoje com verde/laranja/vermelho hardcoded
+       espalhados em vários seletores. */
+    --success: #2E7D32;
+    --success-soft: #E8F5E9;
+    --warning: #B15C00;
+    --warning-soft: #FBE9D8;
+    --danger: #C62828;
+    --danger-soft: #FCE4E4;
+
+    /* --accent-soft já era referenciado (style.css:1033) sem estar
+       definido em :root nenhum — só com fallback #dbe7f0 inline. Fica
+       definido de verdade aqui, alinhado à paleta nova. */
+    --accent-soft: var(--primary-soft);
+
+    /* Escala de espaçamento — style.css não tinha nenhuma, todo
+       espaçamento é px hardcoded por regra. Novo CSS destas 7 páginas
+       (modal, toast, componente de Agenda) usa isto; não é uma
+       migração retroativa do CSS existente. */
+    --space-1: 4px;
+    --space-2: 8px;
+    --space-3: 12px;
+    --space-4: 16px;
+    --space-5: 24px;
+    --space-6: 32px;
+    --space-7: 48px;
+}

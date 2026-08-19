@@ -14,21 +14,23 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="design-tokens.css">
+    <link rel="stylesheet" href="components.css">
     <style>
-        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: #f4f2ec; padding: 24px 16px; }
-        .login-card { width: 100%; max-width: 360px; background: #fff; border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
+        body { min-height: 100vh; display: flex; align-items: center; justify-content: center; background: var(--bg-body, #f4f2ec); padding: 24px 16px; }
+        .login-card { width: 100%; max-width: 360px; background: var(--bg-card, #fff); border-radius: 12px; padding: 32px 28px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); }
         .login-card h1 { font-size: 1.25rem; margin: 0 0 6px; color: #1C201F; }
-        .login-card .subtitle { font-size: 0.85rem; color: #5B6360; margin: 0 0 22px; }
-        .login-field { display: block; width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid #ddd; border-radius: 6px; font-size: 0.95rem; box-sizing: border-box; }
+        .login-card .subtitle { font-size: 0.85rem; color: var(--text-secondary, #5B6360); margin: 0 0 22px; }
+        .login-field { display: block; width: 100%; padding: 10px 12px; margin-bottom: 12px; border: 1px solid var(--border-light, #ddd); border-radius: 6px; font-size: 0.95rem; box-sizing: border-box; }
         .login-btn { display: block; width: 100%; padding: 10px 12px; margin-bottom: 10px; border: none; border-radius: 6px; font-size: 0.95rem; cursor: pointer; }
-        .login-btn-primary { background: #0F5C5B; color: #fff; }
-        .login-btn-primary:hover { background: #0A3E3D; }
-        .login-btn-google { background: #fff; color: #333; border: 1px solid #ddd; }
+        .login-btn-primary { background: var(--primary, #0F5C5B); color: #fff; }
+        .login-btn-primary:hover { background: var(--primary-dark, #0A3E3D); }
+        .login-btn-google { background: var(--bg-card, #fff); color: #333; border: 1px solid var(--border-light, #ddd); }
         .login-btn-google:hover { background: #f7f7f7; }
         .login-msg { font-size: 0.85rem; margin: 10px 0 0; min-height: 1.2em; }
-        .login-msg.error { color: #C62828; }
-        .login-msg.info { color: #5B6360; }
-        .login-loading { text-align: center; color: #5B6360; font-size: 0.9rem; }
+        .login-msg.error { color: var(--danger, #C62828); }
+        .login-msg.info { color: var(--text-secondary, #5B6360); }
+        .login-loading { text-align: center; color: var(--text-secondary, #5B6360); font-size: 0.9rem; }
     </style>
 </head>
 <body>
@@ -48,6 +50,8 @@
         </form>
     </div>
 
+    <script src="modal.js"></script>
+    <script src="toast.js"></script>
     <script type="module">
         import { initSupabaseClient, loadSessionContext, resolveRoleDestination, signInEmail, signInGoogle } from './auth-shared.js';
 

@@ -588,22 +588,53 @@ function limparSelecaoCoordMap() {
 }
 
 async function nomearGrupoSelecionado() {
-    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).');
-    const nome = prompt(`Nome do perímetro para os ${coordSelectedAreaIds.size} quadrantes selecionados:`);
-    if (!nome) return;
+    if (!coordSelectedAreaIds.size) return showToast('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).', { type: 'warning' });
 
-    const nomesAntigosComStatus = new Set(
-        [...coordSelectedAreaIds]
-            .map(id => coordDataCache.areas.find(a => a.id === id))
-            .filter(a => a && a.grupo_nome && a.grupo_nome !== nome)
-            .map(a => a.grupo_nome)
-            .filter(g => coordDataCache.perimetroStatus.some(p => p.grupo_nome === g))
-    );
-    if (nomesAntigosComStatus.size) {
-        const lista = [...nomesAntigosComStatus].join(', ');
-        if (!confirm(`Alguns quadrantes já pertencem a "${lista}", que já tem status registrado na Grade Operacional. Renomear para "${nome}" NÃO migra esse status/histórico — "${lista}" ficará com o status antigo (órfão) e "${nome}" começa em "não iniciado". Continuar?`)) return;
-    }
+    const quantidade = coordSelectedAreaIds.size;
+    openModal({
+        title: `Nomear perímetro — ${quantidade} quadrante(s)`,
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="ng-nome">Nome do perímetro</label>
+                <input type="text" id="ng-nome" class="app-form-input" placeholder="ex: AR 01">
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: 'Nomear', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const nome = document.getElementById('ng-nome').value.trim();
+                    if (!nome) return showToast('Informe o nome do perímetro.', { type: 'warning' });
 
+                    const nomesAntigosComStatus = new Set(
+                        [...coordSelectedAreaIds]
+                            .map(id => coordDataCache.areas.find(a => a.id === id))
+                            .filter(a => a && a.grupo_nome && a.grupo_nome !== nome)
+                            .map(a => a.grupo_nome)
+                            .filter(g => coordDataCache.perimetroStatus.some(p => p.grupo_nome === g))
+                    );
+                    if (nomesAntigosComStatus.size) {
+                        const lista = [...nomesAntigosComStatus].join(', ');
+                        closeModal();
+                        const ok = await confirmModal(
+                            'Perímetro já tem status registrado',
+                            `Alguns quadrantes já pertencem a "${lista}", que já tem status registrado na Grade Operacional. Renomear para "${nome}" NÃO migra esse status/histórico — "${lista}" ficará com o status antigo (órfão) e "${nome}" começa em "não iniciado". Continuar?`
+                        );
+                        if (!ok) return;
+                        await salvarNomeGrupo(nome);
+                        return;
+                    }
+
+                    closeModal();
+                    await salvarNomeGrupo(nome);
+                }
+            }
+        ]
+    });
+}
+
+async function salvarNomeGrupo(nome) {
     const sb = initSupabaseClient();
     const ids = [...coordSelectedAreaIds];
     try {
@@ -612,7 +643,7 @@ async function nomearGrupoSelecionado() {
             if (error) throw error;
         }
     } catch (err) {
-        return alert('Erro: ' + err.message);
+        return showToast('Erro: ' + err.message, { type: 'danger' });
     }
     coordSelectedAreaIds.clear();
     await fetchCoordEquipeEAreas();
@@ -621,10 +652,11 @@ async function nomearGrupoSelecionado() {
     renderCoordMapRectangles();
     const selectionCount = document.getElementById('coord-map-selection-count');
     if (selectionCount) selectionCount.textContent = '0 quadrante(s) selecionado(s)';
+    showToast('Perímetro nomeado.', { type: 'success' });
 }
 
 function abrirAtribuicaoEmLote() {
-    if (!coordSelectedAreaIds.size) return alert('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).');
+    if (!coordSelectedAreaIds.size) return showToast('Selecione ao menos um quadrante no mapa (clique ou Shift+arraste).', { type: 'warning' });
     openCoordAssignPanel([...coordSelectedAreaIds]);
 }
 
@@ -679,7 +711,7 @@ async function toggleCoordAreaVolunteer(userId, atribuir, checkboxEl) {
             }
         }
     } catch (err) {
-        return alert('Erro: ' + err.message);
+        return showToast('Erro: ' + err.message, { type: 'danger' });
     }
     await fetchCoordEquipeEAreas();
     renderCoordEquipeCobertura();
@@ -726,7 +758,7 @@ async function ciclarStatusPerimetro(grupoNome) {
             .upsert({ product_id: coordDataCache.productId, grupo_nome: grupoNome, status: novoStatus, updated_by: okrCurrentUser.id }, { onConflict: 'product_id,grupo_nome' });
         if (error) throw error;
     } catch (err) {
-        return alert('Erro: ' + err.message);
+        return showToast('Erro: ' + err.message, { type: 'danger' });
     }
     if (atual) atual.status = novoStatus;
     else coordDataCache.perimetroStatus.push({ grupo_nome: grupoNome, status: novoStatus, updated_by: okrCurrentUser.id, updated_at: new Date().toISOString() });
@@ -759,7 +791,7 @@ async function gerarLinkCompartilhamentoGrade() {
             box.innerHTML = `🔗 Link somente-leitura (sem login): <a href="${url}" target="_blank" rel="noopener">${url}</a>`;
         }
     } catch (err) {
-        alert('Erro ao gerar link: ' + err.message);
+        showToast('Erro ao gerar link: ' + err.message, { type: 'danger' });
     }
 }
 
@@ -816,25 +848,16 @@ function renderCoordKRs() {
 // Status de Agenda da região (somente leitura — aprovação continua
 // exclusiva de admin.html)
 // ------------------------------------------
+// Renderização via agenda-component.js (Fase 3) — mesma implementação
+// de cartão usada em agenda.html/index.html/admin.html; somente
+// leitura aqui (sem actions), com o status no lugar da data no
+// cabeçalho e a resposta do nível estratégico como texto extra.
 function renderCoordAgenda() {
-    const container = document.getElementById('coord-agenda-container');
-    if (!container) return;
-    if (!coordDataCache.agenda.length) {
-        container.innerHTML = '<div class="instruction">Nenhuma solicitação de agenda registrada para esta região.</div>';
-        return;
-    }
-    container.innerHTML = coordDataCache.agenda.map(ev => `
-        <div class="okr-card">
-            <div class="okr-card-header">
-                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
-                <span class="status-tag status-${ev.status}">${ev.status.toUpperCase()}</span>
-            </div>
-            <h4>${ev.titulo}</h4>
-            <p>${ev.descricao || ''}</p>
-            <div class="okr-card-footer"><span>${formatAgendaDateTime(ev.data_hora)}${ev.local ? ' · ' + ev.local : ''}</span></div>
-            ${ev.resposta_admin ? `<p><strong>Resposta:</strong> ${ev.resposta_admin}</p>` : ''}
-        </div>
-    `).join('');
+    renderAgendaCards(document.getElementById('coord-agenda-container'), coordDataCache.agenda, {
+        emptyMessage: '<div class="instruction">Nenhuma solicitação de agenda registrada para esta região.</div>',
+        headerRight: ev => `<span class="status-tag status-${ev.status}">${ev.status.toUpperCase()}</span>`,
+        extra: ev => ev.resposta_admin ? `<p><strong>Resposta:</strong> ${ev.resposta_admin}</p>` : ''
+    });
 }
 
 // ------------------------------------------
@@ -869,14 +892,35 @@ function renderCoordCheckinsPendentes() {
 
 async function responderCheckinCoord(id, aprovar) {
     const sb = initSupabaseClient();
-    const resposta_aprovacao = prompt(aprovar ? 'Observação para o voluntário (opcional):' : 'Motivo da rejeição (opcional):') || null;
-    const { error } = await sb.from('checkins').update({
-        status: aprovar ? 'aprovado' : 'rejeitado',
-        resposta_aprovacao
-    }).eq('id', id);
-    if (error) return alert('Erro: ' + error.message);
-    await fetchCoordCheckinsPendentes();
-    renderCoordCheckinsPendentes();
+
+    openModal({
+        title: aprovar ? 'Aprovar check-in' : 'Rejeitar check-in',
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="rc-resposta">${aprovar ? 'Observação para o voluntário' : 'Motivo da rejeição'}</label>
+                <textarea id="rc-resposta" class="app-form-textarea" placeholder="Opcional"></textarea>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: aprovar ? 'Aprovar' : 'Rejeitar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const resposta_aprovacao = document.getElementById('rc-resposta').value.trim() || null;
+                    const { error } = await sb.from('checkins').update({
+                        status: aprovar ? 'aprovado' : 'rejeitado',
+                        resposta_aprovacao
+                    }).eq('id', id);
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast(aprovar ? 'Check-in aprovado.' : 'Check-in rejeitado.', { type: 'success' });
+                    await fetchCoordCheckinsPendentes();
+                    renderCoordCheckinsPendentes();
+                }
+            }
+        ]
+    });
 }
 
 // ------------------------------------------
@@ -959,7 +1003,7 @@ async function toggleComparativoRegioes(checked) {
         .update({ comparativo_regioes_liberado: checked, updated_at: new Date().toISOString() })
         .eq('id', true);
     if (error) {
-        alert('Erro ao atualizar o comparativo: ' + error.message);
+        showToast('Erro ao atualizar o comparativo: ' + error.message, { type: 'danger' });
         if (checkboxEl) checkboxEl.checked = valorAnterior;
         return;
     }

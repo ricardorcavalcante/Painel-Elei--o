@@ -321,24 +321,49 @@ async function openNewEquipeModal() {
     const disponiveis = okrCurrentUser.is_super_admin
         ? okrDataCache.products
         : okrDataCache.products.filter(p => okrUserProductIds.includes(p.id));
-    if (!disponiveis.length) return alert('Nenhuma Coordenação Regional disponível para você.');
+    if (!disponiveis.length) return showToast('Nenhuma Coordenação Regional disponível para você.', { type: 'warning' });
 
-    const opcoes = disponiveis.map((p, i) => `${i + 1}. ${p.nome} (${p.ra_nome})`).join('\n');
-    const escolha = prompt(`Adicionar integrante a qual Coordenação?\n${opcoes}`);
-    const idx = parseInt(escolha, 10) - 1;
-    const produto = disponiveis[idx];
-    if (!produto) return alert('Coordenação inválida.');
+    const produto = await pickFromList('Adicionar integrante a qual Coordenação?', disponiveis, p => `${p.nome} (${p.ra_nome})`);
+    if (!produto) return;
 
-    const email = prompt('E-mail do integrante (precisa já ter feito Cadastro no login de OKRs):');
-    if (!email) return;
-    const papel = (prompt('Papel: coordenador ou operacional', 'operacional') || 'operacional').toLowerCase();
+    openModal({
+        title: `Adicionar integrante — ${produto.nome}`,
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="ne-email">E-mail do integrante</label>
+                <input type="email" id="ne-email" class="app-form-input" placeholder="nome@exemplo.com">
+                <div class="app-form-hint">Precisa já ter feito Cadastro no login de OKRs.</div>
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="ne-papel">Papel</label>
+                <select id="ne-papel" class="app-form-select">
+                    <option value="operacional" selected>Operacional</option>
+                    <option value="coordenador">Coordenador</option>
+                </select>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: 'Adicionar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const email = document.getElementById('ne-email').value.trim();
+                    if (!email) return showToast('Informe o e-mail do integrante.', { type: 'warning' });
+                    const papel = document.getElementById('ne-papel').value;
 
-    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
-    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.');
+                    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
+                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser adicionado à equipe.', { type: 'danger' });
 
-    const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
-    if (error) return alert('Erro: ' + error.message);
-    await loadOKRData();
+                    const { error } = await sb.from('product_team').insert({ product_id: produto.id, user_id: perfil.id, papel });
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast('Integrante adicionado à equipe.', { type: 'success' });
+                    await loadOKRData();
+                }
+            }
+        ]
+    });
 }
 
 // ------------------------------------------

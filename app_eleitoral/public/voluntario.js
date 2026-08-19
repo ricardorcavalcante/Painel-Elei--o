@@ -141,58 +141,100 @@ async function fazerCheckin(areaId) {
     const sb = initSupabaseClient();
     if (!sb) return;
     const area = checkinDataCache.minhasAreas.find(a => a.id === areaId);
-    if (!area) return alert('Quadrante não encontrado.');
-    if (!navigator.geolocation) return alert('Seu navegador não suporta geolocalização.');
+    if (!area) return showToast('Quadrante não encontrado.', { type: 'danger' });
+    if (!navigator.geolocation) return showToast('Seu navegador não suporta geolocalização.', { type: 'danger' });
 
     navigator.geolocation.getCurrentPosition(async (position) => {
         const lat = position.coords.latitude;
         const lng = position.coords.longitude;
         const dentro_area = lat >= area.lat_min && lat <= area.lat_max && lng >= area.lng_min && lng <= area.lng_max;
 
-        const descricao = prompt(`Descreva a ação realizada no quadrante ${area.codigo}:`);
-        if (!descricao) return;
+        openModal({
+            title: `Check-in — quadrante ${area.codigo}`,
+            bodyHtml: `
+                <div class="app-form-field">
+                    <label class="app-form-field-label" for="fc-descricao">Descreva a ação realizada</label>
+                    <textarea id="fc-descricao" class="app-form-textarea"></textarea>
+                </div>
+            `,
+            buttons: [
+                { label: 'Cancelar', variant: 'secondary' },
+                {
+                    label: 'Registrar check-in', variant: 'primary', closeOnClick: false,
+                    onClick: async () => {
+                        const descricao = document.getElementById('fc-descricao').value.trim();
+                        if (!descricao) return showToast('Descreva a ação realizada.', { type: 'warning' });
 
-        const status = dentro_area ? 'aprovado' : 'pendente';
-        const { data: checkin, error } = await sb.from('checkins')
-            .insert({ area_id: area.id, user_id: okrCurrentUser.id, descricao, lat, lng, dentro_area, status })
-            .select().single();
-        if (error) return alert('Erro: ' + error.message);
+                        const status = dentro_area ? 'aprovado' : 'pendente';
+                        const { data: checkin, error } = await sb.from('checkins')
+                            .insert({ area_id: area.id, user_id: okrCurrentUser.id, descricao, lat, lng, dentro_area, status })
+                            .select().single();
+                        if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
 
-        alert(dentro_area
-            ? 'Check-in registrado dentro do quadrante!'
-            : 'Check-in registrado fora dos limites do quadrante — fica pendente até o coordenador aprovar.');
+                        closeModal();
+                        showToast(dentro_area
+                            ? 'Check-in registrado dentro do quadrante!'
+                            : 'Check-in registrado fora dos limites do quadrante — fica pendente até o coordenador aprovar.',
+                            { type: dentro_area ? 'success' : 'warning', duration: 6000 });
 
-        if (confirm('Deseja anexar um arquivo como comprovante (foto, documento)?')) {
-            const input = document.createElement('input');
-            input.type = 'file';
-            input.accept = 'image/*,application/pdf';
-            input.onchange = () => uploadCheckinArtefato(checkin.id, input.files[0]);
-            input.click();
-        }
+                        const anexar = await confirmModal('Anexar comprovante?', 'Deseja anexar um arquivo como comprovante (foto, documento)?');
+                        if (anexar) {
+                            const input = document.createElement('input');
+                            input.type = 'file';
+                            input.accept = 'image/*,application/pdf';
+                            input.onchange = () => uploadCheckinArtefato(checkin.id, input.files[0]);
+                            input.click();
+                        }
 
-        await loadCheckinData();
+                        await loadCheckinData();
+                    }
+                }
+            ]
+        });
     }, (err) => {
-        alert('Não foi possível obter sua localização: ' + err.message);
+        showToast('Não foi possível obter sua localização: ' + err.message, { type: 'danger' });
     }, { enableHighAccuracy: true, timeout: 10000 });
 }
 
 async function uploadCheckinArtefato(checkinId, file) {
     const sb = initSupabaseClient();
     if (!sb || !file) return;
-    const titulo = prompt('Título do comprovante:', file.name) || file.name;
-    const path = `checkins/${checkinId}/${Date.now()}_${file.name}`;
 
-    const { error: upErr } = await sb.storage.from('artefatos').upload(path, file);
-    if (upErr) return alert('Erro no upload (verifique se o bucket "artefatos" existe no Supabase Storage): ' + upErr.message);
+    const backdrop = openModal({
+        title: 'Título do comprovante',
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="uca-titulo">Título</label>
+                <input type="text" id="uca-titulo" class="app-form-input">
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: 'Enviar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const titulo = document.getElementById('uca-titulo').value.trim() || file.name;
+                    const path = `checkins/${checkinId}/${Date.now()}_${file.name}`;
 
-    const { data: pub } = sb.storage.from('artefatos').getPublicUrl(path);
-    const tipo_artefato = file.type.startsWith('image/') ? 'foto' : 'comprovante';
+                    const { error: upErr } = await sb.storage.from('artefatos').upload(path, file);
+                    if (upErr) return showToast('Erro no upload (verifique se o bucket "artefatos" existe no Supabase Storage): ' + upErr.message, { type: 'danger' });
 
-    const { error } = await sb.from('okr_artefatos').insert({
-        checkin_id: checkinId, titulo, arquivo_url: pub.publicUrl, tipo_artefato, enviado_por: okrCurrentUser.id
+                    const { data: pub } = sb.storage.from('artefatos').getPublicUrl(path);
+                    const tipo_artefato = file.type.startsWith('image/') ? 'foto' : 'comprovante';
+
+                    const { error } = await sb.from('okr_artefatos').insert({
+                        checkin_id: checkinId, titulo, arquivo_url: pub.publicUrl, tipo_artefato, enviado_por: okrCurrentUser.id
+                    });
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast('Comprovante enviado.', { type: 'success' });
+                    await loadCheckinData();
+                }
+            }
+        ]
     });
-    if (error) return alert('Erro: ' + error.message);
-    await loadCheckinData();
+    backdrop.querySelector('#uca-titulo').value = file.name;
 }
 
 // ------------------------------------------

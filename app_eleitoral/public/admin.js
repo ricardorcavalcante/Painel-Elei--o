@@ -25,17 +25,38 @@ async function openAtribuirVoluntarioModal(areaId) {
     const sb = initSupabaseClient();
     if (!sb) return;
     const area = okrDataCache.areas.find(a => a.id === areaId);
-    if (!area) return alert('Quadrante não encontrado.');
+    if (!area) return showToast('Quadrante não encontrado.', { type: 'danger' });
 
-    const email = prompt(`Atribuir voluntário ao quadrante ${area.codigo} — e-mail (precisa já ter feito Cadastro no login de OKRs):`);
-    if (!email) return;
+    openModal({
+        title: `Atribuir voluntário — quadrante ${area.codigo}`,
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="af-email">E-mail do voluntário</label>
+                <input type="email" id="af-email" class="app-form-input" placeholder="nome@exemplo.com">
+                <div class="app-form-hint">Precisa já ter feito Cadastro no login de OKRs.</div>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: 'Atribuir', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const email = document.getElementById('af-email').value.trim();
+                    if (!email) return showToast('Informe o e-mail do voluntário.', { type: 'warning' });
 
-    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
-    if (perfilErr || !perfil) return alert('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser atribuído.');
+                    const { data: perfil, error: perfilErr } = await sb.from('profiles').select('id, full_name').eq('email', email).maybeSingle();
+                    if (perfilErr || !perfil) return showToast('Usuário não encontrado. Ele precisa se cadastrar (aba OKRs > Cadastrar) antes de ser atribuído.', { type: 'danger' });
 
-    const { error } = await sb.from('area_volunteers').insert({ area_id: area.id, user_id: perfil.id, atribuido_por: okrCurrentUser.id });
-    if (error) return alert('Erro: ' + error.message);
-    await loadOKRData();
+                    const { error } = await sb.from('area_volunteers').insert({ area_id: area.id, user_id: perfil.id, atribuido_por: okrCurrentUser.id });
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast('Voluntário atribuído.', { type: 'success' });
+                    await loadOKRData();
+                }
+            }
+        ]
+    });
 }
 
 // ------------------------------------------
@@ -70,6 +91,10 @@ function renderAgendaActionButtons() {
     box.innerHTML = `<button class="btn-primary" onclick="openNovoCompromissoOficialModal()">📌 Publicar Compromisso Oficial</button>`;
 }
 
+// Renderização via agenda-component.js (Fase 3) — mesma implementação
+// de cartão usada em agenda.html/index.html/coordenador.js; só o que é
+// genuinamente diferente aqui (cabeçalho com a Coordenação de origem,
+// botões de Aprovar/Recusar) vem por option.
 function renderSolicitacoesPendentes() {
     const section = document.getElementById('agenda-pendentes-section');
     const container = document.getElementById('agenda-pendentes-container');
@@ -77,69 +102,119 @@ function renderSolicitacoesPendentes() {
 
     const pendentes = agendaDataCache.eventos.filter(ev => ev.status === 'pendente');
     section.style.display = 'block';
-    if (!pendentes.length) {
-        container.innerHTML = '<div class="instruction">Nenhuma solicitação pendente.</div>';
-        return;
-    }
-
-    container.innerHTML = pendentes.map(ev => {
-        const produto = findProduct(ev.product_id);
-        return `
-        <div class="okr-card">
-            <div class="okr-card-header">
-                <span class="okr-badge badge-tatico">${agendaTipoLabel(ev.tipo)}</span>
-                <span class="okr-year">${produto ? produto.nome + ' (' + produto.ra_nome + ')' : ''}</span>
-            </div>
-            <h4>${ev.titulo}</h4>
-            <p>${ev.descricao || ''}</p>
-            <div class="okr-card-footer">
-                <span>${formatAgendaDateTime(ev.data_hora)}${ev.local ? ' · ' + ev.local : ''}</span>
-            </div>
+    renderAgendaCards(container, pendentes, {
+        emptyMessage: '<div class="instruction">Nenhuma solicitação pendente.</div>',
+        headerRight: ev => {
+            const produto = findProduct(ev.product_id);
+            return produto ? produto.nome + ' (' + produto.ra_nome + ')' : '';
+        },
+        actions: ev => `
             <div class="okr-btn-group" style="margin-top: 10px;">
                 <button class="btn-primary" onclick="responderSolicitacao('${ev.id}', true)">✅ Aprovar</button>
                 <button class="btn-secondary" onclick="responderSolicitacao('${ev.id}', false)">❌ Recusar</button>
             </div>
-        </div>
-    `;
-    }).join('');
-}
-
-function parseAgendaDateTimeInput(texto) {
-    const d = new Date((texto || '').trim().replace(' ', 'T'));
-    return isNaN(d.getTime()) ? null : d;
+        `
+    });
 }
 
 async function openNovoCompromissoOficialModal() {
     const sb = initSupabaseClient();
     if (!sb) return;
-    const titulo = prompt('Título do compromisso oficial:');
-    if (!titulo) return;
-    const local = prompt('Local (endereço ou referência):') || null;
-    const ra_nome = (prompt('Região Administrativa (opcional):') || '').toUpperCase() || null;
-    const data_hora = parseAgendaDateTimeInput(prompt('Data e hora (AAAA-MM-DD HH:MM):'));
-    if (!data_hora) return alert('Data/hora inválida. Use o formato AAAA-MM-DD HH:MM.');
-    const descricao = prompt('Descrição (opcional):') || null;
 
-    const { error } = await sb.from('agenda_eventos').insert({
-        titulo, descricao, tipo: 'oficial', local, ra_nome,
-        data_hora: data_hora.toISOString(),
-        status: 'confirmado'
+    openModal({
+        title: 'Publicar Compromisso Oficial',
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-titulo">Título</label>
+                <input type="text" id="nco-titulo" class="app-form-input">
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-local">Local</label>
+                <input type="text" id="nco-local" class="app-form-input" placeholder="Endereço ou referência">
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-ra">Região Administrativa</label>
+                <input type="text" id="nco-ra" class="app-form-input" placeholder="Opcional">
+            </div>
+            <div class="app-form-field" style="display:flex; gap:10px;">
+                <div style="flex:1;">
+                    <label class="app-form-field-label" for="nco-data">Data</label>
+                    <input type="date" id="nco-data" class="app-form-input">
+                </div>
+                <div style="flex:1;">
+                    <label class="app-form-field-label" for="nco-hora">Hora</label>
+                    <input type="time" id="nco-hora" class="app-form-input">
+                </div>
+            </div>
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="nco-descricao">Descrição</label>
+                <textarea id="nco-descricao" class="app-form-textarea" placeholder="Opcional"></textarea>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: 'Publicar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const titulo = document.getElementById('nco-titulo').value.trim();
+                    if (!titulo) return showToast('Título é obrigatório.', { type: 'warning' });
+                    const local = document.getElementById('nco-local').value.trim() || null;
+                    const ra_nome = document.getElementById('nco-ra').value.trim().toUpperCase() || null;
+                    const dataVal = document.getElementById('nco-data').value;
+                    const horaVal = document.getElementById('nco-hora').value;
+                    if (!dataVal || !horaVal) return showToast('Informe data e hora.', { type: 'warning' });
+                    const data_hora = new Date(`${dataVal}T${horaVal}`);
+                    if (isNaN(data_hora.getTime())) return showToast('Data/hora inválida.', { type: 'warning' });
+                    const descricao = document.getElementById('nco-descricao').value.trim() || null;
+
+                    const { error } = await sb.from('agenda_eventos').insert({
+                        titulo, descricao, tipo: 'oficial', local, ra_nome,
+                        data_hora: data_hora.toISOString(),
+                        status: 'confirmado'
+                    });
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast('Compromisso publicado.', { type: 'success' });
+                    await loadAgendaData();
+                }
+            }
+        ]
     });
-    if (error) return alert('Erro: ' + error.message);
-    await loadAgendaData();
 }
 
 async function responderSolicitacao(id, aprovar) {
     const sb = initSupabaseClient();
     if (!sb) return;
-    const resposta_admin = prompt(aprovar ? 'Observação para o coordenador (opcional):' : 'Motivo da recusa (opcional):') || null;
-    const { error } = await sb.from('agenda_eventos').update({
-        status: aprovar ? 'confirmado' : 'recusado',
-        resposta_admin,
-        updated_at: new Date().toISOString()
-    }).eq('id', id);
-    if (error) return alert('Erro: ' + error.message);
-    await loadAgendaData();
+
+    openModal({
+        title: aprovar ? 'Aprovar solicitação' : 'Recusar solicitação',
+        bodyHtml: `
+            <div class="app-form-field">
+                <label class="app-form-field-label" for="rs-resposta">${aprovar ? 'Observação para o coordenador' : 'Motivo da recusa'}</label>
+                <textarea id="rs-resposta" class="app-form-textarea" placeholder="Opcional"></textarea>
+            </div>
+        `,
+        buttons: [
+            { label: 'Cancelar', variant: 'secondary' },
+            {
+                label: aprovar ? 'Aprovar' : 'Recusar', variant: 'primary', closeOnClick: false,
+                onClick: async () => {
+                    const resposta_admin = document.getElementById('rs-resposta').value.trim() || null;
+                    const { error } = await sb.from('agenda_eventos').update({
+                        status: aprovar ? 'confirmado' : 'recusado',
+                        resposta_admin,
+                        updated_at: new Date().toISOString()
+                    }).eq('id', id);
+                    if (error) return showToast('Erro: ' + error.message, { type: 'danger' });
+
+                    closeModal();
+                    showToast(aprovar ? 'Solicitação aprovada.' : 'Solicitação recusada.', { type: 'success' });
+                    await loadAgendaData();
+                }
+            }
+        ]
+    });
 }
 
 // ------------------------------------------

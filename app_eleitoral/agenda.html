@@ -14,8 +14,10 @@
     </script>
 
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="design-tokens.css">
+    <link rel="stylesheet" href="components.css">
     <style>
-        body { background: #f4f2ec; }
+        body { background: var(--bg-body, #f4f2ec); }
         .page-shell { max-width: 900px; margin: 0 auto; padding: 24px 24px 64px; }
         .page-shell h1 { font-size: 1.4rem; margin: 0 0 20px; color: var(--primary, #1F4E78); }
     </style>
@@ -51,6 +53,9 @@
         </div>
     </div>
 
+    <script src="modal.js"></script>
+    <script src="toast.js"></script>
+    <script src="agenda-component.js"></script>
     <script src="agenda.js"></script>
 </body>
 </html>

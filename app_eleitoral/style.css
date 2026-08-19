@@ -719,7 +719,7 @@ tr:hover { background-color: #e8f4fd; }
 
 .badge-estrategico { background: #e3f2fd; color: #0d47a1; }
 .badge-tatico { background: #e8f5e9; color: #1b5e20; }
-.badge-operacional { background: #fff3e0; color: #e65100; }
+.badge-operacional { background: var(--warning-soft, #fff3e0); color: var(--warning, #e65100); }
 .badge-artefato { background: #f3e5f5; color: #4a148c; }
 
 .okr-year {
@@ -758,13 +758,13 @@ tr:hover { background-color: #e8f4fd; }
 
 .okr-progress-bar {
     height: 100%;
-    background: linear-gradient(90deg, #1F4E78 0%, #28a745 100%);
+    background: linear-gradient(90deg, var(--primary, #1F4E78) 0%, var(--success, #28a745) 100%);
     border-radius: 4px;
     transition: width 0.4s ease;
 }
 
 .progress-tatico {
-    background: linear-gradient(90deg, #28a745 0%, #20c997 100%);
+    background: linear-gradient(90deg, var(--success, #28a745) 0%, #20c997 100%);
 }
 
 .okr-card-footer {
@@ -780,11 +780,11 @@ tr:hover { background-color: #e8f4fd; }
     padding: 2px 6px;
     border-radius: 4px;
 }
-.status-aprovado, .status-confirmado, .status-dentro { background: #c8e6c9; color: #2e7d32; }
+.status-aprovado, .status-confirmado, .status-dentro { background: var(--success-soft, #c8e6c9); color: var(--success, #2e7d32); }
 .status-pendente { background: #fff9c4; color: #f57f17; }
-.status-rejeitado, .status-recusado { background: #ffcdd2; color: #c62828; }
+.status-rejeitado, .status-recusado { background: var(--danger-soft, #ffcdd2); color: var(--danger, #c62828); }
 .status-cancelado { background: #e0e0e0; color: #616161; }
-.status-fora { background: #ffe0b2; color: #e65100; }
+.status-fora { background: var(--warning-soft, #ffe0b2); color: var(--warning, #e65100); }
 
 .quadrantes-section {
     margin-top: 12px;
@@ -977,13 +977,13 @@ tr:hover { background-color: #e8f4fd; }
     border-radius: 50%;
     margin-right: 6px;
 }
-.comando-dot.dot-verde { background: #2e7d32; }
-.comando-dot.dot-amarelo { background: #e65100; }
-.comando-dot.dot-vermelho { background: #c62828; }
+.comando-dot.dot-verde { background: var(--success, #2e7d32); }
+.comando-dot.dot-amarelo { background: var(--warning, #e65100); }
+.comando-dot.dot-vermelho { background: var(--danger, #c62828); }
 
-.txt-verde { color: #2e7d32; }
-.txt-amarelo { color: #e65100; }
-.txt-vermelho { color: #c62828; }
+.txt-verde { color: var(--success, #2e7d32); }
+.txt-amarelo { color: var(--warning, #e65100); }
+.txt-vermelho { color: var(--danger, #c62828); }
 
 .comando-selo { font-size: 1rem; }
 .comando-selo-indisponivel { opacity: 0.4; font-size: 0.85rem; }
@@ -1032,9 +1032,12 @@ tr:hover { background-color: #e8f4fd; }
 
 .coord-comparativo-linha-atual { background-color: var(--accent-soft, #dbe7f0) !important; font-weight: 700; }
 
-/* Grade Operacional — status por perímetro, paleta do Painel
-   Operacional impresso original (roxo Onda Roxa / laranja / verde). */
-#coord-grade-section h3 { color: #5C2D91; }
+/* Grade Operacional — status por perímetro. Paleta unificada com o
+   resto das páginas novas (Fase 3): o roxo "Onda Roxa" do cartaz
+   impresso original (#5C2D91, hardcoded em 3 lugares antes) saiu daqui
+   pra não coexistir com a paleta verde-petróleo nova — ver
+   design-tokens.css. */
+#coord-grade-section h3 { color: var(--primary, #5C2D91); }
 
 .status-circle {
     display: inline-block;
@@ -1042,12 +1045,12 @@ tr:hover { background-color: #e8f4fd; }
     height: 20px;
     min-width: 20px;
     border-radius: 50%;
-    border: 2px solid #5C2D91;
+    border: 2px solid var(--primary, #5C2D91);
     background: transparent;
     vertical-align: middle;
 }
-.status-circle.status-em_andamento { background: #F5A623; border-color: #F5A623; }
-.status-circle.status-concluido { background: #3CB043; border-color: #3CB043; }
+.status-circle.status-em_andamento { background: var(--warning, #F5A623); border-color: var(--warning, #F5A623); }
+.status-circle.status-concluido { background: var(--success, #3CB043); border-color: var(--success, #3CB043); }
 
 @media print {
     body.printing-grade .sidebar,

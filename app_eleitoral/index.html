@@ -237,7 +237,12 @@
     <script src="app.js"></script>
 
     <!-- Card "Próximos Compromissos" (Fase 2) — independente de app.js,
-         só lê agenda_eventos confirmados dos próximos 7 dias. -->
+         só lê agenda_eventos confirmados dos próximos 7 dias. Usa o
+         componente de Agenda compartilhado (Fase 3) pra renderizar,
+         mesma implementação de agenda.html/admin.html/coordenador.html
+         — sem carregar design-tokens.css aqui: index.html não é uma
+         das "7 páginas novas", mantém a identidade azul de sempre. -->
+    <script src="agenda-component.js"></script>
     <script src="proximos-compromissos.js"></script>
 </body>
 </html>
