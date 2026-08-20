@@ -91,7 +91,6 @@ function switchTab(tab) {
     // Sidebars
     document.getElementById('map-sidebar').style.display = tab === 'map' ? 'block' : 'none';
     document.getElementById('ra-sidebar').style.display = tab === 'ra' ? 'block' : 'none';
-    document.getElementById('dash-sidebar').style.display = tab === 'dashboard' ? 'block' : 'none';
     const okrSidebar = document.getElementById('okr-sidebar');
     if (okrSidebar) okrSidebar.style.display = tab === 'okr' ? 'block' : 'none';
     const agendaSidebar = document.getElementById('agenda-sidebar');
@@ -106,7 +105,6 @@ function switchTab(tab) {
     // Main Views (o mapa é compartilhado pelas abas "map" e "ra")
     const showMapView = tab === 'map' || tab === 'ra';
     document.getElementById('view-map').style.display = showMapView ? 'block' : 'none';
-    document.getElementById('view-dashboard').style.display = tab === 'dashboard' ? 'block' : 'none';
     const viewOkr = document.getElementById('view-okr');
     if (viewOkr) viewOkr.style.display = tab === 'okr' ? 'block' : 'none';
     const viewAgenda = document.getElementById('view-agenda');
@@ -179,7 +177,6 @@ function initMap() {
     sharedInfoWindow = new google.maps.InfoWindow();
 
     loadData();
-    loadDashboardData();
     bootstrapComandoSession();
 }
 
@@ -1175,82 +1172,6 @@ function performSearch() {
 }
 
 // ==========================================
-// DASHBOARD (CHART.JS)
-// ==========================================
-async function loadDashboardData() {
-    try {
-        const response = await fetch('estatisticas.json');
-        const stats = await response.json();
-
-        document.getElementById('kpi-eleitores').innerText = stats.total_df.eleitorado.toLocaleString('pt-BR');
-        document.getElementById('kpi-locais').innerText = stats.total_df.locais;
-        document.getElementById('kpi-media').innerText = stats.total_df.media_geral.toLocaleString('pt-BR');
-
-        new Chart(document.getElementById('chartRA'), {
-            type: 'bar',
-            data: {
-                labels: stats.by_ra.labels.slice(0, 10),
-                datasets: [{
-                    label: 'Eleitores',
-                    data: stats.by_ra.eleitorado.slice(0, 10),
-                    backgroundColor: '#1F4E78',
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: { legend: { display: false } },
-                scales: { y: { beginAtZero: true } }
-            }
-        });
-
-        const bgColors = stats.by_zona.labels.map(z => zoneColors[z] || '#999');
-        new Chart(document.getElementById('chartZona'), {
-            type: 'doughnut',
-            data: {
-                labels: stats.by_zona.labels.map(z => 'Zona ' + z),
-                datasets: [{
-                    data: stats.by_zona.percentual,
-                    backgroundColor: bgColors,
-                    borderWidth: 1
-                }]
-            },
-            options: {
-                responsive: true,
-                plugins: {
-                    legend: { position: 'right', labels: { boxWidth: 12 } },
-                    tooltip: { callbacks: { label: function(context) { return context.label + ': ' + context.raw + '%'; } } }
-                }
-            }
-        });
-
-        new Chart(document.getElementById('chartLocaisRA'), {
-            type: 'line',
-            data: {
-                labels: stats.by_ra.labels,
-                datasets: [{
-                    label: 'Quantidade de Locais',
-                    data: stats.by_ra.locais,
-                    borderColor: '#e47171',
-                    backgroundColor: 'rgba(228, 113, 113, 0.2)',
-                    fill: true,
-                    tension: 0.3
-                }]
-            },
-            options: {
-                responsive: true,
-                maintainAspectRatio: false,
-                plugins: { legend: { display: false } },
-                scales: { x: { display: false }, y: { beginAtZero: true } }
-            }
-        });
-
-    } catch (error) {
-        console.error("Erro ao carregar Dashboard:", error);
-    }
-}
-
-// ==========================================
 // MÓDULO DE OKRS — CAMPANHA DF 2026 (SUPABASE DIRETO, SEM API INTERMEDIÁRIA)
 // Hierarquia: Campanha (única) -> RA -> Coordenação Regional ("product",
 // por Zona Eleitoral) -> Ciclo ("period") -> Objective (estratégico/
@@ -1683,13 +1604,11 @@ function renderEquipe() {
                 </div>
                 <h4>${produto.nome}</h4>
                 <p class="okr-coords-list">${membrosHtml}</p>
-                <div class="quadrantes-section">
-                    <div class="quadrante-row-header">
-                        <span>🔲 Quadrantes de Voluntários</span>
-                        ${isAdmin ? `<button class="btn-link" onclick="gerarQuadrantesDaRA('${produto.id}')">➕ Gerar</button>` : ''}
-                    </div>
+                <details class="quadrantes-section">
+                    <summary>🔲 Quadrantes de Voluntários (${quadrantesDoProduto.length})</summary>
+                    ${isAdmin ? `<button class="btn-link" onclick="gerarQuadrantesDaRA('${produto.id}')">➕ Gerar</button>` : ''}
                     ${quadrantesHtml}
-                </div>
+                </details>
             </div>
         `;
     });

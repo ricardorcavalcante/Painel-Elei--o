@@ -311,12 +311,10 @@ function renderEquipe() {
                 </div>
                 <h4>${produto.nome}</h4>
                 <p class="okr-coords-list">${membrosHtml}</p>
-                <div class="quadrantes-section">
-                    <div class="quadrante-row-header">
-                        <span>🔲 Quadrantes de Voluntários</span>
-                    </div>
+                <details class="quadrantes-section">
+                    <summary>🔲 Quadrantes de Voluntários (${quadrantesDoProduto.length})</summary>
                     ${quadrantesHtml}
-                </div>
+                </details>
             </div>
         `;
     });

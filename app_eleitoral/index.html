@@ -14,9 +14,6 @@
     <!-- Google Fonts -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
 
-    <!-- Chart.js -->
-    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-
     <!-- Supabase JS Client (módulo de OKRs) -->
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script>
@@ -28,6 +25,13 @@
 
     <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
+    <style>
+        /* Layout fixo em 100vh (.app-container) — só esta página tem
+           scroll interno por painel (.sidebar-content, .zonas-column etc.),
+           então o body não precisa (e não deve) rolar. As demais páginas
+           (.page-shell) usam o overflow padrão do body — ver style.css. */
+        body { overflow: hidden; }
+    </style>
 </head>
 <body>
 
@@ -48,7 +52,6 @@
                 <div class="nav-tabs">
                     <button class="tab-btn active" data-tab="map" onclick="switchTab('map')" aria-label="Mapa">Mapa</button>
                     <button class="tab-btn" data-tab="ra" onclick="switchTab('ra')" aria-label="Regiões Administrativas">RAs</button>
-                    <button class="tab-btn" data-tab="dashboard" onclick="switchTab('dashboard')" aria-label="Dashboard">Dashboard</button>
                     <a class="tab-btn" href="login.html" aria-label="Entrar" style="text-decoration:none; display:inline-flex; align-items:center;">🔑 Entrar</a>
                 </div>
             </div>
@@ -136,28 +139,6 @@
                 </div>
             </div>
 
-            <!-- Sidebar: Conteúdo do Dashboard -->
-            <div id="dash-sidebar" style="display: none;">
-                <div class="sidebar-content" style="padding-top: 20px;">
-                    <h3>📊 Resumo Geral DF</h3>
-                    <div class="summary-stats" style="flex-direction: column; margin-top: 15px;">
-                        <div class="stat-box" style="margin-bottom: 10px;">
-                            <span>Total de Eleitores</span>
-                            <strong id="kpi-eleitores">--</strong>
-                        </div>
-                        <div class="stat-box" style="margin-bottom: 10px;">
-                            <span>Locais de Votação</span>
-                            <strong id="kpi-locais">--</strong>
-                        </div>
-                        <div class="stat-box">
-                            <span>Média de Eleitores/Local</span>
-                            <strong id="kpi-media">--</strong>
-                        </div>
-                    </div>
-                    <p class="instruction" style="font-size: 0.85rem;">Utilize o painel principal ao lado para visualizar os gráficos extraídos das Tabelas Dinâmicas.</p>
-                </div>
-            </div>
-
         </aside>
 
         <!-- Main Content Area -->
@@ -181,25 +162,6 @@
                         <div id="ras-legend-list" class="zonas-legend-list">
                             <!-- Lista gerada via JS -->
                         </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Container do Dashboard -->
-            <div id="view-dashboard" class="view-container" style="display: none; padding: 30px; overflow-y: auto;">
-                <h2 style="margin-bottom: 20px; color: #1F4E78;">Painel de Indicadores (Estatísticas 2026)</h2>
-                <div class="charts-grid">
-                    <div class="chart-card">
-                        <h3>Eleitorado por Região Administrativa (RA)</h3>
-                        <canvas id="chartRA"></canvas>
-                    </div>
-                    <div class="chart-card">
-                        <h3>Eleitorado por Zona Eleitoral</h3>
-                        <canvas id="chartZona"></canvas>
-                    </div>
-                    <div class="chart-card full-width">
-                        <h3>Quantidade de Locais de Votação por RA</h3>
-                        <canvas id="chartLocaisRA"></canvas>
                     </div>
                 </div>
             </div>

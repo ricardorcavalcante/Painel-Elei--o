@@ -40,7 +40,6 @@
 }
 
 body {
-    overflow: hidden;
     background-color: var(--bg-body);
 }
 
@@ -791,6 +790,17 @@ tr:hover { background-color: #e8f4fd; }
     margin-top: 12px;
     padding-top: 10px;
     border-top: 1px dashed #ddd;
+}
+
+.quadrantes-section summary {
+    cursor: pointer;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: #333;
+}
+
+.quadrantes-section[open] summary {
+    margin-bottom: 6px;
 }
 
 .quadrante-row {

@@ -6,6 +6,7 @@
     <title>Painel da Candidata — Painel Eleitoral DF 2026</title>
     <meta name="robots" content="noindex, nofollow">
 
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js"></script>
     <script>
         window.SUPABASE_URL = "%VITE_SUPABASE_URL%";
@@ -39,6 +40,20 @@
             </div>
         </div>
         <p class="instruction" style="margin: 0 0 18px;">Painel-resumo da campanha — as ações de escrita (definir estratégia de OKR, aprovar agenda, registrar coordenadores, mapa de quadrantes) ficam nas páginas específicas, acessíveis pelo menu "Navegar" acima.</p>
+
+        <div class="okr-section" style="margin-bottom: 30px;">
+            <h3>📊 Painel de Indicadores (Eleitorado 2026)</h3>
+            <div class="charts-grid">
+                <div class="chart-card">
+                    <h3>Eleitorado por Região Administrativa (RA)</h3>
+                    <canvas id="chartRA"></canvas>
+                </div>
+                <div class="chart-card">
+                    <h3>Eleitorado por Zona Eleitoral</h3>
+                    <canvas id="chartZona"></canvas>
+                </div>
+            </div>
+        </div>
 
         <div class="comando-kpis">
             <div class="comando-kpi-card" id="comando-kpi-semaforo"></div>
@@ -100,6 +115,66 @@
         </div>
     </div>
 
+    <!-- Cores das Zonas Eleitorais (mesma paleta de index.html/app.js, conforme
+         "zonas eleitorais df.png") — duplicada aqui porque candidata.html não
+         carrega app.js (que tem lógica própria de mapa/sidebar não aplicável
+         a esta página). -->
+    <script>
+        const zoneColors = {
+            "1": "#63d692", "2": "#869bf0", "3": "#c894e1", "4": "#e15eac",
+            "5": "#9a7c64", "6": "#f6eda5", "8": "#f59f8a", "9": "#e47171",
+            "10": "#8aaae5", "11": "#c8c1bc", "13": "#9ff1cf", "14": "#68e799",
+            "15": "#e7dfcd", "16": "#66cbed", "17": "#e3d274", "18": "#7beddf",
+            "19": "#cd9ce4", "20": "#ebabc8", "21": "#e5a7b6"
+        };
+
+        async function loadDashboardMini() {
+            try {
+                const response = await fetch('estatisticas.json');
+                const stats = await response.json();
+
+                new Chart(document.getElementById('chartRA'), {
+                    type: 'bar',
+                    data: {
+                        labels: stats.by_ra.labels.slice(0, 10),
+                        datasets: [{
+                            label: 'Eleitores',
+                            data: stats.by_ra.eleitorado.slice(0, 10),
+                            backgroundColor: '#1F4E78',
+                            borderRadius: 4
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: { legend: { display: false } },
+                        scales: { y: { beginAtZero: true } }
+                    }
+                });
+
+                const bgColors = stats.by_zona.labels.map(z => zoneColors[z] || '#999');
+                new Chart(document.getElementById('chartZona'), {
+                    type: 'doughnut',
+                    data: {
+                        labels: stats.by_zona.labels.map(z => 'Zona ' + z),
+                        datasets: [{
+                            data: stats.by_zona.percentual,
+                            backgroundColor: bgColors,
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        plugins: {
+                            legend: { position: 'right', labels: { boxWidth: 12 } },
+                            tooltip: { callbacks: { label: c => c.label + ': ' + c.raw + '%' } }
+                        }
+                    }
+                });
+            } catch (error) {
+                console.error('Erro ao carregar Painel de Indicadores:', error);
+            }
+        }
+    </script>
     <script src="modal.js"></script>
     <script src="toast.js"></script>
     <script src="okr-shared.js"></script>
@@ -121,6 +196,7 @@
             });
 
             await window.initCandidataPage(result.sb, result.ctx);
+            await loadDashboardMini();
         }
 
         init();

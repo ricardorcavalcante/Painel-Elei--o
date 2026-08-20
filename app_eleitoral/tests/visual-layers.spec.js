@@ -94,30 +94,6 @@ test.describe('Painel Eleitoral — Verificação Visual das Novas Camadas', () 
         await page.screenshot({ path: `${SCREENSHOTS}/04-ra-selecionada.png`, fullPage: false });
     });
 
-    test('05 — Aba Dashboard carrega os gráficos', async ({ page }) => {
-        const dashTabBtn = page.locator('.tab-btn[data-tab="dashboard"]');
-        await dashTabBtn.click();
-
-        // Container do dashboard deve estar visível
-        const dashView = page.locator('#view-dashboard');
-        await expect(dashView).toBeVisible({ timeout: 5000 });
-
-        // Os canvas dos gráficos devem existir
-        for (const id of ['chartRA', 'chartZona', 'chartLocaisRA']) {
-            const canvas = page.locator(`#${id}`);
-            await expect(canvas).toBeVisible();
-        }
-
-        // KPIs devem ter valores carregados (não "--")
-        for (const id of ['kpi-eleitores', 'kpi-locais', 'kpi-media']) {
-            const el = page.locator(`#${id}`);
-            const text = await el.textContent();
-            expect(text).not.toBe('--');
-        }
-
-        await page.screenshot({ path: `${SCREENSHOTS}/05-dashboard.png`, fullPage: false });
-    });
-
     test('06 — Transição entre abas preserva estado do mapa', async ({ page }) => {
         // Vai para RAs
         await page.locator('.tab-btn[data-tab="ra"]').click();

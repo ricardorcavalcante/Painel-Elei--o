@@ -77,6 +77,13 @@ const COMMANDS = {
     console.log('click-text', JSON.stringify(text), '→', r);
   },
 
+  async wheel(args) {
+    if (!page) return console.log('ERROR: launch first');
+    const [dx, dy] = args.split(' ').map(Number);
+    try { await page.mouse.wheel(dx || 0, dy || 0); console.log('wheel', dx, dy, '→ OK'); }
+    catch (e) { console.log('wheel → ERROR:', e.message.split('\n')[0]); }
+  },
+
   async 'set-offline'(args) {
     if (!page) return console.log('ERROR: launch first');
     const offline = args.trim() !== 'false';
